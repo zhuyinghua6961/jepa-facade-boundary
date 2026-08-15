@@ -19,5 +19,7 @@
       "action": "MOVE_TO_QUARANTINE",
       "reason": "explicit regenerable cache/archive allowlist"
     }
-  ]
+  ],
+  "quarantine_disposition": "moved to desktop trash with gio trash after public GitHub verification",
+  "final_project_disk_bytes": 30334536
 }
