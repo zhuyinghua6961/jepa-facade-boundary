@@ -1,0 +1,288 @@
+{
+  "surface_id": "facade_d",
+  "plane_source": "physical_boundary_plane_equation",
+  "distances_m": [
+    5.0,
+    10.0,
+    20.0
+  ],
+  "sample_count": 15,
+  "z_depth_median_abs_error_m": 0.0017080307006835938,
+  "ray_range_median_abs_error_m": 0.6782974291498043,
+  "z_depth_median_relative_error": 0.00017080287459998177,
+  "ray_range_median_relative_error": 0.06360519041651434,
+  "z_depth_pass": true,
+  "ray_range_pass": false,
+  "samples": [
+    {
+      "distance_m": 5.0,
+      "pixel_offset": [
+        0.0,
+        0.0
+      ],
+      "pixel": [
+        319.5,
+        239.5
+      ],
+      "sensor_depth_m": 5.001783847808838,
+      "analytic_camera_z_m": 5.000011444091797,
+      "analytic_ray_range_m": 5.000011444091797,
+      "abs_error_z_m": 0.0017724037170410156,
+      "abs_error_range_m": 0.0017724037170410156,
+      "rel_error_z": 0.0003544799320680266,
+      "rel_error_range": 0.0003544799320680266
+    },
+    {
+      "distance_m": 5.0,
+      "pixel_offset": [
+        160.0,
+        0.0
+      ],
+      "pixel": [
+        479.5,
+        239.5
+      ],
+      "sensor_depth_m": 5.001783847808838,
+      "analytic_camera_z_m": 5.000011444091797,
+      "analytic_ray_range_m": 5.590182738633073,
+      "abs_error_z_m": 0.0017724037170410156,
+      "abs_error_range_m": 0.5883988908242355,
+      "rel_error_z": 0.0003544799320680266,
+      "rel_error_range": 0.10525575251017864
+    },
+    {
+      "distance_m": 5.0,
+      "pixel_offset": [
+        -160.0,
+        0.0
+      ],
+      "pixel": [
+        159.5,
+        239.5
+      ],
+      "sensor_depth_m": 5.001783847808838,
+      "analytic_camera_z_m": 5.000011444091797,
+      "analytic_ray_range_m": 5.590182738633073,
+      "abs_error_z_m": 0.0017724037170410156,
+      "abs_error_range_m": 0.5883988908242355,
+      "rel_error_z": 0.0003544799320680266,
+      "rel_error_range": 0.10525575251017864
+    },
+    {
+      "distance_m": 5.0,
+      "pixel_offset": [
+        0.0,
+        120.0
+      ],
+      "pixel": [
+        319.5,
+        359.5
+      ],
+      "sensor_depth_m": 5.001783847808838,
+      "analytic_camera_z_m": 5.000011444091797,
+      "analytic_ray_range_m": 5.3400145631188405,
+      "abs_error_z_m": 0.0017724037170410156,
+      "abs_error_range_m": 0.3382307153100026,
+      "rel_error_z": 0.0003544799320680266,
+      "rel_error_range": 0.06333891252769518
+    },
+    {
+      "distance_m": 5.0,
+      "pixel_offset": [
+        0.0,
+        -120.0
+      ],
+      "pixel": [
+        319.5,
+        119.5
+      ],
+      "sensor_depth_m": 5.001783847808838,
+      "analytic_camera_z_m": 5.000011444091797,
+      "analytic_ray_range_m": 5.3400145631188405,
+      "abs_error_z_m": 0.0017724037170410156,
+      "abs_error_range_m": 0.3382307153100026,
+      "rel_error_z": 0.0003544799320680266,
+      "rel_error_range": 0.06333891252769518
+    },
+    {
+      "distance_m": 10.0,
+      "pixel_offset": [
+        0.0,
+        0.0
+      ],
+      "pixel": [
+        319.5,
+        239.5
+      ],
+      "sensor_depth_m": 10.00171947479248,
+      "analytic_camera_z_m": 10.000011444091797,
+      "analytic_ray_range_m": 10.000011444091797,
+      "abs_error_z_m": 0.0017080307006835938,
+      "abs_error_range_m": 0.0017080307006835938,
+      "rel_error_z": 0.00017080287459998177,
+      "rel_error_range": 0.00017080287459998177
+    },
+    {
+      "distance_m": 10.0,
+      "pixel_offset": [
+        160.0,
+        0.0
+      ],
+      "pixel": [
+        479.5,
+        239.5
+      ],
+      "sensor_depth_m": 10.00171947479248,
+      "analytic_camera_z_m": 10.000011444091797,
+      "analytic_ray_range_m": 11.180352682382548,
+      "abs_error_z_m": 0.0017080307006835938,
+      "abs_error_range_m": 1.1786332075900674,
+      "rel_error_z": 0.00017080287459998177,
+      "rel_error_range": 0.10542003826474096
+    },
+    {
+      "distance_m": 10.0,
+      "pixel_offset": [
+        -160.0,
+        0.0
+      ],
+      "pixel": [
+        159.5,
+        239.5
+      ],
+      "sensor_depth_m": 10.00171947479248,
+      "analytic_camera_z_m": 10.000011444091797,
+      "analytic_ray_range_m": 11.180352682382548,
+      "abs_error_z_m": 0.0017080307006835938,
+      "abs_error_range_m": 1.1786332075900674,
+      "rel_error_z": 0.00017080287459998177,
+      "rel_error_range": 0.10542003826474096
+    },
+    {
+      "distance_m": 10.0,
+      "pixel_offset": [
+        0.0,
+        120.0
+      ],
+      "pixel": [
+        319.5,
+        359.5
+      ],
+      "sensor_depth_m": 10.00171947479248,
+      "analytic_camera_z_m": 10.000011444091797,
+      "analytic_ray_range_m": 10.680016903942285,
+      "abs_error_z_m": 0.0017080307006835938,
+      "abs_error_range_m": 0.6782974291498043,
+      "rel_error_z": 0.00017080287459998177,
+      "rel_error_range": 0.06351089471585258
+    },
+    {
+      "distance_m": 10.0,
+      "pixel_offset": [
+        0.0,
+        -120.0
+      ],
+      "pixel": [
+        319.5,
+        119.5
+      ],
+      "sensor_depth_m": 10.00171947479248,
+      "analytic_camera_z_m": 10.000011444091797,
+      "analytic_ray_range_m": 10.680016903942285,
+      "abs_error_z_m": 0.0017080307006835938,
+      "abs_error_range_m": 0.6782974291498043,
+      "rel_error_z": 0.00017080287459998177,
+      "rel_error_range": 0.06351089471585258
+    },
+    {
+      "distance_m": 20.0,
+      "pixel_offset": [
+        0.0,
+        0.0
+      ],
+      "pixel": [
+        319.5,
+        239.5
+      ],
+      "sensor_depth_m": 20.001413345336914,
+      "analytic_camera_z_m": 20.000011444091797,
+      "analytic_ray_range_m": 20.000011444091797,
+      "abs_error_z_m": 0.0014019012451171875,
+      "abs_error_range_m": 0.0014019012451171875,
+      "rel_error_z": 7.009502214716598e-05,
+      "rel_error_range": 7.009502214716598e-05
+    },
+    {
+      "distance_m": 20.0,
+      "pixel_offset": [
+        160.0,
+        0.0
+      ],
+      "pixel": [
+        479.5,
+        239.5
+      ],
+      "sensor_depth_m": 20.001413345336914,
+      "analytic_camera_z_m": 20.000011444091797,
+      "analytic_ray_range_m": 22.360692569881497,
+      "abs_error_z_m": 0.0014019012451171875,
+      "abs_error_range_m": 2.359279224544583,
+      "rel_error_z": 7.009502214716598e-05,
+      "rel_error_range": 0.10551011410632198
+    },
+    {
+      "distance_m": 20.0,
+      "pixel_offset": [
+        -160.0,
+        0.0
+      ],
+      "pixel": [
+        159.5,
+        239.5
+      ],
+      "sensor_depth_m": 20.001413345336914,
+      "analytic_camera_z_m": 20.000011444091797,
+      "analytic_ray_range_m": 22.360692569881497,
+      "abs_error_z_m": 0.0014019012451171875,
+      "abs_error_range_m": 2.359279224544583,
+      "rel_error_z": 7.009502214716598e-05,
+      "rel_error_range": 0.10551011410632198
+    },
+    {
+      "distance_m": 20.0,
+      "pixel_offset": [
+        0.0,
+        120.0
+      ],
+      "pixel": [
+        319.5,
+        359.5
+      ],
+      "sensor_depth_m": 20.001413345336914,
+      "analytic_camera_z_m": 20.000011444091797,
+      "analytic_ray_range_m": 21.36002158558917,
+      "abs_error_z_m": 0.0014019012451171875,
+      "abs_error_range_m": 1.3586082402522557,
+      "rel_error_z": 7.009502214716598e-05,
+      "rel_error_range": 0.06360519041651434
+    },
+    {
+      "distance_m": 20.0,
+      "pixel_offset": [
+        0.0,
+        -120.0
+      ],
+      "pixel": [
+        319.5,
+        119.5
+      ],
+      "sensor_depth_m": 20.001413345336914,
+      "analytic_camera_z_m": 20.000011444091797,
+      "analytic_ray_range_m": 21.36002158558917,
+      "abs_error_z_m": 0.0014019012451171875,
+      "abs_error_range_m": 1.3586082402522557,
+      "rel_error_z": 7.009502214716598e-05,
+      "rel_error_range": 0.06360519041651434
+    }
+  ]
+}

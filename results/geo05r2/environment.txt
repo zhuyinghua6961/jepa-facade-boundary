@@ -1,0 +1,10 @@
+CARLA_VERSION=0.10.0
+MAP=Town10HD_Opt
+IMAGE=640x480
+HORIZONTAL_FOV_DEG=90
+DEPTH_METRIC=z-depth
+MODE=NORMAL_LOCK
+PYTEST=11 passed
+Python=3.10.12
+git=version=2.34.1
+gh=version=2.4.0+dfsg1=(2022-03-23=Ubuntu=2.4.0+dfsg1-2)

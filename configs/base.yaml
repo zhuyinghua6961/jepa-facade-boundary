@@ -1,0 +1,10 @@
+carla_root: /path/to/Carla-0.10.0-Linux-Shipping
+host: localhost
+port: 2000
+map: Town10HD_Opt
+fixed_delta_seconds: 0.05
+sensor:
+  width: 640
+  height: 480
+  horizontal_fov_deg: 90.0
+  sensor_tick: 0.0

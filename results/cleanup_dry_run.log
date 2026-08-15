@@ -1,0 +1,7 @@
+{
+  "schema": "boundary_sweep.clean_artifacts.v1",
+  "mode": "dry-run",
+  "root": ".",
+  "quarantine": "../_cleanup_quarantine/boundary_sweep_20260816",
+  "items": []
+}

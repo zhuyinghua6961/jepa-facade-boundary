@@ -1,0 +1,23 @@
+{
+  "schema": "boundary_sweep.clean_artifacts.v1",
+  "mode": "apply",
+  "root": ".",
+  "quarantine": "../_cleanup_quarantine/boundary_sweep_20260816",
+  "items": [
+    {
+      "path": ".pytest_cache",
+      "action": "MOVE_TO_QUARANTINE",
+      "reason": "explicit regenerable cache/archive allowlist"
+    },
+    {
+      "path": "boundary_sweep/__pycache__",
+      "action": "MOVE_TO_QUARANTINE",
+      "reason": "explicit regenerable cache/archive allowlist"
+    },
+    {
+      "path": "tests/__pycache__",
+      "action": "MOVE_TO_QUARANTINE",
+      "reason": "explicit regenerable cache/archive allowlist"
+    }
+  ]
+}

@@ -1,0 +1,7 @@
+run_id: geo05r2
+mode: NORMAL_LOCK
+distances_m: [5.0, 10.0, 15.0]
+directions: [LEFT, RIGHT]
+step_m: 0.5
+frames_per_direction: 80
+surfaces: results/geo05r2/surfaces_v3

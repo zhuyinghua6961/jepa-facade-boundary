@@ -1,0 +1,23 @@
+carla_root: /path/to/Carla-0.10.0-Linux-Shipping
+host: localhost
+port: 2000
+map: Town10
+fixed_delta_seconds: 0.05
+sensor:
+  width: 640
+  height: 480
+  horizontal_fov_deg: 90.0
+  sensor_tick: 0.0
+  capture_count: 20
+  output_dir: data/geo0
+sweep:
+  step_m: 0.5
+  max_steps: 80
+  distance_m: 25.0
+  output_dir: data/sweeps
+  overlay_dir: data/overlays
+validation:
+  plane_tolerance_m: 0.05
+  rectangle_tolerance_m: 0.15
+  reprojection_median_px: 0.5
+  surface_std_m: 0.1

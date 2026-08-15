@@ -1,0 +1,1268 @@
+{
+  "schema": "geo05r2.manual_boundary_audit.v1",
+  "independent_of": "boundary_sweep.labels_v3",
+  "manual_review_required": true,
+  "frames": [
+    {
+      "frame_id": 505454,
+      "sequence_id": "surface_alpha/NORMAL_LOCK/15m/LEFT",
+      "facade_id": "surface_alpha",
+      "direction": "LEFT",
+      "distance_m": 15.0,
+      "step_index": 48,
+      "rgb_path": "data/sweeps_geo05r2/surface_alpha/NORMAL_LOCK/15m/LEFT/left_0048_rgb.png",
+      "manual_state": "STRADDLE",
+      "manual_boundary_pixel": [
+        [
+          24.070361523599015,
+          16.00179184823877
+        ],
+        [
+          14.898274850180904,
+          475.9709704029193
+        ]
+      ],
+      "review_method": "independent_geometry_review_pending_operator_visual_confirmation"
+    },
+    {
+      "frame_id": 505455,
+      "sequence_id": "surface_alpha/NORMAL_LOCK/15m/LEFT",
+      "facade_id": "surface_alpha",
+      "direction": "LEFT",
+      "distance_m": 15.0,
+      "step_index": 49,
+      "rgb_path": "data/sweeps_geo05r2/surface_alpha/NORMAL_LOCK/15m/LEFT/left_0049_rgb.png",
+      "manual_state": "STRADDLE",
+      "manual_boundary_pixel": [
+        [
+          13.405294148907467,
+          16.134890881531085
+        ],
+        [
+          4.234395924987202,
+          476.10287269386805
+        ]
+      ],
+      "review_method": "independent_geometry_review_pending_operator_visual_confirmation"
+    },
+    {
+      "frame_id": 505456,
+      "sequence_id": "surface_alpha/NORMAL_LOCK/15m/LEFT",
+      "facade_id": "surface_alpha",
+      "direction": "LEFT",
+      "distance_m": 15.0,
+      "step_index": 50,
+      "rgb_path": "data/sweeps_geo05r2/surface_alpha/NORMAL_LOCK/15m/LEFT/left_0050_rgb.png",
+      "manual_state": "STRADDLE",
+      "manual_boundary_pixel": [
+        [
+          2.7401397246749832,
+          16.26776944038548
+        ],
+        [
+          -6.429579211323596,
+          476.2350142698942
+        ]
+      ],
+      "review_method": "independent_geometry_review_pending_operator_visual_confirmation"
+    },
+    {
+      "frame_id": 505457,
+      "sequence_id": "surface_alpha/NORMAL_LOCK/15m/LEFT",
+      "facade_id": "surface_alpha",
+      "direction": "LEFT",
+      "distance_m": 15.0,
+      "step_index": 51,
+      "rgb_path": "data/sweeps_geo05r2/surface_alpha/NORMAL_LOCK/15m/LEFT/left_0051_rgb.png",
+      "manual_state": "OUT",
+      "manual_boundary_pixel": [
+        [
+          -7.9248271127752306,
+          16.400888578107356
+        ],
+        [
+          -17.093357578103145,
+          476.366934507731
+        ]
+      ],
+      "review_method": "independent_geometry_review_pending_operator_visual_confirmation"
+    },
+    {
+      "frame_id": 505458,
+      "sequence_id": "surface_alpha/NORMAL_LOCK/15m/LEFT",
+      "facade_id": "surface_alpha",
+      "direction": "LEFT",
+      "distance_m": 15.0,
+      "step_index": 52,
+      "rgb_path": "data/sweeps_geo05r2/surface_alpha/NORMAL_LOCK/15m/LEFT/left_0052_rgb.png",
+      "manual_state": "OUT",
+      "manual_boundary_pixel": [
+        [
+          -18.590071244423154,
+          16.533783748964442
+        ],
+        [
+          -27.757422550402854,
+          476.4990992108364
+        ]
+      ],
+      "review_method": "independent_geometry_review_pending_operator_visual_confirmation"
+    },
+    {
+      "frame_id": 505459,
+      "sequence_id": "surface_alpha/NORMAL_LOCK/15m/LEFT",
+      "facade_id": "surface_alpha",
+      "direction": "LEFT",
+      "distance_m": 15.0,
+      "step_index": 53,
+      "rgb_path": "data/sweeps_geo05r2/surface_alpha/NORMAL_LOCK/15m/LEFT/left_0053_rgb.png",
+      "manual_state": "OUT",
+      "manual_boundary_pixel": [
+        [
+          -29.254773146755973,
+          16.666862731050845
+        ],
+        [
+          -38.420935935410846,
+          476.6309749618364
+        ]
+      ],
+      "review_method": "independent_geometry_review_pending_operator_visual_confirmation"
+    },
+    {
+      "frame_id": 505460,
+      "sequence_id": "surface_alpha/NORMAL_LOCK/15m/LEFT",
+      "facade_id": "surface_alpha",
+      "direction": "LEFT",
+      "distance_m": 15.0,
+      "step_index": 54,
+      "rgb_path": "data/sweeps_geo05r2/surface_alpha/NORMAL_LOCK/15m/LEFT/left_0054_rgb.png",
+      "manual_state": "OUT",
+      "manual_boundary_pixel": [
+        [
+          -39.91993990625248,
+          16.79975693750902
+        ],
+        [
+          -49.084923552577976,
+          476.76313870668275
+        ]
+      ],
+      "review_method": "independent_geometry_review_pending_operator_visual_confirmation"
+    },
+    {
+      "frame_id": 505542,
+      "sequence_id": "surface_alpha/NORMAL_LOCK/15m/RIGHT",
+      "facade_id": "surface_alpha",
+      "direction": "RIGHT",
+      "distance_m": 15.0,
+      "step_index": 47,
+      "rgb_path": "data/sweeps_geo05r2/surface_alpha/NORMAL_LOCK/15m/RIGHT/right_0047_rgb.png",
+      "manual_state": "STRADDLE",
+      "manual_boundary_pixel": [
+        [
+          602.7668808064885,
+          -2.301231536952016
+        ],
+        [
+          615.0005780701041,
+          468.540877628346
+        ]
+      ],
+      "review_method": "independent_geometry_review_pending_operator_visual_confirmation"
+    },
+    {
+      "frame_id": 505543,
+      "sequence_id": "surface_alpha/NORMAL_LOCK/15m/RIGHT",
+      "facade_id": "surface_alpha",
+      "direction": "RIGHT",
+      "distance_m": 15.0,
+      "step_index": 48,
+      "rgb_path": "data/sweeps_geo05r2/surface_alpha/NORMAL_LOCK/15m/RIGHT/right_0048_rgb.png",
+      "manual_state": "STRADDLE",
+      "manual_boundary_pixel": [
+        [
+          613.4348941201499,
+          -2.43441115824401
+        ],
+        [
+          625.6674420893261,
+          468.4089163756249
+        ]
+      ],
+      "review_method": "independent_geometry_review_pending_operator_visual_confirmation"
+    },
+    {
+      "frame_id": 505544,
+      "sequence_id": "surface_alpha/NORMAL_LOCK/15m/RIGHT",
+      "facade_id": "surface_alpha",
+      "direction": "RIGHT",
+      "distance_m": 15.0,
+      "step_index": 49,
+      "rgb_path": "data/sweeps_geo05r2/surface_alpha/NORMAL_LOCK/15m/RIGHT/right_0049_rgb.png",
+      "manual_state": "STRADDLE",
+      "manual_boundary_pixel": [
+        [
+          624.1024812559384,
+          -2.5673313812423144
+        ],
+        [
+          636.3338676877825,
+          468.2767416223968
+        ]
+      ],
+      "review_method": "independent_geometry_review_pending_operator_visual_confirmation"
+    },
+    {
+      "frame_id": 505545,
+      "sequence_id": "surface_alpha/NORMAL_LOCK/15m/RIGHT",
+      "facade_id": "surface_alpha",
+      "direction": "RIGHT",
+      "distance_m": 15.0,
+      "step_index": 50,
+      "rgb_path": "data/sweeps_geo05r2/surface_alpha/NORMAL_LOCK/15m/RIGHT/right_0050_rgb.png",
+      "manual_state": "OUT",
+      "manual_boundary_pixel": [
+        [
+          634.7704347463703,
+          -2.700494919311752
+        ],
+        [
+          647.0006720529074,
+          468.1448031268132
+        ]
+      ],
+      "review_method": "independent_geometry_review_pending_operator_visual_confirmation"
+    },
+    {
+      "frame_id": 505546,
+      "sequence_id": "surface_alpha/NORMAL_LOCK/15m/RIGHT",
+      "facade_id": "surface_alpha",
+      "direction": "RIGHT",
+      "distance_m": 15.0,
+      "step_index": 51,
+      "rgb_path": "data/sweeps_geo05r2/surface_alpha/NORMAL_LOCK/15m/RIGHT/right_0051_rgb.png",
+      "manual_state": "OUT",
+      "manual_boundary_pixel": [
+        [
+          645.4377859456541,
+          -2.833424350945976
+        ],
+        [
+          657.6668621939951,
+          468.01263693703413
+        ]
+      ],
+      "review_method": "independent_geometry_review_pending_operator_visual_confirmation"
+    },
+    {
+      "frame_id": 505547,
+      "sequence_id": "surface_alpha/NORMAL_LOCK/15m/RIGHT",
+      "facade_id": "surface_alpha",
+      "direction": "RIGHT",
+      "distance_m": 15.0,
+      "step_index": 52,
+      "rgb_path": "data/sweeps_geo05r2/surface_alpha/NORMAL_LOCK/15m/RIGHT/right_0052_rgb.png",
+      "manual_state": "OUT",
+      "manual_boundary_pixel": [
+        [
+          656.1058386714071,
+          -2.966589127145318
+        ],
+        [
+          668.3337657727401,
+          467.88069721366514
+        ]
+      ],
+      "review_method": "independent_geometry_review_pending_operator_visual_confirmation"
+    },
+    {
+      "frame_id": 505548,
+      "sequence_id": "surface_alpha/NORMAL_LOCK/15m/RIGHT",
+      "facade_id": "surface_alpha",
+      "direction": "RIGHT",
+      "distance_m": 15.0,
+      "step_index": 53,
+      "rgb_path": "data/sweeps_geo05r2/surface_alpha/NORMAL_LOCK/15m/RIGHT/right_0053_rgb.png",
+      "manual_state": "OUT",
+      "manual_boundary_pixel": [
+        [
+          666.7735836794498,
+          -3.0995541453457807
+        ],
+        [
+          679.0003493243165,
+          467.74848211610197
+        ]
+      ],
+      "review_method": "independent_geometry_review_pending_operator_visual_confirmation"
+    },
+    {
+      "frame_id": 505987,
+      "sequence_id": "surface_beta/NORMAL_LOCK/15m/LEFT",
+      "facade_id": "surface_beta",
+      "direction": "LEFT",
+      "distance_m": 15.0,
+      "step_index": 47,
+      "rgb_path": "data/sweeps_geo05r2/surface_beta/NORMAL_LOCK/15m/LEFT/left_0047_rgb.png",
+      "manual_state": "STRADDLE",
+      "manual_boundary_pixel": [
+        [
+          603.1722304414535,
+          -2.7190922189819853
+        ],
+        [
+          615.4775543839468,
+          467.6632503050585
+        ]
+      ],
+      "review_method": "independent_geometry_review_pending_operator_visual_confirmation"
+    },
+    {
+      "frame_id": 505988,
+      "sequence_id": "surface_beta/NORMAL_LOCK/15m/LEFT",
+      "facade_id": "surface_beta",
+      "direction": "LEFT",
+      "distance_m": 15.0,
+      "step_index": 48,
+      "rgb_path": "data/sweeps_geo05r2/surface_beta/NORMAL_LOCK/15m/LEFT/left_0048_rgb.png",
+      "manual_state": "STRADDLE",
+      "manual_boundary_pixel": [
+        [
+          613.840405824391,
+          -2.8661926161756557
+        ],
+        [
+          626.1446709508602,
+          467.5182473788975
+        ]
+      ],
+      "review_method": "independent_geometry_review_pending_operator_visual_confirmation"
+    },
+    {
+      "frame_id": 505989,
+      "sequence_id": "surface_beta/NORMAL_LOCK/15m/LEFT",
+      "facade_id": "surface_beta",
+      "direction": "LEFT",
+      "distance_m": 15.0,
+      "step_index": 49,
+      "rgb_path": "data/sweeps_geo05r2/surface_beta/NORMAL_LOCK/15m/LEFT/left_0049_rgb.png",
+      "manual_state": "STRADDLE",
+      "manual_boundary_pixel": [
+        [
+          624.5095343666547,
+          -3.013233001694991
+        ],
+        [
+          636.812735975304,
+          467.3731288750075
+        ]
+      ],
+      "review_method": "independent_geometry_review_pending_operator_visual_confirmation"
+    },
+    {
+      "frame_id": 505990,
+      "sequence_id": "surface_beta/NORMAL_LOCK/15m/LEFT",
+      "facade_id": "surface_beta",
+      "direction": "LEFT",
+      "distance_m": 15.0,
+      "step_index": 50,
+      "rgb_path": "data/sweeps_geo05r2/surface_beta/NORMAL_LOCK/15m/LEFT/left_0050_rgb.png",
+      "manual_state": "OUT",
+      "manual_boundary_pixel": [
+        [
+          635.1784372095707,
+          -3.1602836749077485
+        ],
+        [
+          647.4805758261622,
+          467.228019632344
+        ]
+      ],
+      "review_method": "independent_geometry_review_pending_operator_visual_confirmation"
+    },
+    {
+      "frame_id": 505991,
+      "sequence_id": "surface_beta/NORMAL_LOCK/15m/LEFT",
+      "facade_id": "surface_beta",
+      "direction": "LEFT",
+      "distance_m": 15.0,
+      "step_index": 51,
+      "rgb_path": "data/sweeps_geo05r2/surface_beta/NORMAL_LOCK/15m/LEFT/left_0051_rgb.png",
+      "manual_state": "OUT",
+      "manual_boundary_pixel": [
+        [
+          645.8468039254739,
+          -3.3073537560179527
+        ],
+        [
+          658.1478806188276,
+          467.0829300645677
+        ]
+      ],
+      "review_method": "independent_geometry_review_pending_operator_visual_confirmation"
+    },
+    {
+      "frame_id": 505992,
+      "sequence_id": "surface_beta/NORMAL_LOCK/15m/LEFT",
+      "facade_id": "surface_beta",
+      "direction": "LEFT",
+      "distance_m": 15.0,
+      "step_index": 52,
+      "rgb_path": "data/sweeps_geo05r2/surface_beta/NORMAL_LOCK/15m/LEFT/left_0052_rgb.png",
+      "manual_state": "OUT",
+      "manual_boundary_pixel": [
+        [
+          656.5162793204005,
+          -3.4544104666286977
+        ],
+        [
+          668.8162954356748,
+          466.9379100896652
+        ]
+      ],
+      "review_method": "independent_geometry_review_pending_operator_visual_confirmation"
+    },
+    {
+      "frame_id": 505993,
+      "sequence_id": "surface_beta/NORMAL_LOCK/15m/LEFT",
+      "facade_id": "surface_beta",
+      "direction": "LEFT",
+      "distance_m": 15.0,
+      "step_index": 53,
+      "rgb_path": "data/sweeps_geo05r2/surface_beta/NORMAL_LOCK/15m/LEFT/left_0053_rgb.png",
+      "manual_state": "OUT",
+      "manual_boundary_pixel": [
+        [
+          667.1854473562378,
+          -3.6014647951270695
+        ],
+        [
+          679.484400425374,
+          466.79279724090014
+        ]
+      ],
+      "review_method": "independent_geometry_review_pending_operator_visual_confirmation"
+    },
+    {
+      "frame_id": 506077,
+      "sequence_id": "surface_beta/NORMAL_LOCK/15m/RIGHT",
+      "facade_id": "surface_beta",
+      "direction": "RIGHT",
+      "distance_m": 15.0,
+      "step_index": 48,
+      "rgb_path": "data/sweeps_geo05r2/surface_beta/NORMAL_LOCK/15m/RIGHT/right_0048_rgb.png",
+      "manual_state": "STRADDLE",
+      "manual_boundary_pixel": [
+        [
+          23.553002901352205,
+          17.457517372985407
+        ],
+        [
+          14.60006068904039,
+          475.83519473207497
+        ]
+      ],
+      "review_method": "independent_geometry_review_pending_operator_visual_confirmation"
+    },
+    {
+      "frame_id": 506078,
+      "sequence_id": "surface_beta/NORMAL_LOCK/15m/RIGHT",
+      "facade_id": "surface_beta",
+      "direction": "RIGHT",
+      "distance_m": 15.0,
+      "step_index": 49,
+      "rgb_path": "data/sweeps_geo05r2/surface_beta/NORMAL_LOCK/15m/RIGHT/right_0049_rgb.png",
+      "manual_state": "STRADDLE",
+      "manual_boundary_pixel": [
+        [
+          12.889074166453081,
+          17.604406894201755
+        ],
+        [
+          3.937443740521883,
+          475.98019453893
+        ]
+      ],
+      "review_method": "independent_geometry_review_pending_operator_visual_confirmation"
+    },
+    {
+      "frame_id": 506079,
+      "sequence_id": "surface_beta/NORMAL_LOCK/15m/RIGHT",
+      "facade_id": "surface_beta",
+      "direction": "RIGHT",
+      "distance_m": 15.0,
+      "step_index": 50,
+      "rgb_path": "data/sweeps_geo05r2/surface_beta/NORMAL_LOCK/15m/RIGHT/right_0050_rgb.png",
+      "manual_state": "STRADDLE",
+      "manual_boundary_pixel": [
+        [
+          2.2248971226299745,
+          17.75132964411084
+        ],
+        [
+          -6.725421785676812,
+          476.1252423216928
+        ]
+      ],
+      "review_method": "independent_geometry_review_pending_operator_visual_confirmation"
+    },
+    {
+      "frame_id": 506080,
+      "sequence_id": "surface_beta/NORMAL_LOCK/15m/RIGHT",
+      "facade_id": "surface_beta",
+      "direction": "RIGHT",
+      "distance_m": 15.0,
+      "step_index": 51,
+      "rgb_path": "data/sweeps_geo05r2/surface_beta/NORMAL_LOCK/15m/RIGHT/right_0051_rgb.png",
+      "manual_state": "OUT",
+      "manual_boundary_pixel": [
+        [
+          -8.438176962150585,
+          17.898275860439234
+        ],
+        [
+          -17.38718338085625,
+          476.2702564981474
+        ]
+      ],
+      "review_method": "independent_geometry_review_pending_operator_visual_confirmation"
+    },
+    {
+      "frame_id": 506081,
+      "sequence_id": "surface_beta/NORMAL_LOCK/15m/RIGHT",
+      "facade_id": "surface_beta",
+      "direction": "RIGHT",
+      "distance_m": 15.0,
+      "step_index": 52,
+      "rgb_path": "data/sweeps_geo05r2/surface_beta/NORMAL_LOCK/15m/RIGHT/right_0052_rgb.png",
+      "manual_state": "OUT",
+      "manual_boundary_pixel": [
+        [
+          -19.102181398172515,
+          18.045174884874164
+        ],
+        [
+          -28.049876383217477,
+          476.4152827354809
+        ]
+      ],
+      "review_method": "independent_geometry_review_pending_operator_visual_confirmation"
+    },
+    {
+      "frame_id": 506082,
+      "sequence_id": "surface_beta/NORMAL_LOCK/15m/RIGHT",
+      "facade_id": "surface_beta",
+      "direction": "RIGHT",
+      "distance_m": 15.0,
+      "step_index": 53,
+      "rgb_path": "data/sweeps_geo05r2/surface_beta/NORMAL_LOCK/15m/RIGHT/right_0053_rgb.png",
+      "manual_state": "OUT",
+      "manual_boundary_pixel": [
+        [
+          -29.76499352360414,
+          18.19216875304563
+        ],
+        [
+          -38.71137380547105,
+          476.5602284577102
+        ]
+      ],
+      "review_method": "independent_geometry_review_pending_operator_visual_confirmation"
+    },
+    {
+      "frame_id": 506083,
+      "sequence_id": "surface_beta/NORMAL_LOCK/15m/RIGHT",
+      "facade_id": "surface_beta",
+      "direction": "RIGHT",
+      "distance_m": 15.0,
+      "step_index": 54,
+      "rgb_path": "data/sweeps_geo05r2/surface_beta/NORMAL_LOCK/15m/RIGHT/right_0054_rgb.png",
+      "manual_state": "OUT",
+      "manual_boundary_pixel": [
+        [
+          -40.42882290401576,
+          18.33904401852357
+        ],
+        [
+          -49.373891836787095,
+          476.70523311698986
+        ]
+      ],
+      "review_method": "independent_geometry_review_pending_operator_visual_confirmation"
+    },
+    {
+      "frame_id": 505228,
+      "sequence_id": "surface_alpha/NORMAL_LOCK/10m/LEFT",
+      "facade_id": "surface_alpha",
+      "direction": "LEFT",
+      "distance_m": 10.0,
+      "step_index": 0,
+      "rgb_path": "data/sweeps_geo05r2/surface_alpha/NORMAL_LOCK/10m/LEFT/left_0000_rgb.png",
+      "manual_state": "OUT",
+      "manual_boundary_pixel": [
+        [
+          644.339494344381,
+          -105.33926782762379
+        ],
+        [
+          630.4785114813386,
+          584.6956463907915
+        ]
+      ],
+      "review_method": "independent_geometry_review_pending_operator_visual_confirmation"
+    },
+    {
+      "frame_id": 505229,
+      "sequence_id": "surface_alpha/NORMAL_LOCK/10m/LEFT",
+      "facade_id": "surface_alpha",
+      "direction": "LEFT",
+      "distance_m": 10.0,
+      "step_index": 1,
+      "rgb_path": "data/sweeps_geo05r2/surface_alpha/NORMAL_LOCK/10m/LEFT/left_0001_rgb.png",
+      "manual_state": "OUT",
+      "manual_boundary_pixel": [
+        [
+          628.3382052171033,
+          -105.14013186102574
+        ],
+        [
+          614.4798553565839,
+          584.8941926188772
+        ]
+      ],
+      "review_method": "independent_geometry_review_pending_operator_visual_confirmation"
+    },
+    {
+      "frame_id": 505230,
+      "sequence_id": "surface_alpha/NORMAL_LOCK/10m/LEFT",
+      "facade_id": "surface_alpha",
+      "direction": "LEFT",
+      "distance_m": 10.0,
+      "step_index": 2,
+      "rgb_path": "data/sweeps_geo05r2/surface_alpha/NORMAL_LOCK/10m/LEFT/left_0002_rgb.png",
+      "manual_state": "OUT",
+      "manual_boundary_pixel": [
+        [
+          612.3362464702597,
+          -104.93994599388984
+        ],
+        [
+          598.4805724432757,
+          585.0916607854558
+        ]
+      ],
+      "review_method": "independent_geometry_review_pending_operator_visual_confirmation"
+    },
+    {
+      "frame_id": 505231,
+      "sequence_id": "surface_alpha/NORMAL_LOCK/10m/LEFT",
+      "facade_id": "surface_alpha",
+      "direction": "LEFT",
+      "distance_m": 10.0,
+      "step_index": 3,
+      "rgb_path": "data/sweeps_geo05r2/surface_alpha/NORMAL_LOCK/10m/LEFT/left_0003_rgb.png",
+      "manual_state": "OUT",
+      "manual_boundary_pixel": [
+        [
+          596.3343810687395,
+          -104.74030008907611
+        ],
+        [
+          582.4813608926603,
+          585.2896822726666
+        ]
+      ],
+      "review_method": "independent_geometry_review_pending_operator_visual_confirmation"
+    },
+    {
+      "frame_id": 505232,
+      "sequence_id": "surface_alpha/NORMAL_LOCK/10m/LEFT",
+      "facade_id": "surface_alpha",
+      "direction": "LEFT",
+      "distance_m": 10.0,
+      "step_index": 4,
+      "rgb_path": "data/sweeps_geo05r2/surface_alpha/NORMAL_LOCK/10m/LEFT/left_0004_rgb.png",
+      "manual_state": "OUT",
+      "manual_boundary_pixel": [
+        [
+          580.3328863638491,
+          -104.54017368995568
+        ],
+        [
+          566.4825421042455,
+          585.4870812353009
+        ]
+      ],
+      "review_method": "independent_geometry_review_pending_operator_visual_confirmation"
+    },
+    {
+      "frame_id": 505233,
+      "sequence_id": "surface_alpha/NORMAL_LOCK/10m/LEFT",
+      "facade_id": "surface_alpha",
+      "direction": "LEFT",
+      "distance_m": 10.0,
+      "step_index": 5,
+      "rgb_path": "data/sweeps_geo05r2/surface_alpha/NORMAL_LOCK/10m/LEFT/left_0005_rgb.png",
+      "manual_state": "OUT",
+      "manual_boundary_pixel": [
+        [
+          564.3310407786519,
+          -104.34003410485403
+        ],
+        [
+          550.4833717862382,
+          585.684527580085
+        ]
+      ],
+      "review_method": "independent_geometry_review_pending_operator_visual_confirmation"
+    },
+    {
+      "frame_id": 505234,
+      "sequence_id": "surface_alpha/NORMAL_LOCK/10m/LEFT",
+      "facade_id": "surface_alpha",
+      "direction": "LEFT",
+      "distance_m": 10.0,
+      "step_index": 6,
+      "rgb_path": "data/sweeps_geo05r2/surface_alpha/NORMAL_LOCK/10m/LEFT/left_0006_rgb.png",
+      "manual_state": "OUT",
+      "manual_boundary_pixel": [
+        [
+          548.3296847766319,
+          -104.1403825415689
+        ],
+        [
+          534.4846698982338,
+          585.8825352326284
+        ]
+      ],
+      "review_method": "independent_geometry_review_pending_operator_visual_confirmation"
+    },
+    {
+      "frame_id": 505235,
+      "sequence_id": "surface_alpha/NORMAL_LOCK/10m/LEFT",
+      "facade_id": "surface_alpha",
+      "direction": "LEFT",
+      "distance_m": 10.0,
+      "step_index": 7,
+      "rgb_path": "data/sweeps_geo05r2/surface_alpha/NORMAL_LOCK/10m/LEFT/left_0007_rgb.png",
+      "manual_state": "OUT",
+      "manual_boundary_pixel": [
+        [
+          532.3286429935777,
+          -103.94075572684922
+        ],
+        [
+          518.4862824592468,
+          586.0805034963557
+        ]
+      ],
+      "review_method": "independent_geometry_review_pending_operator_visual_confirmation"
+    },
+    {
+      "frame_id": 505236,
+      "sequence_id": "surface_alpha/NORMAL_LOCK/10m/LEFT",
+      "facade_id": "surface_alpha",
+      "direction": "LEFT",
+      "distance_m": 10.0,
+      "step_index": 8,
+      "rgb_path": "data/sweeps_geo05r2/surface_alpha/NORMAL_LOCK/10m/LEFT/left_0008_rgb.png",
+      "manual_state": "OUT",
+      "manual_boundary_pixel": [
+        [
+          516.3268794865578,
+          -103.74059634381477
+        ],
+        [
+          502.48719385845027,
+          586.2779843338327
+        ]
+      ],
+      "review_method": "independent_geometry_review_pending_operator_visual_confirmation"
+    },
+    {
+      "frame_id": 505237,
+      "sequence_id": "surface_alpha/NORMAL_LOCK/10m/LEFT",
+      "facade_id": "surface_alpha",
+      "direction": "LEFT",
+      "distance_m": 10.0,
+      "step_index": 9,
+      "rgb_path": "data/sweeps_geo05r2/surface_alpha/NORMAL_LOCK/10m/LEFT/left_0009_rgb.png",
+      "manual_state": "OUT",
+      "manual_boundary_pixel": [
+        [
+          500.32601091434816,
+          -103.54093884712641
+        ],
+        [
+          486.48897967065216,
+          586.4759784223083
+        ]
+      ],
+      "review_method": "independent_geometry_review_pending_operator_visual_confirmation"
+    },
+    {
+      "frame_id": 505238,
+      "sequence_id": "surface_alpha/NORMAL_LOCK/10m/LEFT",
+      "facade_id": "surface_alpha",
+      "direction": "LEFT",
+      "distance_m": 10.0,
+      "step_index": 10,
+      "rgb_path": "data/sweeps_geo05r2/surface_alpha/NORMAL_LOCK/10m/LEFT/left_0010_rgb.png",
+      "manual_state": "OUT",
+      "manual_boundary_pixel": [
+        [
+          484.32447165039,
+          -103.34084795515271
+        ],
+        [
+          470.4901150437775,
+          586.673400558479
+        ]
+      ],
+      "review_method": "independent_geometry_review_pending_operator_visual_confirmation"
+    },
+    {
+      "frame_id": 505239,
+      "sequence_id": "surface_alpha/NORMAL_LOCK/10m/LEFT",
+      "facade_id": "surface_alpha",
+      "direction": "LEFT",
+      "distance_m": 10.0,
+      "step_index": 11,
+      "rgb_path": "data/sweeps_geo05r2/surface_alpha/NORMAL_LOCK/10m/LEFT/left_0011_rgb.png",
+      "manual_state": "OUT",
+      "manual_boundary_pixel": [
+        [
+          468.32401641116417,
+          -103.14115075669281
+        ],
+        [
+          454.4923145812828,
+          586.8714099658914
+        ]
+      ],
+      "review_method": "independent_geometry_review_pending_operator_visual_confirmation"
+    },
+    {
+      "frame_id": 505240,
+      "sequence_id": "surface_alpha/NORMAL_LOCK/10m/LEFT",
+      "facade_id": "surface_alpha",
+      "direction": "LEFT",
+      "distance_m": 10.0,
+      "step_index": 12,
+      "rgb_path": "data/sweeps_geo05r2/surface_alpha/NORMAL_LOCK/10m/LEFT/left_0012_rgb.png",
+      "manual_state": "OUT",
+      "manual_boundary_pixel": [
+        [
+          452.32294012077597,
+          -102.94108647361736
+        ],
+        [
+          438.49391310877263,
+          587.0687908792597
+        ]
+      ],
+      "review_method": "independent_geometry_review_pending_operator_visual_confirmation"
+    },
+    {
+      "frame_id": 505241,
+      "sequence_id": "surface_alpha/NORMAL_LOCK/10m/LEFT",
+      "facade_id": "surface_alpha",
+      "direction": "LEFT",
+      "distance_m": 10.0,
+      "step_index": 13,
+      "rgb_path": "data/sweeps_geo05r2/surface_alpha/NORMAL_LOCK/10m/LEFT/left_0013_rgb.png",
+      "manual_state": "OUT",
+      "manual_boundary_pixel": [
+        [
+          436.3221801303727,
+          -102.74140950640492
+        ],
+        [
+          422.49580713324036,
+          587.2668191277352
+        ]
+      ],
+      "review_method": "independent_geometry_review_pending_operator_visual_confirmation"
+    },
+    {
+      "frame_id": 505242,
+      "sequence_id": "surface_alpha/NORMAL_LOCK/10m/LEFT",
+      "facade_id": "surface_alpha",
+      "direction": "LEFT",
+      "distance_m": 10.0,
+      "step_index": 14,
+      "rgb_path": "data/sweeps_geo05r2/surface_alpha/NORMAL_LOCK/10m/LEFT/left_0014_rgb.png",
+      "manual_state": "OUT",
+      "manual_boundary_pixel": [
+        [
+          420.3215654643766,
+          -102.54127328413429
+        ],
+        [
+          406.4978677588573,
+          587.4642427328665
+        ]
+      ],
+      "review_method": "independent_geometry_review_pending_operator_visual_confirmation"
+    },
+    {
+      "frame_id": 505243,
+      "sequence_id": "surface_alpha/NORMAL_LOCK/10m/LEFT",
+      "facade_id": "surface_alpha",
+      "direction": "LEFT",
+      "distance_m": 10.0,
+      "step_index": 15,
+      "rgb_path": "data/sweeps_geo05r2/surface_alpha/NORMAL_LOCK/10m/LEFT/left_0015_rgb.png",
+      "manual_state": "OUT",
+      "manual_boundary_pixel": [
+        [
+          404.32073966947564,
+          -102.34167320038146
+        ],
+        [
+          390.4996953743404,
+          587.6622233996977
+        ]
+      ],
+      "review_method": "independent_geometry_review_pending_operator_visual_confirmation"
+    },
+    {
+      "frame_id": 505244,
+      "sequence_id": "surface_alpha/NORMAL_LOCK/10m/LEFT",
+      "facade_id": "surface_alpha",
+      "direction": "LEFT",
+      "distance_m": 10.0,
+      "step_index": 16,
+      "rgb_path": "data/sweeps_geo05r2/surface_alpha/NORMAL_LOCK/10m/LEFT/left_0016_rgb.png",
+      "manual_state": "OUT",
+      "manual_boundary_pixel": [
+        [
+          388.32034777563933,
+          -102.14150691907082
+        ],
+        [
+          374.5019787959589,
+          587.8596722200828
+        ]
+      ],
+      "review_method": "independent_geometry_review_pending_operator_visual_confirmation"
+    },
+    {
+      "frame_id": 505245,
+      "sequence_id": "surface_alpha/NORMAL_LOCK/10m/LEFT",
+      "facade_id": "surface_alpha",
+      "direction": "LEFT",
+      "distance_m": 10.0,
+      "step_index": 17,
+      "rgb_path": "data/sweeps_geo05r2/surface_alpha/NORMAL_LOCK/10m/LEFT/left_0017_rgb.png",
+      "manual_state": "OUT",
+      "manual_boundary_pixel": [
+        [
+          372.319936773631,
+          -101.94186715234137
+        ],
+        [
+          358.50422159616977,
+          588.0576681874475
+        ]
+      ],
+      "review_method": "independent_geometry_review_pending_operator_visual_confirmation"
+    },
+    {
+      "frame_id": 505246,
+      "sequence_id": "surface_alpha/NORMAL_LOCK/10m/LEFT",
+      "facade_id": "surface_alpha",
+      "direction": "LEFT",
+      "distance_m": 10.0,
+      "step_index": 18,
+      "rgb_path": "data/sweeps_geo05r2/surface_alpha/NORMAL_LOCK/10m/LEFT/left_0018_rgb.png",
+      "manual_state": "OUT",
+      "manual_boundary_pixel": [
+        [
+          356.3197695576764,
+          -101.74176936609503
+        ],
+        [
+          342.50672942638744,
+          588.2550583026725
+        ]
+      ],
+      "review_method": "independent_geometry_review_pending_operator_visual_confirmation"
+    },
+    {
+      "frame_id": 505247,
+      "sequence_id": "surface_alpha/NORMAL_LOCK/10m/LEFT",
+      "facade_id": "surface_alpha",
+      "direction": "LEFT",
+      "distance_m": 10.0,
+      "step_index": 19,
+      "rgb_path": "data/sweeps_geo05r2/surface_alpha/NORMAL_LOCK/10m/LEFT/left_0019_rgb.png",
+      "manual_state": "OUT",
+      "manual_boundary_pixel": [
+        [
+          340.3192892866135,
+          -101.54214075199158
+        ],
+        [
+          326.50890254920455,
+          588.453062662868
+        ]
+      ],
+      "review_method": "independent_geometry_review_pending_operator_visual_confirmation"
+    },
+    {
+      "frame_id": 505248,
+      "sequence_id": "surface_alpha/NORMAL_LOCK/10m/LEFT",
+      "facade_id": "surface_alpha",
+      "direction": "LEFT",
+      "distance_m": 10.0,
+      "step_index": 20,
+      "rgb_path": "data/sweeps_geo05r2/surface_alpha/NORMAL_LOCK/10m/LEFT/left_0020_rgb.png",
+      "manual_state": "OUT",
+      "manual_boundary_pixel": [
+        [
+          324.31937058475563,
+          -101.3425279560614
+        ],
+        [
+          310.5116378208472,
+          588.6510170409924
+        ]
+      ],
+      "review_method": "independent_geometry_review_pending_operator_visual_confirmation"
+    },
+    {
+      "frame_id": 505249,
+      "sequence_id": "surface_alpha/NORMAL_LOCK/10m/LEFT",
+      "facade_id": "surface_alpha",
+      "direction": "LEFT",
+      "distance_m": 10.0,
+      "step_index": 21,
+      "rgb_path": "data/sweeps_geo05r2/surface_alpha/NORMAL_LOCK/10m/LEFT/left_0021_rgb.png",
+      "manual_state": "OUT",
+      "manual_boundary_pixel": [
+        [
+          308.3195262898968,
+          -101.1423685187284
+        ],
+        [
+          294.5144686604322,
+          588.8484590989194
+        ]
+      ],
+      "review_method": "independent_geometry_review_pending_operator_visual_confirmation"
+    },
+    {
+      "frame_id": 505250,
+      "sequence_id": "surface_alpha/NORMAL_LOCK/10m/LEFT",
+      "facade_id": "surface_alpha",
+      "direction": "LEFT",
+      "distance_m": 10.0,
+      "step_index": 22,
+      "rgb_path": "data/sweeps_geo05r2/surface_alpha/NORMAL_LOCK/10m/LEFT/left_0022_rgb.png",
+      "manual_state": "OUT",
+      "manual_boundary_pixel": [
+        [
+          292.319538393578,
+          -100.9427340333884
+        ],
+        [
+          278.51713442674765,
+          589.0464498342
+        ]
+      ],
+      "review_method": "independent_geometry_review_pending_operator_visual_confirmation"
+    },
+    {
+      "frame_id": 505251,
+      "sequence_id": "surface_alpha/NORMAL_LOCK/10m/LEFT",
+      "facade_id": "surface_alpha",
+      "direction": "LEFT",
+      "distance_m": 10.0,
+      "step_index": 23,
+      "rgb_path": "data/sweeps_geo05r2/surface_alpha/NORMAL_LOCK/10m/LEFT/left_0023_rgb.png",
+      "manual_state": "OUT",
+      "manual_boundary_pixel": [
+        [
+          276.319672425307,
+          -100.7426520320247
+        ],
+        [
+          262.51994297373875,
+          589.2438437700051
+        ]
+      ],
+      "review_method": "independent_geometry_review_pending_operator_visual_confirmation"
+    },
+    {
+      "frame_id": 505252,
+      "sequence_id": "surface_alpha/NORMAL_LOCK/10m/LEFT",
+      "facade_id": "surface_alpha",
+      "direction": "LEFT",
+      "distance_m": 10.0,
+      "step_index": 24,
+      "rgb_path": "data/sweeps_geo05r2/surface_alpha/NORMAL_LOCK/10m/LEFT/left_0024_rgb.png",
+      "manual_state": "OUT",
+      "manual_boundary_pixel": [
+        [
+          260.31985820294653,
+          -100.54301971469198
+        ],
+        [
+          246.52278235670954,
+          589.4418323579113
+        ]
+      ],
+      "review_method": "independent_geometry_review_pending_operator_visual_confirmation"
+    },
+    {
+      "frame_id": 505253,
+      "sequence_id": "surface_alpha/NORMAL_LOCK/10m/LEFT",
+      "facade_id": "surface_alpha",
+      "direction": "LEFT",
+      "distance_m": 10.0,
+      "step_index": 25,
+      "rgb_path": "data/sweeps_geo05r2/surface_alpha/NORMAL_LOCK/10m/LEFT/left_0025_rgb.png",
+      "manual_state": "OUT",
+      "manual_boundary_pixel": [
+        [
+          244.3204604586301,
+          -100.34293154437361
+        ],
+        [
+          230.5260594042037,
+          589.6392129724246
+        ]
+      ],
+      "review_method": "independent_geometry_review_pending_operator_visual_confirmation"
+    },
+    {
+      "frame_id": 505254,
+      "sequence_id": "surface_alpha/NORMAL_LOCK/10m/LEFT",
+      "facade_id": "surface_alpha",
+      "direction": "LEFT",
+      "distance_m": 10.0,
+      "step_index": 26,
+      "rgb_path": "data/sweeps_geo05r2/surface_alpha/NORMAL_LOCK/10m/LEFT/left_0026_rgb.png",
+      "manual_state": "OUT",
+      "manual_boundary_pixel": [
+        [
+          228.3205744362892,
+          -100.14327750537416
+        ],
+        [
+          214.52882667719553,
+          589.8372379490731
+        ]
+      ],
+      "review_method": "independent_geometry_review_pending_operator_visual_confirmation"
+    },
+    {
+      "frame_id": 505255,
+      "sequence_id": "surface_alpha/NORMAL_LOCK/10m/LEFT",
+      "facade_id": "surface_alpha",
+      "direction": "LEFT",
+      "distance_m": 10.0,
+      "step_index": 27,
+      "rgb_path": "data/sweeps_geo05r2/surface_alpha/NORMAL_LOCK/10m/LEFT/left_0027_rgb.png",
+      "manual_state": "OUT",
+      "manual_boundary_pixel": [
+        [
+          212.32164758959337,
+          -99.94315035747691
+        ],
+        [
+          198.5325749954657,
+          590.0346331739379
+        ]
+      ],
+      "review_method": "independent_geometry_review_pending_operator_visual_confirmation"
+    },
+    {
+      "frame_id": 505256,
+      "sequence_id": "surface_alpha/NORMAL_LOCK/10m/LEFT",
+      "facade_id": "surface_alpha",
+      "direction": "LEFT",
+      "distance_m": 10.0,
+      "step_index": 28,
+      "rgb_path": "data/sweeps_geo05r2/surface_alpha/NORMAL_LOCK/10m/LEFT/left_0028_rgb.png",
+      "manual_state": "OUT",
+      "manual_boundary_pixel": [
+        [
+          196.3221809663578,
+          -99.74355522171594
+        ],
+        [
+          182.53576176537786,
+          590.2325894992566
+        ]
+      ],
+      "review_method": "independent_geometry_review_pending_operator_visual_confirmation"
+    },
+    {
+      "frame_id": 505257,
+      "sequence_id": "surface_alpha/NORMAL_LOCK/10m/LEFT",
+      "facade_id": "surface_alpha",
+      "direction": "LEFT",
+      "distance_m": 10.0,
+      "step_index": 29,
+      "rgb_path": "data/sweeps_geo05r2/surface_alpha/NORMAL_LOCK/10m/LEFT/left_0029_rgb.png",
+      "manual_state": "OUT",
+      "manual_boundary_pixel": [
+        [
+          180.32298429512332,
+          -99.54341590087685
+        ],
+        [
+          166.5392395831182,
+          590.4300311012156
+        ]
+      ],
+      "review_method": "independent_geometry_review_pending_operator_visual_confirmation"
+    },
+    {
+      "frame_id": 505258,
+      "sequence_id": "surface_alpha/NORMAL_LOCK/10m/LEFT",
+      "facade_id": "surface_alpha",
+      "direction": "LEFT",
+      "distance_m": 10.0,
+      "step_index": 30,
+      "rgb_path": "data/sweeps_geo05r2/surface_alpha/NORMAL_LOCK/10m/LEFT/left_0030_rgb.png",
+      "manual_state": "OUT",
+      "manual_boundary_pixel": [
+        [
+          164.32394069448975,
+          -99.34378118678957
+        ],
+        [
+          150.5428497647308,
+          590.6280026246233
+        ]
+      ],
+      "review_method": "independent_geometry_review_pending_operator_visual_confirmation"
+    },
+    {
+      "frame_id": 505259,
+      "sequence_id": "surface_alpha/NORMAL_LOCK/10m/LEFT",
+      "facade_id": "surface_alpha",
+      "direction": "LEFT",
+      "distance_m": 10.0,
+      "step_index": 31,
+      "rgb_path": "data/sweeps_geo05r2/surface_alpha/NORMAL_LOCK/10m/LEFT/left_0031_rgb.png",
+      "manual_state": "OUT",
+      "manual_boundary_pixel": [
+        [
+          148.32471600471743,
+          -99.14371922065106
+        ],
+        [
+          134.54629894686735,
+          590.8253961840044
+        ]
+      ],
+      "review_method": "independent_geometry_review_pending_operator_visual_confirmation"
+    }
+  ],
+  "count": 60
+}
