@@ -11,7 +11,7 @@
     "geo05r2_validation.json": "6652b8858c7fce0d67517240f82a685ba5af6565bc5122ab09e626c112a1bbfe",
     "trajectory_transition_audit_r2.json": "05ce151a3c07dc0e10708434798af7fd1b0c6ce69b9e72090478432d9f9b334b",
     "geometry_reference_audit.json": "96bf410f30ec79355f490ad16eb8a42d30dbe1431385471ce943b2aae6ce6e6f",
-    "operator_review_template.csv": "72f71cd721880daf71e14c4e5845f6b89cf3cd10984a6600a89982ddc1b37954"
+    "operator_review_template.csv": "de0e91deadc83cc02e4e79ae42a69b3a63b5e79c124cbde4c332132164f073dc"
   },
   "reference_audit": {
     "path": "results/geo05r2/geometry_reference_audit.json",
