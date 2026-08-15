@@ -1,35 +1,63 @@
 #!/usr/bin/env python3
-"""Validate the compact R2 result set without RGB-D frames or CARLA."""
+"""Validate the compact public GEO-0.5R2 result set and its gate semantics."""
 from __future__ import annotations
-import argparse, json, re
+
+import argparse
+import json
 from pathlib import Path
 
-def main():
-    ap=argparse.ArgumentParser(); ap.add_argument("--results",default="results/geo05r2"); a=ap.parse_args()
-    root=Path(a.results)
-    required=["geo05r2_validation.json","trajectory_transition_audit_r2.json","manual_boundary_audit.json","depth_metric_v2.json","r2_dataset_manifest.json"]
-    missing=[x for x in required if not (root/x).exists()]
-    validation=json.loads((root/"geo05r2_validation.json").read_text()) if not missing else {}
-    depth=json.loads((root/"depth_metric_v2.json").read_text()) if not missing else {}
-    manual=json.loads((root/"manual_boundary_audit.json").read_text()) if not missing else {}
-    surfaces=list((root/"surfaces_v3").glob("*.json")) if (root/"surfaces_v3").exists() else []
-    surface_rows=[json.loads(p.read_text()) for p in surfaces]
-    forbidden=[]
-    private_markers=("/" + "mnt/fast18/", "/" + "Users/")
-    for p in Path(".").rglob("*"):
-        if p.is_file() and "__pycache__" not in p.parts and p.suffix != ".pyc" and p.name != "validate_static.py" and ".git" not in p.parts and p.stat().st_size < 2_000_000:
-            try: text=p.read_text(errors="ignore")
-            except Exception: continue
-            if any(marker in text for marker in private_markers): forbidden.append(str(p))
-    checks={
-      "required_files": not missing,
-      "manual_audit_count": int(manual.get("count",len(manual.get("frames",[])))) >= 60,
-      "surface_count": len(surface_rows) >= 2,
-      "z_depth_pass": bool(depth.get("z_depth_pass")),
-      "validation_schema": validation.get("schema")=="geo05r2.validation.v1",
-      "no_private_paths": not forbidden,
-    }
-    result={"schema":"boundary_sweep.static_validation.v1","checks":checks,"missing":missing,"private_path_files":forbidden,"surface_ids":[x.get("surface_id") for x in surface_rows],"manual_audit_count":manual.get("count",len(manual.get("frames",[]))),"z_depth_median_abs_error_m":depth.get("z_depth_median_abs_error_m"),"gates":validation.get("gates",{})}
-    print(json.dumps(result,indent=2)); return 0 if all(checks.values()) else 1
+from scripts.validate_geo05r2 import depth_gate, reprojection_stats
 
-if __name__=="__main__": raise SystemExit(main())
+
+def main(argv=None):
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--results", default="results/geo05r2")
+    args = parser.parse_args(argv)
+    root = Path(args.results)
+    required = ["geo05r2_validation.json", "trajectory_transition_audit_r2.json", "geometry_reference_audit.json", "depth_metric_v2.json", "r2_dataset_manifest.json"]
+    missing = [name for name in required if not (root / name).exists()]
+    validation = json.loads((root / "geo05r2_validation.json").read_text()) if not missing else {}
+    depth = json.loads((root / "depth_metric_v2.json").read_text()) if not missing else {}
+    reference = json.loads((root / "geometry_reference_audit.json").read_text()) if not missing else {}
+    surfaces = sorted((root / "surfaces_v3").glob("*.json")) if (root / "surfaces_v3").exists() else []
+    gates = validation.get("gates", {})
+    surface_checks = []
+    for path in surfaces:
+        data = json.loads(path.read_text())
+        actual = reprojection_stats(data.get("reprojection_errors_px", {}))
+        reported = gates.get("PHYSICAL_BOUNDARY_GROUND_TRUTH", {}).get("surfaces", [])
+        match = next((row for row in reported if row.get("surface_id") == data.get("surface_id", path.stem)), {})
+        surface_checks.append(actual["sample_count"] > 0 and abs(actual["median_px"] - match.get("median_px", -1)) < 1e-12 and abs(actual["max_px"] - match.get("max_px", -1)) < 1e-12)
+    forbidden = []
+    for path in Path(".").rglob("*"):
+        if path.is_file() and ".git" not in path.parts and "__pycache__" not in path.parts and path.suffix != ".pyc" and path.stat().st_size < 2_000_000:
+            try:
+                text = path.read_text(errors="ignore")
+            except Exception:
+                continue
+            if ("/" + "mnt/fast18/") in text or ("/" + "Users/") in text:
+                forbidden.append(str(path))
+    depth_result = depth_gate(depth, "results/geo05r2/depth_metric_v2.json")
+    checks = {
+        "required_files": not missing,
+        "geometry_reference_schema": reference.get("schema") == "geo05r2.geometry_reference_audit.v1",
+        "geometry_reference_count": reference.get("geometry_reference_count", 0) >= 60 and len(reference.get("frames", [])) >= 60,
+        "operator_visual_review_pending": reference.get("operator_visual_review_completed") is False and reference.get("operator_visual_review_required") is True,
+        "not_manual_audit": not any("manual" in key.lower() for key in reference.keys()),
+        "depth_metric_evidence": depth_result["status"] == "PASS",
+        "surface_stats_consistent": bool(surface_checks) and all(surface_checks),
+        "boundary_semantics_fail": gates.get("BOUNDARY_SEMANTICS", {}).get("status") == "FAIL",
+        "event_coverage_fail": gates.get("EVENT_COVERAGE", {}).get("status") == "FAIL",
+        "ready_for_jepa_fail": gates.get("READY_FOR_JEPA", {}).get("status") == "FAIL",
+        "no_private_paths": not forbidden,
+        "validation_schema": validation.get("schema") == "geo05r2.validation.v2",
+    }
+    result = {"schema": "boundary_sweep.static_validation.v2", "checks": checks, "missing": missing, "private_path_files": forbidden,
+              "geometry_reference_count": reference.get("geometry_reference_count"), "depth_metric": depth_result,
+              "surface_stats_consistent": surface_checks, "gates": gates}
+    print(json.dumps(result, indent=2))
+    return 0 if all(checks.values()) else 1
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())

@@ -26,7 +26,7 @@ def main():
     ap.add_argument("--host", default="localhost")
     ap.add_argument("--port", type=int, default=2000)
     ap.add_argument("--surface", required=True)
-    ap.add_argument("--output", default="data/depth_metric_v2.json")
+    ap.add_argument("--output", default="results/geo05r2/depth_metric_v2.json")
     ap.add_argument("--distances", nargs="+", type=float, default=[5.0, 10.0, 20.0])
     ap.add_argument("--width", type=int, default=640)
     ap.add_argument("--height", type=int, default=480)

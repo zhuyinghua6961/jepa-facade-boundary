@@ -12,7 +12,12 @@
   "DEPTH_METRIC": {
     "status": "PASS",
     "metric": "z-depth",
-    "evidence": "data/depth_metric_v2.json"
+    "evidence": "results/geo05r2/depth_metric_v2.json",
+    "sample_count": 15,
+    "z_depth_pass": true,
+    "z_depth_median_abs_error_m": 0.0017080307006835938,
+    "z_depth_median_relative_error": 0.00017080287459998177,
+    "ray_range_median_abs_error_m": 0.6782974291498043
   },
   "PHYSICAL_BOUNDARY_GROUND_TRUTH": {
     "status": "PASS",
@@ -20,44 +25,42 @@
       {
         "surface_id": "surface_alpha",
         "bbox_id": 48391,
-        "median_px": 1.6230180251861128,
+        "median_px": 1.4752148551685593,
         "max_px": 4.147946043385787,
+        "sample_count": 12,
         "manual_confirmation_status": "confirmed_visual_terminal_edges"
       },
       {
         "surface_id": "surface_beta",
         "bbox_id": 48393,
-        "median_px": 1.5500689436363189,
+        "median_px": 1.3788146437958062,
         "max_px": 4.117772059707022,
+        "sample_count": 12,
         "manual_confirmation_status": "confirmed_visual_terminal_edges"
       }
     ]
   },
+  "GEOMETRY_REFERENCE_CONSISTENCY": {
+    "status": "FAIL",
+    "geometry_reference_count": 60,
+    "geometry_reference_agreement": 0.23333333333333334,
+    "operator_visual_review_completed": false
+  },
   "BOUNDARY_SEMANTICS": {
     "status": "FAIL",
-    "manual_count": 60,
-    "accuracy": 0.23333333333333334,
-    "straddle_precision": 0.0,
-    "straddle_recall": 0.0,
-    "out_precision": 1.0,
-    "out_recall": 0.2916666666666667,
-    "straddle_tp_predicted_actual": [
-      0,
-      0,
-      12
-    ],
-    "out_tp_predicted_actual": [
-      14,
-      14,
-      48
-    ]
+    "operator_ground_truth_available": false,
+    "geometry_reference_agreement": 0.23333333333333334,
+    "complete_in_straddle_out_trajectories": 0
   },
-  "TRAJECTORY_MONOTONICITY": {
-    "status": "FAIL",
+  "TRAJECTORY_ORDERING": {
+    "status": "PASS",
     "monotonic_all": true,
-    "complete_transition_trajectories": 0,
-    "required_complete_trajectories": 4,
     "bad_trajectories": []
+  },
+  "EVENT_COVERAGE": {
+    "status": "FAIL",
+    "complete_in_straddle_out_trajectories": 0,
+    "required_complete_trajectories": 4
   },
   "READY_FOR_JEPA": {
     "status": "FAIL"

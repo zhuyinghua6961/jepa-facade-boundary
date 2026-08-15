@@ -8,8 +8,15 @@
   "raw_rgbd_reproducible": true,
   "retained_representative_images": "results/geo05r2/figures",
   "sha256": {
-    "geo05r2_validation.json": "9119fabe8011089b197220855c6d1e542960f705e80e44c7a8cf06f6b15e8091",
-    "trajectory_transition_audit_r2.json": "64eae72be43fdae0edba8a9cd24820c0f16cc2fa312f4e8a7163b6de7c48caae",
-    "manual_boundary_audit.json": "8e152cd4678de32047d2b44921865a7464bd0729d3d0ba763ba672ef920294df"
+    "geo05r2_validation.json": "6652b8858c7fce0d67517240f82a685ba5af6565bc5122ab09e626c112a1bbfe",
+    "trajectory_transition_audit_r2.json": "05ce151a3c07dc0e10708434798af7fd1b0c6ce69b9e72090478432d9f9b334b",
+    "geometry_reference_audit.json": "96bf410f30ec79355f490ad16eb8a42d30dbe1431385471ce943b2aae6ce6e6f",
+    "operator_review_template.csv": "72f71cd721880daf71e14c4e5845f6b89cf3cd10984a6600a89982ddc1b37954"
+  },
+  "reference_audit": {
+    "path": "results/geo05r2/geometry_reference_audit.json",
+    "geometry_reference_count": 60,
+    "operator_visual_review_completed": false,
+    "operator_visual_review_required": true
   }
 }

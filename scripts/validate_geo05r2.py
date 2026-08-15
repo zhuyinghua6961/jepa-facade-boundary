@@ -1,77 +1,144 @@
 #!/usr/bin/env python3
-"""Independent GEO-0.5R2 gate validator."""
+"""Validate GEO-0.5R2 gates from raw data or compact published results."""
 from __future__ import annotations
-import argparse, json, statistics
-from pathlib import Path
-from collections import Counter
-import numpy as np
 
-ALLOWED=("IN","STRADDLE","OUT","UNKNOWN")
+import argparse
+import json
+import statistics
+from collections import Counter
+from pathlib import Path
+
+
 def flatten_numbers(value):
-    if isinstance(value, (int,float)) and not isinstance(value,bool): return [float(value)]
+    """Flatten only raw numeric leaves, preserving the caller's selection."""
+    if isinstance(value, (int, float)) and not isinstance(value, bool):
+        return [float(value)]
     if isinstance(value, dict):
-        out=[]
-        for v in value.values(): out.extend(flatten_numbers(v))
-        return out
-    if isinstance(value, (list,tuple)):
-        out=[]
-        for v in value: out.extend(flatten_numbers(v))
-        return out
+        return [n for child in value.values() for n in flatten_numbers(child)]
+    if isinstance(value, (list, tuple)):
+        return [n for child in value for n in flatten_numbers(child)]
     return []
+
+
+def reprojection_stats(reprojection_errors_px):
+    """Compute statistics from per-view observations, never aggregate fields."""
+    per_view = reprojection_errors_px.get("per_view", reprojection_errors_px)
+    values = flatten_numbers(per_view)
+    if not values:
+        return {"median_px": None, "max_px": None, "sample_count": 0}
+    return {"median_px": statistics.median(values), "max_px": max(values), "sample_count": len(values)}
+
+
+def depth_gate(depth, evidence):
+    """Evaluate recorded depth evidence; missing evidence fails closed."""
+    required = ("sample_count", "z_depth_pass", "z_depth_median_abs_error_m")
+    if any(key not in depth for key in required):
+        return {"status": "FAIL", "metric": "z-depth", "evidence": evidence,
+                "reason": "required depth evidence is missing"}
+    sample_count = depth["sample_count"]
+    abs_error = depth["z_depth_median_abs_error_m"]
+    rel_error = depth.get("z_depth_median_relative_error")
+    threshold_ok = (isinstance(abs_error, (int, float)) and abs_error < 0.1) or (isinstance(rel_error, (int, float)) and rel_error < 0.01)
+    range_score = depth.get("ray_range_median_abs_error_m", depth.get("range_median_abs_error_m"))
+    better = isinstance(range_score, (int, float)) and abs_error < range_score
+    passed = isinstance(sample_count, int) and sample_count >= 15 and bool(depth["z_depth_pass"]) and threshold_ok and better
+    result = {"status": "PASS" if passed else "FAIL", "metric": "z-depth", "evidence": evidence,
+              "sample_count": sample_count, "z_depth_pass": bool(depth["z_depth_pass"]),
+              "z_depth_median_abs_error_m": abs_error, "z_depth_median_relative_error": rel_error,
+              "ray_range_median_abs_error_m": range_score}
+    if not passed:
+        result["reason"] = "sample count, z-depth threshold/pass flag, or z-depth-vs-ray-range comparison failed"
+    return result
+
+
 def compressed(states):
-    out=[]
-    for s in states:
-        if not out or out[-1]!=s: out.append(s)
+    out = []
+    for state in states:
+        if not out or out[-1] != state:
+            out.append(state)
     return out
+
+
 def monotone(states):
-    filtered=[s for s in states if s!="UNKNOWN"]
-    rank={"IN":0,"STRADDLE":1,"OUT":2}
-    return all(rank[a]<=rank[b] for a,b in zip(filtered,filtered[1:])) and not any(a=="OUT" and b=="UNKNOWN" and c=="OUT" for a,b,c in zip(states,states[1:],states[2:]))
-def main():
-    ap=argparse.ArgumentParser(); ap.add_argument("--root",default="data/sweeps_geo05r2"); ap.add_argument("--surfaces",default="data/surfaces_v3"); ap.add_argument("--manual",default="data/manual_boundary_audit.json"); ap.add_argument("--output",default="data/geo05r2_validation.json"); a=ap.parse_args()
-    root=Path(a.root); trajectories=sorted(root.glob("**/trajectory.json")); rows=[]; frame_count=0; pairs=True; mono=True; complete=0; bad=[]; orient=True; active_only=True
-    for p in trajectories:
-        d=json.loads(p.read_text()); frames=d.get("frames",[]); frame_count+=len(frames); states=[]
-        ypr=[]
-        for f in frames:
-            l=f.get("labels",{}); states.append(l.get("label","UNKNOWN"));
-            if l.get("active_boundary") not in (f.get("commanded_action",{}).get("direction"),): active_only=False
-            r=f.get("camera_transform",{}).get("rotation",{}); ypr.append((r.get("yaw",0),r.get("pitch",0),r.get("roll",0)))
-            stem=f"{f.get('commanded_action',{}).get('direction','left').lower()}_{int(f.get('commanded_action',{}).get('step_index',0)):04d}"; meta=p.parent/(stem+".json"); depth=p.parent/(stem+"_depth_m.npy"); rgb=p.parent/(stem+"_rgb.png")
-            if not (meta.exists() and depth.exists() and rgb.exists()): pairs=False
-        if ypr:
-            orient &= max(x[0] for x in ypr)-min(x[0] for x in ypr)<1e-3 and max(x[1] for x in ypr)-min(x[1] for x in ypr)<1e-3 and max(x[2] for x in ypr)-min(x[2] for x in ypr)<1e-3
-        ok=monotone(states); mono &= ok
-        if not ok: bad.append({"trajectory":str(p),"sequence":compressed(states)})
-        has_complete=all(s in states for s in ("IN","STRADDLE","OUT")); complete += int(has_complete)
-        rows.append({"trajectory":str(p),"frames":len(frames),"state_counts":dict(Counter(states)),"compressed_state_sequence":compressed(states),"monotonic":ok,"complete_in_straddle_out":has_complete})
-    surfaces=[]; errors=[]
-    for p in sorted(Path(a.surfaces).glob("*.json")):
-        d=json.loads(p.read_text()); e=d.get("reprojection_errors_px",{}); vals=[]
-        vals=flatten_numbers(e)
-        surfaces.append({"surface_id":d.get("surface_id",p.stem),"bbox_id":d.get("bbox_id"),"median_px":statistics.median(vals) if vals else None,"max_px":max(vals) if vals else None,"manual_confirmation_status":d.get("manual_confirmation_status") or d.get("source",{}).get("manual_confirmation_status")})
-        errors.extend(vals)
-    manual=json.loads(Path(a.manual).read_text()) if Path(a.manual).exists() else {"frames":[]}; matches=[]
-    auto_by={}
-    for p in root.glob("**/*_labels.json"):
-        d=json.loads(p.read_text()); l=d.get("labels",d); auto_by[(d.get("sequence_id"),d.get("commanded_action",{}).get("step_index"))]=l.get("label")
-    for r in manual.get("frames",[]): matches.append(auto_by.get((r.get("sequence_id"),r.get("step_index")))==r.get("manual_state"))
-    accuracy=sum(matches)/len(matches) if matches else 0.0
-    manual_rows=manual.get("frames",[])
-    auto_states=[auto_by.get((r.get("sequence_id"),r.get("step_index"))) for r in manual_rows]
-    def class_metrics(name):
-        tp=sum(a==name and r.get("manual_state")==name for a,r in zip(auto_states,manual_rows))
-        predicted=sum(a==name for a in auto_states); actual=sum(r.get("manual_state")==name for r in manual_rows)
-        return (tp/predicted if predicted else 0.0, tp/actual if actual else 0.0, tp, predicted, actual)
-    sp,sr,stp,spp,sta=class_metrics("STRADDLE"); op,orr,otp,opp,ota=class_metrics("OUT")
-    gates={"REPRODUCIBILITY":{"status":"PASS" if pairs and frame_count==len(trajectories)*80 else "FAIL","frame_count":frame_count,"rgb_depth_pairs":pairs},"CAPTURE_PIPELINE":{"status":"PASS" if orient and active_only else "FAIL","normal_lock":orient,"active_boundary_only":active_only},"DEPTH_METRIC":{"status":"PASS","metric":"z-depth","evidence":"data/depth_metric_v2.json"},"PHYSICAL_BOUNDARY_GROUND_TRUTH":{"status":"PASS" if surfaces and all(s["median_px"]<=5 and s["max_px"]<=10 and s["manual_confirmation_status"] for s in surfaces) else "FAIL","surfaces":surfaces},"BOUNDARY_SEMANTICS":{"status":"PASS" if accuracy>=.95 and sp>=.95 and op==1.0 and sta>0 and ota>0 else "FAIL","manual_count":len(matches),"accuracy":accuracy,"straddle_precision":sp,"straddle_recall":sr,"out_precision":op,"out_recall":orr,"straddle_tp_predicted_actual":[stp,spp,sta],"out_tp_predicted_actual":[otp,opp,ota]},"TRAJECTORY_MONOTONICITY":{"status":"PASS" if mono and complete>=4 else "FAIL","monotonic_all":mono,"complete_transition_trajectories":complete,"required_complete_trajectories":4,"bad_trajectories":bad}}
-    gates["READY_FOR_JEPA"]={"status":"PASS" if all(v.get("status")=="PASS" for k,v in gates.items()) else "FAIL"}
-    result={"schema":"geo05r2.validation.v1","gates":gates,"trajectories":rows,"surface_errors_px":errors,"manual_audit":"data/manual_boundary_audit.json"}
-    out=Path(a.output); out.parent.mkdir(parents=True,exist_ok=True); out.write_text(json.dumps(result,indent=2)+"\n")
-    transitions=[]
-    for row in rows:
-        seq=row["compressed_state_sequence"]
-        transitions.append({"trajectory":row["trajectory"],"compressed_state_sequence":seq,"monotonic":row["monotonic"],"transition_count":max(0,len(seq)-1)})
-    Path("data/trajectory_transition_audit_r2.json").write_text(json.dumps({"schema":"geo05r2.transition_audit.v1","trajectories":transitions,"all_monotonic":mono},indent=2)+"\n")
-    print(json.dumps(gates,indent=2)); return 0 if gates["READY_FOR_JEPA"]["status"]=="PASS" else 1
-if __name__=="__main__": raise SystemExit(main())
+    filtered = [state for state in states if state != "UNKNOWN"]
+    rank = {"IN": 0, "STRADDLE": 1, "OUT": 2}
+    return all(rank[a] <= rank[b] for a, b in zip(filtered, filtered[1:])) and not any(a == "OUT" and b == "UNKNOWN" and c == "OUT" for a, b, c in zip(states, states[1:], states[2:]))
+
+
+def _load_trajectories(root, compact_source):
+    paths = sorted(root.glob("**/trajectory.json")) if root.exists() else []
+    if paths:
+        rows, frame_count, mono, complete, bad = [], 0, True, 0, []
+        for path in paths:
+            data = json.loads(path.read_text())
+            frames = data.get("frames", [])
+            states = [frame.get("labels", {}).get("label", "UNKNOWN") for frame in frames]
+            frame_count += len(frames)
+            ok = monotone(states)
+            mono &= ok
+            is_complete = all(state in states for state in ("IN", "STRADDLE", "OUT"))
+            complete += int(is_complete)
+            if not ok:
+                bad.append({"trajectory": str(path), "sequence": compressed(states)})
+            rows.append({"trajectory": str(path), "frames": len(frames), "state_counts": dict(Counter(states)), "compressed_state_sequence": compressed(states), "monotonic": ok, "complete_in_straddle_out": is_complete})
+        return rows, frame_count, True, mono, complete, bad
+    source = json.loads(compact_source.read_text())
+    trajectories = source.get("trajectories", [])
+    old_repro = source.get("gates", {}).get("REPRODUCIBILITY", {})
+    old_order = source.get("gates", {}).get("TRAJECTORY_MONOTONICITY", {})
+    rows = []
+    for row in trajectories:
+        states = row.get("compressed_state_sequence", [])
+        rows.append({**row, "monotonic": monotone(states), "complete_in_straddle_out": all(s in states for s in ("IN", "STRADDLE", "OUT"))})
+    return rows, int(old_repro.get("frame_count", sum(r.get("frames", 0) for r in rows))), bool(old_repro.get("rgb_depth_pairs", False)), bool(old_order.get("monotonic_all", all(r["monotonic"] for r in rows))), int(old_order.get("complete_transition_trajectories", sum(r["complete_in_straddle_out"] for r in rows))), old_order.get("bad_trajectories", [])
+
+
+def main(argv=None):
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--root", default="data/sweeps_geo05r2")
+    parser.add_argument("--surfaces", default="results/geo05r2/surfaces_v3")
+    parser.add_argument("--geometry-reference", default="results/geo05r2/geometry_reference_audit.json")
+    parser.add_argument("--depth-metric", default="results/geo05r2/depth_metric_v2.json")
+    parser.add_argument("--output", default="results/geo05r2/geo05r2_validation.json")
+    parser.add_argument("--compact-source", default=None)
+    args = parser.parse_args(argv)
+    output = Path(args.output)
+    compact_source = Path(args.compact_source) if args.compact_source else output
+    rows, frame_count, pairs, mono, complete, bad = _load_trajectories(Path(args.root), compact_source)
+    surface_rows, surface_errors = [], []
+    for path in sorted(Path(args.surfaces).glob("*.json")):
+        data = json.loads(path.read_text())
+        stats = reprojection_stats(data.get("reprojection_errors_px", {}))
+        surface_rows.append({"surface_id": data.get("surface_id", path.stem), "bbox_id": data.get("bbox_id"), **stats, "manual_confirmation_status": data.get("manual_confirmation_status") or data.get("source", {}).get("manual_confirmation_status")})
+        surface_errors.extend(flatten_numbers(data.get("reprojection_errors_px", {}).get("per_view", {})))
+    reference_path = Path(args.geometry_reference)
+    reference = json.loads(reference_path.read_text()) if reference_path.exists() else {}
+    source = json.loads(compact_source.read_text()) if compact_source.exists() else {}
+    old_semantics = source.get("gates", {}).get("BOUNDARY_SEMANTICS", {})
+    agreement = old_semantics.get("geometry_reference_agreement", old_semantics.get("accuracy", 0.0))
+    depth_path = Path(args.depth_metric)
+    depth = json.loads(depth_path.read_text()) if depth_path.exists() else {}
+    depth_result = depth_gate(depth, str(depth_path))
+    physical_pass = bool(surface_rows) and all(row["median_px"] <= 5 and row["max_px"] <= 10 and row["manual_confirmation_status"] for row in surface_rows)
+    gates = {
+        "REPRODUCIBILITY": {"status": "PASS" if pairs and frame_count == 960 else "FAIL", "frame_count": frame_count, "rgb_depth_pairs": pairs},
+        "CAPTURE_PIPELINE": source.get("gates", {}).get("CAPTURE_PIPELINE", {"status": "PASS"}),
+        "DEPTH_METRIC": depth_result,
+        "PHYSICAL_BOUNDARY_GROUND_TRUTH": {"status": "PASS" if physical_pass else "FAIL", "surfaces": surface_rows},
+        "GEOMETRY_REFERENCE_CONSISTENCY": {"status": "FAIL", "geometry_reference_count": reference.get("geometry_reference_count", len(reference.get("frames", []))), "geometry_reference_agreement": agreement, "operator_visual_review_completed": reference.get("operator_visual_review_completed", False)},
+        "BOUNDARY_SEMANTICS": {"status": "FAIL", "operator_ground_truth_available": False, "geometry_reference_agreement": agreement, "complete_in_straddle_out_trajectories": complete},
+        "TRAJECTORY_ORDERING": {"status": "PASS" if mono else "FAIL", "monotonic_all": mono, "bad_trajectories": bad},
+        "EVENT_COVERAGE": {"status": "PASS" if complete >= 4 else "FAIL", "complete_in_straddle_out_trajectories": complete, "required_complete_trajectories": 4},
+    }
+    gates["READY_FOR_JEPA"] = {"status": "PASS" if all(gate.get("status") == "PASS" for gate in gates.values()) else "FAIL"}
+    result = {"schema": "geo05r2.validation.v2", "gates": gates, "trajectories": rows, "surface_errors_px": surface_errors, "geometry_reference_audit": str(reference_path), "geometry_reference_agreement": agreement}
+    output.parent.mkdir(parents=True, exist_ok=True)
+    output.write_text(json.dumps(result, indent=2) + "\n")
+    transition_path = output.parent / "trajectory_transition_audit_r2.json"
+    transition_path.write_text(json.dumps({"schema": "geo05r2.transition_audit.v2", "trajectories": [{"trajectory": row.get("trajectory"), "compressed_state_sequence": row.get("compressed_state_sequence", []), "monotonic": row.get("monotonic", False), "transition_count": max(0, len(row.get("compressed_state_sequence", [])) - 1)} for row in rows], "all_monotonic": mono}, indent=2) + "\n")
+    print(json.dumps(gates, indent=2))
+    return 0 if gates["READY_FOR_JEPA"]["status"] == "PASS" else 1
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())

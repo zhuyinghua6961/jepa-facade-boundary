@@ -7,15 +7,16 @@ Reusable CARLA geometry and RGB-D tooling for active facade-boundary perception 
 The repository contains the GEO-0.5R2 implementation and its reproducible audit. CARLA 0.10.0 UE5 / Town10HD_Opt was used with 640x480 RGB-D sensors, horizontal FOV 90 degrees, synchronous mode, fixed delta 0.05 s, and NORMAL_LOCK camera motion.
 
 ```text
-pytest: 11 passed
+pytest: 17 passed
 RGB-D: 960 pairs
 surface_alpha: bbox 48391
 surface_beta: bbox 48393
 alpha reprojection median/max: 1.475 / 4.148 px
 beta reprojection median/max: 1.379 / 4.118 px
 z-depth median absolute error: approximately 0.0017 m
-manual audit: 60 frames
-audit accuracy: 23.33%
+geometry-reference audit candidates: 60 frames
+operator visual review: pending
+geometry-reference agreement: 23.33%
 ```
 
 Gate results are intentionally not overstated:
@@ -25,12 +26,14 @@ REPRODUCIBILITY: PASS
 CAPTURE_PIPELINE: PASS
 DEPTH_METRIC: PASS
 PHYSICAL_BOUNDARY_GROUND_TRUTH: PASS
+GEOMETRY_REFERENCE_CONSISTENCY: FAIL
 BOUNDARY_SEMANTICS: FAIL
-TRAJECTORY_MONOTONICITY: FAIL
+TRAJECTORY_ORDERING: PASS
+EVENT_COVERAGE: FAIL
 READY_FOR_JEPA: FAIL
 ```
 
-The selected facades contain balconies and railings that cause severe occlusion. The run produced `UNKNOWN=490` and `OUT=470`, with no reliable IN/STRADDLE coverage. JEPA training has not started.
+The selected facades contain balconies and railings that cause severe occlusion. The run produced `UNKNOWN=490` and `OUT=470`, with no reliable IN/STRADDLE coverage. The 60-frame set is a geometry-reference candidate set, not completed operator visual review; `23.33%` is geometry-reference agreement, not human accuracy. The trajectory order is monotonic, but there are no complete IN -> STRADDLE -> OUT events. JEPA training has not started.
 
 ## Layout
 
@@ -65,7 +68,7 @@ PYTEST_DISABLE_PLUGIN_AUTOLOAD=1 PYTHONPATH=. python3 -m pytest -q tests
 PYTHONPATH=. python3 scripts/validate_static.py
 ```
 
-The validator reads the compact result files under `results/geo05r2/`; it does not require the 960-frame RGB-D directory.
+The validator reads the compact result files under `results/geo05r2/`; it does not require the 960-frame RGB-D directory. Depth evidence is read from `results/geo05r2/depth_metric_v2.json` and fails closed when required fields are absent.
 
 For a new capture, use configuration and a unique result directory. The capture implementation is a free-camera rig and does not require a flight plugin:
 

@@ -16,8 +16,8 @@ RIGHT 使用与 LEFT 相同的 NORMAL_LOCK 规则，方向只改变水平位置�
 
 ## 深度与可见率
 
-遮挡判断使用 `abs(sensor_depth - theoretical_camera_z) <= max(0.15m, 0.02 * theoretical_camera_z)`。`visible_ratio` 的分母是投影落入当前图像的立面采样点数；视锥外采样点不计为遮挡，而用于判断物理边界是否在视野外。最终深度语义采用 z-depth，独立平面验证结果见 `data/depth_metric_v2.json`。
+遮挡判断使用 `abs(sensor_depth - theoretical_camera_z) <= max(0.15m, 0.02 * theoretical_camera_z)`。`visible_ratio` 的分母是投影落入当前图像的立面采样点数；视锥外采样点不计为遮挡，而用于判断物理边界是否在视野外。最终深度语义采用 z-depth，独立平面验证结果见 `results/geo05r2/depth_metric_v2.json`。
 
 ## 测试
 
-`tests/test_geometry.py` 覆盖几何函数；服务器没有可调用的 pytest 命令，完整尝试输出在 `logs/pytest_output.log`，五个几何测试函数的直接执行结果在 `logs/geometry_manual_tests.log`。当前没有针对 `labels_v2.py` 的独立单元测试，验收由 `validate_geo05.py` 的语义不变量检查覆盖。
+`tests/` 覆盖几何、标签和验证门控；当前使用 `PYTEST_DISABLE_PLUGIN_AUTOLOAD=1 PYTHONPATH=. python3 -m pytest -q tests`，不联网安装插件。

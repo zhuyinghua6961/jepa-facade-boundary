@@ -1,25 +1,157 @@
 {
-  "schema": "boundary_sweep.clean_artifacts.v1",
-  "mode": "apply",
-  "root": ".",
-  "quarantine": "../_cleanup_quarantine/boundary_sweep_20260816",
+  "schema": "boundary_sweep.cleanup_report.v2",
+  "cleanup_date": "2026-08-16",
+  "pre_cleanup_total_bytes": 18430413740,
+  "final_project_disk_bytes": 30334536,
+  "final_project_disk_note": "recorded compact-project measurement; current apparent-size checks may differ by filesystem metadata",
+  "disposition_mechanism": "gio trash moved quarantined content to the desktop trash; no permanent direct deletion was used",
   "items": [
     {
+      "path": ".carla_pkg",
+      "pre_cleanup_size_bytes": 12061853,
+      "classification": "CARLA package/archive",
+      "final_disposition": "DISPOSITION_UNVERIFIED",
+      "reason": "Manifest marked review-required; no item-level trash receipt retained.",
+      "recoverability": "unknown"
+    },
+    {
       "path": ".pytest_cache",
-      "action": "MOVE_TO_QUARANTINE",
-      "reason": "explicit regenerable cache/archive allowlist"
+      "pre_cleanup_size_bytes": 13629,
+      "classification": "regenerable cache",
+      "final_disposition": "MOVED_TO_TRASH",
+      "reason": "cleanup_apply.log records quarantine move; quarantine was sent to gio trash.",
+      "recoverability": "recoverable from trash until emptied"
     },
     {
-      "path": "boundary_sweep/__pycache__",
-      "action": "MOVE_TO_QUARANTINE",
-      "reason": "explicit regenerable cache/archive allowlist"
+      "path": ".venv",
+      "pre_cleanup_size_bytes": 24680,
+      "classification": "local environment",
+      "final_disposition": "DISPOSITION_UNVERIFIED",
+      "reason": "Manifest marked review-required; no item-level disposition evidence retained.",
+      "recoverability": "unknown"
     },
     {
-      "path": "tests/__pycache__",
-      "action": "MOVE_TO_QUARANTINE",
-      "reason": "explicit regenerable cache/archive allowlist"
+      "path": "GEO-0.5R2_audit_20260815",
+      "pre_cleanup_size_bytes": 4261987008,
+      "classification": "legacy audit archive",
+      "final_disposition": "DISPOSITION_UNVERIFIED",
+      "reason": "Legacy archive was excluded from the public compact result; no item-level trash receipt retained.",
+      "recoverability": "unknown"
+    },
+    {
+      "path": "GEO-0.5R2_audit_20260815.tar.gz",
+      "pre_cleanup_size_bytes": 1228818615,
+      "classification": "legacy audit archive",
+      "final_disposition": "DISPOSITION_UNVERIFIED",
+      "reason": "Legacy archive was excluded from the public compact result; no item-level trash receipt retained.",
+      "recoverability": "unknown"
+    },
+    {
+      "path": "GEO-0.5R2_minimal_20260815",
+      "pre_cleanup_size_bytes": 21349180,
+      "classification": "legacy compact duplicate",
+      "final_disposition": "DISPOSITION_UNVERIFIED",
+      "reason": "Duplicate was excluded from the published result; no item-level trash receipt retained.",
+      "recoverability": "unknown"
+    },
+    {
+      "path": "GEO-0.5R2_minimal_20260815.tar.gz",
+      "pre_cleanup_size_bytes": 5437844,
+      "classification": "legacy compact archive",
+      "final_disposition": "DISPOSITION_UNVERIFIED",
+      "reason": "Duplicate was excluded from the published result; no item-level trash receipt retained.",
+      "recoverability": "unknown"
+    },
+    {
+      "path": "GEO-0.5_audit_20260815.tar.gz",
+      "pre_cleanup_size_bytes": 36595591,
+      "classification": "legacy audit archive",
+      "final_disposition": "DISPOSITION_UNVERIFIED",
+      "reason": "Legacy archive was excluded from the public compact result; no item-level trash receipt retained.",
+      "recoverability": "unknown"
+    },
+    {
+      "path": "docs/legacy/GEO05_AUDIT_NOTES.md",
+      "pre_cleanup_size_bytes": 1907,
+      "classification": "historical documentation",
+      "final_disposition": "KEPT",
+      "reason": "Retained as historical provenance and failure analysis.",
+      "recoverability": "tracked in git"
+    },
+    {
+      "path": "README.md",
+      "pre_cleanup_size_bytes": 6934,
+      "classification": "active documentation",
+      "final_disposition": "KEPT",
+      "reason": "Public project documentation.",
+      "recoverability": "tracked in git"
+    },
+    {
+      "path": "boundary_sweep",
+      "pre_cleanup_size_bytes": 132158,
+      "classification": "active source",
+      "final_disposition": "KEPT",
+      "reason": "Reusable geometry, sensors, labels and utilities.",
+      "recoverability": "tracked in git"
+    },
+    {
+      "path": "configs",
+      "pre_cleanup_size_bytes": 4599,
+      "classification": "active configuration",
+      "final_disposition": "KEPT",
+      "reason": "Reproducible configuration.",
+      "recoverability": "tracked in git"
+    },
+    {
+      "path": "data",
+      "pre_cleanup_size_bytes": 12863775129,
+      "classification": "full raw/derived experiment data",
+      "final_disposition": "DISPOSITION_UNVERIFIED",
+      "reason": "Not restored or republished; no per-directory trash receipt is retained, so final disposal is intentionally not asserted.",
+      "recoverability": "unknown"
+    },
+    {
+      "path": "debug_projection.py",
+      "pre_cleanup_size_bytes": 958,
+      "classification": "one-off diagnostic",
+      "final_disposition": "DISPOSITION_UNVERIFIED",
+      "reason": "Manifest marked quarantine; no item-level trash receipt retained.",
+      "recoverability": "unknown"
+    },
+    {
+      "path": "scripts",
+      "pre_cleanup_size_bytes": 173083,
+      "classification": "active scripts",
+      "final_disposition": "KEPT",
+      "reason": "Capture, validation and audit entry points.",
+      "recoverability": "tracked in git"
+    },
+    {
+      "path": "tests",
+      "pre_cleanup_size_bytes": 26476,
+      "classification": "tests",
+      "final_disposition": "KEPT",
+      "reason": "Geometry, labels and validation gate tests.",
+      "recoverability": "tracked in git"
+    },
+    {
+      "path": "results",
+      "pre_cleanup_size_bytes": 4517577,
+      "classification": "compact reproducible results",
+      "final_disposition": "MOVED_TO_GIT_TRACKED_COMPACT_RESULT",
+      "reason": "Only compact metrics, fitted surfaces, figures, logs and manifests retained.",
+      "recoverability": "tracked in git"
     }
   ],
-  "quarantine_disposition": "moved to desktop trash with gio trash after public GitHub verification",
-  "final_project_disk_bytes": 30334536
+  "unverified_items": [
+    ".carla_pkg",
+    ".venv",
+    "GEO-0.5R2_audit_20260815",
+    "GEO-0.5R2_audit_20260815.tar.gz",
+    "GEO-0.5R2_minimal_20260815",
+    "GEO-0.5R2_minimal_20260815.tar.gz",
+    "GEO-0.5_audit_20260815.tar.gz",
+    "data",
+    "debug_projection.py"
+  ]
 }
