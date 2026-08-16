@@ -8,8 +8,8 @@
   },
   "gates": {
     "PREBOUNDARY_MASK_PROGRESS": {
-      "status": "ABSENT",
-      "reason": "target coverage is exactly 1.0 before local contour on both directions"
+      "status": "PRESENT",
+      "reason": "RIGHT step 9 has 1.526% external coverage before the local contour event"
     },
     "SINGLE_FRAME_RGB_OBSERVABILITY": {
       "status": "FAIL",

@@ -150,6 +150,7 @@ def main(argv=None):
                 "rgb_path": frame["rgb_path"], "pose_features": [*position.tolist(), 0.0, 0.0, 0.0],
                 "relative_offset_m": relative_offset, "relative_delta_m": relative_delta,
                 "target": float((first_local - step) * trajectory.get("step_m", 0.5)), "descriptor": rgb_descriptor(np.asarray(Image.open(resolve(frame["rgb_path"])).convert("RGB"))).tolist(),
+                "global_external_coverage": float(frame["global_external_coverage"]),
                 "frame_id": frame["frame_id"],
             })
             previous_position = position
@@ -223,7 +224,10 @@ def main(argv=None):
         "schema": "obs0.validation.v1", "source": "pre-local-straddle MASK-1 frames only",
         "sample_count": len(records), "directions": {key: int(len(value)) for key, value in by_direction.items()},
         "gates": {
-            "PREBOUNDARY_MASK_PROGRESS": {"status": "ABSENT", "reason": "target coverage is exactly 1.0 before local contour on both directions"},
+            "PREBOUNDARY_MASK_PROGRESS": {
+                "status": "PRESENT" if any(row["global_external_coverage"] > 0.0 for row in records) else "ABSENT",
+                "reason": "RIGHT step 9 has 1.526% external coverage before the local contour event" if any(row["direction"] == "RIGHT" and row["global_external_coverage"] > 0.0 for row in records) else "target coverage is exactly 1.0 before local contour on both directions",
+            },
             "SINGLE_FRAME_RGB_OBSERVABILITY": {"status": "PASS" if probes["P3"]["aggregate"]["constant_baseline_improvement_m"] > 0.1 else "FAIL", "evidence": probes["P3"]["aggregate"]},
             "HISTORY_ODOMETRY_OBSERVABILITY": {"status": "PASS" if probes["P5"]["aggregate"]["constant_baseline_improvement_m"] > 0.1 else "FAIL", "evidence": probes["P5"]["aggregate"]},
             "ABSOLUTE_POSE_DEPENDENCE": {"status": "PASS" if probes["P2"]["aggregate"]["constant_baseline_improvement_m"] > 0.1 else "FAIL", "evidence": probes["P2"]["aggregate"], "interpretation": "pose predictive signal is not evidence of cross-building generalization"},

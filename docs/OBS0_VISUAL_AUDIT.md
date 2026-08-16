@@ -6,10 +6,11 @@ distance only; they are excluded from every P0-P6 probe input.
 
 ## Pre-boundary facts
 
-Before local STRADDLE, target coverage remains exactly `1.0` in both directions.
-Therefore `PREBOUNDARY_MASK_PROGRESS=ABSENT`. The first non-target pixel appears
-at the global external-coverage event, not necessarily at the local contour
-event.
+Before local STRADDLE, LEFT remains at target coverage `1.0`, but RIGHT step 9
+already has `1.526%` external coverage. Therefore
+`PREBOUNDARY_MASK_PROGRESS=PRESENT`, while the configured global 3% event still
+occurs later. The first non-target pixel appears before the local contour event,
+not necessarily at the local contour event.
 
 ![Pairwise aligned SSIM](assets/obs0/pairwise_ssim_heatmap.jpg)
 
@@ -76,7 +77,7 @@ cross-building generalization results.
 ## OBS-0 gates
 
 ```text
-PREBOUNDARY_MASK_PROGRESS: ABSENT
+PREBOUNDARY_MASK_PROGRESS: PRESENT
 SINGLE_FRAME_RGB_OBSERVABILITY: FAIL
 HISTORY_ODOMETRY_OBSERVABILITY: PASS (diagnostic only)
 ABSOLUTE_POSE_DEPENDENCE: FAIL
