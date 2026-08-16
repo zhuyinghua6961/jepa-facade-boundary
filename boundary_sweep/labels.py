@@ -15,6 +15,7 @@ import numpy as np
 from PIL import Image, ImageDraw
 
 from .geometry import camera_to_world, pixel_to_camera_ray, ray_plane_intersection, world_to_camera, world_to_pixel
+from .segmentation import outer_transition_contour
 from .surfaces import boundary_line, physical_corners, surface_axes
 
 
@@ -231,6 +232,66 @@ def render_overlay(rgb_path: str | Path, labels: Mapping, output_path: str | Pat
     draw.text((8, 8), f"active={labels['active_boundary']} label={labels['label']} coverage={labels['target_pixel_coverage']:.3f} occ={labels['occlusion_visibility_ratio']:.3f}", fill=(255, 255, 0))
     Path(output_path).parent.mkdir(parents=True, exist_ok=True)
     image.save(output_path)
+
+
+def adaptive_instance_boundary_evidence(target_mask: np.ndarray, direction: str,
+                                        min_side_fraction: float = 0.05,
+                                        min_span_fraction: float = 0.70) -> dict:
+    """Classify a horizontal pilot frame from an instance-mask exterior contour.
+
+    This is deliberately independent of the legacy surface polygon and its
+    projected lines.  It is an oracle used only during simulator pilot capture.
+    """
+    if direction not in ("LEFT", "RIGHT"):
+        raise ValueError("adaptive pilot supports LEFT or RIGHT only")
+    mask = np.asarray(target_mask, dtype=bool)
+    contour = outer_transition_contour(mask)
+    h, w = mask.shape
+    ys, xs = np.where(contour)
+    if not len(xs):
+        return {"label": "IN", "contour": contour, "contour_present": False,
+                "target_fraction": float(mask.mean()), "external_fraction": float((~mask).mean()),
+                "contour_span_fraction": 0.0, "contour_centroid_px": None,
+                "direction": direction, "reason": "no exterior transition contour"}
+    try:
+        from scipy import ndimage
+        component_labels, component_count = ndimage.label(contour, structure=np.ones((3, 3), dtype=bool))
+        components = []
+        for index in range(1, component_count + 1):
+            cy, cx = np.where(component_labels == index)
+            if len(cx) < 10:
+                continue
+            component_span = float((cy.max() - cy.min() + 1) / h)
+            component_centroid = float(cx.mean())
+            expected_component = component_centroid < w * 0.5 if direction == "LEFT" else component_centroid > w * 0.5
+            components.append((expected_component, component_span, len(cx), index, component_centroid))
+        candidates = [item for item in components if item[0]]
+        if candidates:
+            _expected, _span, _size, selected, _centroid = max(candidates, key=lambda item: (item[1], item[2]))
+            contour = component_labels == selected
+            ys, xs = np.where(contour)
+    except ImportError:
+        pass
+    span = float((ys.max() - ys.min() + 1) / h)
+    centroid = float(xs.mean())
+    expected = centroid < w * 0.5 if direction == "LEFT" else centroid > w * 0.5
+    # The exterior side is the side toward the nearest image border.  This
+    # avoids treating an unrelated internal building split as the active edge.
+    if direction == "LEFT":
+        external = mask[:, :max(int(round(centroid)), 1)]
+        target = mask[:, min(int(round(centroid)) + 1, w - 1):]
+    else:
+        external = mask[:, min(int(round(centroid)) + 1, w - 1):]
+        target = mask[:, :max(int(round(centroid)), 1)]
+    target_fraction = float(target.mean()) if target.size else 0.0
+    external_fraction = float((~external).mean()) if external.size else 0.0
+    straddle = bool(expected and span >= min_span_fraction and
+                    target_fraction >= min_side_fraction and external_fraction >= min_side_fraction)
+    return {"label": "STRADDLE" if straddle else "UNKNOWN", "contour": contour,
+            "contour_present": True, "target_fraction": target_fraction,
+            "external_fraction": external_fraction, "contour_span_fraction": span,
+            "contour_centroid_px": centroid, "direction": direction,
+            "reason": "directional exterior contour with both sides observed" if straddle else "contour does not meet directional side/span criteria"}
 
 
 def facade_outer_envelope(target_mask, closing_kernel_px: int = 3):

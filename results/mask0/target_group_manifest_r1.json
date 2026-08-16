@@ -1,0 +1,22 @@
+{
+  "surface_omega": {
+    "target_instance_ids_16bit": [
+      39220
+    ],
+    "target_packed_keys": [
+      10040323
+    ],
+    "stable_min_views": 11,
+    "selection": "semantic Building mask plus 16-bit instance ID; no RGB classification"
+  },
+  "surface_sigma": {
+    "target_instance_ids_16bit": [
+      39249
+    ],
+    "target_packed_keys": [
+      10047747
+    ],
+    "stable_min_views": 11,
+    "selection": "semantic Building mask plus 16-bit instance ID; no RGB classification"
+  }
+}

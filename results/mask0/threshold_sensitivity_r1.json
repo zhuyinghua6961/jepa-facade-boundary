@@ -1,0 +1,245 @@
+{
+  "out=0.05;side=0.01;tol=3": {
+    "out_coverage": 0.05,
+    "straddle_side": 0.01,
+    "alignment_tolerance_px": 3,
+    "sigma_left_validated": true,
+    "sigma_right_validated": true,
+    "omega_validated_edges": [],
+    "note": "state thresholds do not convert absent transition contours into edges"
+  },
+  "out=0.05;side=0.01;tol=5": {
+    "out_coverage": 0.05,
+    "straddle_side": 0.01,
+    "alignment_tolerance_px": 5,
+    "sigma_left_validated": true,
+    "sigma_right_validated": true,
+    "omega_validated_edges": [],
+    "note": "state thresholds do not convert absent transition contours into edges"
+  },
+  "out=0.05;side=0.01;tol=8": {
+    "out_coverage": 0.05,
+    "straddle_side": 0.01,
+    "alignment_tolerance_px": 8,
+    "sigma_left_validated": true,
+    "sigma_right_validated": true,
+    "omega_validated_edges": [],
+    "note": "state thresholds do not convert absent transition contours into edges"
+  },
+  "out=0.05;side=0.03;tol=3": {
+    "out_coverage": 0.05,
+    "straddle_side": 0.03,
+    "alignment_tolerance_px": 3,
+    "sigma_left_validated": true,
+    "sigma_right_validated": true,
+    "omega_validated_edges": [],
+    "note": "state thresholds do not convert absent transition contours into edges"
+  },
+  "out=0.05;side=0.03;tol=5": {
+    "out_coverage": 0.05,
+    "straddle_side": 0.03,
+    "alignment_tolerance_px": 5,
+    "sigma_left_validated": true,
+    "sigma_right_validated": true,
+    "omega_validated_edges": [],
+    "note": "state thresholds do not convert absent transition contours into edges"
+  },
+  "out=0.05;side=0.03;tol=8": {
+    "out_coverage": 0.05,
+    "straddle_side": 0.03,
+    "alignment_tolerance_px": 8,
+    "sigma_left_validated": true,
+    "sigma_right_validated": true,
+    "omega_validated_edges": [],
+    "note": "state thresholds do not convert absent transition contours into edges"
+  },
+  "out=0.05;side=0.05;tol=3": {
+    "out_coverage": 0.05,
+    "straddle_side": 0.05,
+    "alignment_tolerance_px": 3,
+    "sigma_left_validated": true,
+    "sigma_right_validated": true,
+    "omega_validated_edges": [],
+    "note": "state thresholds do not convert absent transition contours into edges"
+  },
+  "out=0.05;side=0.05;tol=5": {
+    "out_coverage": 0.05,
+    "straddle_side": 0.05,
+    "alignment_tolerance_px": 5,
+    "sigma_left_validated": true,
+    "sigma_right_validated": true,
+    "omega_validated_edges": [],
+    "note": "state thresholds do not convert absent transition contours into edges"
+  },
+  "out=0.05;side=0.05;tol=8": {
+    "out_coverage": 0.05,
+    "straddle_side": 0.05,
+    "alignment_tolerance_px": 8,
+    "sigma_left_validated": true,
+    "sigma_right_validated": true,
+    "omega_validated_edges": [],
+    "note": "state thresholds do not convert absent transition contours into edges"
+  },
+  "out=0.10;side=0.01;tol=3": {
+    "out_coverage": 0.1,
+    "straddle_side": 0.01,
+    "alignment_tolerance_px": 3,
+    "sigma_left_validated": true,
+    "sigma_right_validated": true,
+    "omega_validated_edges": [],
+    "note": "state thresholds do not convert absent transition contours into edges"
+  },
+  "out=0.10;side=0.01;tol=5": {
+    "out_coverage": 0.1,
+    "straddle_side": 0.01,
+    "alignment_tolerance_px": 5,
+    "sigma_left_validated": true,
+    "sigma_right_validated": true,
+    "omega_validated_edges": [],
+    "note": "state thresholds do not convert absent transition contours into edges"
+  },
+  "out=0.10;side=0.01;tol=8": {
+    "out_coverage": 0.1,
+    "straddle_side": 0.01,
+    "alignment_tolerance_px": 8,
+    "sigma_left_validated": true,
+    "sigma_right_validated": true,
+    "omega_validated_edges": [],
+    "note": "state thresholds do not convert absent transition contours into edges"
+  },
+  "out=0.10;side=0.03;tol=3": {
+    "out_coverage": 0.1,
+    "straddle_side": 0.03,
+    "alignment_tolerance_px": 3,
+    "sigma_left_validated": true,
+    "sigma_right_validated": true,
+    "omega_validated_edges": [],
+    "note": "state thresholds do not convert absent transition contours into edges"
+  },
+  "out=0.10;side=0.03;tol=5": {
+    "out_coverage": 0.1,
+    "straddle_side": 0.03,
+    "alignment_tolerance_px": 5,
+    "sigma_left_validated": true,
+    "sigma_right_validated": true,
+    "omega_validated_edges": [],
+    "note": "state thresholds do not convert absent transition contours into edges"
+  },
+  "out=0.10;side=0.03;tol=8": {
+    "out_coverage": 0.1,
+    "straddle_side": 0.03,
+    "alignment_tolerance_px": 8,
+    "sigma_left_validated": true,
+    "sigma_right_validated": true,
+    "omega_validated_edges": [],
+    "note": "state thresholds do not convert absent transition contours into edges"
+  },
+  "out=0.10;side=0.05;tol=3": {
+    "out_coverage": 0.1,
+    "straddle_side": 0.05,
+    "alignment_tolerance_px": 3,
+    "sigma_left_validated": true,
+    "sigma_right_validated": true,
+    "omega_validated_edges": [],
+    "note": "state thresholds do not convert absent transition contours into edges"
+  },
+  "out=0.10;side=0.05;tol=5": {
+    "out_coverage": 0.1,
+    "straddle_side": 0.05,
+    "alignment_tolerance_px": 5,
+    "sigma_left_validated": true,
+    "sigma_right_validated": true,
+    "omega_validated_edges": [],
+    "note": "state thresholds do not convert absent transition contours into edges"
+  },
+  "out=0.10;side=0.05;tol=8": {
+    "out_coverage": 0.1,
+    "straddle_side": 0.05,
+    "alignment_tolerance_px": 8,
+    "sigma_left_validated": true,
+    "sigma_right_validated": true,
+    "omega_validated_edges": [],
+    "note": "state thresholds do not convert absent transition contours into edges"
+  },
+  "out=0.15;side=0.01;tol=3": {
+    "out_coverage": 0.15,
+    "straddle_side": 0.01,
+    "alignment_tolerance_px": 3,
+    "sigma_left_validated": true,
+    "sigma_right_validated": true,
+    "omega_validated_edges": [],
+    "note": "state thresholds do not convert absent transition contours into edges"
+  },
+  "out=0.15;side=0.01;tol=5": {
+    "out_coverage": 0.15,
+    "straddle_side": 0.01,
+    "alignment_tolerance_px": 5,
+    "sigma_left_validated": true,
+    "sigma_right_validated": true,
+    "omega_validated_edges": [],
+    "note": "state thresholds do not convert absent transition contours into edges"
+  },
+  "out=0.15;side=0.01;tol=8": {
+    "out_coverage": 0.15,
+    "straddle_side": 0.01,
+    "alignment_tolerance_px": 8,
+    "sigma_left_validated": true,
+    "sigma_right_validated": true,
+    "omega_validated_edges": [],
+    "note": "state thresholds do not convert absent transition contours into edges"
+  },
+  "out=0.15;side=0.03;tol=3": {
+    "out_coverage": 0.15,
+    "straddle_side": 0.03,
+    "alignment_tolerance_px": 3,
+    "sigma_left_validated": true,
+    "sigma_right_validated": true,
+    "omega_validated_edges": [],
+    "note": "state thresholds do not convert absent transition contours into edges"
+  },
+  "out=0.15;side=0.03;tol=5": {
+    "out_coverage": 0.15,
+    "straddle_side": 0.03,
+    "alignment_tolerance_px": 5,
+    "sigma_left_validated": true,
+    "sigma_right_validated": true,
+    "omega_validated_edges": [],
+    "note": "state thresholds do not convert absent transition contours into edges"
+  },
+  "out=0.15;side=0.03;tol=8": {
+    "out_coverage": 0.15,
+    "straddle_side": 0.03,
+    "alignment_tolerance_px": 8,
+    "sigma_left_validated": true,
+    "sigma_right_validated": true,
+    "omega_validated_edges": [],
+    "note": "state thresholds do not convert absent transition contours into edges"
+  },
+  "out=0.15;side=0.05;tol=3": {
+    "out_coverage": 0.15,
+    "straddle_side": 0.05,
+    "alignment_tolerance_px": 3,
+    "sigma_left_validated": true,
+    "sigma_right_validated": true,
+    "omega_validated_edges": [],
+    "note": "state thresholds do not convert absent transition contours into edges"
+  },
+  "out=0.15;side=0.05;tol=5": {
+    "out_coverage": 0.15,
+    "straddle_side": 0.05,
+    "alignment_tolerance_px": 5,
+    "sigma_left_validated": true,
+    "sigma_right_validated": true,
+    "omega_validated_edges": [],
+    "note": "state thresholds do not convert absent transition contours into edges"
+  },
+  "out=0.15;side=0.05;tol=8": {
+    "out_coverage": 0.15,
+    "straddle_side": 0.05,
+    "alignment_tolerance_px": 8,
+    "sigma_left_validated": true,
+    "sigma_right_validated": true,
+    "omega_validated_edges": [],
+    "note": "state thresholds do not convert absent transition contours into edges"
+  }
+}

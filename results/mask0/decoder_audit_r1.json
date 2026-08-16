@@ -1,0 +1,11 @@
+{
+  "semantic_tag_source": "R",
+  "instance_id_16bit_source": "G | (B << 8)",
+  "packed_semantic_instance_key_source": "R | (G << 8) | (B << 16)",
+  "frame_count": 30,
+  "pixel_count": 9216000,
+  "error_pixels": 0,
+  "agreement": 1.0,
+  "max_error_pixels_per_frame": 0,
+  "examples": []
+}

@@ -24,3 +24,7 @@ Pre-cleanup disk usage: 18430413740 bytes
 | `tests` | 26476 | KEEP | active public source/config/test directory |
 
 No deletion is authorized by this manifest alone. Items marked REVIEW_REQUIRED remain until dependency checks and public-subset validation finish.
+
+## MASK-0/MASK-1 follow-up disposition
+
+The existing MASK-0 canonical raw audit remains at `results/mask0/raw` (87,780,770 bytes) for external review and R1 recomputation. MASK-1 retained one canonical pilot raw quartet at `results/mask1/raw` (76,161,702 bytes), outside Git tracking. Three superseded MASK-1 raw attempts were moved to the desktop trash with `gio trash` after the final pilot was validated. Their byte-level pre-quarantine sizes were not captured, so those size fields remain unverified in `results/cleanup_report.json`.

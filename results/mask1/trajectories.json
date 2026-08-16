@@ -1,0 +1,48 @@
+[
+  {
+    "sequence_id": "surface_sigma/MASK-1/10m/LEFT",
+    "surface_id": "surface_sigma",
+    "direction": "LEFT",
+    "distance_m": 10.0,
+    "step_m": 0.5,
+    "frames": 13,
+    "state_counts": {
+      "IN": 3,
+      "APPROACH": 7,
+      "STRADDLE": 3,
+      "UNKNOWN": 0,
+      "OUT": 0
+    },
+    "compressed_state_sequence": [
+      "IN",
+      "APPROACH",
+      "STRADDLE"
+    ],
+    "orientation_locked": true,
+    "stop_after_confirmed_straddle": true,
+    "target_instance_id_16bit": 39249
+  },
+  {
+    "sequence_id": "surface_sigma/MASK-1/10m/RIGHT",
+    "surface_id": "surface_sigma",
+    "direction": "RIGHT",
+    "distance_m": 10.0,
+    "step_m": 0.5,
+    "frames": 13,
+    "state_counts": {
+      "IN": 3,
+      "APPROACH": 7,
+      "STRADDLE": 3,
+      "UNKNOWN": 0,
+      "OUT": 0
+    },
+    "compressed_state_sequence": [
+      "IN",
+      "APPROACH",
+      "STRADDLE"
+    ],
+    "orientation_locked": true,
+    "stop_after_confirmed_straddle": true,
+    "target_instance_id_16bit": 39249
+  }
+]

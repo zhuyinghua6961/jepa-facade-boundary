@@ -1,0 +1,630 @@
+{
+  "surface_omega": {
+    "LEFT": {
+      "surface_id": "surface_omega",
+      "edge": "LEFT",
+      "views": 15,
+      "tolerances_px": {
+        "3": {
+          "alignment_statuses": [
+            "FAIL",
+            "FAIL",
+            "FAIL",
+            "FAIL",
+            "FAIL",
+            "FAIL",
+            "FAIL",
+            "FAIL",
+            "FAIL",
+            "FAIL",
+            "FAIL",
+            "FAIL",
+            "FAIL",
+            "FAIL",
+            "FAIL"
+          ],
+          "pass_count": 0,
+          "median_distance_px": null,
+          "p90_distance_px": null
+        },
+        "5": {
+          "alignment_statuses": [
+            "FAIL",
+            "FAIL",
+            "FAIL",
+            "FAIL",
+            "FAIL",
+            "FAIL",
+            "FAIL",
+            "FAIL",
+            "FAIL",
+            "FAIL",
+            "FAIL",
+            "FAIL",
+            "FAIL",
+            "FAIL",
+            "FAIL"
+          ],
+          "pass_count": 0,
+          "median_distance_px": null,
+          "p90_distance_px": null
+        },
+        "8": {
+          "alignment_statuses": [
+            "FAIL",
+            "FAIL",
+            "FAIL",
+            "FAIL",
+            "FAIL",
+            "FAIL",
+            "FAIL",
+            "FAIL",
+            "FAIL",
+            "FAIL",
+            "FAIL",
+            "FAIL",
+            "FAIL",
+            "FAIL",
+            "FAIL"
+          ],
+          "pass_count": 0,
+          "median_distance_px": null,
+          "p90_distance_px": null
+        }
+      },
+      "transition_contour_frames": 0,
+      "validated_edge_frames": 0,
+      "validated_edge_set": false,
+      "median_target_side_fraction": 0.2,
+      "median_external_side_fraction": 0.0
+    },
+    "RIGHT": {
+      "surface_id": "surface_omega",
+      "edge": "RIGHT",
+      "views": 15,
+      "tolerances_px": {
+        "3": {
+          "alignment_statuses": [
+            "FAIL",
+            "FAIL",
+            "FAIL",
+            "FAIL",
+            "FAIL",
+            "FAIL",
+            "FAIL",
+            "FAIL",
+            "FAIL",
+            "FAIL",
+            "FAIL",
+            "FAIL",
+            "FAIL",
+            "FAIL",
+            "FAIL"
+          ],
+          "pass_count": 0,
+          "median_distance_px": null,
+          "p90_distance_px": null
+        },
+        "5": {
+          "alignment_statuses": [
+            "FAIL",
+            "FAIL",
+            "FAIL",
+            "FAIL",
+            "FAIL",
+            "FAIL",
+            "FAIL",
+            "FAIL",
+            "FAIL",
+            "FAIL",
+            "FAIL",
+            "FAIL",
+            "FAIL",
+            "FAIL",
+            "FAIL"
+          ],
+          "pass_count": 0,
+          "median_distance_px": null,
+          "p90_distance_px": null
+        },
+        "8": {
+          "alignment_statuses": [
+            "FAIL",
+            "FAIL",
+            "FAIL",
+            "FAIL",
+            "FAIL",
+            "FAIL",
+            "FAIL",
+            "FAIL",
+            "FAIL",
+            "FAIL",
+            "FAIL",
+            "FAIL",
+            "FAIL",
+            "FAIL",
+            "FAIL"
+          ],
+          "pass_count": 0,
+          "median_distance_px": null,
+          "p90_distance_px": null
+        }
+      },
+      "transition_contour_frames": 0,
+      "validated_edge_frames": 0,
+      "validated_edge_set": false,
+      "median_target_side_fraction": 0.2,
+      "median_external_side_fraction": 0.0
+    },
+    "TOP": {
+      "surface_id": "surface_omega",
+      "edge": "TOP",
+      "views": 15,
+      "tolerances_px": {
+        "3": {
+          "alignment_statuses": [
+            "FAIL",
+            "FAIL",
+            "FAIL",
+            "FAIL",
+            "FAIL",
+            "FAIL",
+            "FAIL",
+            "FAIL",
+            "FAIL",
+            "FAIL",
+            "FAIL",
+            "FAIL",
+            "FAIL",
+            "FAIL",
+            "FAIL"
+          ],
+          "pass_count": 0,
+          "median_distance_px": null,
+          "p90_distance_px": null
+        },
+        "5": {
+          "alignment_statuses": [
+            "FAIL",
+            "FAIL",
+            "FAIL",
+            "FAIL",
+            "FAIL",
+            "FAIL",
+            "FAIL",
+            "FAIL",
+            "FAIL",
+            "FAIL",
+            "FAIL",
+            "FAIL",
+            "FAIL",
+            "FAIL",
+            "FAIL"
+          ],
+          "pass_count": 0,
+          "median_distance_px": null,
+          "p90_distance_px": null
+        },
+        "8": {
+          "alignment_statuses": [
+            "FAIL",
+            "FAIL",
+            "FAIL",
+            "FAIL",
+            "FAIL",
+            "FAIL",
+            "FAIL",
+            "FAIL",
+            "FAIL",
+            "FAIL",
+            "FAIL",
+            "FAIL",
+            "FAIL",
+            "FAIL",
+            "FAIL"
+          ],
+          "pass_count": 0,
+          "median_distance_px": null,
+          "p90_distance_px": null
+        }
+      },
+      "transition_contour_frames": 0,
+      "validated_edge_frames": 0,
+      "validated_edge_set": false,
+      "median_target_side_fraction": 0.2,
+      "median_external_side_fraction": 0.0
+    },
+    "BOTTOM": {
+      "surface_id": "surface_omega",
+      "edge": "BOTTOM",
+      "views": 15,
+      "tolerances_px": {
+        "3": {
+          "alignment_statuses": [
+            "FAIL",
+            "FAIL",
+            "FAIL",
+            "FAIL",
+            "FAIL",
+            "FAIL",
+            "FAIL",
+            "FAIL",
+            "FAIL",
+            "FAIL",
+            "FAIL",
+            "FAIL",
+            "FAIL",
+            "FAIL",
+            "FAIL"
+          ],
+          "pass_count": 0,
+          "median_distance_px": null,
+          "p90_distance_px": null
+        },
+        "5": {
+          "alignment_statuses": [
+            "FAIL",
+            "FAIL",
+            "FAIL",
+            "FAIL",
+            "FAIL",
+            "FAIL",
+            "FAIL",
+            "FAIL",
+            "FAIL",
+            "FAIL",
+            "FAIL",
+            "FAIL",
+            "FAIL",
+            "FAIL",
+            "FAIL"
+          ],
+          "pass_count": 0,
+          "median_distance_px": null,
+          "p90_distance_px": null
+        },
+        "8": {
+          "alignment_statuses": [
+            "FAIL",
+            "FAIL",
+            "FAIL",
+            "FAIL",
+            "FAIL",
+            "FAIL",
+            "FAIL",
+            "FAIL",
+            "FAIL",
+            "FAIL",
+            "FAIL",
+            "FAIL",
+            "FAIL",
+            "FAIL",
+            "FAIL"
+          ],
+          "pass_count": 0,
+          "median_distance_px": null,
+          "p90_distance_px": null
+        }
+      },
+      "transition_contour_frames": 0,
+      "validated_edge_frames": 0,
+      "validated_edge_set": false,
+      "median_target_side_fraction": 0.2,
+      "median_external_side_fraction": 0.0
+    }
+  },
+  "surface_sigma": {
+    "LEFT": {
+      "surface_id": "surface_sigma",
+      "edge": "LEFT",
+      "views": 15,
+      "tolerances_px": {
+        "3": {
+          "alignment_statuses": [
+            "FAIL",
+            "FAIL",
+            "FAIL",
+            "FAIL",
+            "FAIL",
+            "FAIL",
+            "FAIL",
+            "FAIL",
+            "FAIL",
+            "FAIL",
+            "FAIL",
+            "FAIL",
+            "FAIL",
+            "FAIL",
+            "FAIL"
+          ],
+          "pass_count": 0,
+          "median_distance_px": 28.0,
+          "p90_distance_px": 30.0
+        },
+        "5": {
+          "alignment_statuses": [
+            "FAIL",
+            "FAIL",
+            "FAIL",
+            "FAIL",
+            "FAIL",
+            "FAIL",
+            "FAIL",
+            "FAIL",
+            "FAIL",
+            "FAIL",
+            "FAIL",
+            "FAIL",
+            "FAIL",
+            "FAIL",
+            "FAIL"
+          ],
+          "pass_count": 0,
+          "median_distance_px": 28.0,
+          "p90_distance_px": 30.0
+        },
+        "8": {
+          "alignment_statuses": [
+            "FAIL",
+            "FAIL",
+            "FAIL",
+            "FAIL",
+            "FAIL",
+            "FAIL",
+            "FAIL",
+            "FAIL",
+            "FAIL",
+            "FAIL",
+            "FAIL",
+            "FAIL",
+            "FAIL",
+            "FAIL",
+            "FAIL"
+          ],
+          "pass_count": 0,
+          "median_distance_px": 28.0,
+          "p90_distance_px": 30.0
+        }
+      },
+      "transition_contour_frames": 6,
+      "validated_edge_frames": 3,
+      "validated_edge_set": true,
+      "median_target_side_fraction": 0.0,
+      "median_external_side_fraction": 0.2
+    },
+    "RIGHT": {
+      "surface_id": "surface_sigma",
+      "edge": "RIGHT",
+      "views": 15,
+      "tolerances_px": {
+        "3": {
+          "alignment_statuses": [
+            "FAIL",
+            "FAIL",
+            "FAIL",
+            "FAIL",
+            "FAIL",
+            "FAIL",
+            "FAIL",
+            "FAIL",
+            "FAIL",
+            "FAIL",
+            "FAIL",
+            "FAIL",
+            "FAIL",
+            "FAIL",
+            "FAIL"
+          ],
+          "pass_count": 0,
+          "median_distance_px": 51.0,
+          "p90_distance_px": 52.392747589718944
+        },
+        "5": {
+          "alignment_statuses": [
+            "FAIL",
+            "FAIL",
+            "FAIL",
+            "FAIL",
+            "FAIL",
+            "FAIL",
+            "FAIL",
+            "FAIL",
+            "FAIL",
+            "FAIL",
+            "FAIL",
+            "FAIL",
+            "FAIL",
+            "FAIL",
+            "FAIL"
+          ],
+          "pass_count": 0,
+          "median_distance_px": 51.0,
+          "p90_distance_px": 52.392747589718944
+        },
+        "8": {
+          "alignment_statuses": [
+            "FAIL",
+            "FAIL",
+            "FAIL",
+            "FAIL",
+            "FAIL",
+            "FAIL",
+            "FAIL",
+            "FAIL",
+            "FAIL",
+            "FAIL",
+            "FAIL",
+            "FAIL",
+            "FAIL",
+            "FAIL",
+            "FAIL"
+          ],
+          "pass_count": 0,
+          "median_distance_px": 51.0,
+          "p90_distance_px": 52.392747589718944
+        }
+      },
+      "transition_contour_frames": 6,
+      "validated_edge_frames": 3,
+      "validated_edge_set": true,
+      "median_target_side_fraction": 0.0,
+      "median_external_side_fraction": 0.2
+    },
+    "TOP": {
+      "surface_id": "surface_sigma",
+      "edge": "TOP",
+      "views": 15,
+      "tolerances_px": {
+        "3": {
+          "alignment_statuses": [
+            "FAIL",
+            "FAIL",
+            "FAIL",
+            "FAIL",
+            "FAIL",
+            "FAIL",
+            "FAIL",
+            "FAIL",
+            "FAIL",
+            "FAIL",
+            "FAIL",
+            "FAIL",
+            "FAIL",
+            "FAIL",
+            "FAIL"
+          ],
+          "pass_count": 0,
+          "median_distance_px": null,
+          "p90_distance_px": null
+        },
+        "5": {
+          "alignment_statuses": [
+            "FAIL",
+            "FAIL",
+            "FAIL",
+            "FAIL",
+            "FAIL",
+            "FAIL",
+            "FAIL",
+            "FAIL",
+            "FAIL",
+            "FAIL",
+            "FAIL",
+            "FAIL",
+            "FAIL",
+            "FAIL",
+            "FAIL"
+          ],
+          "pass_count": 0,
+          "median_distance_px": null,
+          "p90_distance_px": null
+        },
+        "8": {
+          "alignment_statuses": [
+            "FAIL",
+            "FAIL",
+            "FAIL",
+            "FAIL",
+            "FAIL",
+            "FAIL",
+            "FAIL",
+            "FAIL",
+            "FAIL",
+            "FAIL",
+            "FAIL",
+            "FAIL",
+            "FAIL",
+            "FAIL",
+            "FAIL"
+          ],
+          "pass_count": 0,
+          "median_distance_px": null,
+          "p90_distance_px": null
+        }
+      },
+      "transition_contour_frames": 6,
+      "validated_edge_frames": 0,
+      "validated_edge_set": false,
+      "median_target_side_fraction": 0.2,
+      "median_external_side_fraction": 0.0
+    },
+    "BOTTOM": {
+      "surface_id": "surface_sigma",
+      "edge": "BOTTOM",
+      "views": 15,
+      "tolerances_px": {
+        "3": {
+          "alignment_statuses": [
+            "FAIL",
+            "FAIL",
+            "FAIL",
+            "FAIL",
+            "FAIL",
+            "FAIL",
+            "FAIL",
+            "FAIL",
+            "FAIL",
+            "FAIL",
+            "FAIL",
+            "FAIL",
+            "FAIL",
+            "FAIL",
+            "FAIL"
+          ],
+          "pass_count": 0,
+          "median_distance_px": null,
+          "p90_distance_px": null
+        },
+        "5": {
+          "alignment_statuses": [
+            "FAIL",
+            "FAIL",
+            "FAIL",
+            "FAIL",
+            "FAIL",
+            "FAIL",
+            "FAIL",
+            "FAIL",
+            "FAIL",
+            "FAIL",
+            "FAIL",
+            "FAIL",
+            "FAIL",
+            "FAIL",
+            "FAIL"
+          ],
+          "pass_count": 0,
+          "median_distance_px": null,
+          "p90_distance_px": null
+        },
+        "8": {
+          "alignment_statuses": [
+            "FAIL",
+            "FAIL",
+            "FAIL",
+            "FAIL",
+            "FAIL",
+            "FAIL",
+            "FAIL",
+            "FAIL",
+            "FAIL",
+            "FAIL",
+            "FAIL",
+            "FAIL",
+            "FAIL",
+            "FAIL",
+            "FAIL"
+          ],
+          "pass_count": 0,
+          "median_distance_px": null,
+          "p90_distance_px": null
+        }
+      },
+      "transition_contour_frames": 6,
+      "validated_edge_frames": 0,
+      "validated_edge_set": false,
+      "median_target_side_fraction": 0.2,
+      "median_external_side_fraction": 0.0
+    }
+  }
+}

@@ -1,0 +1,18 @@
+run_id: mask0r1
+source_data: results/mask0/raw
+segmentation:
+  building_semantic_tag: 3
+  target_id_min_view_fraction: 0.67
+decoder:
+  min_agreement: 0.9999
+alignment:
+  tolerances_px: [3, 5, 8]
+  min_edge_views: 3
+repeatability:
+  min_target_mask_iou: 0.99
+  min_largest_component_ratio: 0.95
+labels:
+  out_coverage_values: [0.05, 0.10, 0.15]
+  straddle_side_values: [0.01, 0.03, 0.05]
+action:
+  min_agl_m: 2.0

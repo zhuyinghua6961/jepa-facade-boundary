@@ -1,4 +1,8 @@
-"""CARLA semantic and instance camera decoding plus mask utilities."""
+"""CARLA semantic/instance decoding and mask geometry utilities.
+
+CARLA stores semantic tag in R and the 16-bit instance id in G/B. The packed
+semantic-instance key is kept as a separate API.
+"""
 
 from __future__ import annotations
 
@@ -25,7 +29,17 @@ def decode_semantic_tag(image_or_bgra) -> np.ndarray:
 
 
 def decode_instance_id(image_or_bgra) -> np.ndarray:
-    """Decode CARLA's 24-bit instance ID from RGB little-endian bytes."""
+    """Decode CARLA's 16-bit instance id: G | (B << 8)."""
+    arr = image_or_bgra if isinstance(image_or_bgra, np.ndarray) else bgra_array(image_or_bgra)
+    if arr.ndim != 3 or arr.shape[-1] < 3:
+        raise ValueError("expected HxWx4 BGRA data")
+    g = arr[..., 1].astype(np.uint32)
+    b = arr[..., 0].astype(np.uint32)
+    return g | (b << 8)
+
+
+def decode_packed_semantic_instance_key(image_or_bgra) -> np.ndarray:
+    """Decode the index key R | (G << 8) | (B << 16)."""
     arr = image_or_bgra if isinstance(image_or_bgra, np.ndarray) else bgra_array(image_or_bgra)
     if arr.ndim != 3 or arr.shape[-1] < 3:
         raise ValueError("expected HxWx4 BGRA data")
@@ -33,6 +47,43 @@ def decode_instance_id(image_or_bgra) -> np.ndarray:
     g = arr[..., 1].astype(np.uint32)
     b = arr[..., 0].astype(np.uint32)
     return r | (g << 8) | (b << 16)
+
+
+def decode_instance_channels(image_or_rgb) -> dict[str, np.ndarray]:
+    """Return semantic tag, 16-bit id and packed key from BGRA or RGB data."""
+    arr = image_or_rgb if isinstance(image_or_rgb, np.ndarray) else bgra_array(image_or_rgb)
+    if arr.ndim != 3 or arr.shape[-1] < 3:
+        raise ValueError("expected HxWx3/4 image data")
+    if arr.shape[-1] == 4:
+        r, g, b = arr[..., 2], arr[..., 1], arr[..., 0]
+    else:
+        r, g, b = arr[..., 0], arr[..., 1], arr[..., 2]
+    r = r.astype(np.uint32, copy=False)
+    g = g.astype(np.uint32, copy=False)
+    b = b.astype(np.uint32, copy=False)
+    return {
+        "semantic_tag": r.astype(np.uint8, copy=False),
+        "instance_id_16bit": g | (b << 8),
+        "packed_semantic_instance_key": r | (g << 8) | (b << 16),
+    }
+
+
+def semantic_instance_consistency(semantic_rgb: np.ndarray, instance_rgb: np.ndarray) -> dict:
+    """Compare semantic-camera R with instance-camera R pixel by pixel."""
+    semantic = decode_instance_channels(semantic_rgb)["semantic_tag"]
+    instance = decode_instance_channels(instance_rgb)["semantic_tag"]
+    if semantic.shape != instance.shape:
+        raise ValueError("semantic and instance image shapes differ")
+    mismatch = semantic != instance
+    ys, xs = np.where(mismatch)
+    examples = [{"x": int(x), "y": int(y), "semantic": int(semantic[y, x]),
+                 "instance": int(instance[y, x])}
+                for y, x in zip(ys[:10], xs[:10])]
+    total = int(mismatch.size)
+    errors = int(mismatch.sum())
+    return {"pixel_count": total, "matching_pixels": total - errors,
+            "error_pixels": errors, "agreement": float((total - errors) / max(total, 1)),
+            "examples": examples}
 
 
 def rgb_from_bgra(bgra: np.ndarray) -> np.ndarray:
@@ -103,3 +154,48 @@ def stable_id_intersection(rows: Iterable[Mapping], min_views: int) -> list[int]
     for row in rows:
         counts.update(int(value) for value in row.get("candidate_ids", []))
     return sorted(key for key, value in counts.items() if value >= int(min_views))
+
+
+def largest_connected_component_ratio(mask: np.ndarray) -> float:
+    """Return largest 8-connected component divided by all foreground pixels."""
+    source = np.asarray(mask, dtype=bool)
+    total = int(source.sum())
+    if total == 0:
+        return 0.0
+    try:
+        from scipy import ndimage
+        labels, count = ndimage.label(source, structure=np.ones((3, 3), dtype=bool))
+        sizes = np.bincount(labels.ravel())[1:]
+        return float(sizes.max() / total) if count and sizes.size else 0.0
+    except ImportError:
+        return 1.0
+
+
+def mask_iou(left: np.ndarray, right: np.ndarray) -> float:
+    a, b = np.asarray(left, dtype=bool), np.asarray(right, dtype=bool)
+    union = int(np.count_nonzero(a | b))
+    return float(np.count_nonzero(a & b) / max(union, 1))
+
+
+def outer_transition_contour(target_mask: np.ndarray) -> np.ndarray:
+    """Extract target/non-target transitions whose non-target side reaches frame edge.
+
+    Enclosed holes and image-border truncation are excluded.
+    """
+    target = np.asarray(target_mask, dtype=bool)
+    if target.ndim != 2:
+        raise ValueError("target_mask must be two-dimensional")
+    try:
+        from scipy import ndimage
+    except ImportError:
+        return np.zeros_like(target)
+    labels, count = ndimage.label(~target, structure=np.ones((3, 3), dtype=bool))
+    if count == 0:
+        return np.zeros_like(target)
+    edge_labels = np.unique(np.r_[labels[0], labels[-1], labels[:, 0], labels[:, -1]])
+    edge_labels = edge_labels[edge_labels > 0]
+    exterior = np.isin(labels, edge_labels)
+    contour = target & ndimage.binary_dilation(exterior, structure=np.ones((3, 3), dtype=bool))
+    contour[[0, -1], :] = False
+    contour[:, [0, -1]] = False
+    return contour

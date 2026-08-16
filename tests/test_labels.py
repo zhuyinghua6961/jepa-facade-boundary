@@ -1,6 +1,6 @@
 import numpy as np
 
-from boundary_sweep.labels import classify_boundary
+from boundary_sweep.labels import adaptive_instance_boundary_evidence, classify_boundary
 
 
 def _dense(coverage, projected, occ=1.0):
@@ -50,3 +50,15 @@ def test_sparse_zero_over_zero_is_not_implicit_out_when_not_confirmed():
     result = classify_boundary("ignored", "LEFT", _dense(0.0, 0), boundary, _probes(False, False, False), 640, 480, False)
     # The line is still in the image, so no exit evidence exists.
     assert result["label"] == "UNKNOWN"
+
+
+def test_adaptive_contour_requires_directional_external_side():
+    left = np.zeros((40, 60), dtype=bool); left[:, 15:] = True
+    right = np.zeros((40, 60), dtype=bool); right[:, :45] = True
+    assert adaptive_instance_boundary_evidence(left, "LEFT")["label"] == "STRADDLE"
+    assert adaptive_instance_boundary_evidence(right, "RIGHT")["label"] == "STRADDLE"
+
+
+def test_adaptive_continuous_wall_has_no_straddle_contour():
+    full = np.ones((40, 60), dtype=bool)
+    assert adaptive_instance_boundary_evidence(full, "LEFT")["label"] == "IN"

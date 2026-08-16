@@ -38,6 +38,15 @@ def main(argv=None):
             if ("/" + "mnt/fast18/") in text or ("/" + "Users/") in text:
                 forbidden.append(str(path))
     depth_result = depth_gate(depth, "results/geo05r2/depth_metric_v2.json")
+    r1_path = Path("results/mask0/validation_r1.json")
+    mask1_path = Path("results/mask1/validation.json")
+    r1 = json.loads(r1_path.read_text()) if r1_path.exists() else {}
+    mask1 = json.loads(mask1_path.read_text()) if mask1_path.exists() else {}
+    r1_gates = r1.get("gates", {})
+    mask1_gates = mask1.get("gates", {})
+    mask1_required = ("MASK1_CAPTURE_PAIRING", "NORMAL_LOCK", "INITIAL_IN",
+                      "STRADDLE_CONFIRMATION", "ADAPTIVE_STOP",
+                      "COVERAGE_MONOTONICITY", "WORLD_BOUNDARY_ESTIMATE")
     checks = {
         "required_files": not missing,
         "geometry_reference_schema": reference.get("schema") == "geo05r2.geometry_reference_audit.v1",
@@ -51,6 +60,10 @@ def main(argv=None):
         "ready_for_jepa_fail": gates.get("READY_FOR_JEPA", {}).get("status") == "FAIL",
         "no_private_paths": not forbidden,
         "validation_schema": validation.get("schema") == "geo05r2.validation.v2",
+        "mask0r1_decoder": r1.get("decoder_audit", {}).get("agreement", 0.0) >= 0.9999 and r1.get("decoder_audit", {}).get("error_pixels", 1) == 0,
+        "mask0r1_edge_gate": r1_gates.get("READY_FOR_ADAPTIVE_PILOT", {}).get("status") == "PASS" and r1_gates.get("LEGACY_EDGE_ALIGNMENT", {}).get("status") == "FAIL",
+        "mask1_pilot_validation": bool(mask1.get("trajectories")) and all(mask1_gates.get(name, {}).get("status") == "PASS" for name in mask1_required),
+        "mask1_jepa_not_evaluated": mask1_gates.get("READY_FOR_JEPA", {}).get("status") == "NOT_EVALUATED",
     }
     result = {"schema": "boundary_sweep.static_validation.v2", "checks": checks, "missing": missing, "private_path_files": forbidden,
               "geometry_reference_count": reference.get("geometry_reference_count"), "depth_metric": depth_result,

@@ -4,7 +4,7 @@ from pathlib import Path
 import numpy as np
 
 from boundary_sweep.labels import classify_mask_state, facade_outer_envelope
-from boundary_sweep.segmentation import decode_instance_id, decode_semantic_tag
+from boundary_sweep.segmentation import decode_instance_id, decode_packed_semantic_instance_key, decode_semantic_tag
 
 
 class FakeImage:
@@ -15,7 +15,8 @@ class FakeImage:
 
 def test_mask0_bgra_semantic_and_instance_decode():
     assert decode_semantic_tag(FakeImage()).tolist() == [[1, 7]]
-    assert decode_instance_id(FakeImage()).tolist() == [[197121, 7]]
+    assert decode_instance_id(FakeImage()).tolist() == [[770, 0]]
+    assert decode_packed_semantic_instance_key(FakeImage()).tolist() == [[197121, 7]]
 
 
 def test_mask0_hole_fill_is_enclosed_and_does_not_shrink():

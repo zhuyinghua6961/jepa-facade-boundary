@@ -6,6 +6,8 @@
   "final_project_disk_note": "recorded compact-project measurement; current apparent-size checks may differ by filesystem metadata",
   "post_geo06_compact_project_disk_bytes": 33760050,
   "post_geo06_compact_project_disk_note": "measured after GEO-0.6 raw frames were moved to trash; excludes .git and raw RGB-D",
+  "post_mask1_project_disk_bytes": 215067051,
+  "post_mask1_project_disk_note": "measured after MASK-1 pilot; includes one canonical 76,161,702-byte raw directory and compact results, excludes .git metadata",
   "disposition_mechanism": "gio trash moved quarantined content to the desktop trash; no permanent direct deletion was used",
   "items": [
     {
@@ -151,6 +153,46 @@
       "final_disposition": "MOVED_TO_TRASH",
       "reason": "GEO-0.6 failed event-coverage and visibility gates; compact validation and representative images were committed before cleanup, then the raw directory was moved with gio trash.",
       "recoverability": "recoverable from trash until emptied"
+    },
+    {
+      "path": "results/mask0/raw",
+      "pre_cleanup_size_bytes": 87780770,
+      "classification": "MASK-0 canonical raw audit",
+      "final_disposition": "KEPT",
+      "reason": "Retained for external visual review and R1 recomputation; not tracked in GitHub.",
+      "recoverability": "server-local canonical copy"
+    },
+    {
+      "path": "results/mask1/raw",
+      "pre_cleanup_size_bytes": 76161702,
+      "classification": "MASK-1 canonical pilot raw quartet",
+      "final_disposition": "KEPT",
+      "reason": "One normalized raw copy retained for pilot audit; not tracked in GitHub.",
+      "recoverability": "server-local canonical copy"
+    },
+    {
+      "path": "results/mask1/raw_attempt_unfiltered",
+      "pre_cleanup_size_bytes": null,
+      "classification": "superseded MASK-1 pilot raw attempt",
+      "final_disposition": "MOVED_TO_TRASH",
+      "reason": "Superseded after contour-component and depth-filter correction; byte-level pre-size was not captured before quarantine.",
+      "recoverability": "recoverable from trash until emptied; size DISPOSITION_UNVERIFIED"
+    },
+    {
+      "path": "results/mask1/raw_attempt_plane_filter",
+      "pre_cleanup_size_bytes": null,
+      "classification": "superseded MASK-1 pilot raw attempt",
+      "final_disposition": "MOVED_TO_TRASH",
+      "reason": "Superseded after plane-coordinate bound correction; byte-level pre-size was not captured before quarantine.",
+      "recoverability": "recoverable from trash until emptied; size DISPOSITION_UNVERIFIED"
+    },
+    {
+      "path": "results/mask1/raw_attempt_plane_filter2",
+      "pre_cleanup_size_bytes": null,
+      "classification": "superseded MASK-1 pilot raw attempt",
+      "final_disposition": "MOVED_TO_TRASH",
+      "reason": "Superseded after horizontal-coordinate repeatability correction; byte-level pre-size was not captured before quarantine.",
+      "recoverability": "recoverable from trash until emptied; size DISPOSITION_UNVERIFIED"
     }
   ],
   "unverified_items": [

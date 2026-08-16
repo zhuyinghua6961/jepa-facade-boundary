@@ -1,0 +1,28 @@
+run_id: mask1
+source_phase: MASK-0R1
+map: Town10HD_Opt
+surface_id: surface_sigma
+directions: [LEFT, RIGHT]
+sensor:
+  width: 640
+  height: 480
+  horizontal_fov_deg: 90.0
+  fixed_delta_seconds: 0.05
+  quartet: [sensor.camera.rgb, sensor.camera.depth, sensor.camera.semantic_segmentation, sensor.camera.instance_segmentation]
+  depth_metric: z-depth
+pilot:
+  distance_m: 10.0
+  step_m: 0.5
+  max_steps: 80
+  confirm_straddle_frames: 3
+  min_initial_in_frames: 3
+  min_side_fraction: 0.05
+  min_contour_span_fraction: 0.70
+  max_plane_depth_residual_m: 1.0
+  max_world_median_spread_m: 1.0
+  orientation: NORMAL_LOCK
+  stop_state: STRADDLE
+validation:
+  required_state_sequence: [IN, APPROACH, STRADDLE, STOP]
+  operator_visual_review: PENDING
+  ready_for_jepa: NOT_EVALUATED
