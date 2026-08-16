@@ -21,8 +21,6 @@ def discover_carla_root(explicit: str | None = None) -> Path | None:
         Path.cwd() / "Carla-0.10.0-Linux-Shipping",
         Path.cwd() / "CARLA_0.10.0",
         here.parents[2] / "Carla-0.10.0-Linux-Shipping",
-        Path("/opt/carla"),
-        Path("/home/user/CARLA_0.10.0"),
     ])
     for candidate in candidates:
         if (candidate / "PythonAPI").exists() or (candidate / "CarlaUE5.sh").exists():
