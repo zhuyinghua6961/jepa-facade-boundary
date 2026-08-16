@@ -40,8 +40,18 @@ def main(argv=None):
     depth_result = depth_gate(depth, "results/geo05r2/depth_metric_v2.json")
     r1_path = Path("results/mask0/validation_r1.json")
     mask1_path = Path("results/mask1/validation.json")
+    mask1_r1_path = Path("results/mask1/validation_r1.json")
+    event_r1_path = Path("results/mask1/event_reanalysis_r1.json")
+    repeatability_r1_path = Path("results/mask1/world_boundary_repeatability_r1.json")
+    obs0_path = Path("results/obs0/validation.json")
+    probe_path = Path("results/obs0/probe_results.json")
     r1 = json.loads(r1_path.read_text()) if r1_path.exists() else {}
     mask1 = json.loads(mask1_path.read_text()) if mask1_path.exists() else {}
+    mask1_r1 = json.loads(mask1_r1_path.read_text()) if mask1_r1_path.exists() else {}
+    event_r1 = json.loads(event_r1_path.read_text()) if event_r1_path.exists() else {}
+    repeatability_r1 = json.loads(repeatability_r1_path.read_text()) if repeatability_r1_path.exists() else {}
+    obs0 = json.loads(obs0_path.read_text()) if obs0_path.exists() else {}
+    probes = json.loads(probe_path.read_text()) if probe_path.exists() else {}
     r1_gates = r1.get("gates", {})
     mask1_gates = mask1.get("gates", {})
     mask1_required = ("MASK1_CAPTURE_PAIRING", "NORMAL_LOCK", "INITIAL_IN",
@@ -64,10 +74,18 @@ def main(argv=None):
         "mask0r1_edge_gate": r1_gates.get("READY_FOR_ADAPTIVE_PILOT", {}).get("status") == "PASS" and r1_gates.get("LEGACY_EDGE_ALIGNMENT", {}).get("status") == "FAIL",
         "mask1_pilot_validation": bool(mask1.get("trajectories")) and all(mask1_gates.get(name, {}).get("status") == "PASS" for name in mask1_required),
         "mask1_jepa_not_evaluated": mask1_gates.get("READY_FOR_JEPA", {}).get("status") == "NOT_EVALUATED",
+        "mask1r1_reanalysis": mask1_r1.get("schema") == "mask1.validation_r1.v1" and mask1_r1.get("historical_result_files_modified") is False,
+        "mask1r1_event_gates": event_r1.get("gates", {}).get("FIRST_STRADDLE_DETECTION", {}).get("status") == "PASS" and event_r1.get("gates", {}).get("STOP_OVERSHOOT", {}).get("status") == "FAIL",
+        "mask1r1_repeatability": repeatability_r1.get("gates", {}).get("WORLD_BOUNDARY_ABSOLUTE_ACCURACY", {}).get("status") == "NOT_EVALUATED",
+        "obs0_schema": obs0.get("schema") == "obs0.validation.v1" and obs0.get("sample_count") == 20,
+        "obs0_complete_direction_holdout": probes.get("split") == "complete direction holdout" and set(probes.get("probes", {})) == {"P0", "P1", "P2", "P3", "P4", "P5", "P6"},
+        "obs0_action_selection_not_evaluated": obs0.get("gates", {}).get("ACTION_SELECTION_OBSERVABILITY", {}).get("status") == "NOT_EVALUATED",
+        "obs0_jepa_not_evaluated": obs0.get("gates", {}).get("READY_FOR_JEPA", {}).get("status") == "NOT_EVALUATED",
     }
-    result = {"schema": "boundary_sweep.static_validation.v2", "checks": checks, "missing": missing, "private_path_files": forbidden,
+    result = {"schema": "boundary_sweep.static_validation.v3", "checks": checks, "missing": missing, "private_path_files": forbidden,
               "geometry_reference_count": reference.get("geometry_reference_count"), "depth_metric": depth_result,
-              "surface_stats_consistent": surface_checks, "gates": gates}
+              "surface_stats_consistent": surface_checks, "gates": gates,
+              "mask1r1_gates": mask1_r1.get("gates", {}), "obs0_gates": obs0.get("gates", {})}
     print(json.dumps(result, indent=2))
     return 0 if all(checks.values()) else 1
 

@@ -1,0 +1,31 @@
+run_id: obs0
+source: existing_results/mask1/raw
+mode: offline_only
+directions: [LEFT, RIGHT]
+preboundary_definition: step < first_local_straddle_step
+local_contour:
+  min_side_fraction: 0.05
+  min_span_fraction: 0.70
+global_external_coverage_thresholds: [0.03, 0.05, 0.10]
+repeatability_sensitivity_m: [0.05, 0.10, 0.25, 1.00]
+similarity:
+  aligned_ssim_thresholds: [0.90, 0.95, 0.98]
+  remaining_distance_gap_m: [1.0, 2.0, 3.0]
+  exclude_adjacent_distance_m: 2.0
+probe:
+  split: complete_direction_holdout
+  ridge_alpha: 1.0
+  inputs:
+    P0: constant_mean
+    P1: step_and_relative_odometry
+    P2: absolute_pose
+    P3: current_rgb_descriptor
+    P4: two_frame_rgb_change
+    P5: short_rgb_history_plus_relative_odometry
+    P6: short_rgb_history_plus_absolute_pose
+  target: remaining_distance_to_local_boundary_m
+  no_random_adjacent_frame_split: true
+gates:
+  operator_visual_review: PENDING
+  ready_for_dataset_expansion: NOT_EVALUATED
+  ready_for_jepa: NOT_EVALUATED

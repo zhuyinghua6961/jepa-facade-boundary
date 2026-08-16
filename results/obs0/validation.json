@@ -1,0 +1,275 @@
+{
+  "schema": "obs0.validation.v1",
+  "source": "pre-local-straddle MASK-1 frames only",
+  "sample_count": 20,
+  "directions": {
+    "LEFT": 10,
+    "RIGHT": 10
+  },
+  "gates": {
+    "PREBOUNDARY_MASK_PROGRESS": {
+      "status": "ABSENT",
+      "reason": "target coverage is exactly 1.0 before local contour on both directions"
+    },
+    "SINGLE_FRAME_RGB_OBSERVABILITY": {
+      "status": "FAIL",
+      "evidence": {
+        "MAE_m": 1.169110380613557,
+        "median_absolute_error_m": 1.01753456760108,
+        "spearman_rho": -0.08151001431331072,
+        "prediction_range_m": [
+          1.6447986045350602,
+          5.0990965466821985
+        ],
+        "constant_baseline_improvement_m": 0.08088961938644301
+      }
+    },
+    "HISTORY_ODOMETRY_OBSERVABILITY": {
+      "status": "PASS",
+      "evidence": {
+        "MAE_m": 1.0793025024876028,
+        "median_absolute_error_m": 1.0448650379768027,
+        "spearman_rho": 0.2717000477110357,
+        "prediction_range_m": [
+          1.7362604413139535,
+          4.810161469041456
+        ],
+        "constant_baseline_improvement_m": 0.17069749751239716
+      }
+    },
+    "ABSOLUTE_POSE_DEPENDENCE": {
+      "status": "FAIL",
+      "evidence": {
+        "MAE_m": 4.131818181818182,
+        "median_absolute_error_m": 4.09090909090909,
+        "spearman_rho": -1.0,
+        "prediction_range_m": [
+          4.795454545454545,
+          8.886363636363635
+        ],
+        "constant_baseline_improvement_m": -2.881818181818182
+      },
+      "interpretation": "pose predictive signal is not evidence of cross-building generalization"
+    },
+    "BOUNDARY_DETECTION_OBSERVABILITY": {
+      "status": "INCONCLUSIVE",
+      "reason": "local event is derived from privileged instance masks; human-visible event remains pending"
+    },
+    "BOUNDARY_DISTANCE_OBSERVABILITY": {
+      "status": "INCONCLUSIVE",
+      "evidence": {
+        "rgb_only_P3": {
+          "MAE_m": 1.169110380613557,
+          "median_absolute_error_m": 1.01753456760108,
+          "spearman_rho": -0.08151001431331072,
+          "prediction_range_m": [
+            1.6447986045350602,
+            5.0990965466821985
+          ],
+          "constant_baseline_improvement_m": 0.08088961938644301
+        },
+        "history_odometry_P5": {
+          "MAE_m": 1.0793025024876028,
+          "median_absolute_error_m": 1.0448650379768027,
+          "spearman_rho": 0.2717000477110357,
+          "prediction_range_m": [
+            1.7362604413139535,
+            4.810161469041456
+          ],
+          "constant_baseline_improvement_m": 0.17069749751239716
+        },
+        "absolute_pose_only_P2": {
+          "MAE_m": 4.131818181818182,
+          "median_absolute_error_m": 4.09090909090909,
+          "spearman_rho": -1.0,
+          "prediction_range_m": [
+            4.795454545454545,
+            8.886363636363635
+          ],
+          "constant_baseline_improvement_m": -2.881818181818182
+        },
+        "history_absolute_pose_P6": {
+          "MAE_m": 1.0828892841973734,
+          "median_absolute_error_m": 1.0596002426605073,
+          "spearman_rho": 0.2717000477110357,
+          "prediction_range_m": [
+            1.7427770414283508,
+            4.8071076108534125
+          ],
+          "constant_baseline_improvement_m": 0.1671107158026266
+        }
+      },
+      "reason": "two trajectories provide a diagnostic holdout, not cross-surface validation"
+    },
+    "ACTION_SELECTION_OBSERVABILITY": {
+      "status": "NOT_EVALUATED",
+      "reason": "no same-start alternative actions in existing data"
+    },
+    "READY_FOR_MULTI_SURFACE_CAPTURE": {
+      "status": "CONDITIONAL_PASS",
+      "reason": "diagnostic signal exists, but visual and multi-surface validation remain pending"
+    },
+    "READY_FOR_DATASET_EXPANSION": {
+      "status": "NOT_EVALUATED"
+    },
+    "READY_FOR_JEPA": {
+      "status": "NOT_EVALUATED"
+    }
+  },
+  "probe_summary": {
+    "rgb_only_P3": {
+      "MAE_m": 1.169110380613557,
+      "median_absolute_error_m": 1.01753456760108,
+      "spearman_rho": -0.08151001431331072,
+      "prediction_range_m": [
+        1.6447986045350602,
+        5.0990965466821985
+      ],
+      "constant_baseline_improvement_m": 0.08088961938644301
+    },
+    "history_odometry_P5": {
+      "MAE_m": 1.0793025024876028,
+      "median_absolute_error_m": 1.0448650379768027,
+      "spearman_rho": 0.2717000477110357,
+      "prediction_range_m": [
+        1.7362604413139535,
+        4.810161469041456
+      ],
+      "constant_baseline_improvement_m": 0.17069749751239716
+    },
+    "absolute_pose_only_P2": {
+      "MAE_m": 4.131818181818182,
+      "median_absolute_error_m": 4.09090909090909,
+      "spearman_rho": -1.0,
+      "prediction_range_m": [
+        4.795454545454545,
+        8.886363636363635
+      ],
+      "constant_baseline_improvement_m": -2.881818181818182
+    },
+    "history_absolute_pose_P6": {
+      "MAE_m": 1.0828892841973734,
+      "median_absolute_error_m": 1.0596002426605073,
+      "spearman_rho": 0.2717000477110357,
+      "prediction_range_m": [
+        1.7427770414283508,
+        4.8071076108534125
+      ],
+      "constant_baseline_improvement_m": 0.1671107158026266
+    }
+  },
+  "alias_summary": {
+    "schema": "obs0.alias_summary.v1",
+    "pair_count": 190,
+    "thresholds": {
+      "ssim_0.90_gap_1.0m": {
+        "eligible_pairs": 144,
+        "alias_pairs": 0,
+        "alias_ratio": 0.0
+      },
+      "ssim_0.90_gap_2.0m": {
+        "eligible_pairs": 84,
+        "alias_pairs": 0,
+        "alias_ratio": 0.0
+      },
+      "ssim_0.90_gap_3.0m": {
+        "eligible_pairs": 40,
+        "alias_pairs": 0,
+        "alias_ratio": 0.0
+      },
+      "ssim_0.95_gap_1.0m": {
+        "eligible_pairs": 144,
+        "alias_pairs": 0,
+        "alias_ratio": 0.0
+      },
+      "ssim_0.95_gap_2.0m": {
+        "eligible_pairs": 84,
+        "alias_pairs": 0,
+        "alias_ratio": 0.0
+      },
+      "ssim_0.95_gap_3.0m": {
+        "eligible_pairs": 40,
+        "alias_pairs": 0,
+        "alias_ratio": 0.0
+      },
+      "ssim_0.98_gap_1.0m": {
+        "eligible_pairs": 144,
+        "alias_pairs": 0,
+        "alias_ratio": 0.0
+      },
+      "ssim_0.98_gap_2.0m": {
+        "eligible_pairs": 84,
+        "alias_pairs": 0,
+        "alias_ratio": 0.0
+      },
+      "ssim_0.98_gap_3.0m": {
+        "eligible_pairs": 40,
+        "alias_pairs": 0,
+        "alias_ratio": 0.0
+      }
+    },
+    "strongest_pairs": [
+      {
+        "left_index": 8,
+        "right_index": 12,
+        "left_direction": "LEFT",
+        "right_direction": "RIGHT",
+        "left_step": 8,
+        "right_step": 2,
+        "remaining_distance_gap_m": 3.0,
+        "aligned_ssim": 0.6581721356276755,
+        "phase_shift_px": 0.6828664832008159,
+        "cross_direction": true
+      },
+      {
+        "left_index": 4,
+        "right_index": 9,
+        "left_direction": "LEFT",
+        "right_direction": "LEFT",
+        "left_step": 4,
+        "right_step": 9,
+        "remaining_distance_gap_m": 2.5,
+        "aligned_ssim": 0.6508037097000823,
+        "phase_shift_px": 36.758225362775086,
+        "cross_direction": false
+      },
+      {
+        "left_index": 1,
+        "right_index": 6,
+        "left_direction": "LEFT",
+        "right_direction": "LEFT",
+        "left_step": 1,
+        "right_step": 6,
+        "remaining_distance_gap_m": 2.5,
+        "aligned_ssim": 0.6499662824232505,
+        "phase_shift_px": 36.84411669227654,
+        "cross_direction": false
+      },
+      {
+        "left_index": 2,
+        "right_index": 7,
+        "left_direction": "LEFT",
+        "right_direction": "LEFT",
+        "left_step": 2,
+        "right_step": 7,
+        "remaining_distance_gap_m": 2.5,
+        "aligned_ssim": 0.6378826032763355,
+        "phase_shift_px": 36.795928466853894,
+        "cross_direction": false
+      },
+      {
+        "left_index": 3,
+        "right_index": 17,
+        "left_direction": "LEFT",
+        "right_direction": "RIGHT",
+        "left_step": 3,
+        "right_step": 7,
+        "remaining_distance_gap_m": 2.0,
+        "aligned_ssim": 0.6370002818291257,
+        "phase_shift_px": 0.3138472616996318,
+        "cross_direction": true
+      }
+    ]
+  },
+  "probe_feature_boundary": "instance/semantic/depth are GT generation only; not included in P0-P6 inputs"
+}

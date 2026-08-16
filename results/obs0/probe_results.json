@@ -1,0 +1,420 @@
+{
+  "schema": "obs0.probe_results.v1",
+  "split": "complete direction holdout",
+  "records": 20,
+  "probes": {
+    "P0": {
+      "splits": {
+        "train_LEFT_test_RIGHT": {
+          "metrics": {
+            "MAE_m": 1.25,
+            "median_absolute_error_m": 1.25,
+            "spearman_rho": null,
+            "prediction_range_m": [
+              2.75,
+              2.75
+            ],
+            "constant_baseline_improvement_m": 0.0
+          },
+          "constant_baseline": {
+            "MAE_m": 1.25,
+            "median_absolute_error_m": 1.25,
+            "spearman_rho": null,
+            "prediction_range_m": [
+              2.75,
+              2.75
+            ]
+          },
+          "test_count": 10
+        },
+        "train_RIGHT_test_LEFT": {
+          "metrics": {
+            "MAE_m": 1.25,
+            "median_absolute_error_m": 1.25,
+            "spearman_rho": null,
+            "prediction_range_m": [
+              2.75,
+              2.75
+            ],
+            "constant_baseline_improvement_m": 0.0
+          },
+          "constant_baseline": {
+            "MAE_m": 1.25,
+            "median_absolute_error_m": 1.25,
+            "spearman_rho": null,
+            "prediction_range_m": [
+              2.75,
+              2.75
+            ]
+          },
+          "test_count": 10
+        }
+      },
+      "aggregate": {
+        "MAE_m": 1.25,
+        "median_absolute_error_m": 1.25,
+        "spearman_rho": null,
+        "prediction_range_m": [
+          2.75,
+          2.75
+        ],
+        "constant_baseline_improvement_m": 0.0
+      },
+      "input_definition": "constant mean"
+    },
+    "P1": {
+      "splits": {
+        "train_LEFT_test_RIGHT": {
+          "metrics": {
+            "MAE_m": 0.06375579598145316,
+            "median_absolute_error_m": 0.062339000515198695,
+            "spearman_rho": 0.9999999999999999,
+            "prediction_range_m": [
+              0.6260947964966517,
+              4.9872488408037094
+            ],
+            "constant_baseline_improvement_m": 1.1862442040185468
+          },
+          "constant_baseline": {
+            "MAE_m": 1.25,
+            "median_absolute_error_m": 1.25,
+            "spearman_rho": null,
+            "prediction_range_m": [
+              2.75,
+              2.75
+            ]
+          },
+          "test_count": 10
+        },
+        "train_RIGHT_test_LEFT": {
+          "metrics": {
+            "MAE_m": 0.06375579598145316,
+            "median_absolute_error_m": 0.062339000515198695,
+            "spearman_rho": 0.9999999999999999,
+            "prediction_range_m": [
+              0.6260947964966517,
+              4.9872488408037094
+            ],
+            "constant_baseline_improvement_m": 1.1862442040185468
+          },
+          "constant_baseline": {
+            "MAE_m": 1.25,
+            "median_absolute_error_m": 1.25,
+            "spearman_rho": null,
+            "prediction_range_m": [
+              2.75,
+              2.75
+            ]
+          },
+          "test_count": 10
+        }
+      },
+      "aggregate": {
+        "MAE_m": 0.06375579598145316,
+        "median_absolute_error_m": 0.062339000515198695,
+        "spearman_rho": 1.0,
+        "prediction_range_m": [
+          0.6260947964966517,
+          4.9872488408037094
+        ],
+        "constant_baseline_improvement_m": 1.1862442040185468
+      },
+      "input_definition": "step and relative odometry"
+    },
+    "P2": {
+      "splits": {
+        "train_LEFT_test_RIGHT": {
+          "metrics": {
+            "MAE_m": 4.131818181818181,
+            "median_absolute_error_m": 4.09090909090909,
+            "spearman_rho": -0.9999999999999999,
+            "prediction_range_m": [
+              4.795454545454545,
+              8.886363636363635
+            ],
+            "constant_baseline_improvement_m": -2.881818181818181
+          },
+          "constant_baseline": {
+            "MAE_m": 1.25,
+            "median_absolute_error_m": 1.25,
+            "spearman_rho": null,
+            "prediction_range_m": [
+              2.75,
+              2.75
+            ]
+          },
+          "test_count": 10
+        },
+        "train_RIGHT_test_LEFT": {
+          "metrics": {
+            "MAE_m": 4.131818181818181,
+            "median_absolute_error_m": 4.09090909090909,
+            "spearman_rho": -0.9999999999999999,
+            "prediction_range_m": [
+              4.795454545454545,
+              8.886363636363635
+            ],
+            "constant_baseline_improvement_m": -2.881818181818181
+          },
+          "constant_baseline": {
+            "MAE_m": 1.25,
+            "median_absolute_error_m": 1.25,
+            "spearman_rho": null,
+            "prediction_range_m": [
+              2.75,
+              2.75
+            ]
+          },
+          "test_count": 10
+        }
+      },
+      "aggregate": {
+        "MAE_m": 4.131818181818182,
+        "median_absolute_error_m": 4.09090909090909,
+        "spearman_rho": -1.0,
+        "prediction_range_m": [
+          4.795454545454545,
+          8.886363636363635
+        ],
+        "constant_baseline_improvement_m": -2.881818181818182
+      },
+      "input_definition": "absolute pose"
+    },
+    "P3": {
+      "splits": {
+        "train_LEFT_test_RIGHT": {
+          "metrics": {
+            "MAE_m": 1.1319453444609382,
+            "median_absolute_error_m": 1.01753456760108,
+            "spearman_rho": 0.04242424242424241,
+            "prediction_range_m": [
+              2.3572343361186383,
+              5.0990965466821985
+            ],
+            "constant_baseline_improvement_m": 0.1180546555390618
+          },
+          "constant_baseline": {
+            "MAE_m": 1.25,
+            "median_absolute_error_m": 1.25,
+            "spearman_rho": null,
+            "prediction_range_m": [
+              2.75,
+              2.75
+            ]
+          },
+          "test_count": 10
+        },
+        "train_RIGHT_test_LEFT": {
+          "metrics": {
+            "MAE_m": 1.2062754167661758,
+            "median_absolute_error_m": 1.072656302751502,
+            "spearman_rho": -0.1515151515151515,
+            "prediction_range_m": [
+              1.6447986045350602,
+              4.914970213928231
+            ],
+            "constant_baseline_improvement_m": 0.04372458323382422
+          },
+          "constant_baseline": {
+            "MAE_m": 1.25,
+            "median_absolute_error_m": 1.25,
+            "spearman_rho": null,
+            "prediction_range_m": [
+              2.75,
+              2.75
+            ]
+          },
+          "test_count": 10
+        }
+      },
+      "aggregate": {
+        "MAE_m": 1.169110380613557,
+        "median_absolute_error_m": 1.01753456760108,
+        "spearman_rho": -0.08151001431331072,
+        "prediction_range_m": [
+          1.6447986045350602,
+          5.0990965466821985
+        ],
+        "constant_baseline_improvement_m": 0.08088961938644301
+      },
+      "input_definition": "current RGB descriptor"
+    },
+    "P4": {
+      "splits": {
+        "train_LEFT_test_RIGHT": {
+          "metrics": {
+            "MAE_m": 4.600993307849695,
+            "median_absolute_error_m": 2.3119120652348903,
+            "spearman_rho": 0.35757575757575755,
+            "prediction_range_m": [
+              -1.3837386487968228,
+              28.74396692451505
+            ],
+            "constant_baseline_improvement_m": -3.350993307849695
+          },
+          "constant_baseline": {
+            "MAE_m": 1.25,
+            "median_absolute_error_m": 1.25,
+            "spearman_rho": null,
+            "prediction_range_m": [
+              2.75,
+              2.75
+            ]
+          },
+          "test_count": 10
+        },
+        "train_RIGHT_test_LEFT": {
+          "metrics": {
+            "MAE_m": 1.1470015868532601,
+            "median_absolute_error_m": 0.941868147071069,
+            "spearman_rho": 0.18787878787878787,
+            "prediction_range_m": [
+              0.1306740895415413,
+              4.3619768225410445
+            ],
+            "constant_baseline_improvement_m": 0.10299841314673985
+          },
+          "constant_baseline": {
+            "MAE_m": 1.25,
+            "median_absolute_error_m": 1.25,
+            "spearman_rho": null,
+            "prediction_range_m": [
+              2.75,
+              2.75
+            ]
+          },
+          "test_count": 10
+        }
+      },
+      "aggregate": {
+        "MAE_m": 2.8739974473514773,
+        "median_absolute_error_m": 1.4191513390304782,
+        "spearman_rho": 0.0784911248942992,
+        "prediction_range_m": [
+          -1.3837386487968228,
+          28.74396692451505
+        ],
+        "constant_baseline_improvement_m": -1.6239974473514773
+      },
+      "input_definition": "two-frame RGB change"
+    },
+    "P5": {
+      "splits": {
+        "train_LEFT_test_RIGHT": {
+          "metrics": {
+            "MAE_m": 1.087958847620341,
+            "median_absolute_error_m": 1.1234509336895306,
+            "spearman_rho": 0.41818181818181815,
+            "prediction_range_m": [
+              1.9704710257969924,
+              3.865675575402477
+            ],
+            "constant_baseline_improvement_m": 0.162041152379659
+          },
+          "constant_baseline": {
+            "MAE_m": 1.25,
+            "median_absolute_error_m": 1.25,
+            "spearman_rho": null,
+            "prediction_range_m": [
+              2.75,
+              2.75
+            ]
+          },
+          "test_count": 10
+        },
+        "train_RIGHT_test_LEFT": {
+          "metrics": {
+            "MAE_m": 1.0706461573548647,
+            "median_absolute_error_m": 1.039202240331957,
+            "spearman_rho": 0.19999999999999998,
+            "prediction_range_m": [
+              1.7362604413139535,
+              4.810161469041456
+            ],
+            "constant_baseline_improvement_m": 0.17935384264513532
+          },
+          "constant_baseline": {
+            "MAE_m": 1.25,
+            "median_absolute_error_m": 1.25,
+            "spearman_rho": null,
+            "prediction_range_m": [
+              2.75,
+              2.75
+            ]
+          },
+          "test_count": 10
+        }
+      },
+      "aggregate": {
+        "MAE_m": 1.0793025024876028,
+        "median_absolute_error_m": 1.0448650379768027,
+        "spearman_rho": 0.2717000477110357,
+        "prediction_range_m": [
+          1.7362604413139535,
+          4.810161469041456
+        ],
+        "constant_baseline_improvement_m": 0.17069749751239716
+      },
+      "input_definition": "short RGB history plus relative odometry"
+    },
+    "P6": {
+      "splits": {
+        "train_LEFT_test_RIGHT": {
+          "metrics": {
+            "MAE_m": 1.0901049649961447,
+            "median_absolute_error_m": 1.1274389734384835,
+            "spearman_rho": 0.41818181818181815,
+            "prediction_range_m": [
+              1.9765314176235698,
+              3.870733644556668
+            ],
+            "constant_baseline_improvement_m": 0.15989503500385527
+          },
+          "constant_baseline": {
+            "MAE_m": 1.25,
+            "median_absolute_error_m": 1.25,
+            "spearman_rho": null,
+            "prediction_range_m": [
+              2.75,
+              2.75
+            ]
+          },
+          "test_count": 10
+        },
+        "train_RIGHT_test_LEFT": {
+          "metrics": {
+            "MAE_m": 1.0756736033986025,
+            "median_absolute_error_m": 1.0430176687487223,
+            "spearman_rho": 0.19999999999999998,
+            "prediction_range_m": [
+              1.7427770414283508,
+              4.8071076108534125
+            ],
+            "constant_baseline_improvement_m": 0.17432639660139748
+          },
+          "constant_baseline": {
+            "MAE_m": 1.25,
+            "median_absolute_error_m": 1.25,
+            "spearman_rho": null,
+            "prediction_range_m": [
+              2.75,
+              2.75
+            ]
+          },
+          "test_count": 10
+        }
+      },
+      "aggregate": {
+        "MAE_m": 1.0828892841973734,
+        "median_absolute_error_m": 1.0596002426605073,
+        "spearman_rho": 0.2717000477110357,
+        "prediction_range_m": [
+          1.7427770414283508,
+          4.8071076108534125
+        ],
+        "constant_baseline_improvement_m": 0.1671107158026266
+      },
+      "input_definition": "short RGB history plus absolute pose"
+    }
+  }
+}

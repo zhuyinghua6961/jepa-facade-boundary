@@ -1,0 +1,122 @@
+{
+  "schema": "mask1.world_boundary_repeatability_r1.v1",
+  "method": "target-side external contour pixels with valid z-depth backprojection; no legacy plane, bbox, width, height or boundary line filtering",
+  "trajectories": [
+    {
+      "sequence_id": "surface_sigma/MASK-1/10m/LEFT",
+      "surface_id": "surface_sigma",
+      "direction": "LEFT",
+      "frame_count": 13,
+      "step_m": 0.5,
+      "first_local_straddle_step": 10,
+      "first_global_3pct_step": 11,
+      "first_global_5pct_step": "NOT_REACHED",
+      "first_global_10pct_step": "NOT_REACHED",
+      "actual_last_step": 12,
+      "overshoot_steps": 2,
+      "overshoot_distance_m": 1.0,
+      "confirmation_same_pose": false,
+      "confirmation_distinct_poses": true,
+      "moving_straddle_persistence": true,
+      "action_axis": [
+        0.0,
+        -1.0,
+        0.0
+      ],
+      "action_axis_metadata": {
+        "motion_samples": 12,
+        "fallback": false,
+        "median_delta_m": [
+          0.0,
+          -0.5,
+          0.0
+        ]
+      },
+      "boundary_coordinate_spread_m": 0.0006567090749740601,
+      "repeatability_sensitivity": {
+        "0.05": {
+          "status": "PASS",
+          "spread_m": 0.0006567090749740601
+        },
+        "0.1": {
+          "status": "PASS",
+          "spread_m": 0.0006567090749740601
+        },
+        "0.25": {
+          "status": "PASS",
+          "spread_m": 0.0006567090749740601
+        },
+        "1.0": {
+          "status": "PASS",
+          "spread_m": 0.0006567090749740601
+        }
+      }
+    },
+    {
+      "sequence_id": "surface_sigma/MASK-1/10m/RIGHT",
+      "surface_id": "surface_sigma",
+      "direction": "RIGHT",
+      "frame_count": 13,
+      "step_m": 0.5,
+      "first_local_straddle_step": 10,
+      "first_global_3pct_step": 10,
+      "first_global_5pct_step": 11,
+      "first_global_10pct_step": "NOT_REACHED",
+      "actual_last_step": 12,
+      "overshoot_steps": 2,
+      "overshoot_distance_m": 1.0,
+      "confirmation_same_pose": false,
+      "confirmation_distinct_poses": true,
+      "moving_straddle_persistence": true,
+      "action_axis": [
+        0.0,
+        1.0,
+        0.0
+      ],
+      "action_axis_metadata": {
+        "motion_samples": 12,
+        "fallback": false,
+        "median_delta_m": [
+          0.0,
+          0.5,
+          0.0
+        ]
+      },
+      "boundary_coordinate_spread_m": 0.040521605312818565,
+      "repeatability_sensitivity": {
+        "0.05": {
+          "status": "PASS",
+          "spread_m": 0.040521605312818565
+        },
+        "0.1": {
+          "status": "PASS",
+          "spread_m": 0.040521605312818565
+        },
+        "0.25": {
+          "status": "PASS",
+          "spread_m": 0.040521605312818565
+        },
+        "1.0": {
+          "status": "PASS",
+          "spread_m": 0.040521605312818565
+        }
+      }
+    }
+  ],
+  "gates": {
+    "WORLD_BOUNDARY_REPEATABILITY": {
+      "status": "PASS",
+      "acceptance_threshold_m": 1.0,
+      "threshold_sensitivity_m": [
+        0.05,
+        0.1,
+        0.25,
+        1.0
+      ]
+    },
+    "WORLD_BOUNDARY_ABSOLUTE_ACCURACY": {
+      "status": "NOT_EVALUATED",
+      "reason": "no independent world-coordinate measurement is available"
+    }
+  }
+}
