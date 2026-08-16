@@ -1,0 +1,74 @@
+{
+  "surface_omega": {
+    "building_semantic_tag": 3,
+    "frames": 15,
+    "ids": [
+      {
+        "instance_id": 10040323,
+        "pixel_count": 4608000,
+        "view_count": 15,
+        "view_fraction": 1.0
+      }
+    ]
+  },
+  "surface_sigma": {
+    "building_semantic_tag": 3,
+    "frames": 15,
+    "ids": [
+      {
+        "instance_id": 10047747,
+        "pixel_count": 4216905,
+        "view_count": 15,
+        "view_fraction": 1.0
+      },
+      {
+        "instance_id": 8982019,
+        "pixel_count": 56136,
+        "view_count": 3,
+        "view_fraction": 0.2
+      },
+      {
+        "instance_id": 8996867,
+        "pixel_count": 55227,
+        "view_count": 6,
+        "view_fraction": 0.4
+      },
+      {
+        "instance_id": 8985859,
+        "pixel_count": 47130,
+        "view_count": 6,
+        "view_fraction": 0.4
+      },
+      {
+        "instance_id": 8985347,
+        "pixel_count": 15207,
+        "view_count": 3,
+        "view_fraction": 0.2
+      },
+      {
+        "instance_id": 8985603,
+        "pixel_count": 13512,
+        "view_count": 3,
+        "view_fraction": 0.2
+      },
+      {
+        "instance_id": 8999171,
+        "pixel_count": 456,
+        "view_count": 3,
+        "view_fraction": 0.2
+      },
+      {
+        "instance_id": 8982275,
+        "pixel_count": 129,
+        "view_count": 3,
+        "view_fraction": 0.2
+      },
+      {
+        "instance_id": 8982787,
+        "pixel_count": 42,
+        "view_count": 3,
+        "view_fraction": 0.2
+      }
+    ]
+  }
+}

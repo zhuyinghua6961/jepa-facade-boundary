@@ -1,0 +1,26 @@
+run_id: mask0
+map: Town10HD_Opt
+mode: KEY_POSES_ONLY
+surfaces: results/geo06/surfaces
+poses: [CENTER, LEFT_NEAR_BOUNDARY, RIGHT_NEAR_BOUNDARY, TOP_NEAR_BOUNDARY, BOTTOM_SAFE_VIEW]
+sensor:
+  width: 640
+  height: 480
+  horizontal_fov_deg: 90.0
+  fixed_delta_seconds: 0.05
+  quartet: [sensor.camera.rgb, sensor.camera.depth, sensor.camera.semantic_segmentation, sensor.camera.instance_segmentation]
+  depth_metric: z-depth
+segmentation:
+  building_semantic_tag: 3
+  envelope_closing_kernel_px: 3
+  envelope_area_thresholds: [0.05, 0.10, 0.15]
+  target_id_min_view_fraction: 0.67
+validation:
+  repeats_per_pose: 3
+  min_agl_m: 2.0
+  max_timestamp_delta_s: 0.000001
+  max_unknown_ratio: 0.10
+  external_visual_review: PENDING
+  ready_for_sequence_recapture: CONDITIONAL_PASS
+  ready_for_dataset_expansion: NOT_EVALUATED
+  ready_for_jepa: NOT_EVALUATED

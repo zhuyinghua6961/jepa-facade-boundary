@@ -231,3 +231,52 @@ def render_overlay(rgb_path: str | Path, labels: Mapping, output_path: str | Pat
     draw.text((8, 8), f"active={labels['active_boundary']} label={labels['label']} coverage={labels['target_pixel_coverage']:.3f} occ={labels['occlusion_visibility_ratio']:.3f}", fill=(255, 255, 0))
     Path(output_path).parent.mkdir(parents=True, exist_ok=True)
     image.save(output_path)
+
+
+def facade_outer_envelope(target_mask, closing_kernel_px: int = 3):
+    """Build an outer envelope by filling enclosed internal holes only."""
+    from .segmentation import binary_close_holes
+    return binary_close_holes(target_mask, closing_kernel_px)
+
+
+def classify_mask_state(target_mask, envelope_mask, boundary_pixel_line, target_center_pixel,
+                        stable_target_ids: bool, thresholds=None):
+    """Classify a key pose from simulator masks and a projected physical edge."""
+    thresholds = thresholds or {}
+    in_min = float(thresholds.get("in_envelope_coverage", 0.50))
+    out_max = float(thresholds.get("out_envelope_coverage", 0.05))
+    side_min = float(thresholds.get("straddle_side_fraction", 0.05))
+    target_mask = np.asarray(target_mask, dtype=bool)
+    envelope_mask = np.asarray(envelope_mask, dtype=bool)
+    h, w = target_mask.shape
+    total = float(max(h * w, 1))
+    target_cov = float(np.count_nonzero(target_mask) / total)
+    envelope_cov = float(np.count_nonzero(envelope_mask) / total)
+    line = np.asarray(boundary_pixel_line, dtype=float)
+    center = np.asarray(target_center_pixel, dtype=float)
+    valid_line = line.shape == (2, 2) and np.isfinite(line).all() and np.isfinite(center).all()
+    d = line[1] - line[0] if valid_line else np.zeros(2)
+    cross_center = float(d[0] * (center[1] - line[0, 1]) - d[1] * (center[0] - line[0, 0])) if valid_line else 0.0
+    yy, xx = np.indices((h, w), dtype=float)
+    signed = d[0] * (yy - line[0, 1]) - d[1] * (xx - line[0, 0]) if valid_line else np.zeros((h, w))
+    target_side = signed * (1.0 if cross_center >= 0 else -1.0) >= 0
+    target_side_pixels = int(np.count_nonzero(target_mask & target_side))
+    external_side_pixels = int(np.count_nonzero((~envelope_mask) & (~target_side)))
+    boundary_inside = bool(valid_line and _segment_intersects_view(line[0], line[1], w, h))
+    central = envelope_mask[int(h * 0.30):int(h * 0.70), int(w * 0.30):int(w * 0.70)]
+    central_target = bool(central.size and np.mean(central) >= 0.25)
+    if not stable_target_ids or not valid_line:
+        label = "UNKNOWN"
+    elif envelope_cov <= out_max:
+        label = "OUT"
+    elif boundary_inside and target_side_pixels / total >= side_min and external_side_pixels / total >= side_min:
+        label = "STRADDLE"
+    elif not boundary_inside and envelope_cov >= in_min and central_target:
+        label = "IN"
+    else:
+        label = "UNKNOWN"
+    return {"label": label, "target_pixel_coverage": target_cov, "envelope_coverage": envelope_cov,
+            "boundary_in_image": boundary_inside, "central_target": central_target,
+            "target_side_pixels": target_side_pixels, "external_side_pixels": external_side_pixels,
+            "stable_target_ids": bool(stable_target_ids), "out_threshold": out_max,
+            "in_threshold": in_min, "straddle_side_fraction": side_min}

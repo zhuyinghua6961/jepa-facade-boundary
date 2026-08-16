@@ -108,3 +108,9 @@ READY_FOR_JEPA: NOT_EVALUATED
 ```
 
 GEO-0.6 raw RGB-D was never tracked in GitHub and, after the failed event-coverage gate was recorded, the `results/geo06/raw` directory was moved to the user trash with `gio trash`. Only compact manifests, frame metadata, failure images and thresholds remain. No GEO-0.5R2 result was rewritten.
+
+## MASK-0 instance-mask feasibility audit
+
+MASK-0 tested 30 key-pose RGB/depth/semantic/instance groups on `surface_omega` and `surface_sigma` in Town10HD_Opt. CARLA `CityObjectLabel.Buildings` decodes to semantic tag `3`; instance IDs were decoded from raw BGRA and grouped only when stable across views. The audit is published in [`docs/MASK0_VISUAL_AUDIT.md`](docs/MASK0_VISUAL_AUDIT.md) with compact RGB/semantic/instance/envelope composites.
+
+The four-sensor pairing, decoder, stable-ID grouping and enclosed-hole envelope checks pass. CENTER is IN on both surfaces and sigma LEFT/RIGHT are STRADDLE, but omega boundary views and sigma TOP remain UNKNOWN; downward AGL raycasts did not establish the required 2 m safety margin. Therefore `READY_FOR_SEQUENCE_RECAPTURE` is FAIL, while `READY_FOR_DATASET_EXPANSION` and `READY_FOR_JEPA` remain NOT_EVALUATED. No JEPA training or full trajectory capture was performed.

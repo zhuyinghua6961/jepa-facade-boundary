@@ -1,0 +1,20 @@
+{
+  "surface_omega": {
+    "target_instance_ids": [
+      10040323
+    ],
+    "stable_min_views": 11,
+    "stable_view_fraction": 0.67,
+    "grouping": "multi_mesh_instance_group",
+    "selection": "semantic Building pixels plus geometry-seeded central projection; no RGB classification"
+  },
+  "surface_sigma": {
+    "target_instance_ids": [
+      10047747
+    ],
+    "stable_min_views": 11,
+    "stable_view_fraction": 0.67,
+    "grouping": "multi_mesh_instance_group",
+    "selection": "semantic Building pixels plus geometry-seeded central projection; no RGB classification"
+  }
+}

@@ -1,0 +1,4802 @@
+{
+  "schema": "mask0.capture.v1",
+  "map": "Carla/Maps/Town10HD_Opt",
+  "sensor": {
+    "width": 640,
+    "height": 480,
+    "horizontal_fov_deg": 90.0,
+    "fixed_delta_seconds": 0.05,
+    "repeats_per_pose": 3,
+    "min_agl_m": 2.0
+  },
+  "blueprints": {
+    "sensor.camera.rgb": {
+      "present": true,
+      "id": "sensor.camera.rgb"
+    },
+    "sensor.camera.depth": {
+      "present": true,
+      "id": "sensor.camera.depth"
+    },
+    "sensor.camera.semantic_segmentation": {
+      "present": true,
+      "id": "sensor.camera.semantic_segmentation"
+    },
+    "sensor.camera.instance_segmentation": {
+      "present": true,
+      "id": "sensor.camera.instance_segmentation"
+    }
+  },
+  "frames": [
+    {
+      "surface_id": "surface_omega",
+      "pose": "CENTER",
+      "repeat_index": 0,
+      "frame_id": 4362167,
+      "timestamp": 64611.269621910644,
+      "plan": {
+        "pose": "CENTER",
+        "axis": "none",
+        "offset_m": 0.0,
+        "distance_m": 5.644800457954407,
+        "facade_width_m": 37.78593444824219,
+        "facade_height_m": 20.160001635551453,
+        "image_footprint_width_m": 11.289600915908812,
+        "image_footprint_height_m": 8.46720068693161,
+        "agl_m": null,
+        "agl_method": "no_ground_hit",
+        "min_agl_m": 2.0,
+        "safety_vertical_adjustment_m": 0.0,
+        "bottom_action_feasible": true
+      },
+      "metadata_path": "surface_omega/CENTER/center_00.json",
+      "files": {
+        "rgb": {
+          "path": "results/mask0/raw/surface_omega/CENTER/center_00_rgb.png",
+          "sha256": "3d22d057ef885c6ecbe3b7cb85edccbec07ff14a2a5e31151ddf864a027a3d85"
+        },
+        "depth_raw": {
+          "path": "results/mask0/raw/surface_omega/CENTER/center_00_depth.raw.bin",
+          "sha256": "225afd83ba51d0b80577a16d85ff8ee9dced43202e00011e5990f5ff560d3c2a"
+        },
+        "depth_m": {
+          "path": "results/mask0/raw/surface_omega/CENTER/center_00_depth_m.npy",
+          "sha256": "049316fa54f515d22fe35a4b6a2b63d5bc31b8a4e7d003d51b84fa63e3787e90"
+        },
+        "semantic": {
+          "path": "results/mask0/raw/surface_omega/CENTER/center_00_semantic_raw.png",
+          "sha256": "482de965ec0abedbc86fafef4cc57066a04eab732900d003a4052f95a2d8157c"
+        },
+        "instance": {
+          "path": "results/mask0/raw/surface_omega/CENTER/center_00_instance_raw.png",
+          "sha256": "ac2d5ef85bc2252765b915f28d05e9353594e7794f16655287f6fd47ec05e6c2"
+        }
+      },
+      "camera_transform": {
+        "location": {
+          "x": -94.25432586669922,
+          "y": 275.97454833984375,
+          "z": 12.002955436706543
+        },
+        "rotation": {
+          "pitch": 1.2722218874358041e-14,
+          "yaw": -90.0,
+          "roll": -0.0
+        }
+      },
+      "K": [
+        [
+          320.00000000000006,
+          0.0,
+          319.5
+        ],
+        [
+          0.0,
+          320.00000000000006,
+          239.5
+        ],
+        [
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "T_world_camera": [
+        [
+          6.123233995736766e-17,
+          1.0,
+          -1.359631089317599e-32,
+          -94.25432586669922
+        ],
+        [
+          -1.0,
+          6.123233995736766e-17,
+          2.220446075169146e-16,
+          275.97454833984375
+        ],
+        [
+          2.220446075169146e-16,
+          0.0,
+          1.0,
+          12.002955436706543
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "sensor_frames": {
+        "rgb": 4362167,
+        "depth": 4362167,
+        "semantic": 4362167,
+        "instance": 4362167
+      },
+      "sensor_timestamps": {
+        "rgb": 64611.269621910644,
+        "depth": 64611.269621910644,
+        "semantic": 64611.269621910644,
+        "instance": 64611.269621910644
+      },
+      "commanded_action": {
+        "mode": "MASK-0_KEY_POSE",
+        "surface_id": "surface_omega",
+        "pose": "CENTER",
+        "repeat_index": 0,
+        "plan": {
+          "pose": "CENTER",
+          "axis": "none",
+          "offset_m": 0.0,
+          "distance_m": 5.644800457954407,
+          "facade_width_m": 37.78593444824219,
+          "facade_height_m": 20.160001635551453,
+          "image_footprint_width_m": 11.289600915908812,
+          "image_footprint_height_m": 8.46720068693161,
+          "agl_m": null,
+          "agl_method": "no_ground_hit",
+          "min_agl_m": 2.0,
+          "safety_vertical_adjustment_m": 0.0,
+          "bottom_action_feasible": true
+        }
+      },
+      "executed_delta_pose": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ]
+    },
+    {
+      "surface_id": "surface_omega",
+      "pose": "CENTER",
+      "repeat_index": 1,
+      "frame_id": 4362168,
+      "timestamp": 64611.31962191139,
+      "plan": {
+        "pose": "CENTER",
+        "axis": "none",
+        "offset_m": 0.0,
+        "distance_m": 5.644800457954407,
+        "facade_width_m": 37.78593444824219,
+        "facade_height_m": 20.160001635551453,
+        "image_footprint_width_m": 11.289600915908812,
+        "image_footprint_height_m": 8.46720068693161,
+        "agl_m": null,
+        "agl_method": "no_ground_hit",
+        "min_agl_m": 2.0,
+        "safety_vertical_adjustment_m": 0.0,
+        "bottom_action_feasible": true
+      },
+      "metadata_path": "surface_omega/CENTER/center_01.json",
+      "files": {
+        "rgb": {
+          "path": "results/mask0/raw/surface_omega/CENTER/center_01_rgb.png",
+          "sha256": "36659897160e0b1cebb7b4c099c34109404262eb6f7c9974883995d8ebe20c19"
+        },
+        "depth_raw": {
+          "path": "results/mask0/raw/surface_omega/CENTER/center_01_depth.raw.bin",
+          "sha256": "225afd83ba51d0b80577a16d85ff8ee9dced43202e00011e5990f5ff560d3c2a"
+        },
+        "depth_m": {
+          "path": "results/mask0/raw/surface_omega/CENTER/center_01_depth_m.npy",
+          "sha256": "049316fa54f515d22fe35a4b6a2b63d5bc31b8a4e7d003d51b84fa63e3787e90"
+        },
+        "semantic": {
+          "path": "results/mask0/raw/surface_omega/CENTER/center_01_semantic_raw.png",
+          "sha256": "482de965ec0abedbc86fafef4cc57066a04eab732900d003a4052f95a2d8157c"
+        },
+        "instance": {
+          "path": "results/mask0/raw/surface_omega/CENTER/center_01_instance_raw.png",
+          "sha256": "ac2d5ef85bc2252765b915f28d05e9353594e7794f16655287f6fd47ec05e6c2"
+        }
+      },
+      "camera_transform": {
+        "location": {
+          "x": -94.25432586669922,
+          "y": 275.97454833984375,
+          "z": 12.002955436706543
+        },
+        "rotation": {
+          "pitch": 1.2722218874358041e-14,
+          "yaw": -90.0,
+          "roll": -0.0
+        }
+      },
+      "K": [
+        [
+          320.00000000000006,
+          0.0,
+          319.5
+        ],
+        [
+          0.0,
+          320.00000000000006,
+          239.5
+        ],
+        [
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "T_world_camera": [
+        [
+          6.123233995736766e-17,
+          1.0,
+          -1.359631089317599e-32,
+          -94.25432586669922
+        ],
+        [
+          -1.0,
+          6.123233995736766e-17,
+          2.220446075169146e-16,
+          275.97454833984375
+        ],
+        [
+          2.220446075169146e-16,
+          0.0,
+          1.0,
+          12.002955436706543
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "sensor_frames": {
+        "rgb": 4362168,
+        "depth": 4362168,
+        "semantic": 4362168,
+        "instance": 4362168
+      },
+      "sensor_timestamps": {
+        "rgb": 64611.31962191139,
+        "depth": 64611.31962191139,
+        "semantic": 64611.31962191139,
+        "instance": 64611.31962191139
+      },
+      "commanded_action": {
+        "mode": "MASK-0_KEY_POSE",
+        "surface_id": "surface_omega",
+        "pose": "CENTER",
+        "repeat_index": 1,
+        "plan": {
+          "pose": "CENTER",
+          "axis": "none",
+          "offset_m": 0.0,
+          "distance_m": 5.644800457954407,
+          "facade_width_m": 37.78593444824219,
+          "facade_height_m": 20.160001635551453,
+          "image_footprint_width_m": 11.289600915908812,
+          "image_footprint_height_m": 8.46720068693161,
+          "agl_m": null,
+          "agl_method": "no_ground_hit",
+          "min_agl_m": 2.0,
+          "safety_vertical_adjustment_m": 0.0,
+          "bottom_action_feasible": true
+        }
+      },
+      "executed_delta_pose": [
+        [
+          1.0,
+          -3.0189875159532135e-48,
+          0.0,
+          0.0
+        ],
+        [
+          -3.0189875159532135e-48,
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ]
+    },
+    {
+      "surface_id": "surface_omega",
+      "pose": "CENTER",
+      "repeat_index": 2,
+      "frame_id": 4362169,
+      "timestamp": 64611.369621912134,
+      "plan": {
+        "pose": "CENTER",
+        "axis": "none",
+        "offset_m": 0.0,
+        "distance_m": 5.644800457954407,
+        "facade_width_m": 37.78593444824219,
+        "facade_height_m": 20.160001635551453,
+        "image_footprint_width_m": 11.289600915908812,
+        "image_footprint_height_m": 8.46720068693161,
+        "agl_m": null,
+        "agl_method": "no_ground_hit",
+        "min_agl_m": 2.0,
+        "safety_vertical_adjustment_m": 0.0,
+        "bottom_action_feasible": true
+      },
+      "metadata_path": "surface_omega/CENTER/center_02.json",
+      "files": {
+        "rgb": {
+          "path": "results/mask0/raw/surface_omega/CENTER/center_02_rgb.png",
+          "sha256": "29f695526d57a4f03fa8b0680ff846a0d871c52d7c2ee14683add58b41a1e3b3"
+        },
+        "depth_raw": {
+          "path": "results/mask0/raw/surface_omega/CENTER/center_02_depth.raw.bin",
+          "sha256": "225afd83ba51d0b80577a16d85ff8ee9dced43202e00011e5990f5ff560d3c2a"
+        },
+        "depth_m": {
+          "path": "results/mask0/raw/surface_omega/CENTER/center_02_depth_m.npy",
+          "sha256": "049316fa54f515d22fe35a4b6a2b63d5bc31b8a4e7d003d51b84fa63e3787e90"
+        },
+        "semantic": {
+          "path": "results/mask0/raw/surface_omega/CENTER/center_02_semantic_raw.png",
+          "sha256": "482de965ec0abedbc86fafef4cc57066a04eab732900d003a4052f95a2d8157c"
+        },
+        "instance": {
+          "path": "results/mask0/raw/surface_omega/CENTER/center_02_instance_raw.png",
+          "sha256": "ac2d5ef85bc2252765b915f28d05e9353594e7794f16655287f6fd47ec05e6c2"
+        }
+      },
+      "camera_transform": {
+        "location": {
+          "x": -94.25432586669922,
+          "y": 275.97454833984375,
+          "z": 12.002955436706543
+        },
+        "rotation": {
+          "pitch": 1.2722218874358041e-14,
+          "yaw": -90.0,
+          "roll": -0.0
+        }
+      },
+      "K": [
+        [
+          320.00000000000006,
+          0.0,
+          319.5
+        ],
+        [
+          0.0,
+          320.00000000000006,
+          239.5
+        ],
+        [
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "T_world_camera": [
+        [
+          6.123233995736766e-17,
+          1.0,
+          -1.359631089317599e-32,
+          -94.25432586669922
+        ],
+        [
+          -1.0,
+          6.123233995736766e-17,
+          2.220446075169146e-16,
+          275.97454833984375
+        ],
+        [
+          2.220446075169146e-16,
+          0.0,
+          1.0,
+          12.002955436706543
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "sensor_frames": {
+        "rgb": 4362169,
+        "depth": 4362169,
+        "semantic": 4362169,
+        "instance": 4362169
+      },
+      "sensor_timestamps": {
+        "rgb": 64611.369621912134,
+        "depth": 64611.369621912134,
+        "semantic": 64611.369621912134,
+        "instance": 64611.369621912134
+      },
+      "commanded_action": {
+        "mode": "MASK-0_KEY_POSE",
+        "surface_id": "surface_omega",
+        "pose": "CENTER",
+        "repeat_index": 2,
+        "plan": {
+          "pose": "CENTER",
+          "axis": "none",
+          "offset_m": 0.0,
+          "distance_m": 5.644800457954407,
+          "facade_width_m": 37.78593444824219,
+          "facade_height_m": 20.160001635551453,
+          "image_footprint_width_m": 11.289600915908812,
+          "image_footprint_height_m": 8.46720068693161,
+          "agl_m": null,
+          "agl_method": "no_ground_hit",
+          "min_agl_m": 2.0,
+          "safety_vertical_adjustment_m": 0.0,
+          "bottom_action_feasible": true
+        }
+      },
+      "executed_delta_pose": [
+        [
+          1.0,
+          -3.0189875159532135e-48,
+          0.0,
+          0.0
+        ],
+        [
+          -3.0189875159532135e-48,
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ]
+    },
+    {
+      "surface_id": "surface_omega",
+      "pose": "LEFT_NEAR_BOUNDARY",
+      "repeat_index": 0,
+      "frame_id": 4362177,
+      "timestamp": 64611.64976863528,
+      "plan": {
+        "pose": "LEFT_NEAR_BOUNDARY",
+        "axis": "horizontal",
+        "offset_m": -14.94160690355301,
+        "distance_m": 5.644800457954407,
+        "facade_width_m": 37.78593444824219,
+        "facade_height_m": 20.160001635551453,
+        "image_footprint_width_m": 11.289600915908812,
+        "image_footprint_height_m": 8.46720068693161,
+        "agl_m": null,
+        "agl_method": "no_ground_hit",
+        "min_agl_m": 2.0,
+        "safety_vertical_adjustment_m": 0.0,
+        "bottom_action_feasible": true
+      },
+      "metadata_path": "surface_omega/LEFT_NEAR_BOUNDARY/left_near_boundary_00.json",
+      "files": {
+        "rgb": {
+          "path": "results/mask0/raw/surface_omega/LEFT_NEAR_BOUNDARY/left_near_boundary_00_rgb.png",
+          "sha256": "c2839d6feb15fc6ff8c18817b2883b1ac57b41358c731b3b6ffd7f68100abac8"
+        },
+        "depth_raw": {
+          "path": "results/mask0/raw/surface_omega/LEFT_NEAR_BOUNDARY/left_near_boundary_00_depth.raw.bin",
+          "sha256": "a077db6e0ecfbe91f8abc91786e39e9ab2e30946daa11e762de5d560cba1ee80"
+        },
+        "depth_m": {
+          "path": "results/mask0/raw/surface_omega/LEFT_NEAR_BOUNDARY/left_near_boundary_00_depth_m.npy",
+          "sha256": "2996910d245d6f9887368c587b10696b6cf4c0dbe958dc3b4ede9878e98d580a"
+        },
+        "semantic": {
+          "path": "results/mask0/raw/surface_omega/LEFT_NEAR_BOUNDARY/left_near_boundary_00_semantic_raw.png",
+          "sha256": "482de965ec0abedbc86fafef4cc57066a04eab732900d003a4052f95a2d8157c"
+        },
+        "instance": {
+          "path": "results/mask0/raw/surface_omega/LEFT_NEAR_BOUNDARY/left_near_boundary_00_instance_raw.png",
+          "sha256": "ac2d5ef85bc2252765b915f28d05e9353594e7794f16655287f6fd47ec05e6c2"
+        }
+      },
+      "camera_transform": {
+        "location": {
+          "x": -109.1959228515625,
+          "y": 275.97454833984375,
+          "z": 12.002955436706543
+        },
+        "rotation": {
+          "pitch": 1.2722218874358041e-14,
+          "yaw": -90.0,
+          "roll": -0.0
+        }
+      },
+      "K": [
+        [
+          320.00000000000006,
+          0.0,
+          319.5
+        ],
+        [
+          0.0,
+          320.00000000000006,
+          239.5
+        ],
+        [
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "T_world_camera": [
+        [
+          6.123233995736766e-17,
+          1.0,
+          -1.359631089317599e-32,
+          -109.1959228515625
+        ],
+        [
+          -1.0,
+          6.123233995736766e-17,
+          2.220446075169146e-16,
+          275.97454833984375
+        ],
+        [
+          2.220446075169146e-16,
+          0.0,
+          1.0,
+          12.002955436706543
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "sensor_frames": {
+        "rgb": 4362177,
+        "depth": 4362177,
+        "semantic": 4362177,
+        "instance": 4362177
+      },
+      "sensor_timestamps": {
+        "rgb": 64611.64976863528,
+        "depth": 64611.64976863528,
+        "semantic": 64611.64976863528,
+        "instance": 64611.64976863528
+      },
+      "commanded_action": {
+        "mode": "MASK-0_KEY_POSE",
+        "surface_id": "surface_omega",
+        "pose": "LEFT_NEAR_BOUNDARY",
+        "repeat_index": 0,
+        "plan": {
+          "pose": "LEFT_NEAR_BOUNDARY",
+          "axis": "horizontal",
+          "offset_m": -14.94160690355301,
+          "distance_m": 5.644800457954407,
+          "facade_width_m": 37.78593444824219,
+          "facade_height_m": 20.160001635551453,
+          "image_footprint_width_m": 11.289600915908812,
+          "image_footprint_height_m": 8.46720068693161,
+          "agl_m": null,
+          "agl_method": "no_ground_hit",
+          "min_agl_m": 2.0,
+          "safety_vertical_adjustment_m": 0.0,
+          "bottom_action_feasible": true
+        }
+      },
+      "executed_delta_pose": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ]
+    },
+    {
+      "surface_id": "surface_omega",
+      "pose": "LEFT_NEAR_BOUNDARY",
+      "repeat_index": 1,
+      "frame_id": 4362178,
+      "timestamp": 64611.69976863603,
+      "plan": {
+        "pose": "LEFT_NEAR_BOUNDARY",
+        "axis": "horizontal",
+        "offset_m": -14.94160690355301,
+        "distance_m": 5.644800457954407,
+        "facade_width_m": 37.78593444824219,
+        "facade_height_m": 20.160001635551453,
+        "image_footprint_width_m": 11.289600915908812,
+        "image_footprint_height_m": 8.46720068693161,
+        "agl_m": null,
+        "agl_method": "no_ground_hit",
+        "min_agl_m": 2.0,
+        "safety_vertical_adjustment_m": 0.0,
+        "bottom_action_feasible": true
+      },
+      "metadata_path": "surface_omega/LEFT_NEAR_BOUNDARY/left_near_boundary_01.json",
+      "files": {
+        "rgb": {
+          "path": "results/mask0/raw/surface_omega/LEFT_NEAR_BOUNDARY/left_near_boundary_01_rgb.png",
+          "sha256": "a5da5b5e48e678ecd4b51371cd399f71c5be415bc5311b32d99a77c995283488"
+        },
+        "depth_raw": {
+          "path": "results/mask0/raw/surface_omega/LEFT_NEAR_BOUNDARY/left_near_boundary_01_depth.raw.bin",
+          "sha256": "a077db6e0ecfbe91f8abc91786e39e9ab2e30946daa11e762de5d560cba1ee80"
+        },
+        "depth_m": {
+          "path": "results/mask0/raw/surface_omega/LEFT_NEAR_BOUNDARY/left_near_boundary_01_depth_m.npy",
+          "sha256": "2996910d245d6f9887368c587b10696b6cf4c0dbe958dc3b4ede9878e98d580a"
+        },
+        "semantic": {
+          "path": "results/mask0/raw/surface_omega/LEFT_NEAR_BOUNDARY/left_near_boundary_01_semantic_raw.png",
+          "sha256": "482de965ec0abedbc86fafef4cc57066a04eab732900d003a4052f95a2d8157c"
+        },
+        "instance": {
+          "path": "results/mask0/raw/surface_omega/LEFT_NEAR_BOUNDARY/left_near_boundary_01_instance_raw.png",
+          "sha256": "ac2d5ef85bc2252765b915f28d05e9353594e7794f16655287f6fd47ec05e6c2"
+        }
+      },
+      "camera_transform": {
+        "location": {
+          "x": -109.1959228515625,
+          "y": 275.97454833984375,
+          "z": 12.002955436706543
+        },
+        "rotation": {
+          "pitch": 1.2722218874358041e-14,
+          "yaw": -90.0,
+          "roll": -0.0
+        }
+      },
+      "K": [
+        [
+          320.00000000000006,
+          0.0,
+          319.5
+        ],
+        [
+          0.0,
+          320.00000000000006,
+          239.5
+        ],
+        [
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "T_world_camera": [
+        [
+          6.123233995736766e-17,
+          1.0,
+          -1.359631089317599e-32,
+          -109.1959228515625
+        ],
+        [
+          -1.0,
+          6.123233995736766e-17,
+          2.220446075169146e-16,
+          275.97454833984375
+        ],
+        [
+          2.220446075169146e-16,
+          0.0,
+          1.0,
+          12.002955436706543
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "sensor_frames": {
+        "rgb": 4362178,
+        "depth": 4362178,
+        "semantic": 4362178,
+        "instance": 4362178
+      },
+      "sensor_timestamps": {
+        "rgb": 64611.69976863603,
+        "depth": 64611.69976863603,
+        "semantic": 64611.69976863603,
+        "instance": 64611.69976863603
+      },
+      "commanded_action": {
+        "mode": "MASK-0_KEY_POSE",
+        "surface_id": "surface_omega",
+        "pose": "LEFT_NEAR_BOUNDARY",
+        "repeat_index": 1,
+        "plan": {
+          "pose": "LEFT_NEAR_BOUNDARY",
+          "axis": "horizontal",
+          "offset_m": -14.94160690355301,
+          "distance_m": 5.644800457954407,
+          "facade_width_m": 37.78593444824219,
+          "facade_height_m": 20.160001635551453,
+          "image_footprint_width_m": 11.289600915908812,
+          "image_footprint_height_m": 8.46720068693161,
+          "agl_m": null,
+          "agl_method": "no_ground_hit",
+          "min_agl_m": 2.0,
+          "safety_vertical_adjustment_m": 0.0,
+          "bottom_action_feasible": true
+        }
+      },
+      "executed_delta_pose": [
+        [
+          1.0,
+          -3.0189875159532135e-48,
+          0.0,
+          0.0
+        ],
+        [
+          -3.0189875159532135e-48,
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ]
+    },
+    {
+      "surface_id": "surface_omega",
+      "pose": "LEFT_NEAR_BOUNDARY",
+      "repeat_index": 2,
+      "frame_id": 4362179,
+      "timestamp": 64611.74976863677,
+      "plan": {
+        "pose": "LEFT_NEAR_BOUNDARY",
+        "axis": "horizontal",
+        "offset_m": -14.94160690355301,
+        "distance_m": 5.644800457954407,
+        "facade_width_m": 37.78593444824219,
+        "facade_height_m": 20.160001635551453,
+        "image_footprint_width_m": 11.289600915908812,
+        "image_footprint_height_m": 8.46720068693161,
+        "agl_m": null,
+        "agl_method": "no_ground_hit",
+        "min_agl_m": 2.0,
+        "safety_vertical_adjustment_m": 0.0,
+        "bottom_action_feasible": true
+      },
+      "metadata_path": "surface_omega/LEFT_NEAR_BOUNDARY/left_near_boundary_02.json",
+      "files": {
+        "rgb": {
+          "path": "results/mask0/raw/surface_omega/LEFT_NEAR_BOUNDARY/left_near_boundary_02_rgb.png",
+          "sha256": "3ebd323c0cba9735b7b974d1669a8d8d298781d906c9b0d65e686b9eb108a3ad"
+        },
+        "depth_raw": {
+          "path": "results/mask0/raw/surface_omega/LEFT_NEAR_BOUNDARY/left_near_boundary_02_depth.raw.bin",
+          "sha256": "a077db6e0ecfbe91f8abc91786e39e9ab2e30946daa11e762de5d560cba1ee80"
+        },
+        "depth_m": {
+          "path": "results/mask0/raw/surface_omega/LEFT_NEAR_BOUNDARY/left_near_boundary_02_depth_m.npy",
+          "sha256": "2996910d245d6f9887368c587b10696b6cf4c0dbe958dc3b4ede9878e98d580a"
+        },
+        "semantic": {
+          "path": "results/mask0/raw/surface_omega/LEFT_NEAR_BOUNDARY/left_near_boundary_02_semantic_raw.png",
+          "sha256": "482de965ec0abedbc86fafef4cc57066a04eab732900d003a4052f95a2d8157c"
+        },
+        "instance": {
+          "path": "results/mask0/raw/surface_omega/LEFT_NEAR_BOUNDARY/left_near_boundary_02_instance_raw.png",
+          "sha256": "ac2d5ef85bc2252765b915f28d05e9353594e7794f16655287f6fd47ec05e6c2"
+        }
+      },
+      "camera_transform": {
+        "location": {
+          "x": -109.1959228515625,
+          "y": 275.97454833984375,
+          "z": 12.002955436706543
+        },
+        "rotation": {
+          "pitch": 1.2722218874358041e-14,
+          "yaw": -90.0,
+          "roll": -0.0
+        }
+      },
+      "K": [
+        [
+          320.00000000000006,
+          0.0,
+          319.5
+        ],
+        [
+          0.0,
+          320.00000000000006,
+          239.5
+        ],
+        [
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "T_world_camera": [
+        [
+          6.123233995736766e-17,
+          1.0,
+          -1.359631089317599e-32,
+          -109.1959228515625
+        ],
+        [
+          -1.0,
+          6.123233995736766e-17,
+          2.220446075169146e-16,
+          275.97454833984375
+        ],
+        [
+          2.220446075169146e-16,
+          0.0,
+          1.0,
+          12.002955436706543
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "sensor_frames": {
+        "rgb": 4362179,
+        "depth": 4362179,
+        "semantic": 4362179,
+        "instance": 4362179
+      },
+      "sensor_timestamps": {
+        "rgb": 64611.74976863677,
+        "depth": 64611.74976863677,
+        "semantic": 64611.74976863677,
+        "instance": 64611.74976863677
+      },
+      "commanded_action": {
+        "mode": "MASK-0_KEY_POSE",
+        "surface_id": "surface_omega",
+        "pose": "LEFT_NEAR_BOUNDARY",
+        "repeat_index": 2,
+        "plan": {
+          "pose": "LEFT_NEAR_BOUNDARY",
+          "axis": "horizontal",
+          "offset_m": -14.94160690355301,
+          "distance_m": 5.644800457954407,
+          "facade_width_m": 37.78593444824219,
+          "facade_height_m": 20.160001635551453,
+          "image_footprint_width_m": 11.289600915908812,
+          "image_footprint_height_m": 8.46720068693161,
+          "agl_m": null,
+          "agl_method": "no_ground_hit",
+          "min_agl_m": 2.0,
+          "safety_vertical_adjustment_m": 0.0,
+          "bottom_action_feasible": true
+        }
+      },
+      "executed_delta_pose": [
+        [
+          1.0,
+          -3.0189875159532135e-48,
+          0.0,
+          0.0
+        ],
+        [
+          -3.0189875159532135e-48,
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ]
+    },
+    {
+      "surface_id": "surface_omega",
+      "pose": "RIGHT_NEAR_BOUNDARY",
+      "repeat_index": 0,
+      "frame_id": 4362187,
+      "timestamp": 64612.04056775069,
+      "plan": {
+        "pose": "RIGHT_NEAR_BOUNDARY",
+        "axis": "horizontal",
+        "offset_m": 14.94160690355301,
+        "distance_m": 5.644800457954407,
+        "facade_width_m": 37.78593444824219,
+        "facade_height_m": 20.160001635551453,
+        "image_footprint_width_m": 11.289600915908812,
+        "image_footprint_height_m": 8.46720068693161,
+        "agl_m": null,
+        "agl_method": "no_ground_hit",
+        "min_agl_m": 2.0,
+        "safety_vertical_adjustment_m": 0.0,
+        "bottom_action_feasible": true
+      },
+      "metadata_path": "surface_omega/RIGHT_NEAR_BOUNDARY/right_near_boundary_00.json",
+      "files": {
+        "rgb": {
+          "path": "results/mask0/raw/surface_omega/RIGHT_NEAR_BOUNDARY/right_near_boundary_00_rgb.png",
+          "sha256": "a5ce9c16a8659fe11985fa1e43d9f535fad75d151c9584e14a96c3b7471f7a3b"
+        },
+        "depth_raw": {
+          "path": "results/mask0/raw/surface_omega/RIGHT_NEAR_BOUNDARY/right_near_boundary_00_depth.raw.bin",
+          "sha256": "55163d14f8fb70da8bcdbd23fe6b210c58d5083b660a8c90c116c27e33e32a84"
+        },
+        "depth_m": {
+          "path": "results/mask0/raw/surface_omega/RIGHT_NEAR_BOUNDARY/right_near_boundary_00_depth_m.npy",
+          "sha256": "205e45019a5c27842888203916f7fce14890986f336b6fdfeb8436d2365a9332"
+        },
+        "semantic": {
+          "path": "results/mask0/raw/surface_omega/RIGHT_NEAR_BOUNDARY/right_near_boundary_00_semantic_raw.png",
+          "sha256": "482de965ec0abedbc86fafef4cc57066a04eab732900d003a4052f95a2d8157c"
+        },
+        "instance": {
+          "path": "results/mask0/raw/surface_omega/RIGHT_NEAR_BOUNDARY/right_near_boundary_00_instance_raw.png",
+          "sha256": "ac2d5ef85bc2252765b915f28d05e9353594e7794f16655287f6fd47ec05e6c2"
+        }
+      },
+      "camera_transform": {
+        "location": {
+          "x": -79.3127212524414,
+          "y": 275.97454833984375,
+          "z": 12.002955436706543
+        },
+        "rotation": {
+          "pitch": 1.2722218874358041e-14,
+          "yaw": -90.0,
+          "roll": -0.0
+        }
+      },
+      "K": [
+        [
+          320.00000000000006,
+          0.0,
+          319.5
+        ],
+        [
+          0.0,
+          320.00000000000006,
+          239.5
+        ],
+        [
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "T_world_camera": [
+        [
+          6.123233995736766e-17,
+          1.0,
+          -1.359631089317599e-32,
+          -79.3127212524414
+        ],
+        [
+          -1.0,
+          6.123233995736766e-17,
+          2.220446075169146e-16,
+          275.97454833984375
+        ],
+        [
+          2.220446075169146e-16,
+          0.0,
+          1.0,
+          12.002955436706543
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "sensor_frames": {
+        "rgb": 4362187,
+        "depth": 4362187,
+        "semantic": 4362187,
+        "instance": 4362187
+      },
+      "sensor_timestamps": {
+        "rgb": 64612.04056775069,
+        "depth": 64612.04056775069,
+        "semantic": 64612.04056775069,
+        "instance": 64612.04056775069
+      },
+      "commanded_action": {
+        "mode": "MASK-0_KEY_POSE",
+        "surface_id": "surface_omega",
+        "pose": "RIGHT_NEAR_BOUNDARY",
+        "repeat_index": 0,
+        "plan": {
+          "pose": "RIGHT_NEAR_BOUNDARY",
+          "axis": "horizontal",
+          "offset_m": 14.94160690355301,
+          "distance_m": 5.644800457954407,
+          "facade_width_m": 37.78593444824219,
+          "facade_height_m": 20.160001635551453,
+          "image_footprint_width_m": 11.289600915908812,
+          "image_footprint_height_m": 8.46720068693161,
+          "agl_m": null,
+          "agl_method": "no_ground_hit",
+          "min_agl_m": 2.0,
+          "safety_vertical_adjustment_m": 0.0,
+          "bottom_action_feasible": true
+        }
+      },
+      "executed_delta_pose": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ]
+    },
+    {
+      "surface_id": "surface_omega",
+      "pose": "RIGHT_NEAR_BOUNDARY",
+      "repeat_index": 1,
+      "frame_id": 4362188,
+      "timestamp": 64612.09056775144,
+      "plan": {
+        "pose": "RIGHT_NEAR_BOUNDARY",
+        "axis": "horizontal",
+        "offset_m": 14.94160690355301,
+        "distance_m": 5.644800457954407,
+        "facade_width_m": 37.78593444824219,
+        "facade_height_m": 20.160001635551453,
+        "image_footprint_width_m": 11.289600915908812,
+        "image_footprint_height_m": 8.46720068693161,
+        "agl_m": null,
+        "agl_method": "no_ground_hit",
+        "min_agl_m": 2.0,
+        "safety_vertical_adjustment_m": 0.0,
+        "bottom_action_feasible": true
+      },
+      "metadata_path": "surface_omega/RIGHT_NEAR_BOUNDARY/right_near_boundary_01.json",
+      "files": {
+        "rgb": {
+          "path": "results/mask0/raw/surface_omega/RIGHT_NEAR_BOUNDARY/right_near_boundary_01_rgb.png",
+          "sha256": "259ed0a4a3128be67fba8896d8feb69510c0b319e0a40dd6bccc5ce9366a7c24"
+        },
+        "depth_raw": {
+          "path": "results/mask0/raw/surface_omega/RIGHT_NEAR_BOUNDARY/right_near_boundary_01_depth.raw.bin",
+          "sha256": "55163d14f8fb70da8bcdbd23fe6b210c58d5083b660a8c90c116c27e33e32a84"
+        },
+        "depth_m": {
+          "path": "results/mask0/raw/surface_omega/RIGHT_NEAR_BOUNDARY/right_near_boundary_01_depth_m.npy",
+          "sha256": "205e45019a5c27842888203916f7fce14890986f336b6fdfeb8436d2365a9332"
+        },
+        "semantic": {
+          "path": "results/mask0/raw/surface_omega/RIGHT_NEAR_BOUNDARY/right_near_boundary_01_semantic_raw.png",
+          "sha256": "482de965ec0abedbc86fafef4cc57066a04eab732900d003a4052f95a2d8157c"
+        },
+        "instance": {
+          "path": "results/mask0/raw/surface_omega/RIGHT_NEAR_BOUNDARY/right_near_boundary_01_instance_raw.png",
+          "sha256": "ac2d5ef85bc2252765b915f28d05e9353594e7794f16655287f6fd47ec05e6c2"
+        }
+      },
+      "camera_transform": {
+        "location": {
+          "x": -79.3127212524414,
+          "y": 275.97454833984375,
+          "z": 12.002955436706543
+        },
+        "rotation": {
+          "pitch": 1.2722218874358041e-14,
+          "yaw": -90.0,
+          "roll": -0.0
+        }
+      },
+      "K": [
+        [
+          320.00000000000006,
+          0.0,
+          319.5
+        ],
+        [
+          0.0,
+          320.00000000000006,
+          239.5
+        ],
+        [
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "T_world_camera": [
+        [
+          6.123233995736766e-17,
+          1.0,
+          -1.359631089317599e-32,
+          -79.3127212524414
+        ],
+        [
+          -1.0,
+          6.123233995736766e-17,
+          2.220446075169146e-16,
+          275.97454833984375
+        ],
+        [
+          2.220446075169146e-16,
+          0.0,
+          1.0,
+          12.002955436706543
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "sensor_frames": {
+        "rgb": 4362188,
+        "depth": 4362188,
+        "semantic": 4362188,
+        "instance": 4362188
+      },
+      "sensor_timestamps": {
+        "rgb": 64612.09056775144,
+        "depth": 64612.09056775144,
+        "semantic": 64612.09056775144,
+        "instance": 64612.09056775144
+      },
+      "commanded_action": {
+        "mode": "MASK-0_KEY_POSE",
+        "surface_id": "surface_omega",
+        "pose": "RIGHT_NEAR_BOUNDARY",
+        "repeat_index": 1,
+        "plan": {
+          "pose": "RIGHT_NEAR_BOUNDARY",
+          "axis": "horizontal",
+          "offset_m": 14.94160690355301,
+          "distance_m": 5.644800457954407,
+          "facade_width_m": 37.78593444824219,
+          "facade_height_m": 20.160001635551453,
+          "image_footprint_width_m": 11.289600915908812,
+          "image_footprint_height_m": 8.46720068693161,
+          "agl_m": null,
+          "agl_method": "no_ground_hit",
+          "min_agl_m": 2.0,
+          "safety_vertical_adjustment_m": 0.0,
+          "bottom_action_feasible": true
+        }
+      },
+      "executed_delta_pose": [
+        [
+          1.0,
+          -3.0189875159532135e-48,
+          0.0,
+          0.0
+        ],
+        [
+          -3.0189875159532135e-48,
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ]
+    },
+    {
+      "surface_id": "surface_omega",
+      "pose": "RIGHT_NEAR_BOUNDARY",
+      "repeat_index": 2,
+      "frame_id": 4362189,
+      "timestamp": 64612.14056775218,
+      "plan": {
+        "pose": "RIGHT_NEAR_BOUNDARY",
+        "axis": "horizontal",
+        "offset_m": 14.94160690355301,
+        "distance_m": 5.644800457954407,
+        "facade_width_m": 37.78593444824219,
+        "facade_height_m": 20.160001635551453,
+        "image_footprint_width_m": 11.289600915908812,
+        "image_footprint_height_m": 8.46720068693161,
+        "agl_m": null,
+        "agl_method": "no_ground_hit",
+        "min_agl_m": 2.0,
+        "safety_vertical_adjustment_m": 0.0,
+        "bottom_action_feasible": true
+      },
+      "metadata_path": "surface_omega/RIGHT_NEAR_BOUNDARY/right_near_boundary_02.json",
+      "files": {
+        "rgb": {
+          "path": "results/mask0/raw/surface_omega/RIGHT_NEAR_BOUNDARY/right_near_boundary_02_rgb.png",
+          "sha256": "4e9781068c0c59f73908bd4beab0db784307fb53036c3cfba81d34e064acec80"
+        },
+        "depth_raw": {
+          "path": "results/mask0/raw/surface_omega/RIGHT_NEAR_BOUNDARY/right_near_boundary_02_depth.raw.bin",
+          "sha256": "55163d14f8fb70da8bcdbd23fe6b210c58d5083b660a8c90c116c27e33e32a84"
+        },
+        "depth_m": {
+          "path": "results/mask0/raw/surface_omega/RIGHT_NEAR_BOUNDARY/right_near_boundary_02_depth_m.npy",
+          "sha256": "205e45019a5c27842888203916f7fce14890986f336b6fdfeb8436d2365a9332"
+        },
+        "semantic": {
+          "path": "results/mask0/raw/surface_omega/RIGHT_NEAR_BOUNDARY/right_near_boundary_02_semantic_raw.png",
+          "sha256": "482de965ec0abedbc86fafef4cc57066a04eab732900d003a4052f95a2d8157c"
+        },
+        "instance": {
+          "path": "results/mask0/raw/surface_omega/RIGHT_NEAR_BOUNDARY/right_near_boundary_02_instance_raw.png",
+          "sha256": "ac2d5ef85bc2252765b915f28d05e9353594e7794f16655287f6fd47ec05e6c2"
+        }
+      },
+      "camera_transform": {
+        "location": {
+          "x": -79.3127212524414,
+          "y": 275.97454833984375,
+          "z": 12.002955436706543
+        },
+        "rotation": {
+          "pitch": 1.2722218874358041e-14,
+          "yaw": -90.0,
+          "roll": -0.0
+        }
+      },
+      "K": [
+        [
+          320.00000000000006,
+          0.0,
+          319.5
+        ],
+        [
+          0.0,
+          320.00000000000006,
+          239.5
+        ],
+        [
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "T_world_camera": [
+        [
+          6.123233995736766e-17,
+          1.0,
+          -1.359631089317599e-32,
+          -79.3127212524414
+        ],
+        [
+          -1.0,
+          6.123233995736766e-17,
+          2.220446075169146e-16,
+          275.97454833984375
+        ],
+        [
+          2.220446075169146e-16,
+          0.0,
+          1.0,
+          12.002955436706543
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "sensor_frames": {
+        "rgb": 4362189,
+        "depth": 4362189,
+        "semantic": 4362189,
+        "instance": 4362189
+      },
+      "sensor_timestamps": {
+        "rgb": 64612.14056775218,
+        "depth": 64612.14056775218,
+        "semantic": 64612.14056775218,
+        "instance": 64612.14056775218
+      },
+      "commanded_action": {
+        "mode": "MASK-0_KEY_POSE",
+        "surface_id": "surface_omega",
+        "pose": "RIGHT_NEAR_BOUNDARY",
+        "repeat_index": 2,
+        "plan": {
+          "pose": "RIGHT_NEAR_BOUNDARY",
+          "axis": "horizontal",
+          "offset_m": 14.94160690355301,
+          "distance_m": 5.644800457954407,
+          "facade_width_m": 37.78593444824219,
+          "facade_height_m": 20.160001635551453,
+          "image_footprint_width_m": 11.289600915908812,
+          "image_footprint_height_m": 8.46720068693161,
+          "agl_m": null,
+          "agl_method": "no_ground_hit",
+          "min_agl_m": 2.0,
+          "safety_vertical_adjustment_m": 0.0,
+          "bottom_action_feasible": true
+        }
+      },
+      "executed_delta_pose": [
+        [
+          1.0,
+          -3.0189875159532135e-48,
+          0.0,
+          0.0
+        ],
+        [
+          -3.0189875159532135e-48,
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ]
+    },
+    {
+      "surface_id": "surface_omega",
+      "pose": "TOP_NEAR_BOUNDARY",
+      "repeat_index": 0,
+      "frame_id": 4362197,
+      "timestamp": 64612.41923201468,
+      "plan": {
+        "pose": "TOP_NEAR_BOUNDARY",
+        "axis": "vertical",
+        "offset_m": 7.116480577349662,
+        "distance_m": 5.644800457954407,
+        "facade_width_m": 37.78593444824219,
+        "facade_height_m": 20.160001635551453,
+        "image_footprint_width_m": 11.289600915908812,
+        "image_footprint_height_m": 8.46720068693161,
+        "agl_m": null,
+        "agl_method": "no_ground_hit",
+        "min_agl_m": 2.0,
+        "safety_vertical_adjustment_m": 0.0,
+        "bottom_action_feasible": true
+      },
+      "metadata_path": "surface_omega/TOP_NEAR_BOUNDARY/top_near_boundary_00.json",
+      "files": {
+        "rgb": {
+          "path": "results/mask0/raw/surface_omega/TOP_NEAR_BOUNDARY/top_near_boundary_00_rgb.png",
+          "sha256": "b74146c38d049cbb75f2eb09247b96307c20f06f8021d72c4021ee70ab51504a"
+        },
+        "depth_raw": {
+          "path": "results/mask0/raw/surface_omega/TOP_NEAR_BOUNDARY/top_near_boundary_00_depth.raw.bin",
+          "sha256": "4e9c4c13ca26a8870177cef8d3306e95419ea3e662761a21def36b9f5432d3e1"
+        },
+        "depth_m": {
+          "path": "results/mask0/raw/surface_omega/TOP_NEAR_BOUNDARY/top_near_boundary_00_depth_m.npy",
+          "sha256": "f2128810052e46901921f9eaf1d115a44e11aebe9edf22c610c4d66a14641ce6"
+        },
+        "semantic": {
+          "path": "results/mask0/raw/surface_omega/TOP_NEAR_BOUNDARY/top_near_boundary_00_semantic_raw.png",
+          "sha256": "482de965ec0abedbc86fafef4cc57066a04eab732900d003a4052f95a2d8157c"
+        },
+        "instance": {
+          "path": "results/mask0/raw/surface_omega/TOP_NEAR_BOUNDARY/top_near_boundary_00_instance_raw.png",
+          "sha256": "ac2d5ef85bc2252765b915f28d05e9353594e7794f16655287f6fd47ec05e6c2"
+        }
+      },
+      "camera_transform": {
+        "location": {
+          "x": -94.25432586669922,
+          "y": 275.97454833984375,
+          "z": 19.119436264038086
+        },
+        "rotation": {
+          "pitch": 1.2722218874358041e-14,
+          "yaw": -90.0,
+          "roll": -0.0
+        }
+      },
+      "K": [
+        [
+          320.00000000000006,
+          0.0,
+          319.5
+        ],
+        [
+          0.0,
+          320.00000000000006,
+          239.5
+        ],
+        [
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "T_world_camera": [
+        [
+          6.123233995736766e-17,
+          1.0,
+          -1.359631089317599e-32,
+          -94.25432586669922
+        ],
+        [
+          -1.0,
+          6.123233995736766e-17,
+          2.220446075169146e-16,
+          275.97454833984375
+        ],
+        [
+          2.220446075169146e-16,
+          0.0,
+          1.0,
+          19.119436264038086
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "sensor_frames": {
+        "rgb": 4362197,
+        "depth": 4362197,
+        "semantic": 4362197,
+        "instance": 4362197
+      },
+      "sensor_timestamps": {
+        "rgb": 64612.41923201468,
+        "depth": 64612.41923201468,
+        "semantic": 64612.41923201468,
+        "instance": 64612.41923201468
+      },
+      "commanded_action": {
+        "mode": "MASK-0_KEY_POSE",
+        "surface_id": "surface_omega",
+        "pose": "TOP_NEAR_BOUNDARY",
+        "repeat_index": 0,
+        "plan": {
+          "pose": "TOP_NEAR_BOUNDARY",
+          "axis": "vertical",
+          "offset_m": 7.116480577349662,
+          "distance_m": 5.644800457954407,
+          "facade_width_m": 37.78593444824219,
+          "facade_height_m": 20.160001635551453,
+          "image_footprint_width_m": 11.289600915908812,
+          "image_footprint_height_m": 8.46720068693161,
+          "agl_m": null,
+          "agl_method": "no_ground_hit",
+          "min_agl_m": 2.0,
+          "safety_vertical_adjustment_m": 0.0,
+          "bottom_action_feasible": true
+        }
+      },
+      "executed_delta_pose": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ]
+    },
+    {
+      "surface_id": "surface_omega",
+      "pose": "TOP_NEAR_BOUNDARY",
+      "repeat_index": 1,
+      "frame_id": 4362198,
+      "timestamp": 64612.46923201543,
+      "plan": {
+        "pose": "TOP_NEAR_BOUNDARY",
+        "axis": "vertical",
+        "offset_m": 7.116480577349662,
+        "distance_m": 5.644800457954407,
+        "facade_width_m": 37.78593444824219,
+        "facade_height_m": 20.160001635551453,
+        "image_footprint_width_m": 11.289600915908812,
+        "image_footprint_height_m": 8.46720068693161,
+        "agl_m": null,
+        "agl_method": "no_ground_hit",
+        "min_agl_m": 2.0,
+        "safety_vertical_adjustment_m": 0.0,
+        "bottom_action_feasible": true
+      },
+      "metadata_path": "surface_omega/TOP_NEAR_BOUNDARY/top_near_boundary_01.json",
+      "files": {
+        "rgb": {
+          "path": "results/mask0/raw/surface_omega/TOP_NEAR_BOUNDARY/top_near_boundary_01_rgb.png",
+          "sha256": "a7421549d8d0fe82ba70eeb623945f21109e82450f70842aa53f94f0e1c1d797"
+        },
+        "depth_raw": {
+          "path": "results/mask0/raw/surface_omega/TOP_NEAR_BOUNDARY/top_near_boundary_01_depth.raw.bin",
+          "sha256": "4e9c4c13ca26a8870177cef8d3306e95419ea3e662761a21def36b9f5432d3e1"
+        },
+        "depth_m": {
+          "path": "results/mask0/raw/surface_omega/TOP_NEAR_BOUNDARY/top_near_boundary_01_depth_m.npy",
+          "sha256": "f2128810052e46901921f9eaf1d115a44e11aebe9edf22c610c4d66a14641ce6"
+        },
+        "semantic": {
+          "path": "results/mask0/raw/surface_omega/TOP_NEAR_BOUNDARY/top_near_boundary_01_semantic_raw.png",
+          "sha256": "482de965ec0abedbc86fafef4cc57066a04eab732900d003a4052f95a2d8157c"
+        },
+        "instance": {
+          "path": "results/mask0/raw/surface_omega/TOP_NEAR_BOUNDARY/top_near_boundary_01_instance_raw.png",
+          "sha256": "ac2d5ef85bc2252765b915f28d05e9353594e7794f16655287f6fd47ec05e6c2"
+        }
+      },
+      "camera_transform": {
+        "location": {
+          "x": -94.25432586669922,
+          "y": 275.97454833984375,
+          "z": 19.119436264038086
+        },
+        "rotation": {
+          "pitch": 1.2722218874358041e-14,
+          "yaw": -90.0,
+          "roll": -0.0
+        }
+      },
+      "K": [
+        [
+          320.00000000000006,
+          0.0,
+          319.5
+        ],
+        [
+          0.0,
+          320.00000000000006,
+          239.5
+        ],
+        [
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "T_world_camera": [
+        [
+          6.123233995736766e-17,
+          1.0,
+          -1.359631089317599e-32,
+          -94.25432586669922
+        ],
+        [
+          -1.0,
+          6.123233995736766e-17,
+          2.220446075169146e-16,
+          275.97454833984375
+        ],
+        [
+          2.220446075169146e-16,
+          0.0,
+          1.0,
+          19.119436264038086
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "sensor_frames": {
+        "rgb": 4362198,
+        "depth": 4362198,
+        "semantic": 4362198,
+        "instance": 4362198
+      },
+      "sensor_timestamps": {
+        "rgb": 64612.46923201543,
+        "depth": 64612.46923201543,
+        "semantic": 64612.46923201543,
+        "instance": 64612.46923201543
+      },
+      "commanded_action": {
+        "mode": "MASK-0_KEY_POSE",
+        "surface_id": "surface_omega",
+        "pose": "TOP_NEAR_BOUNDARY",
+        "repeat_index": 1,
+        "plan": {
+          "pose": "TOP_NEAR_BOUNDARY",
+          "axis": "vertical",
+          "offset_m": 7.116480577349662,
+          "distance_m": 5.644800457954407,
+          "facade_width_m": 37.78593444824219,
+          "facade_height_m": 20.160001635551453,
+          "image_footprint_width_m": 11.289600915908812,
+          "image_footprint_height_m": 8.46720068693161,
+          "agl_m": null,
+          "agl_method": "no_ground_hit",
+          "min_agl_m": 2.0,
+          "safety_vertical_adjustment_m": 0.0,
+          "bottom_action_feasible": true
+        }
+      },
+      "executed_delta_pose": [
+        [
+          1.0,
+          -3.0189875159532135e-48,
+          0.0,
+          0.0
+        ],
+        [
+          -3.0189875159532135e-48,
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ]
+    },
+    {
+      "surface_id": "surface_omega",
+      "pose": "TOP_NEAR_BOUNDARY",
+      "repeat_index": 2,
+      "frame_id": 4362199,
+      "timestamp": 64612.51923201617,
+      "plan": {
+        "pose": "TOP_NEAR_BOUNDARY",
+        "axis": "vertical",
+        "offset_m": 7.116480577349662,
+        "distance_m": 5.644800457954407,
+        "facade_width_m": 37.78593444824219,
+        "facade_height_m": 20.160001635551453,
+        "image_footprint_width_m": 11.289600915908812,
+        "image_footprint_height_m": 8.46720068693161,
+        "agl_m": null,
+        "agl_method": "no_ground_hit",
+        "min_agl_m": 2.0,
+        "safety_vertical_adjustment_m": 0.0,
+        "bottom_action_feasible": true
+      },
+      "metadata_path": "surface_omega/TOP_NEAR_BOUNDARY/top_near_boundary_02.json",
+      "files": {
+        "rgb": {
+          "path": "results/mask0/raw/surface_omega/TOP_NEAR_BOUNDARY/top_near_boundary_02_rgb.png",
+          "sha256": "9018c9e337248b0a6d741ee8f9bd4c3b1f8484baf2966220c6911ad0801fdc1e"
+        },
+        "depth_raw": {
+          "path": "results/mask0/raw/surface_omega/TOP_NEAR_BOUNDARY/top_near_boundary_02_depth.raw.bin",
+          "sha256": "4e9c4c13ca26a8870177cef8d3306e95419ea3e662761a21def36b9f5432d3e1"
+        },
+        "depth_m": {
+          "path": "results/mask0/raw/surface_omega/TOP_NEAR_BOUNDARY/top_near_boundary_02_depth_m.npy",
+          "sha256": "f2128810052e46901921f9eaf1d115a44e11aebe9edf22c610c4d66a14641ce6"
+        },
+        "semantic": {
+          "path": "results/mask0/raw/surface_omega/TOP_NEAR_BOUNDARY/top_near_boundary_02_semantic_raw.png",
+          "sha256": "482de965ec0abedbc86fafef4cc57066a04eab732900d003a4052f95a2d8157c"
+        },
+        "instance": {
+          "path": "results/mask0/raw/surface_omega/TOP_NEAR_BOUNDARY/top_near_boundary_02_instance_raw.png",
+          "sha256": "ac2d5ef85bc2252765b915f28d05e9353594e7794f16655287f6fd47ec05e6c2"
+        }
+      },
+      "camera_transform": {
+        "location": {
+          "x": -94.25432586669922,
+          "y": 275.97454833984375,
+          "z": 19.119436264038086
+        },
+        "rotation": {
+          "pitch": 1.2722218874358041e-14,
+          "yaw": -90.0,
+          "roll": -0.0
+        }
+      },
+      "K": [
+        [
+          320.00000000000006,
+          0.0,
+          319.5
+        ],
+        [
+          0.0,
+          320.00000000000006,
+          239.5
+        ],
+        [
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "T_world_camera": [
+        [
+          6.123233995736766e-17,
+          1.0,
+          -1.359631089317599e-32,
+          -94.25432586669922
+        ],
+        [
+          -1.0,
+          6.123233995736766e-17,
+          2.220446075169146e-16,
+          275.97454833984375
+        ],
+        [
+          2.220446075169146e-16,
+          0.0,
+          1.0,
+          19.119436264038086
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "sensor_frames": {
+        "rgb": 4362199,
+        "depth": 4362199,
+        "semantic": 4362199,
+        "instance": 4362199
+      },
+      "sensor_timestamps": {
+        "rgb": 64612.51923201617,
+        "depth": 64612.51923201617,
+        "semantic": 64612.51923201617,
+        "instance": 64612.51923201617
+      },
+      "commanded_action": {
+        "mode": "MASK-0_KEY_POSE",
+        "surface_id": "surface_omega",
+        "pose": "TOP_NEAR_BOUNDARY",
+        "repeat_index": 2,
+        "plan": {
+          "pose": "TOP_NEAR_BOUNDARY",
+          "axis": "vertical",
+          "offset_m": 7.116480577349662,
+          "distance_m": 5.644800457954407,
+          "facade_width_m": 37.78593444824219,
+          "facade_height_m": 20.160001635551453,
+          "image_footprint_width_m": 11.289600915908812,
+          "image_footprint_height_m": 8.46720068693161,
+          "agl_m": null,
+          "agl_method": "no_ground_hit",
+          "min_agl_m": 2.0,
+          "safety_vertical_adjustment_m": 0.0,
+          "bottom_action_feasible": true
+        }
+      },
+      "executed_delta_pose": [
+        [
+          1.0,
+          -3.0189875159532135e-48,
+          0.0,
+          0.0
+        ],
+        [
+          -3.0189875159532135e-48,
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ]
+    },
+    {
+      "surface_id": "surface_omega",
+      "pose": "BOTTOM_SAFE_VIEW",
+      "repeat_index": 0,
+      "frame_id": 4362207,
+      "timestamp": 64612.7988691862,
+      "plan": {
+        "pose": "BOTTOM_SAFE_VIEW",
+        "axis": "vertical",
+        "offset_m": -6.269760508656502,
+        "distance_m": 5.644800457954407,
+        "facade_width_m": 37.78593444824219,
+        "facade_height_m": 20.160001635551453,
+        "image_footprint_width_m": 11.289600915908812,
+        "image_footprint_height_m": 8.46720068693161,
+        "agl_m": null,
+        "agl_method": "no_ground_hit",
+        "min_agl_m": 2.0,
+        "safety_vertical_adjustment_m": 0.0,
+        "bottom_action_feasible": false
+      },
+      "metadata_path": "surface_omega/BOTTOM_SAFE_VIEW/bottom_safe_view_00.json",
+      "files": {
+        "rgb": {
+          "path": "results/mask0/raw/surface_omega/BOTTOM_SAFE_VIEW/bottom_safe_view_00_rgb.png",
+          "sha256": "2d4a7655617b5265eaa08337720bb5f024a53d4c09abf5f4a103bfa4dd87976a"
+        },
+        "depth_raw": {
+          "path": "results/mask0/raw/surface_omega/BOTTOM_SAFE_VIEW/bottom_safe_view_00_depth.raw.bin",
+          "sha256": "6dbccdcc3cdae9fd9d9ed9c3cdf221b1ec3920b3765192c851f7f68c6f94c11f"
+        },
+        "depth_m": {
+          "path": "results/mask0/raw/surface_omega/BOTTOM_SAFE_VIEW/bottom_safe_view_00_depth_m.npy",
+          "sha256": "010c05ea17baefee81f3e5a13db7a4ef777342d698224c9e5837508a6f3e59a9"
+        },
+        "semantic": {
+          "path": "results/mask0/raw/surface_omega/BOTTOM_SAFE_VIEW/bottom_safe_view_00_semantic_raw.png",
+          "sha256": "482de965ec0abedbc86fafef4cc57066a04eab732900d003a4052f95a2d8157c"
+        },
+        "instance": {
+          "path": "results/mask0/raw/surface_omega/BOTTOM_SAFE_VIEW/bottom_safe_view_00_instance_raw.png",
+          "sha256": "ac2d5ef85bc2252765b915f28d05e9353594e7794f16655287f6fd47ec05e6c2"
+        }
+      },
+      "camera_transform": {
+        "location": {
+          "x": -94.25432586669922,
+          "y": 275.97454833984375,
+          "z": 5.733194351196289
+        },
+        "rotation": {
+          "pitch": 1.2722218874358041e-14,
+          "yaw": -90.0,
+          "roll": -0.0
+        }
+      },
+      "K": [
+        [
+          320.00000000000006,
+          0.0,
+          319.5
+        ],
+        [
+          0.0,
+          320.00000000000006,
+          239.5
+        ],
+        [
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "T_world_camera": [
+        [
+          6.123233995736766e-17,
+          1.0,
+          -1.359631089317599e-32,
+          -94.25432586669922
+        ],
+        [
+          -1.0,
+          6.123233995736766e-17,
+          2.220446075169146e-16,
+          275.97454833984375
+        ],
+        [
+          2.220446075169146e-16,
+          0.0,
+          1.0,
+          5.733194351196289
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "sensor_frames": {
+        "rgb": 4362207,
+        "depth": 4362207,
+        "semantic": 4362207,
+        "instance": 4362207
+      },
+      "sensor_timestamps": {
+        "rgb": 64612.7988691862,
+        "depth": 64612.7988691862,
+        "semantic": 64612.7988691862,
+        "instance": 64612.7988691862
+      },
+      "commanded_action": {
+        "mode": "MASK-0_KEY_POSE",
+        "surface_id": "surface_omega",
+        "pose": "BOTTOM_SAFE_VIEW",
+        "repeat_index": 0,
+        "plan": {
+          "pose": "BOTTOM_SAFE_VIEW",
+          "axis": "vertical",
+          "offset_m": -6.269760508656502,
+          "distance_m": 5.644800457954407,
+          "facade_width_m": 37.78593444824219,
+          "facade_height_m": 20.160001635551453,
+          "image_footprint_width_m": 11.289600915908812,
+          "image_footprint_height_m": 8.46720068693161,
+          "agl_m": null,
+          "agl_method": "no_ground_hit",
+          "min_agl_m": 2.0,
+          "safety_vertical_adjustment_m": 0.0,
+          "bottom_action_feasible": false
+        }
+      },
+      "executed_delta_pose": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ]
+    },
+    {
+      "surface_id": "surface_omega",
+      "pose": "BOTTOM_SAFE_VIEW",
+      "repeat_index": 1,
+      "frame_id": 4362208,
+      "timestamp": 64612.84886918694,
+      "plan": {
+        "pose": "BOTTOM_SAFE_VIEW",
+        "axis": "vertical",
+        "offset_m": -6.269760508656502,
+        "distance_m": 5.644800457954407,
+        "facade_width_m": 37.78593444824219,
+        "facade_height_m": 20.160001635551453,
+        "image_footprint_width_m": 11.289600915908812,
+        "image_footprint_height_m": 8.46720068693161,
+        "agl_m": null,
+        "agl_method": "no_ground_hit",
+        "min_agl_m": 2.0,
+        "safety_vertical_adjustment_m": 0.0,
+        "bottom_action_feasible": false
+      },
+      "metadata_path": "surface_omega/BOTTOM_SAFE_VIEW/bottom_safe_view_01.json",
+      "files": {
+        "rgb": {
+          "path": "results/mask0/raw/surface_omega/BOTTOM_SAFE_VIEW/bottom_safe_view_01_rgb.png",
+          "sha256": "862f7b68137d4a2c5462bb5ed32dce9a58647d405d7f6f3dbf2063d94658658f"
+        },
+        "depth_raw": {
+          "path": "results/mask0/raw/surface_omega/BOTTOM_SAFE_VIEW/bottom_safe_view_01_depth.raw.bin",
+          "sha256": "6dbccdcc3cdae9fd9d9ed9c3cdf221b1ec3920b3765192c851f7f68c6f94c11f"
+        },
+        "depth_m": {
+          "path": "results/mask0/raw/surface_omega/BOTTOM_SAFE_VIEW/bottom_safe_view_01_depth_m.npy",
+          "sha256": "010c05ea17baefee81f3e5a13db7a4ef777342d698224c9e5837508a6f3e59a9"
+        },
+        "semantic": {
+          "path": "results/mask0/raw/surface_omega/BOTTOM_SAFE_VIEW/bottom_safe_view_01_semantic_raw.png",
+          "sha256": "482de965ec0abedbc86fafef4cc57066a04eab732900d003a4052f95a2d8157c"
+        },
+        "instance": {
+          "path": "results/mask0/raw/surface_omega/BOTTOM_SAFE_VIEW/bottom_safe_view_01_instance_raw.png",
+          "sha256": "ac2d5ef85bc2252765b915f28d05e9353594e7794f16655287f6fd47ec05e6c2"
+        }
+      },
+      "camera_transform": {
+        "location": {
+          "x": -94.25432586669922,
+          "y": 275.97454833984375,
+          "z": 5.733194351196289
+        },
+        "rotation": {
+          "pitch": 1.2722218874358041e-14,
+          "yaw": -90.0,
+          "roll": -0.0
+        }
+      },
+      "K": [
+        [
+          320.00000000000006,
+          0.0,
+          319.5
+        ],
+        [
+          0.0,
+          320.00000000000006,
+          239.5
+        ],
+        [
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "T_world_camera": [
+        [
+          6.123233995736766e-17,
+          1.0,
+          -1.359631089317599e-32,
+          -94.25432586669922
+        ],
+        [
+          -1.0,
+          6.123233995736766e-17,
+          2.220446075169146e-16,
+          275.97454833984375
+        ],
+        [
+          2.220446075169146e-16,
+          0.0,
+          1.0,
+          5.733194351196289
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "sensor_frames": {
+        "rgb": 4362208,
+        "depth": 4362208,
+        "semantic": 4362208,
+        "instance": 4362208
+      },
+      "sensor_timestamps": {
+        "rgb": 64612.84886918694,
+        "depth": 64612.84886918694,
+        "semantic": 64612.84886918694,
+        "instance": 64612.84886918694
+      },
+      "commanded_action": {
+        "mode": "MASK-0_KEY_POSE",
+        "surface_id": "surface_omega",
+        "pose": "BOTTOM_SAFE_VIEW",
+        "repeat_index": 1,
+        "plan": {
+          "pose": "BOTTOM_SAFE_VIEW",
+          "axis": "vertical",
+          "offset_m": -6.269760508656502,
+          "distance_m": 5.644800457954407,
+          "facade_width_m": 37.78593444824219,
+          "facade_height_m": 20.160001635551453,
+          "image_footprint_width_m": 11.289600915908812,
+          "image_footprint_height_m": 8.46720068693161,
+          "agl_m": null,
+          "agl_method": "no_ground_hit",
+          "min_agl_m": 2.0,
+          "safety_vertical_adjustment_m": 0.0,
+          "bottom_action_feasible": false
+        }
+      },
+      "executed_delta_pose": [
+        [
+          1.0,
+          -3.0189875159532135e-48,
+          0.0,
+          0.0
+        ],
+        [
+          -3.0189875159532135e-48,
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ]
+    },
+    {
+      "surface_id": "surface_omega",
+      "pose": "BOTTOM_SAFE_VIEW",
+      "repeat_index": 2,
+      "frame_id": 4362209,
+      "timestamp": 64612.89886918769,
+      "plan": {
+        "pose": "BOTTOM_SAFE_VIEW",
+        "axis": "vertical",
+        "offset_m": -6.269760508656502,
+        "distance_m": 5.644800457954407,
+        "facade_width_m": 37.78593444824219,
+        "facade_height_m": 20.160001635551453,
+        "image_footprint_width_m": 11.289600915908812,
+        "image_footprint_height_m": 8.46720068693161,
+        "agl_m": null,
+        "agl_method": "no_ground_hit",
+        "min_agl_m": 2.0,
+        "safety_vertical_adjustment_m": 0.0,
+        "bottom_action_feasible": false
+      },
+      "metadata_path": "surface_omega/BOTTOM_SAFE_VIEW/bottom_safe_view_02.json",
+      "files": {
+        "rgb": {
+          "path": "results/mask0/raw/surface_omega/BOTTOM_SAFE_VIEW/bottom_safe_view_02_rgb.png",
+          "sha256": "ebd6b37a91d9efcc133bb678536444817b3d935761bf482f56d412153e6e503b"
+        },
+        "depth_raw": {
+          "path": "results/mask0/raw/surface_omega/BOTTOM_SAFE_VIEW/bottom_safe_view_02_depth.raw.bin",
+          "sha256": "6dbccdcc3cdae9fd9d9ed9c3cdf221b1ec3920b3765192c851f7f68c6f94c11f"
+        },
+        "depth_m": {
+          "path": "results/mask0/raw/surface_omega/BOTTOM_SAFE_VIEW/bottom_safe_view_02_depth_m.npy",
+          "sha256": "010c05ea17baefee81f3e5a13db7a4ef777342d698224c9e5837508a6f3e59a9"
+        },
+        "semantic": {
+          "path": "results/mask0/raw/surface_omega/BOTTOM_SAFE_VIEW/bottom_safe_view_02_semantic_raw.png",
+          "sha256": "482de965ec0abedbc86fafef4cc57066a04eab732900d003a4052f95a2d8157c"
+        },
+        "instance": {
+          "path": "results/mask0/raw/surface_omega/BOTTOM_SAFE_VIEW/bottom_safe_view_02_instance_raw.png",
+          "sha256": "ac2d5ef85bc2252765b915f28d05e9353594e7794f16655287f6fd47ec05e6c2"
+        }
+      },
+      "camera_transform": {
+        "location": {
+          "x": -94.25432586669922,
+          "y": 275.97454833984375,
+          "z": 5.733194351196289
+        },
+        "rotation": {
+          "pitch": 1.2722218874358041e-14,
+          "yaw": -90.0,
+          "roll": -0.0
+        }
+      },
+      "K": [
+        [
+          320.00000000000006,
+          0.0,
+          319.5
+        ],
+        [
+          0.0,
+          320.00000000000006,
+          239.5
+        ],
+        [
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "T_world_camera": [
+        [
+          6.123233995736766e-17,
+          1.0,
+          -1.359631089317599e-32,
+          -94.25432586669922
+        ],
+        [
+          -1.0,
+          6.123233995736766e-17,
+          2.220446075169146e-16,
+          275.97454833984375
+        ],
+        [
+          2.220446075169146e-16,
+          0.0,
+          1.0,
+          5.733194351196289
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "sensor_frames": {
+        "rgb": 4362209,
+        "depth": 4362209,
+        "semantic": 4362209,
+        "instance": 4362209
+      },
+      "sensor_timestamps": {
+        "rgb": 64612.89886918769,
+        "depth": 64612.89886918769,
+        "semantic": 64612.89886918769,
+        "instance": 64612.89886918769
+      },
+      "commanded_action": {
+        "mode": "MASK-0_KEY_POSE",
+        "surface_id": "surface_omega",
+        "pose": "BOTTOM_SAFE_VIEW",
+        "repeat_index": 2,
+        "plan": {
+          "pose": "BOTTOM_SAFE_VIEW",
+          "axis": "vertical",
+          "offset_m": -6.269760508656502,
+          "distance_m": 5.644800457954407,
+          "facade_width_m": 37.78593444824219,
+          "facade_height_m": 20.160001635551453,
+          "image_footprint_width_m": 11.289600915908812,
+          "image_footprint_height_m": 8.46720068693161,
+          "agl_m": null,
+          "agl_method": "no_ground_hit",
+          "min_agl_m": 2.0,
+          "safety_vertical_adjustment_m": 0.0,
+          "bottom_action_feasible": false
+        }
+      },
+      "executed_delta_pose": [
+        [
+          1.0,
+          -3.0189875159532135e-48,
+          0.0,
+          0.0
+        ],
+        [
+          -3.0189875159532135e-48,
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ]
+    },
+    {
+      "surface_id": "surface_sigma",
+      "pose": "CENTER",
+      "repeat_index": 0,
+      "frame_id": 4362217,
+      "timestamp": 64613.17164710595,
+      "plan": {
+        "pose": "CENTER",
+        "axis": "none",
+        "offset_m": 0.0,
+        "distance_m": 6.503838043212891,
+        "facade_width_m": 30.970657348632812,
+        "facade_height_m": 24.58628092288971,
+        "image_footprint_width_m": 13.00767608642578,
+        "image_footprint_height_m": 9.755757064819337,
+        "agl_m": null,
+        "agl_method": "no_ground_hit",
+        "min_agl_m": 2.0,
+        "safety_vertical_adjustment_m": 0.0,
+        "bottom_action_feasible": true
+      },
+      "metadata_path": "surface_sigma/CENTER/center_00.json",
+      "files": {
+        "rgb": {
+          "path": "results/mask0/raw/surface_sigma/CENTER/center_00_rgb.png",
+          "sha256": "5f7f2b48d5282aa12c2baeb98d5d084f9fc336b801729e8bd01c7be41a609e6f"
+        },
+        "depth_raw": {
+          "path": "results/mask0/raw/surface_sigma/CENTER/center_00_depth.raw.bin",
+          "sha256": "822537e6667ad947f6f6aef7ba68d8d6ca67bda6f790fb5d352da22e182b02da"
+        },
+        "depth_m": {
+          "path": "results/mask0/raw/surface_sigma/CENTER/center_00_depth_m.npy",
+          "sha256": "b437ac2fa86c2ce37b3f7eca24927732a4d6bfb05551b3fcf59098815ef66c57"
+        },
+        "semantic": {
+          "path": "results/mask0/raw/surface_sigma/CENTER/center_00_semantic_raw.png",
+          "sha256": "482de965ec0abedbc86fafef4cc57066a04eab732900d003a4052f95a2d8157c"
+        },
+        "instance": {
+          "path": "results/mask0/raw/surface_sigma/CENTER/center_00_instance_raw.png",
+          "sha256": "856a34637276ed0d300eb6518c9f9eb228fee6ca2bb107e8ed4804b1f6ef6f30"
+        }
+      },
+      "camera_transform": {
+        "location": {
+          "x": 203.12228393554688,
+          "y": 152.92327880859375,
+          "z": 14.006122589111328
+        },
+        "rotation": {
+          "pitch": 0.0,
+          "yaw": 0.0,
+          "roll": -0.0
+        }
+      },
+      "K": [
+        [
+          320.00000000000006,
+          0.0,
+          319.5
+        ],
+        [
+          0.0,
+          320.00000000000006,
+          239.5
+        ],
+        [
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "T_world_camera": [
+        [
+          1.0,
+          -0.0,
+          0.0,
+          203.12228393554688
+        ],
+        [
+          0.0,
+          1.0,
+          -0.0,
+          152.92327880859375
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          14.006122589111328
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "sensor_frames": {
+        "rgb": 4362217,
+        "depth": 4362217,
+        "semantic": 4362217,
+        "instance": 4362217
+      },
+      "sensor_timestamps": {
+        "rgb": 64613.17164710595,
+        "depth": 64613.17164710595,
+        "semantic": 64613.17164710595,
+        "instance": 64613.17164710595
+      },
+      "commanded_action": {
+        "mode": "MASK-0_KEY_POSE",
+        "surface_id": "surface_sigma",
+        "pose": "CENTER",
+        "repeat_index": 0,
+        "plan": {
+          "pose": "CENTER",
+          "axis": "none",
+          "offset_m": 0.0,
+          "distance_m": 6.503838043212891,
+          "facade_width_m": 30.970657348632812,
+          "facade_height_m": 24.58628092288971,
+          "image_footprint_width_m": 13.00767608642578,
+          "image_footprint_height_m": 9.755757064819337,
+          "agl_m": null,
+          "agl_method": "no_ground_hit",
+          "min_agl_m": 2.0,
+          "safety_vertical_adjustment_m": 0.0,
+          "bottom_action_feasible": true
+        }
+      },
+      "executed_delta_pose": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ]
+    },
+    {
+      "surface_id": "surface_sigma",
+      "pose": "CENTER",
+      "repeat_index": 1,
+      "frame_id": 4362218,
+      "timestamp": 64613.22164710669,
+      "plan": {
+        "pose": "CENTER",
+        "axis": "none",
+        "offset_m": 0.0,
+        "distance_m": 6.503838043212891,
+        "facade_width_m": 30.970657348632812,
+        "facade_height_m": 24.58628092288971,
+        "image_footprint_width_m": 13.00767608642578,
+        "image_footprint_height_m": 9.755757064819337,
+        "agl_m": null,
+        "agl_method": "no_ground_hit",
+        "min_agl_m": 2.0,
+        "safety_vertical_adjustment_m": 0.0,
+        "bottom_action_feasible": true
+      },
+      "metadata_path": "surface_sigma/CENTER/center_01.json",
+      "files": {
+        "rgb": {
+          "path": "results/mask0/raw/surface_sigma/CENTER/center_01_rgb.png",
+          "sha256": "6cf93e6ccca5f2912f5e30387f5409e79631c34b605a9595fa89e8e682f87134"
+        },
+        "depth_raw": {
+          "path": "results/mask0/raw/surface_sigma/CENTER/center_01_depth.raw.bin",
+          "sha256": "822537e6667ad947f6f6aef7ba68d8d6ca67bda6f790fb5d352da22e182b02da"
+        },
+        "depth_m": {
+          "path": "results/mask0/raw/surface_sigma/CENTER/center_01_depth_m.npy",
+          "sha256": "b437ac2fa86c2ce37b3f7eca24927732a4d6bfb05551b3fcf59098815ef66c57"
+        },
+        "semantic": {
+          "path": "results/mask0/raw/surface_sigma/CENTER/center_01_semantic_raw.png",
+          "sha256": "482de965ec0abedbc86fafef4cc57066a04eab732900d003a4052f95a2d8157c"
+        },
+        "instance": {
+          "path": "results/mask0/raw/surface_sigma/CENTER/center_01_instance_raw.png",
+          "sha256": "856a34637276ed0d300eb6518c9f9eb228fee6ca2bb107e8ed4804b1f6ef6f30"
+        }
+      },
+      "camera_transform": {
+        "location": {
+          "x": 203.12228393554688,
+          "y": 152.92327880859375,
+          "z": 14.006122589111328
+        },
+        "rotation": {
+          "pitch": 0.0,
+          "yaw": 0.0,
+          "roll": -0.0
+        }
+      },
+      "K": [
+        [
+          320.00000000000006,
+          0.0,
+          319.5
+        ],
+        [
+          0.0,
+          320.00000000000006,
+          239.5
+        ],
+        [
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "T_world_camera": [
+        [
+          1.0,
+          -0.0,
+          0.0,
+          203.12228393554688
+        ],
+        [
+          0.0,
+          1.0,
+          -0.0,
+          152.92327880859375
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          14.006122589111328
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "sensor_frames": {
+        "rgb": 4362218,
+        "depth": 4362218,
+        "semantic": 4362218,
+        "instance": 4362218
+      },
+      "sensor_timestamps": {
+        "rgb": 64613.22164710669,
+        "depth": 64613.22164710669,
+        "semantic": 64613.22164710669,
+        "instance": 64613.22164710669
+      },
+      "commanded_action": {
+        "mode": "MASK-0_KEY_POSE",
+        "surface_id": "surface_sigma",
+        "pose": "CENTER",
+        "repeat_index": 1,
+        "plan": {
+          "pose": "CENTER",
+          "axis": "none",
+          "offset_m": 0.0,
+          "distance_m": 6.503838043212891,
+          "facade_width_m": 30.970657348632812,
+          "facade_height_m": 24.58628092288971,
+          "image_footprint_width_m": 13.00767608642578,
+          "image_footprint_height_m": 9.755757064819337,
+          "agl_m": null,
+          "agl_method": "no_ground_hit",
+          "min_agl_m": 2.0,
+          "safety_vertical_adjustment_m": 0.0,
+          "bottom_action_feasible": true
+        }
+      },
+      "executed_delta_pose": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ]
+    },
+    {
+      "surface_id": "surface_sigma",
+      "pose": "CENTER",
+      "repeat_index": 2,
+      "frame_id": 4362219,
+      "timestamp": 64613.27164710744,
+      "plan": {
+        "pose": "CENTER",
+        "axis": "none",
+        "offset_m": 0.0,
+        "distance_m": 6.503838043212891,
+        "facade_width_m": 30.970657348632812,
+        "facade_height_m": 24.58628092288971,
+        "image_footprint_width_m": 13.00767608642578,
+        "image_footprint_height_m": 9.755757064819337,
+        "agl_m": null,
+        "agl_method": "no_ground_hit",
+        "min_agl_m": 2.0,
+        "safety_vertical_adjustment_m": 0.0,
+        "bottom_action_feasible": true
+      },
+      "metadata_path": "surface_sigma/CENTER/center_02.json",
+      "files": {
+        "rgb": {
+          "path": "results/mask0/raw/surface_sigma/CENTER/center_02_rgb.png",
+          "sha256": "7a6909ac4d3d3abd5508cbac4ff1d4f1059776c88a566d72cccc37020a54c17c"
+        },
+        "depth_raw": {
+          "path": "results/mask0/raw/surface_sigma/CENTER/center_02_depth.raw.bin",
+          "sha256": "822537e6667ad947f6f6aef7ba68d8d6ca67bda6f790fb5d352da22e182b02da"
+        },
+        "depth_m": {
+          "path": "results/mask0/raw/surface_sigma/CENTER/center_02_depth_m.npy",
+          "sha256": "b437ac2fa86c2ce37b3f7eca24927732a4d6bfb05551b3fcf59098815ef66c57"
+        },
+        "semantic": {
+          "path": "results/mask0/raw/surface_sigma/CENTER/center_02_semantic_raw.png",
+          "sha256": "482de965ec0abedbc86fafef4cc57066a04eab732900d003a4052f95a2d8157c"
+        },
+        "instance": {
+          "path": "results/mask0/raw/surface_sigma/CENTER/center_02_instance_raw.png",
+          "sha256": "856a34637276ed0d300eb6518c9f9eb228fee6ca2bb107e8ed4804b1f6ef6f30"
+        }
+      },
+      "camera_transform": {
+        "location": {
+          "x": 203.12228393554688,
+          "y": 152.92327880859375,
+          "z": 14.006122589111328
+        },
+        "rotation": {
+          "pitch": 0.0,
+          "yaw": 0.0,
+          "roll": -0.0
+        }
+      },
+      "K": [
+        [
+          320.00000000000006,
+          0.0,
+          319.5
+        ],
+        [
+          0.0,
+          320.00000000000006,
+          239.5
+        ],
+        [
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "T_world_camera": [
+        [
+          1.0,
+          -0.0,
+          0.0,
+          203.12228393554688
+        ],
+        [
+          0.0,
+          1.0,
+          -0.0,
+          152.92327880859375
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          14.006122589111328
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "sensor_frames": {
+        "rgb": 4362219,
+        "depth": 4362219,
+        "semantic": 4362219,
+        "instance": 4362219
+      },
+      "sensor_timestamps": {
+        "rgb": 64613.27164710744,
+        "depth": 64613.27164710744,
+        "semantic": 64613.27164710744,
+        "instance": 64613.27164710744
+      },
+      "commanded_action": {
+        "mode": "MASK-0_KEY_POSE",
+        "surface_id": "surface_sigma",
+        "pose": "CENTER",
+        "repeat_index": 2,
+        "plan": {
+          "pose": "CENTER",
+          "axis": "none",
+          "offset_m": 0.0,
+          "distance_m": 6.503838043212891,
+          "facade_width_m": 30.970657348632812,
+          "facade_height_m": 24.58628092288971,
+          "image_footprint_width_m": 13.00767608642578,
+          "image_footprint_height_m": 9.755757064819337,
+          "agl_m": null,
+          "agl_method": "no_ground_hit",
+          "min_agl_m": 2.0,
+          "safety_vertical_adjustment_m": 0.0,
+          "bottom_action_feasible": true
+        }
+      },
+      "executed_delta_pose": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ]
+    },
+    {
+      "surface_id": "surface_sigma",
+      "pose": "LEFT_NEAR_BOUNDARY",
+      "repeat_index": 0,
+      "frame_id": 4362227,
+      "timestamp": 64613.55442930164,
+      "plan": {
+        "pose": "LEFT_NEAR_BOUNDARY",
+        "axis": "horizontal",
+        "offset_m": -10.932642044067382,
+        "distance_m": 6.503838043212891,
+        "facade_width_m": 30.970657348632812,
+        "facade_height_m": 24.58628092288971,
+        "image_footprint_width_m": 13.00767608642578,
+        "image_footprint_height_m": 9.755757064819337,
+        "agl_m": null,
+        "agl_method": "no_ground_hit",
+        "min_agl_m": 2.0,
+        "safety_vertical_adjustment_m": 0.0,
+        "bottom_action_feasible": true
+      },
+      "metadata_path": "surface_sigma/LEFT_NEAR_BOUNDARY/left_near_boundary_00.json",
+      "files": {
+        "rgb": {
+          "path": "results/mask0/raw/surface_sigma/LEFT_NEAR_BOUNDARY/left_near_boundary_00_rgb.png",
+          "sha256": "603344e6fd9b79f6af4d991e2ca038cb19605f2afa8607a440ec7d38408ddf99"
+        },
+        "depth_raw": {
+          "path": "results/mask0/raw/surface_sigma/LEFT_NEAR_BOUNDARY/left_near_boundary_00_depth.raw.bin",
+          "sha256": "0d68821a73e63c52945890a830319b6cd028eeb38b861d1f99075560bdc20b9a"
+        },
+        "depth_m": {
+          "path": "results/mask0/raw/surface_sigma/LEFT_NEAR_BOUNDARY/left_near_boundary_00_depth_m.npy",
+          "sha256": "f3e46681002dc52ee8054e468c1ef5a059506696fb90d2538763d5d2b33f3a4f"
+        },
+        "semantic": {
+          "path": "results/mask0/raw/surface_sigma/LEFT_NEAR_BOUNDARY/left_near_boundary_00_semantic_raw.png",
+          "sha256": "56d2a284078dd62014f0427eddb96c247cac23136b686f4823a682d6f0b2f5c3"
+        },
+        "instance": {
+          "path": "results/mask0/raw/surface_sigma/LEFT_NEAR_BOUNDARY/left_near_boundary_00_instance_raw.png",
+          "sha256": "723151bdc981499ac1f6471ac29f29227297a4c8af623ccf6384855655409bda"
+        }
+      },
+      "camera_transform": {
+        "location": {
+          "x": 203.12228393554688,
+          "y": 141.9906463623047,
+          "z": 14.006122589111328
+        },
+        "rotation": {
+          "pitch": 0.0,
+          "yaw": 0.0,
+          "roll": -0.0
+        }
+      },
+      "K": [
+        [
+          320.00000000000006,
+          0.0,
+          319.5
+        ],
+        [
+          0.0,
+          320.00000000000006,
+          239.5
+        ],
+        [
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "T_world_camera": [
+        [
+          1.0,
+          -0.0,
+          0.0,
+          203.12228393554688
+        ],
+        [
+          0.0,
+          1.0,
+          -0.0,
+          141.9906463623047
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          14.006122589111328
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "sensor_frames": {
+        "rgb": 4362227,
+        "depth": 4362227,
+        "semantic": 4362227,
+        "instance": 4362227
+      },
+      "sensor_timestamps": {
+        "rgb": 64613.55442930164,
+        "depth": 64613.55442930164,
+        "semantic": 64613.55442930164,
+        "instance": 64613.55442930164
+      },
+      "commanded_action": {
+        "mode": "MASK-0_KEY_POSE",
+        "surface_id": "surface_sigma",
+        "pose": "LEFT_NEAR_BOUNDARY",
+        "repeat_index": 0,
+        "plan": {
+          "pose": "LEFT_NEAR_BOUNDARY",
+          "axis": "horizontal",
+          "offset_m": -10.932642044067382,
+          "distance_m": 6.503838043212891,
+          "facade_width_m": 30.970657348632812,
+          "facade_height_m": 24.58628092288971,
+          "image_footprint_width_m": 13.00767608642578,
+          "image_footprint_height_m": 9.755757064819337,
+          "agl_m": null,
+          "agl_method": "no_ground_hit",
+          "min_agl_m": 2.0,
+          "safety_vertical_adjustment_m": 0.0,
+          "bottom_action_feasible": true
+        }
+      },
+      "executed_delta_pose": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ]
+    },
+    {
+      "surface_id": "surface_sigma",
+      "pose": "LEFT_NEAR_BOUNDARY",
+      "repeat_index": 1,
+      "frame_id": 4362228,
+      "timestamp": 64613.60442930239,
+      "plan": {
+        "pose": "LEFT_NEAR_BOUNDARY",
+        "axis": "horizontal",
+        "offset_m": -10.932642044067382,
+        "distance_m": 6.503838043212891,
+        "facade_width_m": 30.970657348632812,
+        "facade_height_m": 24.58628092288971,
+        "image_footprint_width_m": 13.00767608642578,
+        "image_footprint_height_m": 9.755757064819337,
+        "agl_m": null,
+        "agl_method": "no_ground_hit",
+        "min_agl_m": 2.0,
+        "safety_vertical_adjustment_m": 0.0,
+        "bottom_action_feasible": true
+      },
+      "metadata_path": "surface_sigma/LEFT_NEAR_BOUNDARY/left_near_boundary_01.json",
+      "files": {
+        "rgb": {
+          "path": "results/mask0/raw/surface_sigma/LEFT_NEAR_BOUNDARY/left_near_boundary_01_rgb.png",
+          "sha256": "9bd9d1a6d6c62571b095cc0278499f0e18eeb4071578ec4d56fff676b5cb9d46"
+        },
+        "depth_raw": {
+          "path": "results/mask0/raw/surface_sigma/LEFT_NEAR_BOUNDARY/left_near_boundary_01_depth.raw.bin",
+          "sha256": "0d68821a73e63c52945890a830319b6cd028eeb38b861d1f99075560bdc20b9a"
+        },
+        "depth_m": {
+          "path": "results/mask0/raw/surface_sigma/LEFT_NEAR_BOUNDARY/left_near_boundary_01_depth_m.npy",
+          "sha256": "f3e46681002dc52ee8054e468c1ef5a059506696fb90d2538763d5d2b33f3a4f"
+        },
+        "semantic": {
+          "path": "results/mask0/raw/surface_sigma/LEFT_NEAR_BOUNDARY/left_near_boundary_01_semantic_raw.png",
+          "sha256": "56d2a284078dd62014f0427eddb96c247cac23136b686f4823a682d6f0b2f5c3"
+        },
+        "instance": {
+          "path": "results/mask0/raw/surface_sigma/LEFT_NEAR_BOUNDARY/left_near_boundary_01_instance_raw.png",
+          "sha256": "723151bdc981499ac1f6471ac29f29227297a4c8af623ccf6384855655409bda"
+        }
+      },
+      "camera_transform": {
+        "location": {
+          "x": 203.12228393554688,
+          "y": 141.9906463623047,
+          "z": 14.006122589111328
+        },
+        "rotation": {
+          "pitch": 0.0,
+          "yaw": 0.0,
+          "roll": -0.0
+        }
+      },
+      "K": [
+        [
+          320.00000000000006,
+          0.0,
+          319.5
+        ],
+        [
+          0.0,
+          320.00000000000006,
+          239.5
+        ],
+        [
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "T_world_camera": [
+        [
+          1.0,
+          -0.0,
+          0.0,
+          203.12228393554688
+        ],
+        [
+          0.0,
+          1.0,
+          -0.0,
+          141.9906463623047
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          14.006122589111328
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "sensor_frames": {
+        "rgb": 4362228,
+        "depth": 4362228,
+        "semantic": 4362228,
+        "instance": 4362228
+      },
+      "sensor_timestamps": {
+        "rgb": 64613.60442930239,
+        "depth": 64613.60442930239,
+        "semantic": 64613.60442930239,
+        "instance": 64613.60442930239
+      },
+      "commanded_action": {
+        "mode": "MASK-0_KEY_POSE",
+        "surface_id": "surface_sigma",
+        "pose": "LEFT_NEAR_BOUNDARY",
+        "repeat_index": 1,
+        "plan": {
+          "pose": "LEFT_NEAR_BOUNDARY",
+          "axis": "horizontal",
+          "offset_m": -10.932642044067382,
+          "distance_m": 6.503838043212891,
+          "facade_width_m": 30.970657348632812,
+          "facade_height_m": 24.58628092288971,
+          "image_footprint_width_m": 13.00767608642578,
+          "image_footprint_height_m": 9.755757064819337,
+          "agl_m": null,
+          "agl_method": "no_ground_hit",
+          "min_agl_m": 2.0,
+          "safety_vertical_adjustment_m": 0.0,
+          "bottom_action_feasible": true
+        }
+      },
+      "executed_delta_pose": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ]
+    },
+    {
+      "surface_id": "surface_sigma",
+      "pose": "LEFT_NEAR_BOUNDARY",
+      "repeat_index": 2,
+      "frame_id": 4362229,
+      "timestamp": 64613.65442930313,
+      "plan": {
+        "pose": "LEFT_NEAR_BOUNDARY",
+        "axis": "horizontal",
+        "offset_m": -10.932642044067382,
+        "distance_m": 6.503838043212891,
+        "facade_width_m": 30.970657348632812,
+        "facade_height_m": 24.58628092288971,
+        "image_footprint_width_m": 13.00767608642578,
+        "image_footprint_height_m": 9.755757064819337,
+        "agl_m": null,
+        "agl_method": "no_ground_hit",
+        "min_agl_m": 2.0,
+        "safety_vertical_adjustment_m": 0.0,
+        "bottom_action_feasible": true
+      },
+      "metadata_path": "surface_sigma/LEFT_NEAR_BOUNDARY/left_near_boundary_02.json",
+      "files": {
+        "rgb": {
+          "path": "results/mask0/raw/surface_sigma/LEFT_NEAR_BOUNDARY/left_near_boundary_02_rgb.png",
+          "sha256": "22d0f02cb5c1ba9c82fe69977adfc80795725c65f38ebefc3f6cdf5068cba702"
+        },
+        "depth_raw": {
+          "path": "results/mask0/raw/surface_sigma/LEFT_NEAR_BOUNDARY/left_near_boundary_02_depth.raw.bin",
+          "sha256": "0d68821a73e63c52945890a830319b6cd028eeb38b861d1f99075560bdc20b9a"
+        },
+        "depth_m": {
+          "path": "results/mask0/raw/surface_sigma/LEFT_NEAR_BOUNDARY/left_near_boundary_02_depth_m.npy",
+          "sha256": "f3e46681002dc52ee8054e468c1ef5a059506696fb90d2538763d5d2b33f3a4f"
+        },
+        "semantic": {
+          "path": "results/mask0/raw/surface_sigma/LEFT_NEAR_BOUNDARY/left_near_boundary_02_semantic_raw.png",
+          "sha256": "56d2a284078dd62014f0427eddb96c247cac23136b686f4823a682d6f0b2f5c3"
+        },
+        "instance": {
+          "path": "results/mask0/raw/surface_sigma/LEFT_NEAR_BOUNDARY/left_near_boundary_02_instance_raw.png",
+          "sha256": "723151bdc981499ac1f6471ac29f29227297a4c8af623ccf6384855655409bda"
+        }
+      },
+      "camera_transform": {
+        "location": {
+          "x": 203.12228393554688,
+          "y": 141.9906463623047,
+          "z": 14.006122589111328
+        },
+        "rotation": {
+          "pitch": 0.0,
+          "yaw": 0.0,
+          "roll": -0.0
+        }
+      },
+      "K": [
+        [
+          320.00000000000006,
+          0.0,
+          319.5
+        ],
+        [
+          0.0,
+          320.00000000000006,
+          239.5
+        ],
+        [
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "T_world_camera": [
+        [
+          1.0,
+          -0.0,
+          0.0,
+          203.12228393554688
+        ],
+        [
+          0.0,
+          1.0,
+          -0.0,
+          141.9906463623047
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          14.006122589111328
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "sensor_frames": {
+        "rgb": 4362229,
+        "depth": 4362229,
+        "semantic": 4362229,
+        "instance": 4362229
+      },
+      "sensor_timestamps": {
+        "rgb": 64613.65442930313,
+        "depth": 64613.65442930313,
+        "semantic": 64613.65442930313,
+        "instance": 64613.65442930313
+      },
+      "commanded_action": {
+        "mode": "MASK-0_KEY_POSE",
+        "surface_id": "surface_sigma",
+        "pose": "LEFT_NEAR_BOUNDARY",
+        "repeat_index": 2,
+        "plan": {
+          "pose": "LEFT_NEAR_BOUNDARY",
+          "axis": "horizontal",
+          "offset_m": -10.932642044067382,
+          "distance_m": 6.503838043212891,
+          "facade_width_m": 30.970657348632812,
+          "facade_height_m": 24.58628092288971,
+          "image_footprint_width_m": 13.00767608642578,
+          "image_footprint_height_m": 9.755757064819337,
+          "agl_m": null,
+          "agl_method": "no_ground_hit",
+          "min_agl_m": 2.0,
+          "safety_vertical_adjustment_m": 0.0,
+          "bottom_action_feasible": true
+        }
+      },
+      "executed_delta_pose": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ]
+    },
+    {
+      "surface_id": "surface_sigma",
+      "pose": "RIGHT_NEAR_BOUNDARY",
+      "repeat_index": 0,
+      "frame_id": 4362237,
+      "timestamp": 64613.930365492706,
+      "plan": {
+        "pose": "RIGHT_NEAR_BOUNDARY",
+        "axis": "horizontal",
+        "offset_m": 10.932642044067382,
+        "distance_m": 6.503838043212891,
+        "facade_width_m": 30.970657348632812,
+        "facade_height_m": 24.58628092288971,
+        "image_footprint_width_m": 13.00767608642578,
+        "image_footprint_height_m": 9.755757064819337,
+        "agl_m": null,
+        "agl_method": "no_ground_hit",
+        "min_agl_m": 2.0,
+        "safety_vertical_adjustment_m": 0.0,
+        "bottom_action_feasible": true
+      },
+      "metadata_path": "surface_sigma/RIGHT_NEAR_BOUNDARY/right_near_boundary_00.json",
+      "files": {
+        "rgb": {
+          "path": "results/mask0/raw/surface_sigma/RIGHT_NEAR_BOUNDARY/right_near_boundary_00_rgb.png",
+          "sha256": "185d27e31710da984a46525a68c032dd8cab3c749433a4a7189f0b34c018b9b4"
+        },
+        "depth_raw": {
+          "path": "results/mask0/raw/surface_sigma/RIGHT_NEAR_BOUNDARY/right_near_boundary_00_depth.raw.bin",
+          "sha256": "6a04d5d439e5d5ae32738e56abc8b131b392409626073bb97069cc1d7c059450"
+        },
+        "depth_m": {
+          "path": "results/mask0/raw/surface_sigma/RIGHT_NEAR_BOUNDARY/right_near_boundary_00_depth_m.npy",
+          "sha256": "6b7d4fa072a4fcc19f0fdd6f2391d94a70824030208ebc38ec6e9369f49fd4a4"
+        },
+        "semantic": {
+          "path": "results/mask0/raw/surface_sigma/RIGHT_NEAR_BOUNDARY/right_near_boundary_00_semantic_raw.png",
+          "sha256": "045ecafc34e3349bfd26f9661b963b6b5f6d696011efb2a06deb5225a0b4d0cb"
+        },
+        "instance": {
+          "path": "results/mask0/raw/surface_sigma/RIGHT_NEAR_BOUNDARY/right_near_boundary_00_instance_raw.png",
+          "sha256": "37b854431195a7c4dfc8e3c3c74c64c6e2c1351a20320702e006e534017d2a1f"
+        }
+      },
+      "camera_transform": {
+        "location": {
+          "x": 203.12228393554688,
+          "y": 163.8559112548828,
+          "z": 14.006122589111328
+        },
+        "rotation": {
+          "pitch": 0.0,
+          "yaw": 0.0,
+          "roll": -0.0
+        }
+      },
+      "K": [
+        [
+          320.00000000000006,
+          0.0,
+          319.5
+        ],
+        [
+          0.0,
+          320.00000000000006,
+          239.5
+        ],
+        [
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "T_world_camera": [
+        [
+          1.0,
+          -0.0,
+          0.0,
+          203.12228393554688
+        ],
+        [
+          0.0,
+          1.0,
+          -0.0,
+          163.8559112548828
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          14.006122589111328
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "sensor_frames": {
+        "rgb": 4362237,
+        "depth": 4362237,
+        "semantic": 4362237,
+        "instance": 4362237
+      },
+      "sensor_timestamps": {
+        "rgb": 64613.930365492706,
+        "depth": 64613.930365492706,
+        "semantic": 64613.930365492706,
+        "instance": 64613.930365492706
+      },
+      "commanded_action": {
+        "mode": "MASK-0_KEY_POSE",
+        "surface_id": "surface_sigma",
+        "pose": "RIGHT_NEAR_BOUNDARY",
+        "repeat_index": 0,
+        "plan": {
+          "pose": "RIGHT_NEAR_BOUNDARY",
+          "axis": "horizontal",
+          "offset_m": 10.932642044067382,
+          "distance_m": 6.503838043212891,
+          "facade_width_m": 30.970657348632812,
+          "facade_height_m": 24.58628092288971,
+          "image_footprint_width_m": 13.00767608642578,
+          "image_footprint_height_m": 9.755757064819337,
+          "agl_m": null,
+          "agl_method": "no_ground_hit",
+          "min_agl_m": 2.0,
+          "safety_vertical_adjustment_m": 0.0,
+          "bottom_action_feasible": true
+        }
+      },
+      "executed_delta_pose": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ]
+    },
+    {
+      "surface_id": "surface_sigma",
+      "pose": "RIGHT_NEAR_BOUNDARY",
+      "repeat_index": 1,
+      "frame_id": 4362238,
+      "timestamp": 64613.98036549345,
+      "plan": {
+        "pose": "RIGHT_NEAR_BOUNDARY",
+        "axis": "horizontal",
+        "offset_m": 10.932642044067382,
+        "distance_m": 6.503838043212891,
+        "facade_width_m": 30.970657348632812,
+        "facade_height_m": 24.58628092288971,
+        "image_footprint_width_m": 13.00767608642578,
+        "image_footprint_height_m": 9.755757064819337,
+        "agl_m": null,
+        "agl_method": "no_ground_hit",
+        "min_agl_m": 2.0,
+        "safety_vertical_adjustment_m": 0.0,
+        "bottom_action_feasible": true
+      },
+      "metadata_path": "surface_sigma/RIGHT_NEAR_BOUNDARY/right_near_boundary_01.json",
+      "files": {
+        "rgb": {
+          "path": "results/mask0/raw/surface_sigma/RIGHT_NEAR_BOUNDARY/right_near_boundary_01_rgb.png",
+          "sha256": "01f9808a8c22d1aaf98409123de60deceeca0964ba7939d261057fa5b2bdd59f"
+        },
+        "depth_raw": {
+          "path": "results/mask0/raw/surface_sigma/RIGHT_NEAR_BOUNDARY/right_near_boundary_01_depth.raw.bin",
+          "sha256": "6a04d5d439e5d5ae32738e56abc8b131b392409626073bb97069cc1d7c059450"
+        },
+        "depth_m": {
+          "path": "results/mask0/raw/surface_sigma/RIGHT_NEAR_BOUNDARY/right_near_boundary_01_depth_m.npy",
+          "sha256": "6b7d4fa072a4fcc19f0fdd6f2391d94a70824030208ebc38ec6e9369f49fd4a4"
+        },
+        "semantic": {
+          "path": "results/mask0/raw/surface_sigma/RIGHT_NEAR_BOUNDARY/right_near_boundary_01_semantic_raw.png",
+          "sha256": "045ecafc34e3349bfd26f9661b963b6b5f6d696011efb2a06deb5225a0b4d0cb"
+        },
+        "instance": {
+          "path": "results/mask0/raw/surface_sigma/RIGHT_NEAR_BOUNDARY/right_near_boundary_01_instance_raw.png",
+          "sha256": "37b854431195a7c4dfc8e3c3c74c64c6e2c1351a20320702e006e534017d2a1f"
+        }
+      },
+      "camera_transform": {
+        "location": {
+          "x": 203.12228393554688,
+          "y": 163.8559112548828,
+          "z": 14.006122589111328
+        },
+        "rotation": {
+          "pitch": 0.0,
+          "yaw": 0.0,
+          "roll": -0.0
+        }
+      },
+      "K": [
+        [
+          320.00000000000006,
+          0.0,
+          319.5
+        ],
+        [
+          0.0,
+          320.00000000000006,
+          239.5
+        ],
+        [
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "T_world_camera": [
+        [
+          1.0,
+          -0.0,
+          0.0,
+          203.12228393554688
+        ],
+        [
+          0.0,
+          1.0,
+          -0.0,
+          163.8559112548828
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          14.006122589111328
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "sensor_frames": {
+        "rgb": 4362238,
+        "depth": 4362238,
+        "semantic": 4362238,
+        "instance": 4362238
+      },
+      "sensor_timestamps": {
+        "rgb": 64613.98036549345,
+        "depth": 64613.98036549345,
+        "semantic": 64613.98036549345,
+        "instance": 64613.98036549345
+      },
+      "commanded_action": {
+        "mode": "MASK-0_KEY_POSE",
+        "surface_id": "surface_sigma",
+        "pose": "RIGHT_NEAR_BOUNDARY",
+        "repeat_index": 1,
+        "plan": {
+          "pose": "RIGHT_NEAR_BOUNDARY",
+          "axis": "horizontal",
+          "offset_m": 10.932642044067382,
+          "distance_m": 6.503838043212891,
+          "facade_width_m": 30.970657348632812,
+          "facade_height_m": 24.58628092288971,
+          "image_footprint_width_m": 13.00767608642578,
+          "image_footprint_height_m": 9.755757064819337,
+          "agl_m": null,
+          "agl_method": "no_ground_hit",
+          "min_agl_m": 2.0,
+          "safety_vertical_adjustment_m": 0.0,
+          "bottom_action_feasible": true
+        }
+      },
+      "executed_delta_pose": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ]
+    },
+    {
+      "surface_id": "surface_sigma",
+      "pose": "RIGHT_NEAR_BOUNDARY",
+      "repeat_index": 2,
+      "frame_id": 4362239,
+      "timestamp": 64614.030365494196,
+      "plan": {
+        "pose": "RIGHT_NEAR_BOUNDARY",
+        "axis": "horizontal",
+        "offset_m": 10.932642044067382,
+        "distance_m": 6.503838043212891,
+        "facade_width_m": 30.970657348632812,
+        "facade_height_m": 24.58628092288971,
+        "image_footprint_width_m": 13.00767608642578,
+        "image_footprint_height_m": 9.755757064819337,
+        "agl_m": null,
+        "agl_method": "no_ground_hit",
+        "min_agl_m": 2.0,
+        "safety_vertical_adjustment_m": 0.0,
+        "bottom_action_feasible": true
+      },
+      "metadata_path": "surface_sigma/RIGHT_NEAR_BOUNDARY/right_near_boundary_02.json",
+      "files": {
+        "rgb": {
+          "path": "results/mask0/raw/surface_sigma/RIGHT_NEAR_BOUNDARY/right_near_boundary_02_rgb.png",
+          "sha256": "8353ae18cc68acaf8c6ded223c0e1ea28a776cff8f97a652951abefc38bc966d"
+        },
+        "depth_raw": {
+          "path": "results/mask0/raw/surface_sigma/RIGHT_NEAR_BOUNDARY/right_near_boundary_02_depth.raw.bin",
+          "sha256": "6a04d5d439e5d5ae32738e56abc8b131b392409626073bb97069cc1d7c059450"
+        },
+        "depth_m": {
+          "path": "results/mask0/raw/surface_sigma/RIGHT_NEAR_BOUNDARY/right_near_boundary_02_depth_m.npy",
+          "sha256": "6b7d4fa072a4fcc19f0fdd6f2391d94a70824030208ebc38ec6e9369f49fd4a4"
+        },
+        "semantic": {
+          "path": "results/mask0/raw/surface_sigma/RIGHT_NEAR_BOUNDARY/right_near_boundary_02_semantic_raw.png",
+          "sha256": "045ecafc34e3349bfd26f9661b963b6b5f6d696011efb2a06deb5225a0b4d0cb"
+        },
+        "instance": {
+          "path": "results/mask0/raw/surface_sigma/RIGHT_NEAR_BOUNDARY/right_near_boundary_02_instance_raw.png",
+          "sha256": "37b854431195a7c4dfc8e3c3c74c64c6e2c1351a20320702e006e534017d2a1f"
+        }
+      },
+      "camera_transform": {
+        "location": {
+          "x": 203.12228393554688,
+          "y": 163.8559112548828,
+          "z": 14.006122589111328
+        },
+        "rotation": {
+          "pitch": 0.0,
+          "yaw": 0.0,
+          "roll": -0.0
+        }
+      },
+      "K": [
+        [
+          320.00000000000006,
+          0.0,
+          319.5
+        ],
+        [
+          0.0,
+          320.00000000000006,
+          239.5
+        ],
+        [
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "T_world_camera": [
+        [
+          1.0,
+          -0.0,
+          0.0,
+          203.12228393554688
+        ],
+        [
+          0.0,
+          1.0,
+          -0.0,
+          163.8559112548828
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          14.006122589111328
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "sensor_frames": {
+        "rgb": 4362239,
+        "depth": 4362239,
+        "semantic": 4362239,
+        "instance": 4362239
+      },
+      "sensor_timestamps": {
+        "rgb": 64614.030365494196,
+        "depth": 64614.030365494196,
+        "semantic": 64614.030365494196,
+        "instance": 64614.030365494196
+      },
+      "commanded_action": {
+        "mode": "MASK-0_KEY_POSE",
+        "surface_id": "surface_sigma",
+        "pose": "RIGHT_NEAR_BOUNDARY",
+        "repeat_index": 2,
+        "plan": {
+          "pose": "RIGHT_NEAR_BOUNDARY",
+          "axis": "horizontal",
+          "offset_m": 10.932642044067382,
+          "distance_m": 6.503838043212891,
+          "facade_width_m": 30.970657348632812,
+          "facade_height_m": 24.58628092288971,
+          "image_footprint_width_m": 13.00767608642578,
+          "image_footprint_height_m": 9.755757064819337,
+          "agl_m": null,
+          "agl_method": "no_ground_hit",
+          "min_agl_m": 2.0,
+          "safety_vertical_adjustment_m": 0.0,
+          "bottom_action_feasible": true
+        }
+      },
+      "executed_delta_pose": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ]
+    },
+    {
+      "surface_id": "surface_sigma",
+      "pose": "TOP_NEAR_BOUNDARY",
+      "repeat_index": 0,
+      "frame_id": 4362247,
+      "timestamp": 64614.3157805159,
+      "plan": {
+        "pose": "TOP_NEAR_BOUNDARY",
+        "axis": "vertical",
+        "offset_m": 8.878625488758088,
+        "distance_m": 6.503838043212891,
+        "facade_width_m": 30.970657348632812,
+        "facade_height_m": 24.58628092288971,
+        "image_footprint_width_m": 13.00767608642578,
+        "image_footprint_height_m": 9.755757064819337,
+        "agl_m": null,
+        "agl_method": "no_ground_hit",
+        "min_agl_m": 2.0,
+        "safety_vertical_adjustment_m": 0.0,
+        "bottom_action_feasible": true
+      },
+      "metadata_path": "surface_sigma/TOP_NEAR_BOUNDARY/top_near_boundary_00.json",
+      "files": {
+        "rgb": {
+          "path": "results/mask0/raw/surface_sigma/TOP_NEAR_BOUNDARY/top_near_boundary_00_rgb.png",
+          "sha256": "649a85e01232348cab93a3d4ac5ed50e21f77bdcf652301f244828d768a84633"
+        },
+        "depth_raw": {
+          "path": "results/mask0/raw/surface_sigma/TOP_NEAR_BOUNDARY/top_near_boundary_00_depth.raw.bin",
+          "sha256": "98ebd6b02074b70d3968cdbf1b5995e839d87ea50b380a3b1e3b94c52f0bcce9"
+        },
+        "depth_m": {
+          "path": "results/mask0/raw/surface_sigma/TOP_NEAR_BOUNDARY/top_near_boundary_00_depth_m.npy",
+          "sha256": "99b7674b47edb3379056f2f5c907c81c51ed7d1ddc42c0c9efc2b0736f11cd84"
+        },
+        "semantic": {
+          "path": "results/mask0/raw/surface_sigma/TOP_NEAR_BOUNDARY/top_near_boundary_00_semantic_raw.png",
+          "sha256": "482de965ec0abedbc86fafef4cc57066a04eab732900d003a4052f95a2d8157c"
+        },
+        "instance": {
+          "path": "results/mask0/raw/surface_sigma/TOP_NEAR_BOUNDARY/top_near_boundary_00_instance_raw.png",
+          "sha256": "856a34637276ed0d300eb6518c9f9eb228fee6ca2bb107e8ed4804b1f6ef6f30"
+        }
+      },
+      "camera_transform": {
+        "location": {
+          "x": 203.12228393554688,
+          "y": 152.92327880859375,
+          "z": 22.884748458862305
+        },
+        "rotation": {
+          "pitch": 0.0,
+          "yaw": 0.0,
+          "roll": -0.0
+        }
+      },
+      "K": [
+        [
+          320.00000000000006,
+          0.0,
+          319.5
+        ],
+        [
+          0.0,
+          320.00000000000006,
+          239.5
+        ],
+        [
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "T_world_camera": [
+        [
+          1.0,
+          -0.0,
+          0.0,
+          203.12228393554688
+        ],
+        [
+          0.0,
+          1.0,
+          -0.0,
+          152.92327880859375
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          22.884748458862305
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "sensor_frames": {
+        "rgb": 4362247,
+        "depth": 4362247,
+        "semantic": 4362247,
+        "instance": 4362247
+      },
+      "sensor_timestamps": {
+        "rgb": 64614.3157805159,
+        "depth": 64614.3157805159,
+        "semantic": 64614.3157805159,
+        "instance": 64614.3157805159
+      },
+      "commanded_action": {
+        "mode": "MASK-0_KEY_POSE",
+        "surface_id": "surface_sigma",
+        "pose": "TOP_NEAR_BOUNDARY",
+        "repeat_index": 0,
+        "plan": {
+          "pose": "TOP_NEAR_BOUNDARY",
+          "axis": "vertical",
+          "offset_m": 8.878625488758088,
+          "distance_m": 6.503838043212891,
+          "facade_width_m": 30.970657348632812,
+          "facade_height_m": 24.58628092288971,
+          "image_footprint_width_m": 13.00767608642578,
+          "image_footprint_height_m": 9.755757064819337,
+          "agl_m": null,
+          "agl_method": "no_ground_hit",
+          "min_agl_m": 2.0,
+          "safety_vertical_adjustment_m": 0.0,
+          "bottom_action_feasible": true
+        }
+      },
+      "executed_delta_pose": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ]
+    },
+    {
+      "surface_id": "surface_sigma",
+      "pose": "TOP_NEAR_BOUNDARY",
+      "repeat_index": 1,
+      "frame_id": 4362248,
+      "timestamp": 64614.365780516644,
+      "plan": {
+        "pose": "TOP_NEAR_BOUNDARY",
+        "axis": "vertical",
+        "offset_m": 8.878625488758088,
+        "distance_m": 6.503838043212891,
+        "facade_width_m": 30.970657348632812,
+        "facade_height_m": 24.58628092288971,
+        "image_footprint_width_m": 13.00767608642578,
+        "image_footprint_height_m": 9.755757064819337,
+        "agl_m": null,
+        "agl_method": "no_ground_hit",
+        "min_agl_m": 2.0,
+        "safety_vertical_adjustment_m": 0.0,
+        "bottom_action_feasible": true
+      },
+      "metadata_path": "surface_sigma/TOP_NEAR_BOUNDARY/top_near_boundary_01.json",
+      "files": {
+        "rgb": {
+          "path": "results/mask0/raw/surface_sigma/TOP_NEAR_BOUNDARY/top_near_boundary_01_rgb.png",
+          "sha256": "45d979502af42a62c4fb4e75ed7fb591f6a9a258140eb8f889c4f2c23d438b8a"
+        },
+        "depth_raw": {
+          "path": "results/mask0/raw/surface_sigma/TOP_NEAR_BOUNDARY/top_near_boundary_01_depth.raw.bin",
+          "sha256": "98ebd6b02074b70d3968cdbf1b5995e839d87ea50b380a3b1e3b94c52f0bcce9"
+        },
+        "depth_m": {
+          "path": "results/mask0/raw/surface_sigma/TOP_NEAR_BOUNDARY/top_near_boundary_01_depth_m.npy",
+          "sha256": "99b7674b47edb3379056f2f5c907c81c51ed7d1ddc42c0c9efc2b0736f11cd84"
+        },
+        "semantic": {
+          "path": "results/mask0/raw/surface_sigma/TOP_NEAR_BOUNDARY/top_near_boundary_01_semantic_raw.png",
+          "sha256": "482de965ec0abedbc86fafef4cc57066a04eab732900d003a4052f95a2d8157c"
+        },
+        "instance": {
+          "path": "results/mask0/raw/surface_sigma/TOP_NEAR_BOUNDARY/top_near_boundary_01_instance_raw.png",
+          "sha256": "856a34637276ed0d300eb6518c9f9eb228fee6ca2bb107e8ed4804b1f6ef6f30"
+        }
+      },
+      "camera_transform": {
+        "location": {
+          "x": 203.12228393554688,
+          "y": 152.92327880859375,
+          "z": 22.884748458862305
+        },
+        "rotation": {
+          "pitch": 0.0,
+          "yaw": 0.0,
+          "roll": -0.0
+        }
+      },
+      "K": [
+        [
+          320.00000000000006,
+          0.0,
+          319.5
+        ],
+        [
+          0.0,
+          320.00000000000006,
+          239.5
+        ],
+        [
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "T_world_camera": [
+        [
+          1.0,
+          -0.0,
+          0.0,
+          203.12228393554688
+        ],
+        [
+          0.0,
+          1.0,
+          -0.0,
+          152.92327880859375
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          22.884748458862305
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "sensor_frames": {
+        "rgb": 4362248,
+        "depth": 4362248,
+        "semantic": 4362248,
+        "instance": 4362248
+      },
+      "sensor_timestamps": {
+        "rgb": 64614.365780516644,
+        "depth": 64614.365780516644,
+        "semantic": 64614.365780516644,
+        "instance": 64614.365780516644
+      },
+      "commanded_action": {
+        "mode": "MASK-0_KEY_POSE",
+        "surface_id": "surface_sigma",
+        "pose": "TOP_NEAR_BOUNDARY",
+        "repeat_index": 1,
+        "plan": {
+          "pose": "TOP_NEAR_BOUNDARY",
+          "axis": "vertical",
+          "offset_m": 8.878625488758088,
+          "distance_m": 6.503838043212891,
+          "facade_width_m": 30.970657348632812,
+          "facade_height_m": 24.58628092288971,
+          "image_footprint_width_m": 13.00767608642578,
+          "image_footprint_height_m": 9.755757064819337,
+          "agl_m": null,
+          "agl_method": "no_ground_hit",
+          "min_agl_m": 2.0,
+          "safety_vertical_adjustment_m": 0.0,
+          "bottom_action_feasible": true
+        }
+      },
+      "executed_delta_pose": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ]
+    },
+    {
+      "surface_id": "surface_sigma",
+      "pose": "TOP_NEAR_BOUNDARY",
+      "repeat_index": 2,
+      "frame_id": 4362249,
+      "timestamp": 64614.41578051739,
+      "plan": {
+        "pose": "TOP_NEAR_BOUNDARY",
+        "axis": "vertical",
+        "offset_m": 8.878625488758088,
+        "distance_m": 6.503838043212891,
+        "facade_width_m": 30.970657348632812,
+        "facade_height_m": 24.58628092288971,
+        "image_footprint_width_m": 13.00767608642578,
+        "image_footprint_height_m": 9.755757064819337,
+        "agl_m": null,
+        "agl_method": "no_ground_hit",
+        "min_agl_m": 2.0,
+        "safety_vertical_adjustment_m": 0.0,
+        "bottom_action_feasible": true
+      },
+      "metadata_path": "surface_sigma/TOP_NEAR_BOUNDARY/top_near_boundary_02.json",
+      "files": {
+        "rgb": {
+          "path": "results/mask0/raw/surface_sigma/TOP_NEAR_BOUNDARY/top_near_boundary_02_rgb.png",
+          "sha256": "51cb4378f35af1185b0eeb7c489cadd54222dbc22640d95df17788d1aa27cbe0"
+        },
+        "depth_raw": {
+          "path": "results/mask0/raw/surface_sigma/TOP_NEAR_BOUNDARY/top_near_boundary_02_depth.raw.bin",
+          "sha256": "98ebd6b02074b70d3968cdbf1b5995e839d87ea50b380a3b1e3b94c52f0bcce9"
+        },
+        "depth_m": {
+          "path": "results/mask0/raw/surface_sigma/TOP_NEAR_BOUNDARY/top_near_boundary_02_depth_m.npy",
+          "sha256": "99b7674b47edb3379056f2f5c907c81c51ed7d1ddc42c0c9efc2b0736f11cd84"
+        },
+        "semantic": {
+          "path": "results/mask0/raw/surface_sigma/TOP_NEAR_BOUNDARY/top_near_boundary_02_semantic_raw.png",
+          "sha256": "482de965ec0abedbc86fafef4cc57066a04eab732900d003a4052f95a2d8157c"
+        },
+        "instance": {
+          "path": "results/mask0/raw/surface_sigma/TOP_NEAR_BOUNDARY/top_near_boundary_02_instance_raw.png",
+          "sha256": "856a34637276ed0d300eb6518c9f9eb228fee6ca2bb107e8ed4804b1f6ef6f30"
+        }
+      },
+      "camera_transform": {
+        "location": {
+          "x": 203.12228393554688,
+          "y": 152.92327880859375,
+          "z": 22.884748458862305
+        },
+        "rotation": {
+          "pitch": 0.0,
+          "yaw": 0.0,
+          "roll": -0.0
+        }
+      },
+      "K": [
+        [
+          320.00000000000006,
+          0.0,
+          319.5
+        ],
+        [
+          0.0,
+          320.00000000000006,
+          239.5
+        ],
+        [
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "T_world_camera": [
+        [
+          1.0,
+          -0.0,
+          0.0,
+          203.12228393554688
+        ],
+        [
+          0.0,
+          1.0,
+          -0.0,
+          152.92327880859375
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          22.884748458862305
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "sensor_frames": {
+        "rgb": 4362249,
+        "depth": 4362249,
+        "semantic": 4362249,
+        "instance": 4362249
+      },
+      "sensor_timestamps": {
+        "rgb": 64614.41578051739,
+        "depth": 64614.41578051739,
+        "semantic": 64614.41578051739,
+        "instance": 64614.41578051739
+      },
+      "commanded_action": {
+        "mode": "MASK-0_KEY_POSE",
+        "surface_id": "surface_sigma",
+        "pose": "TOP_NEAR_BOUNDARY",
+        "repeat_index": 2,
+        "plan": {
+          "pose": "TOP_NEAR_BOUNDARY",
+          "axis": "vertical",
+          "offset_m": 8.878625488758088,
+          "distance_m": 6.503838043212891,
+          "facade_width_m": 30.970657348632812,
+          "facade_height_m": 24.58628092288971,
+          "image_footprint_width_m": 13.00767608642578,
+          "image_footprint_height_m": 9.755757064819337,
+          "agl_m": null,
+          "agl_method": "no_ground_hit",
+          "min_agl_m": 2.0,
+          "safety_vertical_adjustment_m": 0.0,
+          "bottom_action_feasible": true
+        }
+      },
+      "executed_delta_pose": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ]
+    },
+    {
+      "surface_id": "surface_sigma",
+      "pose": "BOTTOM_SAFE_VIEW",
+      "repeat_index": 0,
+      "frame_id": 4362257,
+      "timestamp": 64614.691974773654,
+      "plan": {
+        "pose": "BOTTOM_SAFE_VIEW",
+        "axis": "vertical",
+        "offset_m": -7.903049782276153,
+        "distance_m": 6.503838043212891,
+        "facade_width_m": 30.970657348632812,
+        "facade_height_m": 24.58628092288971,
+        "image_footprint_width_m": 13.00767608642578,
+        "image_footprint_height_m": 9.755757064819337,
+        "agl_m": null,
+        "agl_method": "no_ground_hit",
+        "min_agl_m": 2.0,
+        "safety_vertical_adjustment_m": 0.0,
+        "bottom_action_feasible": false
+      },
+      "metadata_path": "surface_sigma/BOTTOM_SAFE_VIEW/bottom_safe_view_00.json",
+      "files": {
+        "rgb": {
+          "path": "results/mask0/raw/surface_sigma/BOTTOM_SAFE_VIEW/bottom_safe_view_00_rgb.png",
+          "sha256": "f8f2a96219616cbe97290639405fa7181e9a0c7714eee8e21f6f5affd96f5c3a"
+        },
+        "depth_raw": {
+          "path": "results/mask0/raw/surface_sigma/BOTTOM_SAFE_VIEW/bottom_safe_view_00_depth.raw.bin",
+          "sha256": "1ab653b8a2281dabfc1a917c248383cd769030e3f2dd81f5037c3e03eb5b7125"
+        },
+        "depth_m": {
+          "path": "results/mask0/raw/surface_sigma/BOTTOM_SAFE_VIEW/bottom_safe_view_00_depth_m.npy",
+          "sha256": "ad1f91f5c083eff2ef7e50101a8e50fc7876b71864ece7587b8a63d7f5181559"
+        },
+        "semantic": {
+          "path": "results/mask0/raw/surface_sigma/BOTTOM_SAFE_VIEW/bottom_safe_view_00_semantic_raw.png",
+          "sha256": "fa9d709a2753b62765c7644722e831e4b12ae5786c0babb4e2043c72640a85df"
+        },
+        "instance": {
+          "path": "results/mask0/raw/surface_sigma/BOTTOM_SAFE_VIEW/bottom_safe_view_00_instance_raw.png",
+          "sha256": "7e3ba6b7248b6e1107ca9300efb329fa3c961d647dbeac8f6b4243bf0ab0dc60"
+        }
+      },
+      "camera_transform": {
+        "location": {
+          "x": 203.12228393554688,
+          "y": 152.92327880859375,
+          "z": 6.103072166442871
+        },
+        "rotation": {
+          "pitch": 0.0,
+          "yaw": 0.0,
+          "roll": -0.0
+        }
+      },
+      "K": [
+        [
+          320.00000000000006,
+          0.0,
+          319.5
+        ],
+        [
+          0.0,
+          320.00000000000006,
+          239.5
+        ],
+        [
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "T_world_camera": [
+        [
+          1.0,
+          -0.0,
+          0.0,
+          203.12228393554688
+        ],
+        [
+          0.0,
+          1.0,
+          -0.0,
+          152.92327880859375
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          6.103072166442871
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "sensor_frames": {
+        "rgb": 4362257,
+        "depth": 4362257,
+        "semantic": 4362257,
+        "instance": 4362257
+      },
+      "sensor_timestamps": {
+        "rgb": 64614.691974773654,
+        "depth": 64614.691974773654,
+        "semantic": 64614.691974773654,
+        "instance": 64614.691974773654
+      },
+      "commanded_action": {
+        "mode": "MASK-0_KEY_POSE",
+        "surface_id": "surface_sigma",
+        "pose": "BOTTOM_SAFE_VIEW",
+        "repeat_index": 0,
+        "plan": {
+          "pose": "BOTTOM_SAFE_VIEW",
+          "axis": "vertical",
+          "offset_m": -7.903049782276153,
+          "distance_m": 6.503838043212891,
+          "facade_width_m": 30.970657348632812,
+          "facade_height_m": 24.58628092288971,
+          "image_footprint_width_m": 13.00767608642578,
+          "image_footprint_height_m": 9.755757064819337,
+          "agl_m": null,
+          "agl_method": "no_ground_hit",
+          "min_agl_m": 2.0,
+          "safety_vertical_adjustment_m": 0.0,
+          "bottom_action_feasible": false
+        }
+      },
+      "executed_delta_pose": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ]
+    },
+    {
+      "surface_id": "surface_sigma",
+      "pose": "BOTTOM_SAFE_VIEW",
+      "repeat_index": 1,
+      "frame_id": 4362258,
+      "timestamp": 64614.7419747744,
+      "plan": {
+        "pose": "BOTTOM_SAFE_VIEW",
+        "axis": "vertical",
+        "offset_m": -7.903049782276153,
+        "distance_m": 6.503838043212891,
+        "facade_width_m": 30.970657348632812,
+        "facade_height_m": 24.58628092288971,
+        "image_footprint_width_m": 13.00767608642578,
+        "image_footprint_height_m": 9.755757064819337,
+        "agl_m": null,
+        "agl_method": "no_ground_hit",
+        "min_agl_m": 2.0,
+        "safety_vertical_adjustment_m": 0.0,
+        "bottom_action_feasible": false
+      },
+      "metadata_path": "surface_sigma/BOTTOM_SAFE_VIEW/bottom_safe_view_01.json",
+      "files": {
+        "rgb": {
+          "path": "results/mask0/raw/surface_sigma/BOTTOM_SAFE_VIEW/bottom_safe_view_01_rgb.png",
+          "sha256": "a30429a60d592f0c274b046450b67cef242c121fc78a589d671dc44f7fad85ee"
+        },
+        "depth_raw": {
+          "path": "results/mask0/raw/surface_sigma/BOTTOM_SAFE_VIEW/bottom_safe_view_01_depth.raw.bin",
+          "sha256": "1ab653b8a2281dabfc1a917c248383cd769030e3f2dd81f5037c3e03eb5b7125"
+        },
+        "depth_m": {
+          "path": "results/mask0/raw/surface_sigma/BOTTOM_SAFE_VIEW/bottom_safe_view_01_depth_m.npy",
+          "sha256": "ad1f91f5c083eff2ef7e50101a8e50fc7876b71864ece7587b8a63d7f5181559"
+        },
+        "semantic": {
+          "path": "results/mask0/raw/surface_sigma/BOTTOM_SAFE_VIEW/bottom_safe_view_01_semantic_raw.png",
+          "sha256": "fa9d709a2753b62765c7644722e831e4b12ae5786c0babb4e2043c72640a85df"
+        },
+        "instance": {
+          "path": "results/mask0/raw/surface_sigma/BOTTOM_SAFE_VIEW/bottom_safe_view_01_instance_raw.png",
+          "sha256": "7e3ba6b7248b6e1107ca9300efb329fa3c961d647dbeac8f6b4243bf0ab0dc60"
+        }
+      },
+      "camera_transform": {
+        "location": {
+          "x": 203.12228393554688,
+          "y": 152.92327880859375,
+          "z": 6.103072166442871
+        },
+        "rotation": {
+          "pitch": 0.0,
+          "yaw": 0.0,
+          "roll": -0.0
+        }
+      },
+      "K": [
+        [
+          320.00000000000006,
+          0.0,
+          319.5
+        ],
+        [
+          0.0,
+          320.00000000000006,
+          239.5
+        ],
+        [
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "T_world_camera": [
+        [
+          1.0,
+          -0.0,
+          0.0,
+          203.12228393554688
+        ],
+        [
+          0.0,
+          1.0,
+          -0.0,
+          152.92327880859375
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          6.103072166442871
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "sensor_frames": {
+        "rgb": 4362258,
+        "depth": 4362258,
+        "semantic": 4362258,
+        "instance": 4362258
+      },
+      "sensor_timestamps": {
+        "rgb": 64614.7419747744,
+        "depth": 64614.7419747744,
+        "semantic": 64614.7419747744,
+        "instance": 64614.7419747744
+      },
+      "commanded_action": {
+        "mode": "MASK-0_KEY_POSE",
+        "surface_id": "surface_sigma",
+        "pose": "BOTTOM_SAFE_VIEW",
+        "repeat_index": 1,
+        "plan": {
+          "pose": "BOTTOM_SAFE_VIEW",
+          "axis": "vertical",
+          "offset_m": -7.903049782276153,
+          "distance_m": 6.503838043212891,
+          "facade_width_m": 30.970657348632812,
+          "facade_height_m": 24.58628092288971,
+          "image_footprint_width_m": 13.00767608642578,
+          "image_footprint_height_m": 9.755757064819337,
+          "agl_m": null,
+          "agl_method": "no_ground_hit",
+          "min_agl_m": 2.0,
+          "safety_vertical_adjustment_m": 0.0,
+          "bottom_action_feasible": false
+        }
+      },
+      "executed_delta_pose": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ]
+    },
+    {
+      "surface_id": "surface_sigma",
+      "pose": "BOTTOM_SAFE_VIEW",
+      "repeat_index": 2,
+      "frame_id": 4362259,
+      "timestamp": 64614.791974775144,
+      "plan": {
+        "pose": "BOTTOM_SAFE_VIEW",
+        "axis": "vertical",
+        "offset_m": -7.903049782276153,
+        "distance_m": 6.503838043212891,
+        "facade_width_m": 30.970657348632812,
+        "facade_height_m": 24.58628092288971,
+        "image_footprint_width_m": 13.00767608642578,
+        "image_footprint_height_m": 9.755757064819337,
+        "agl_m": null,
+        "agl_method": "no_ground_hit",
+        "min_agl_m": 2.0,
+        "safety_vertical_adjustment_m": 0.0,
+        "bottom_action_feasible": false
+      },
+      "metadata_path": "surface_sigma/BOTTOM_SAFE_VIEW/bottom_safe_view_02.json",
+      "files": {
+        "rgb": {
+          "path": "results/mask0/raw/surface_sigma/BOTTOM_SAFE_VIEW/bottom_safe_view_02_rgb.png",
+          "sha256": "3626bc67e36d08457f6caa2a81a67a0d138d2d58432cdb3358a195f9c6b33146"
+        },
+        "depth_raw": {
+          "path": "results/mask0/raw/surface_sigma/BOTTOM_SAFE_VIEW/bottom_safe_view_02_depth.raw.bin",
+          "sha256": "1ab653b8a2281dabfc1a917c248383cd769030e3f2dd81f5037c3e03eb5b7125"
+        },
+        "depth_m": {
+          "path": "results/mask0/raw/surface_sigma/BOTTOM_SAFE_VIEW/bottom_safe_view_02_depth_m.npy",
+          "sha256": "ad1f91f5c083eff2ef7e50101a8e50fc7876b71864ece7587b8a63d7f5181559"
+        },
+        "semantic": {
+          "path": "results/mask0/raw/surface_sigma/BOTTOM_SAFE_VIEW/bottom_safe_view_02_semantic_raw.png",
+          "sha256": "fa9d709a2753b62765c7644722e831e4b12ae5786c0babb4e2043c72640a85df"
+        },
+        "instance": {
+          "path": "results/mask0/raw/surface_sigma/BOTTOM_SAFE_VIEW/bottom_safe_view_02_instance_raw.png",
+          "sha256": "7e3ba6b7248b6e1107ca9300efb329fa3c961d647dbeac8f6b4243bf0ab0dc60"
+        }
+      },
+      "camera_transform": {
+        "location": {
+          "x": 203.12228393554688,
+          "y": 152.92327880859375,
+          "z": 6.103072166442871
+        },
+        "rotation": {
+          "pitch": 0.0,
+          "yaw": 0.0,
+          "roll": -0.0
+        }
+      },
+      "K": [
+        [
+          320.00000000000006,
+          0.0,
+          319.5
+        ],
+        [
+          0.0,
+          320.00000000000006,
+          239.5
+        ],
+        [
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "T_world_camera": [
+        [
+          1.0,
+          -0.0,
+          0.0,
+          203.12228393554688
+        ],
+        [
+          0.0,
+          1.0,
+          -0.0,
+          152.92327880859375
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          6.103072166442871
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "sensor_frames": {
+        "rgb": 4362259,
+        "depth": 4362259,
+        "semantic": 4362259,
+        "instance": 4362259
+      },
+      "sensor_timestamps": {
+        "rgb": 64614.791974775144,
+        "depth": 64614.791974775144,
+        "semantic": 64614.791974775144,
+        "instance": 64614.791974775144
+      },
+      "commanded_action": {
+        "mode": "MASK-0_KEY_POSE",
+        "surface_id": "surface_sigma",
+        "pose": "BOTTOM_SAFE_VIEW",
+        "repeat_index": 2,
+        "plan": {
+          "pose": "BOTTOM_SAFE_VIEW",
+          "axis": "vertical",
+          "offset_m": -7.903049782276153,
+          "distance_m": 6.503838043212891,
+          "facade_width_m": 30.970657348632812,
+          "facade_height_m": 24.58628092288971,
+          "image_footprint_width_m": 13.00767608642578,
+          "image_footprint_height_m": 9.755757064819337,
+          "agl_m": null,
+          "agl_method": "no_ground_hit",
+          "min_agl_m": 2.0,
+          "safety_vertical_adjustment_m": 0.0,
+          "bottom_action_feasible": false
+        }
+      },
+      "executed_delta_pose": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ]
+    }
+  ]
+}

@@ -1,0 +1,5 @@
+{
+  "map": "Carla/Maps/Town10HD_Opt",
+  "frame_count": 30,
+  "output": "results/mask0/raw"
+}

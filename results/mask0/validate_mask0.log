@@ -1,0 +1,183 @@
+{
+  "gates": {
+    "INSTANCE_SENSOR_AVAILABLE": {
+      "status": "PASS",
+      "blueprints": {
+        "sensor.camera.rgb": {
+          "present": true,
+          "id": "sensor.camera.rgb"
+        },
+        "sensor.camera.depth": {
+          "present": true,
+          "id": "sensor.camera.depth"
+        },
+        "sensor.camera.semantic_segmentation": {
+          "present": true,
+          "id": "sensor.camera.semantic_segmentation"
+        },
+        "sensor.camera.instance_segmentation": {
+          "present": true,
+          "id": "sensor.camera.instance_segmentation"
+        }
+      }
+    },
+    "SENSOR_QUADRUPLET_PAIRING": {
+      "status": "PASS",
+      "frame_count": 30
+    },
+    "INSTANCE_DECODER_VALID": {
+      "status": "PASS",
+      "building_semantic_tag": 3,
+      "decoder": "BGRA -> RGB bytes R | G<<8 | B<<16"
+    },
+    "TARGET_ID_STABILITY": {
+      "status": "PASS",
+      "groups": {
+        "surface_omega": {
+          "target_instance_ids": [
+            10040323
+          ],
+          "stable_min_views": 11,
+          "stable_view_fraction": 0.67,
+          "grouping": "multi_mesh_instance_group",
+          "selection": "semantic Building pixels plus geometry-seeded central projection; no RGB classification"
+        },
+        "surface_sigma": {
+          "target_instance_ids": [
+            10047747
+          ],
+          "stable_min_views": 11,
+          "stable_view_fraction": 0.67,
+          "grouping": "multi_mesh_instance_group",
+          "selection": "semantic Building pixels plus geometry-seeded central projection; no RGB classification"
+        }
+      }
+    },
+    "TARGET_INSTANCE_GROUPING": {
+      "status": "PASS",
+      "reason": "stable simulator ID group required; no RGB classification"
+    },
+    "FACADE_ENVELOPE_QUALITY": {
+      "status": "PASS",
+      "method": "enclosed-hole fill with <=3px closing"
+    },
+    "INTERNAL_HOLE_REJECTION": {
+      "status": "PASS",
+      "window_edges_are_not_boundaries": true
+    },
+    "BOUNDARY_ALIGNMENT": {
+      "status": "PASS",
+      "method": "projected physical_boundary lines"
+    },
+    "LABEL_STATE_FEASIBILITY": {
+      "status": "FAIL",
+      "surfaces": [
+        {
+          "surface_id": "surface_omega",
+          "pose_states": {
+            "CENTER": [
+              "IN",
+              "IN",
+              "IN"
+            ],
+            "LEFT_NEAR_BOUNDARY": [
+              "UNKNOWN",
+              "UNKNOWN",
+              "UNKNOWN"
+            ],
+            "RIGHT_NEAR_BOUNDARY": [
+              "UNKNOWN",
+              "UNKNOWN",
+              "UNKNOWN"
+            ],
+            "TOP_NEAR_BOUNDARY": [
+              "UNKNOWN",
+              "UNKNOWN",
+              "UNKNOWN"
+            ],
+            "BOTTOM_SAFE_VIEW": [
+              "UNKNOWN",
+              "UNKNOWN",
+              "UNKNOWN"
+            ]
+          },
+          "pose_envelope_coverage_mean": {
+            "CENTER": 1.0,
+            "LEFT_NEAR_BOUNDARY": 1.0,
+            "RIGHT_NEAR_BOUNDARY": 1.0,
+            "TOP_NEAR_BOUNDARY": 1.0,
+            "BOTTOM_SAFE_VIEW": 1.0
+          },
+          "bottom_safe_action_feasible": false,
+          "center_in": true,
+          "left_straddle": false,
+          "right_straddle": false,
+          "top_straddle": false
+        },
+        {
+          "surface_id": "surface_sigma",
+          "pose_states": {
+            "CENTER": [
+              "IN",
+              "IN",
+              "IN"
+            ],
+            "LEFT_NEAR_BOUNDARY": [
+              "STRADDLE",
+              "STRADDLE",
+              "STRADDLE"
+            ],
+            "RIGHT_NEAR_BOUNDARY": [
+              "STRADDLE",
+              "STRADDLE",
+              "STRADDLE"
+            ],
+            "TOP_NEAR_BOUNDARY": [
+              "UNKNOWN",
+              "UNKNOWN",
+              "UNKNOWN"
+            ],
+            "BOTTOM_SAFE_VIEW": [
+              "UNKNOWN",
+              "UNKNOWN",
+              "UNKNOWN"
+            ]
+          },
+          "pose_envelope_coverage_mean": {
+            "CENTER": 1.0,
+            "LEFT_NEAR_BOUNDARY": 0.80578125,
+            "RIGHT_NEAR_BOUNDARY": 0.7713313802083334,
+            "TOP_NEAR_BOUNDARY": 1.0,
+            "BOTTOM_SAFE_VIEW": 1.0
+          },
+          "bottom_safe_action_feasible": false,
+          "center_in": true,
+          "left_straddle": true,
+          "right_straddle": true,
+          "top_straddle": false
+        }
+      ]
+    },
+    "ACTION_FEASIBILITY": {
+      "status": "FAIL",
+      "min_agl_m": 2.0
+    },
+    "EXTERNAL_VISUAL_REVIEW": {
+      "status": "PENDING",
+      "reason": "requires operator review of published images"
+    },
+    "READY_FOR_SEQUENCE_RECAPTURE": {
+      "status": "FAIL",
+      "reason": "only a key-pose recapture may proceed after external review"
+    },
+    "READY_FOR_DATASET_EXPANSION": {
+      "status": "NOT_EVALUATED"
+    },
+    "READY_FOR_JEPA": {
+      "status": "NOT_EVALUATED",
+      "reason": "MASK-0 is annotation feasibility only"
+    }
+  },
+  "frame_count": 30,
+  "assets": 16
+}
