@@ -131,7 +131,9 @@ def _probe(surface, boundary_name, camera_transform, K, depth_m, width, height, 
                "TOP": (width_m / 2, height_m - amount, width_m / 2, height_m + amount),
                "BOTTOM": (width_m / 2, amount, width_m / 2, -amount)}
     iu, iv, ou, ov = offsets[boundary_name]
-    origin = np.asarray(surface["plane_origin"], dtype=float)
+    # plane_origin is a fit centroid, while probe coordinates are measured
+    # from the physical bottom-left corner of the terminal surface.
+    origin = corners[2]
     target = origin + h * iu + v * iv
     external = origin + h * ou + v * ov
     target_uvz = world_to_pixel(target, camera_transform, K)
@@ -162,7 +164,7 @@ def classify_boundary(surface, active_boundary: str, dense: Mapping, boundary_pi
     target = probes["target"]
     external = probes["external"]
     exit_confirmed = bool(projected == 0 and not interior and not central_target)
-    if not interior and coverage >= 0.95 and central_target:
+    if not interior and float(dense["occlusion_visibility_ratio"]) >= 0.95 and central_target:
         label = "IN"
     elif interior and target["target_side_observed"] and external["external_side_observed"] and external["external_side_is_not_target"]:
         label = "STRADDLE"

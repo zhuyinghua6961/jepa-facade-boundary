@@ -1,0 +1,71 @@
+{
+  "gates": {
+    "SCENE_SUITABILITY": {
+      "status": "FAIL",
+      "selected_surface_count": 1,
+      "rejected_candidate_count": 22
+    },
+    "SENSOR_PAIRING": {
+      "status": "PASS",
+      "frame_count": 190,
+      "pairing_errors": []
+    },
+    "PHYSICAL_BOUNDARY_GT": {
+      "status": "FAIL",
+      "surfaces": [
+        {
+          "surface_id": "surface_omega",
+          "bbox_id": 48389,
+          "path": "results/geo06/surfaces/surface_omega.json",
+          "status": "SELECTED",
+          "boundary_method": "collision_raycast_terminal_extrema_and_plane_fit",
+          "plane_fit_max_residual_m": 2.2556503758831402e-15,
+          "operator_visual_review_status": "PENDING",
+          "depth_alignment_median_abs_error_m": 0.0017762184143075288
+        }
+      ],
+      "rejected_surfaces": [
+        {
+          "surface_id": "surface_sigma",
+          "bbox_id": 48418,
+          "path": "results/geo06/surfaces/surface_sigma.json",
+          "status": "REJECTED_DEPTH_MISMATCH",
+          "boundary_method": "collision_raycast_terminal_extrema_and_plane_fit",
+          "plane_fit_max_residual_m": 0.0,
+          "operator_visual_review_status": "PENDING",
+          "depth_alignment_median_abs_error_m": 0.7307558059692383,
+          "rejection_reason": "collision-raycast plane differs from sensor z-depth beyond 0.1 m"
+        }
+      ]
+    },
+    "BOUNDARY_VISIBILITY": {
+      "status": "FAIL",
+      "max_unknown_ratio": 0.8928571428571429,
+      "straddle_boundary_inside": true
+    },
+    "TRAJECTORY_ORDERING": {
+      "status": "PASS",
+      "all_monotonic": true,
+      "max_reverse_overlap_jump": 0.0363020833333334
+    },
+    "EVENT_COVERAGE": {
+      "status": "FAIL",
+      "complete_trajectories": 0,
+      "required_trajectories": 8
+    },
+    "OPERATOR_VISUAL_REVIEW": {
+      "status": "PENDING",
+      "reason": "external review of published images is required"
+    },
+    "READY_FOR_DATASET_EXPANSION": {
+      "status": "FAIL"
+    },
+    "READY_FOR_JEPA": {
+      "status": "NOT_EVALUATED",
+      "reason": "GEO-0.6 is a data-feasibility audit; no JEPA training is authorized"
+    }
+  },
+  "trajectory_count": 8,
+  "frame_count": 190,
+  "assets": 33
+}

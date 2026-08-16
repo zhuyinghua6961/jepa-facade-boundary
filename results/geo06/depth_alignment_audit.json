@@ -1,0 +1,14 @@
+{
+  "schema": "geo06.depth_alignment.v1",
+  "surfaces": [
+    {
+      "surface_id": "surface_omega",
+      "median_abs_error_m": 0.0017762184143075288
+    },
+    {
+      "surface_id": "surface_sigma",
+      "median_abs_error_m": 0.7307558059692383
+    }
+  ],
+  "threshold_m": 0.1
+}

@@ -1,0 +1,237 @@
+{
+  "schema": "geo06.capture.v1",
+  "map": "Carla/Maps/Town10HD_Opt",
+  "sensor": {
+    "width": 640,
+    "height": 480,
+    "horizontal_fov_deg": 90.0,
+    "fixed_delta_seconds": 0.05,
+    "depth_metric": "z-depth"
+  },
+  "trajectories": [
+    {
+      "schema": "geo06.trajectory.v1",
+      "sequence_id": "surface_omega/NORMAL_LOCK/DOWN",
+      "surface_id": "surface_omega",
+      "direction": "DOWN",
+      "active_boundary": "BOTTOM",
+      "plan": {
+        "direction": "DOWN",
+        "active_boundary": "BOTTOM",
+        "axis": "vertical",
+        "distance_m": 5.418667538960776,
+        "facade_width_m": 37.78593444824219,
+        "facade_height_m": 20.160001635551453,
+        "image_footprint_width_m": 10.83733507792155,
+        "image_footprint_height_m": 8.128001308441162,
+        "step_m": 1.0,
+        "steps": 18,
+        "travel_m": 16.144001471996308,
+        "thresholds": {
+          "min_in_frames": 5,
+          "min_straddle_frames": 5,
+          "min_out_frames": 5
+        }
+      },
+      "frames": 18,
+      "mode": "NORMAL_LOCK",
+      "orientation_locked": true
+    },
+    {
+      "schema": "geo06.trajectory.v1",
+      "sequence_id": "surface_omega/NORMAL_LOCK/LEFT",
+      "surface_id": "surface_omega",
+      "direction": "LEFT",
+      "active_boundary": "LEFT",
+      "plan": {
+        "direction": "LEFT",
+        "active_boundary": "LEFT",
+        "axis": "horizontal",
+        "distance_m": 5.418667538960776,
+        "facade_width_m": 37.78593444824219,
+        "facade_height_m": 20.160001635551453,
+        "image_footprint_width_m": 10.83733507792155,
+        "image_footprint_height_m": 8.128001308441162,
+        "step_m": 1.0,
+        "steps": 28,
+        "travel_m": 26.31163476308187,
+        "thresholds": {
+          "min_in_frames": 5,
+          "min_straddle_frames": 5,
+          "min_out_frames": 5
+        }
+      },
+      "frames": 28,
+      "mode": "NORMAL_LOCK",
+      "orientation_locked": true
+    },
+    {
+      "schema": "geo06.trajectory.v1",
+      "sequence_id": "surface_omega/NORMAL_LOCK/RIGHT",
+      "surface_id": "surface_omega",
+      "direction": "RIGHT",
+      "active_boundary": "RIGHT",
+      "plan": {
+        "direction": "RIGHT",
+        "active_boundary": "RIGHT",
+        "axis": "horizontal",
+        "distance_m": 5.418667538960776,
+        "facade_width_m": 37.78593444824219,
+        "facade_height_m": 20.160001635551453,
+        "image_footprint_width_m": 10.83733507792155,
+        "image_footprint_height_m": 8.128001308441162,
+        "step_m": 1.0,
+        "steps": 28,
+        "travel_m": 26.31163476308187,
+        "thresholds": {
+          "min_in_frames": 5,
+          "min_straddle_frames": 5,
+          "min_out_frames": 5
+        }
+      },
+      "frames": 28,
+      "mode": "NORMAL_LOCK",
+      "orientation_locked": true
+    },
+    {
+      "schema": "geo06.trajectory.v1",
+      "sequence_id": "surface_omega/NORMAL_LOCK/UP",
+      "surface_id": "surface_omega",
+      "direction": "UP",
+      "active_boundary": "TOP",
+      "plan": {
+        "direction": "UP",
+        "active_boundary": "TOP",
+        "axis": "vertical",
+        "distance_m": 5.418667538960776,
+        "facade_width_m": 37.78593444824219,
+        "facade_height_m": 20.160001635551453,
+        "image_footprint_width_m": 10.83733507792155,
+        "image_footprint_height_m": 8.128001308441162,
+        "step_m": 1.0,
+        "steps": 18,
+        "travel_m": 16.144001471996308,
+        "thresholds": {
+          "min_in_frames": 5,
+          "min_straddle_frames": 5,
+          "min_out_frames": 5
+        }
+      },
+      "frames": 18,
+      "mode": "NORMAL_LOCK",
+      "orientation_locked": true
+    },
+    {
+      "schema": "geo06.trajectory.v1",
+      "sequence_id": "surface_sigma/NORMAL_LOCK/DOWN",
+      "surface_id": "surface_sigma",
+      "direction": "DOWN",
+      "active_boundary": "BOTTOM",
+      "plan": {
+        "direction": "DOWN",
+        "active_boundary": "BOTTOM",
+        "axis": "vertical",
+        "distance_m": 7.779349825541179,
+        "facade_width_m": 30.970657348632812,
+        "facade_height_m": 24.58628092288971,
+        "image_footprint_width_m": 15.558699651082357,
+        "image_footprint_height_m": 11.669024738311768,
+        "step_m": 1.0,
+        "steps": 22,
+        "travel_m": 20.127652830600738,
+        "thresholds": {
+          "min_in_frames": 5,
+          "min_straddle_frames": 5,
+          "min_out_frames": 5
+        }
+      },
+      "frames": 22,
+      "mode": "NORMAL_LOCK",
+      "orientation_locked": true
+    },
+    {
+      "schema": "geo06.trajectory.v1",
+      "sequence_id": "surface_sigma/NORMAL_LOCK/LEFT",
+      "surface_id": "surface_sigma",
+      "direction": "LEFT",
+      "active_boundary": "LEFT",
+      "plan": {
+        "direction": "LEFT",
+        "active_boundary": "LEFT",
+        "axis": "horizontal",
+        "distance_m": 7.779349825541179,
+        "facade_width_m": 30.970657348632812,
+        "facade_height_m": 24.58628092288971,
+        "image_footprint_width_m": 15.558699651082357,
+        "image_footprint_height_m": 11.669024738311768,
+        "step_m": 1.0,
+        "steps": 27,
+        "travel_m": 25.264678499857585,
+        "thresholds": {
+          "min_in_frames": 5,
+          "min_straddle_frames": 5,
+          "min_out_frames": 5
+        }
+      },
+      "frames": 27,
+      "mode": "NORMAL_LOCK",
+      "orientation_locked": true
+    },
+    {
+      "schema": "geo06.trajectory.v1",
+      "sequence_id": "surface_sigma/NORMAL_LOCK/RIGHT",
+      "surface_id": "surface_sigma",
+      "direction": "RIGHT",
+      "active_boundary": "RIGHT",
+      "plan": {
+        "direction": "RIGHT",
+        "active_boundary": "RIGHT",
+        "axis": "horizontal",
+        "distance_m": 7.779349825541179,
+        "facade_width_m": 30.970657348632812,
+        "facade_height_m": 24.58628092288971,
+        "image_footprint_width_m": 15.558699651082357,
+        "image_footprint_height_m": 11.669024738311768,
+        "step_m": 1.0,
+        "steps": 27,
+        "travel_m": 25.264678499857585,
+        "thresholds": {
+          "min_in_frames": 5,
+          "min_straddle_frames": 5,
+          "min_out_frames": 5
+        }
+      },
+      "frames": 27,
+      "mode": "NORMAL_LOCK",
+      "orientation_locked": true
+    },
+    {
+      "schema": "geo06.trajectory.v1",
+      "sequence_id": "surface_sigma/NORMAL_LOCK/UP",
+      "surface_id": "surface_sigma",
+      "direction": "UP",
+      "active_boundary": "TOP",
+      "plan": {
+        "direction": "UP",
+        "active_boundary": "TOP",
+        "axis": "vertical",
+        "distance_m": 7.779349825541179,
+        "facade_width_m": 30.970657348632812,
+        "facade_height_m": 24.58628092288971,
+        "image_footprint_width_m": 15.558699651082357,
+        "image_footprint_height_m": 11.669024738311768,
+        "step_m": 1.0,
+        "steps": 22,
+        "travel_m": 20.127652830600738,
+        "thresholds": {
+          "min_in_frames": 5,
+          "min_straddle_frames": 5,
+          "min_out_frames": 5
+        }
+      },
+      "frames": 22,
+      "mode": "NORMAL_LOCK",
+      "orientation_locked": true
+    }
+  ]
+}

@@ -1,0 +1,25 @@
+run_id: geo06
+map: Town10HD_Opt
+mode: NORMAL_LOCK
+surfaces: results/geo06/surfaces
+directions: [LEFT, RIGHT, UP, DOWN]
+sensor:
+  width: 640
+  height: 480
+  horizontal_fov_deg: 90.0
+  fixed_delta_seconds: 0.05
+  depth_metric: z-depth
+sweep:
+  step_m: 1.0
+  max_steps: 80
+  min_in_frames: 5
+  min_straddle_frames: 5
+  min_out_frames: 5
+  max_unknown_ratio: 0.10
+  max_reverse_overlap_jump: 0.10
+  min_straddle_boundary_inside_ratio: 1.0
+validation:
+  plane_fit_max_residual_m: 0.10
+  required_surface_count: 2
+  operator_visual_review: PENDING
+  ready_for_jepa: NOT_EVALUATED

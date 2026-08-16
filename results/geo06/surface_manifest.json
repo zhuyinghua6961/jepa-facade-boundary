@@ -1,0 +1,314 @@
+{
+  "schema": "geo06.surface_manifest.v1",
+  "map": "Carla/Maps/Town10HD_Opt",
+  "selection_method": "low_cost_RGB_scout_plus_collision_raycast",
+  "bbox_role": "candidate_filter_only",
+  "selected_surfaces": [
+    {
+      "surface_id": "surface_omega",
+      "bbox_id": 48389,
+      "path": "results/geo06/surfaces/surface_omega.json",
+      "status": "SELECTED",
+      "boundary_method": "collision_raycast_terminal_extrema_and_plane_fit",
+      "plane_fit_max_residual_m": 2.2556503758831402e-15,
+      "operator_visual_review_status": "PENDING",
+      "depth_alignment_median_abs_error_m": 0.0017762184143075288
+    }
+  ],
+  "rejected_candidates": [
+    {
+      "candidate_index": 0,
+      "bbox_id": 48421,
+      "surface": "+X",
+      "rgb_path": "results/geo06/scout/candidate_00_bbox_48421.jpg",
+      "decision": "REJECT",
+      "rejection_reasons": [
+        "raycast_sparse_or_nonopaque",
+        "surface_normals_inconsistent"
+      ],
+      "raycast_hit_ratio": 0.7142857142857143,
+      "raycast_normal_consistency": 0.0
+    },
+    {
+      "candidate_index": 2,
+      "bbox_id": 48424,
+      "surface": "+X",
+      "rgb_path": "results/geo06/scout/candidate_02_bbox_48424.jpg",
+      "decision": "REJECT",
+      "rejection_reasons": [
+        "raycast_sparse_or_nonopaque",
+        "surface_normals_inconsistent"
+      ],
+      "raycast_hit_ratio": 0.7142857142857143,
+      "raycast_normal_consistency": 0.0
+    },
+    {
+      "candidate_index": 3,
+      "bbox_id": 48405,
+      "surface": "+Y",
+      "rgb_path": "results/geo06/scout/candidate_03_bbox_48405.jpg",
+      "decision": "REJECT",
+      "rejection_reasons": [
+        "raycast_sparse_or_nonopaque",
+        "surface_normals_inconsistent"
+      ],
+      "raycast_hit_ratio": 0.0,
+      "raycast_normal_consistency": 0.0
+    },
+    {
+      "candidate_index": 4,
+      "bbox_id": 48407,
+      "surface": "+Y",
+      "rgb_path": "results/geo06/scout/candidate_04_bbox_48407.jpg",
+      "decision": "REJECT",
+      "rejection_reasons": [
+        "raycast_sparse_or_nonopaque",
+        "surface_normals_inconsistent"
+      ],
+      "raycast_hit_ratio": 0.0,
+      "raycast_normal_consistency": 0.0
+    },
+    {
+      "candidate_index": 5,
+      "bbox_id": 48409,
+      "surface": "+Y",
+      "rgb_path": "results/geo06/scout/candidate_05_bbox_48409.jpg",
+      "decision": "REJECT",
+      "rejection_reasons": [
+        "raycast_sparse_or_nonopaque",
+        "surface_normals_inconsistent"
+      ],
+      "raycast_hit_ratio": 0.0,
+      "raycast_normal_consistency": 0.0
+    },
+    {
+      "candidate_index": 6,
+      "bbox_id": 48397,
+      "surface": "+X",
+      "rgb_path": "results/geo06/scout/candidate_06_bbox_48397.jpg",
+      "decision": "REJECT",
+      "rejection_reasons": [
+        "surface_normals_inconsistent"
+      ],
+      "raycast_hit_ratio": 1.0,
+      "raycast_normal_consistency": 0.0
+    },
+    {
+      "candidate_index": 7,
+      "bbox_id": 48399,
+      "surface": "+X",
+      "rgb_path": "results/geo06/scout/candidate_07_bbox_48399.jpg",
+      "decision": "REJECT",
+      "rejection_reasons": [
+        "raycast_sparse_or_nonopaque",
+        "surface_normals_inconsistent"
+      ],
+      "raycast_hit_ratio": 0.05714285714285714,
+      "raycast_normal_consistency": 0.0
+    },
+    {
+      "candidate_index": 8,
+      "bbox_id": 48401,
+      "surface": "+X",
+      "rgb_path": "results/geo06/scout/candidate_08_bbox_48401.jpg",
+      "decision": "REJECT",
+      "rejection_reasons": [
+        "raycast_sparse_or_nonopaque",
+        "surface_normals_inconsistent"
+      ],
+      "raycast_hit_ratio": 0.14285714285714285,
+      "raycast_normal_consistency": 0.0
+    },
+    {
+      "candidate_index": 9,
+      "bbox_id": 48417,
+      "surface": "+Y",
+      "rgb_path": "results/geo06/scout/candidate_09_bbox_48417.jpg",
+      "decision": "REJECT",
+      "rejection_reasons": [
+        "raycast_sparse_or_nonopaque",
+        "surface_normals_inconsistent"
+      ],
+      "raycast_hit_ratio": 0.2857142857142857,
+      "raycast_normal_consistency": 0.0
+    },
+    {
+      "candidate_index": 11,
+      "bbox_id": 48436,
+      "surface": "+X",
+      "rgb_path": "results/geo06/scout/candidate_11_bbox_48436.jpg",
+      "decision": "REJECT",
+      "rejection_reasons": [
+        "surface_normals_inconsistent"
+      ],
+      "raycast_hit_ratio": 1.0,
+      "raycast_normal_consistency": 0.0
+    },
+    {
+      "candidate_index": 12,
+      "bbox_id": 48420,
+      "surface": "+Y",
+      "rgb_path": "results/geo06/scout/candidate_12_bbox_48420.jpg",
+      "decision": "REJECT",
+      "rejection_reasons": [
+        "surface_normals_inconsistent"
+      ],
+      "raycast_hit_ratio": 1.0,
+      "raycast_normal_consistency": 0.0
+    },
+    {
+      "candidate_index": 13,
+      "bbox_id": 48419,
+      "surface": "+X",
+      "rgb_path": "results/geo06/scout/candidate_13_bbox_48419.jpg",
+      "decision": "REJECT",
+      "rejection_reasons": [
+        "raycast_sparse_or_nonopaque",
+        "surface_normals_inconsistent"
+      ],
+      "raycast_hit_ratio": 0.22857142857142856,
+      "raycast_normal_consistency": 0.0
+    },
+    {
+      "candidate_index": 14,
+      "bbox_id": 48425,
+      "surface": "+X",
+      "rgb_path": "results/geo06/scout/candidate_14_bbox_48425.jpg",
+      "decision": "REJECT",
+      "rejection_reasons": [
+        "raycast_sparse_or_nonopaque",
+        "surface_normals_inconsistent"
+      ],
+      "raycast_hit_ratio": 0.42857142857142855,
+      "raycast_normal_consistency": 0.0
+    },
+    {
+      "candidate_index": 15,
+      "bbox_id": 48416,
+      "surface": "+Y",
+      "rgb_path": "results/geo06/scout/candidate_15_bbox_48416.jpg",
+      "decision": "REJECT",
+      "rejection_reasons": [
+        "surface_normals_inconsistent"
+      ],
+      "raycast_hit_ratio": 1.0,
+      "raycast_normal_consistency": 0.0
+    },
+    {
+      "candidate_index": 16,
+      "bbox_id": 48415,
+      "surface": "+X",
+      "rgb_path": "results/geo06/scout/candidate_16_bbox_48415.jpg",
+      "decision": "REJECT",
+      "rejection_reasons": [
+        "raycast_sparse_or_nonopaque",
+        "surface_normals_inconsistent"
+      ],
+      "raycast_hit_ratio": 0.8285714285714286,
+      "raycast_normal_consistency": 0.0
+    },
+    {
+      "candidate_index": 17,
+      "bbox_id": 48391,
+      "surface": "+X",
+      "rgb_path": "results/geo06/scout/candidate_17_bbox_48391.jpg",
+      "decision": "REJECT",
+      "rejection_reasons": [
+        "surface_normals_inconsistent"
+      ],
+      "raycast_hit_ratio": 1.0,
+      "raycast_normal_consistency": 0.0
+    },
+    {
+      "candidate_index": 18,
+      "bbox_id": 48393,
+      "surface": "+X",
+      "rgb_path": "results/geo06/scout/candidate_18_bbox_48393.jpg",
+      "decision": "REJECT",
+      "rejection_reasons": [
+        "surface_normals_inconsistent"
+      ],
+      "raycast_hit_ratio": 1.0,
+      "raycast_normal_consistency": 0.0
+    },
+    {
+      "candidate_index": 19,
+      "bbox_id": 48395,
+      "surface": "+X",
+      "rgb_path": "results/geo06/scout/candidate_19_bbox_48395.jpg",
+      "decision": "REJECT",
+      "rejection_reasons": [
+        "surface_normals_inconsistent"
+      ],
+      "raycast_hit_ratio": 1.0,
+      "raycast_normal_consistency": 0.0
+    },
+    {
+      "candidate_index": 20,
+      "bbox_id": 47839,
+      "surface": "+X",
+      "rgb_path": "results/geo06/scout/candidate_20_bbox_47839.jpg",
+      "decision": "REJECT",
+      "rejection_reasons": [
+        "surface_normals_inconsistent"
+      ],
+      "raycast_hit_ratio": 1.0,
+      "raycast_normal_consistency": 0.0
+    },
+    {
+      "candidate_index": 21,
+      "bbox_id": 47845,
+      "surface": "+X",
+      "rgb_path": "results/geo06/scout/candidate_21_bbox_47845.jpg",
+      "decision": "REJECT",
+      "rejection_reasons": [
+        "surface_normals_inconsistent"
+      ],
+      "raycast_hit_ratio": 1.0,
+      "raycast_normal_consistency": 0.0
+    },
+    {
+      "candidate_index": 22,
+      "bbox_id": 47853,
+      "surface": "+X",
+      "rgb_path": "results/geo06/scout/candidate_22_bbox_47853.jpg",
+      "decision": "REJECT",
+      "rejection_reasons": [
+        "surface_normals_inconsistent"
+      ],
+      "raycast_hit_ratio": 1.0,
+      "raycast_normal_consistency": 0.0
+    },
+    {
+      "candidate_index": 23,
+      "bbox_id": 47857,
+      "surface": "+X",
+      "rgb_path": "results/geo06/scout/candidate_23_bbox_47857.jpg",
+      "decision": "REJECT",
+      "rejection_reasons": [
+        "surface_normals_inconsistent"
+      ],
+      "raycast_hit_ratio": 1.0,
+      "raycast_normal_consistency": 0.0
+    }
+  ],
+  "operator_visual_review_status": "PENDING",
+  "rejected_surfaces": [
+    {
+      "surface_id": "surface_sigma",
+      "bbox_id": 48418,
+      "path": "results/geo06/surfaces/surface_sigma.json",
+      "status": "REJECTED_DEPTH_MISMATCH",
+      "boundary_method": "collision_raycast_terminal_extrema_and_plane_fit",
+      "plane_fit_max_residual_m": 0.0,
+      "operator_visual_review_status": "PENDING",
+      "depth_alignment_median_abs_error_m": 0.7307558059692383,
+      "rejection_reason": "collision-raycast plane differs from sensor z-depth beyond 0.1 m"
+    }
+  ],
+  "selection_summary": {
+    "raycast_selected_count": 2,
+    "depth_consistent_count": 1,
+    "operator_visual_review_status": "PENDING"
+  }
+}

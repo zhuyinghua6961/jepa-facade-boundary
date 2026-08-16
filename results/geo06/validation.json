@@ -1,0 +1,465 @@
+{
+  "schema": "geo06.validation.v1",
+  "config": "configs/experiments/geo06.yaml",
+  "map": "Carla/Maps/Town10HD_Opt",
+  "sensor": {
+    "width": 640,
+    "height": 480,
+    "horizontal_fov_deg": 90.0,
+    "fixed_delta_seconds": 0.05,
+    "depth_metric": "z-depth"
+  },
+  "thresholds": {
+    "step_m": 1.0,
+    "max_steps": 80,
+    "min_in_frames": 5,
+    "min_straddle_frames": 5,
+    "min_out_frames": 5,
+    "max_unknown_ratio": 0.1,
+    "max_reverse_overlap_jump": 0.1,
+    "min_straddle_boundary_inside_ratio": 1.0
+  },
+  "gates": {
+    "SCENE_SUITABILITY": {
+      "status": "FAIL",
+      "selected_surface_count": 1,
+      "rejected_candidate_count": 22
+    },
+    "SENSOR_PAIRING": {
+      "status": "PASS",
+      "frame_count": 190,
+      "pairing_errors": []
+    },
+    "PHYSICAL_BOUNDARY_GT": {
+      "status": "FAIL",
+      "surfaces": [
+        {
+          "surface_id": "surface_omega",
+          "bbox_id": 48389,
+          "path": "results/geo06/surfaces/surface_omega.json",
+          "status": "SELECTED",
+          "boundary_method": "collision_raycast_terminal_extrema_and_plane_fit",
+          "plane_fit_max_residual_m": 2.2556503758831402e-15,
+          "operator_visual_review_status": "PENDING",
+          "depth_alignment_median_abs_error_m": 0.0017762184143075288
+        }
+      ],
+      "rejected_surfaces": [
+        {
+          "surface_id": "surface_sigma",
+          "bbox_id": 48418,
+          "path": "results/geo06/surfaces/surface_sigma.json",
+          "status": "REJECTED_DEPTH_MISMATCH",
+          "boundary_method": "collision_raycast_terminal_extrema_and_plane_fit",
+          "plane_fit_max_residual_m": 0.0,
+          "operator_visual_review_status": "PENDING",
+          "depth_alignment_median_abs_error_m": 0.7307558059692383,
+          "rejection_reason": "collision-raycast plane differs from sensor z-depth beyond 0.1 m"
+        }
+      ]
+    },
+    "BOUNDARY_VISIBILITY": {
+      "status": "FAIL",
+      "max_unknown_ratio": 0.8928571428571429,
+      "straddle_boundary_inside": true
+    },
+    "TRAJECTORY_ORDERING": {
+      "status": "PASS",
+      "all_monotonic": true,
+      "max_reverse_overlap_jump": 0.0363020833333334
+    },
+    "EVENT_COVERAGE": {
+      "status": "FAIL",
+      "complete_trajectories": 0,
+      "required_trajectories": 8
+    },
+    "OPERATOR_VISUAL_REVIEW": {
+      "status": "PENDING",
+      "reason": "external review of published images is required"
+    },
+    "READY_FOR_DATASET_EXPANSION": {
+      "status": "FAIL"
+    },
+    "READY_FOR_JEPA": {
+      "status": "NOT_EVALUATED",
+      "reason": "GEO-0.6 is a data-feasibility audit; no JEPA training is authorized"
+    }
+  },
+  "trajectories": [
+    {
+      "frames": 18,
+      "state_counts": {
+        "IN": 0,
+        "STRADDLE": 0,
+        "OUT": 3,
+        "UNKNOWN": 15
+      },
+      "compressed_state_sequence": [
+        "UNKNOWN",
+        "OUT"
+      ],
+      "unknown_ratio": 0.8333333333333334,
+      "monotonic_ignoring_unknown": true,
+      "bad_transitions": [],
+      "outward_overlap_spearman": 0.9628482972136224,
+      "max_reverse_overlap_jump": 0.02026041666666667,
+      "straddle_boundary_inside": true,
+      "event_coverage": false,
+      "sequence_id": "surface_omega/NORMAL_LOCK/DOWN",
+      "surface_id": "surface_omega",
+      "direction": "DOWN",
+      "active_boundary": "BOTTOM",
+      "plan": {
+        "direction": "DOWN",
+        "active_boundary": "BOTTOM",
+        "axis": "vertical",
+        "distance_m": 5.418667538960776,
+        "facade_width_m": 37.78593444824219,
+        "facade_height_m": 20.160001635551453,
+        "image_footprint_width_m": 10.83733507792155,
+        "image_footprint_height_m": 8.128001308441162,
+        "step_m": 1.0,
+        "steps": 18,
+        "travel_m": 16.144001471996308,
+        "thresholds": {
+          "min_in_frames": 5,
+          "min_straddle_frames": 5,
+          "min_out_frames": 5
+        }
+      }
+    },
+    {
+      "frames": 28,
+      "state_counts": {
+        "IN": 0,
+        "STRADDLE": 0,
+        "OUT": 3,
+        "UNKNOWN": 25
+      },
+      "compressed_state_sequence": [
+        "UNKNOWN",
+        "OUT"
+      ],
+      "unknown_ratio": 0.8928571428571429,
+      "monotonic_ignoring_unknown": true,
+      "bad_transitions": [],
+      "outward_overlap_spearman": 0.922824302134647,
+      "max_reverse_overlap_jump": 0.0363020833333334,
+      "straddle_boundary_inside": true,
+      "event_coverage": false,
+      "sequence_id": "surface_omega/NORMAL_LOCK/LEFT",
+      "surface_id": "surface_omega",
+      "direction": "LEFT",
+      "active_boundary": "LEFT",
+      "plan": {
+        "direction": "LEFT",
+        "active_boundary": "LEFT",
+        "axis": "horizontal",
+        "distance_m": 5.418667538960776,
+        "facade_width_m": 37.78593444824219,
+        "facade_height_m": 20.160001635551453,
+        "image_footprint_width_m": 10.83733507792155,
+        "image_footprint_height_m": 8.128001308441162,
+        "step_m": 1.0,
+        "steps": 28,
+        "travel_m": 26.31163476308187,
+        "thresholds": {
+          "min_in_frames": 5,
+          "min_straddle_frames": 5,
+          "min_out_frames": 5
+        }
+      }
+    },
+    {
+      "frames": 28,
+      "state_counts": {
+        "IN": 0,
+        "STRADDLE": 0,
+        "OUT": 3,
+        "UNKNOWN": 25
+      },
+      "compressed_state_sequence": [
+        "UNKNOWN",
+        "OUT"
+      ],
+      "unknown_ratio": 0.8928571428571429,
+      "monotonic_ignoring_unknown": true,
+      "bad_transitions": [],
+      "outward_overlap_spearman": 0.8626163108921729,
+      "max_reverse_overlap_jump": 0.0363020833333334,
+      "straddle_boundary_inside": true,
+      "event_coverage": false,
+      "sequence_id": "surface_omega/NORMAL_LOCK/RIGHT",
+      "surface_id": "surface_omega",
+      "direction": "RIGHT",
+      "active_boundary": "RIGHT",
+      "plan": {
+        "direction": "RIGHT",
+        "active_boundary": "RIGHT",
+        "axis": "horizontal",
+        "distance_m": 5.418667538960776,
+        "facade_width_m": 37.78593444824219,
+        "facade_height_m": 20.160001635551453,
+        "image_footprint_width_m": 10.83733507792155,
+        "image_footprint_height_m": 8.128001308441162,
+        "step_m": 1.0,
+        "steps": 28,
+        "travel_m": 26.31163476308187,
+        "thresholds": {
+          "min_in_frames": 5,
+          "min_straddle_frames": 5,
+          "min_out_frames": 5
+        }
+      }
+    },
+    {
+      "frames": 18,
+      "state_counts": {
+        "IN": 0,
+        "STRADDLE": 2,
+        "OUT": 3,
+        "UNKNOWN": 13
+      },
+      "compressed_state_sequence": [
+        "UNKNOWN",
+        "STRADDLE",
+        "UNKNOWN",
+        "STRADDLE",
+        "UNKNOWN",
+        "OUT"
+      ],
+      "unknown_ratio": 0.7222222222222222,
+      "monotonic_ignoring_unknown": true,
+      "bad_transitions": [],
+      "outward_overlap_spearman": 0.977296181630547,
+      "max_reverse_overlap_jump": 0.020156249999999987,
+      "straddle_boundary_inside": true,
+      "event_coverage": false,
+      "sequence_id": "surface_omega/NORMAL_LOCK/UP",
+      "surface_id": "surface_omega",
+      "direction": "UP",
+      "active_boundary": "TOP",
+      "plan": {
+        "direction": "UP",
+        "active_boundary": "TOP",
+        "axis": "vertical",
+        "distance_m": 5.418667538960776,
+        "facade_width_m": 37.78593444824219,
+        "facade_height_m": 20.160001635551453,
+        "image_footprint_width_m": 10.83733507792155,
+        "image_footprint_height_m": 8.128001308441162,
+        "step_m": 1.0,
+        "steps": 18,
+        "travel_m": 16.144001471996308,
+        "thresholds": {
+          "min_in_frames": 5,
+          "min_straddle_frames": 5,
+          "min_out_frames": 5
+        }
+      }
+    },
+    {
+      "frames": 22,
+      "state_counts": {
+        "IN": 0,
+        "STRADDLE": 0,
+        "OUT": 3,
+        "UNKNOWN": 19
+      },
+      "compressed_state_sequence": [
+        "UNKNOWN",
+        "OUT"
+      ],
+      "unknown_ratio": 0.8636363636363636,
+      "monotonic_ignoring_unknown": true,
+      "bad_transitions": [],
+      "outward_overlap_spearman": 0.0,
+      "max_reverse_overlap_jump": 0.0,
+      "straddle_boundary_inside": true,
+      "event_coverage": false,
+      "sequence_id": "surface_sigma/NORMAL_LOCK/DOWN",
+      "surface_id": "surface_sigma",
+      "direction": "DOWN",
+      "active_boundary": "BOTTOM",
+      "plan": {
+        "direction": "DOWN",
+        "active_boundary": "BOTTOM",
+        "axis": "vertical",
+        "distance_m": 7.779349825541179,
+        "facade_width_m": 30.970657348632812,
+        "facade_height_m": 24.58628092288971,
+        "image_footprint_width_m": 15.558699651082357,
+        "image_footprint_height_m": 11.669024738311768,
+        "step_m": 1.0,
+        "steps": 22,
+        "travel_m": 20.127652830600738,
+        "thresholds": {
+          "min_in_frames": 5,
+          "min_straddle_frames": 5,
+          "min_out_frames": 5
+        }
+      }
+    },
+    {
+      "frames": 27,
+      "state_counts": {
+        "IN": 0,
+        "STRADDLE": 0,
+        "OUT": 3,
+        "UNKNOWN": 24
+      },
+      "compressed_state_sequence": [
+        "UNKNOWN",
+        "OUT"
+      ],
+      "unknown_ratio": 0.8888888888888888,
+      "monotonic_ignoring_unknown": true,
+      "bad_transitions": [],
+      "outward_overlap_spearman": 0.0,
+      "max_reverse_overlap_jump": 0.0,
+      "straddle_boundary_inside": true,
+      "event_coverage": false,
+      "sequence_id": "surface_sigma/NORMAL_LOCK/LEFT",
+      "surface_id": "surface_sigma",
+      "direction": "LEFT",
+      "active_boundary": "LEFT",
+      "plan": {
+        "direction": "LEFT",
+        "active_boundary": "LEFT",
+        "axis": "horizontal",
+        "distance_m": 7.779349825541179,
+        "facade_width_m": 30.970657348632812,
+        "facade_height_m": 24.58628092288971,
+        "image_footprint_width_m": 15.558699651082357,
+        "image_footprint_height_m": 11.669024738311768,
+        "step_m": 1.0,
+        "steps": 27,
+        "travel_m": 25.264678499857585,
+        "thresholds": {
+          "min_in_frames": 5,
+          "min_straddle_frames": 5,
+          "min_out_frames": 5
+        }
+      }
+    },
+    {
+      "frames": 27,
+      "state_counts": {
+        "IN": 0,
+        "STRADDLE": 0,
+        "OUT": 3,
+        "UNKNOWN": 24
+      },
+      "compressed_state_sequence": [
+        "UNKNOWN",
+        "OUT"
+      ],
+      "unknown_ratio": 0.8888888888888888,
+      "monotonic_ignoring_unknown": true,
+      "bad_transitions": [],
+      "outward_overlap_spearman": 0.0,
+      "max_reverse_overlap_jump": 0.0,
+      "straddle_boundary_inside": true,
+      "event_coverage": false,
+      "sequence_id": "surface_sigma/NORMAL_LOCK/RIGHT",
+      "surface_id": "surface_sigma",
+      "direction": "RIGHT",
+      "active_boundary": "RIGHT",
+      "plan": {
+        "direction": "RIGHT",
+        "active_boundary": "RIGHT",
+        "axis": "horizontal",
+        "distance_m": 7.779349825541179,
+        "facade_width_m": 30.970657348632812,
+        "facade_height_m": 24.58628092288971,
+        "image_footprint_width_m": 15.558699651082357,
+        "image_footprint_height_m": 11.669024738311768,
+        "step_m": 1.0,
+        "steps": 27,
+        "travel_m": 25.264678499857585,
+        "thresholds": {
+          "min_in_frames": 5,
+          "min_straddle_frames": 5,
+          "min_out_frames": 5
+        }
+      }
+    },
+    {
+      "frames": 22,
+      "state_counts": {
+        "IN": 0,
+        "STRADDLE": 0,
+        "OUT": 3,
+        "UNKNOWN": 19
+      },
+      "compressed_state_sequence": [
+        "UNKNOWN",
+        "OUT"
+      ],
+      "unknown_ratio": 0.8636363636363636,
+      "monotonic_ignoring_unknown": true,
+      "bad_transitions": [],
+      "outward_overlap_spearman": 0.0,
+      "max_reverse_overlap_jump": 0.0,
+      "straddle_boundary_inside": true,
+      "event_coverage": false,
+      "sequence_id": "surface_sigma/NORMAL_LOCK/UP",
+      "surface_id": "surface_sigma",
+      "direction": "UP",
+      "active_boundary": "TOP",
+      "plan": {
+        "direction": "UP",
+        "active_boundary": "TOP",
+        "axis": "vertical",
+        "distance_m": 7.779349825541179,
+        "facade_width_m": 30.970657348632812,
+        "facade_height_m": 24.58628092288971,
+        "image_footprint_width_m": 15.558699651082357,
+        "image_footprint_height_m": 11.669024738311768,
+        "step_m": 1.0,
+        "steps": 22,
+        "travel_m": 20.127652830600738,
+        "thresholds": {
+          "min_in_frames": 5,
+          "min_straddle_frames": 5,
+          "min_out_frames": 5
+        }
+      }
+    }
+  ],
+  "image_assets": [
+    "docs/assets/geo06/contact_surface_omega_NORMAL_LOCK_DOWN.jpg",
+    "docs/assets/geo06/triptych_surface_omega_NORMAL_LOCK_DOWN.jpg",
+    "docs/assets/geo06/straddle_surface_omega_NORMAL_LOCK_DOWN.jpg",
+    "docs/assets/geo06/failure_surface_omega_NORMAL_LOCK_DOWN.jpg",
+    "docs/assets/geo06/contact_surface_omega_NORMAL_LOCK_LEFT.jpg",
+    "docs/assets/geo06/triptych_surface_omega_NORMAL_LOCK_LEFT.jpg",
+    "docs/assets/geo06/straddle_surface_omega_NORMAL_LOCK_LEFT.jpg",
+    "docs/assets/geo06/failure_surface_omega_NORMAL_LOCK_LEFT.jpg",
+    "docs/assets/geo06/contact_surface_omega_NORMAL_LOCK_RIGHT.jpg",
+    "docs/assets/geo06/triptych_surface_omega_NORMAL_LOCK_RIGHT.jpg",
+    "docs/assets/geo06/straddle_surface_omega_NORMAL_LOCK_RIGHT.jpg",
+    "docs/assets/geo06/failure_surface_omega_NORMAL_LOCK_RIGHT.jpg",
+    "docs/assets/geo06/contact_surface_omega_NORMAL_LOCK_UP.jpg",
+    "docs/assets/geo06/triptych_surface_omega_NORMAL_LOCK_UP.jpg",
+    "docs/assets/geo06/straddle_surface_omega_NORMAL_LOCK_UP.jpg",
+    "docs/assets/geo06/failure_surface_omega_NORMAL_LOCK_UP.jpg",
+    "docs/assets/geo06/contact_surface_sigma_NORMAL_LOCK_DOWN.jpg",
+    "docs/assets/geo06/triptych_surface_sigma_NORMAL_LOCK_DOWN.jpg",
+    "docs/assets/geo06/straddle_surface_sigma_NORMAL_LOCK_DOWN.jpg",
+    "docs/assets/geo06/failure_surface_sigma_NORMAL_LOCK_DOWN.jpg",
+    "docs/assets/geo06/contact_surface_sigma_NORMAL_LOCK_LEFT.jpg",
+    "docs/assets/geo06/triptych_surface_sigma_NORMAL_LOCK_LEFT.jpg",
+    "docs/assets/geo06/straddle_surface_sigma_NORMAL_LOCK_LEFT.jpg",
+    "docs/assets/geo06/failure_surface_sigma_NORMAL_LOCK_LEFT.jpg",
+    "docs/assets/geo06/contact_surface_sigma_NORMAL_LOCK_RIGHT.jpg",
+    "docs/assets/geo06/triptych_surface_sigma_NORMAL_LOCK_RIGHT.jpg",
+    "docs/assets/geo06/straddle_surface_sigma_NORMAL_LOCK_RIGHT.jpg",
+    "docs/assets/geo06/failure_surface_sigma_NORMAL_LOCK_RIGHT.jpg",
+    "docs/assets/geo06/contact_surface_sigma_NORMAL_LOCK_UP.jpg",
+    "docs/assets/geo06/triptych_surface_sigma_NORMAL_LOCK_UP.jpg",
+    "docs/assets/geo06/straddle_surface_sigma_NORMAL_LOCK_UP.jpg",
+    "docs/assets/geo06/failure_surface_sigma_NORMAL_LOCK_UP.jpg",
+    "docs/assets/geo06/rejected_candidate_example.jpg"
+  ]
+}

@@ -88,3 +88,23 @@ The public repository contains source code, tests, configuration, key validation
 The complete GEO-0.5R2 audit archive is not part of the repository. Its SHA-256 is recorded in the audit notes and release manifest:
 
 `12d478035955b54ec39510517131458e08a19db53e27ba10ab0fe29626c7398b`
+
+## GEO-0.6 data-feasibility audit
+
+GEO-0.6 evaluates two new Town10HD_Opt facade candidates with collision-raycast terminal lines and eight NORMAL_LOCK outward sweeps (`LEFT`, `RIGHT`, `UP`, `DOWN`). It is not a JEPA experiment and no training was run.
+
+The audit is published in [`docs/GEO06_VISUAL_AUDIT.md`](docs/GEO06_VISUAL_AUDIT.md), with compressed real RGB audit images under [`docs/assets/geo06/`](docs/assets/geo06/). The result is intentionally a failure audit: sensor pairing and trajectory ordering pass, but only one of the two candidates remains depth-consistent. The second candidate has a `0.731 m` collision-raycast versus z-depth offset, and the selected facade has too much depth-visible occlusion for the `UNKNOWN <= 10%` requirement. Event coverage is `0/8` complete `IN -> STRADDLE -> OUT` tracks.
+
+```text
+SCENE_SUITABILITY: FAIL
+SENSOR_PAIRING: PASS
+PHYSICAL_BOUNDARY_GT: FAIL
+BOUNDARY_VISIBILITY: FAIL
+TRAJECTORY_ORDERING: PASS
+EVENT_COVERAGE: FAIL
+OPERATOR_VISUAL_REVIEW: PENDING
+READY_FOR_DATASET_EXPANSION: FAIL
+READY_FOR_JEPA: NOT_EVALUATED
+```
+
+GEO-0.6 raw RGB-D is retained only in the server's independent result directory while the audit is reviewed; it is not tracked in GitHub. The compact manifests, frame metadata, failure images and thresholds are tracked. No GEO-0.5R2 result was rewritten.

@@ -1,0 +1,9 @@
+sequence_id,surface_id,direction,active_boundary,frames,state_counts,compressed_state_sequence,unknown_ratio,monotonic_ignoring_unknown,outward_overlap_spearman,max_reverse_overlap_jump,event_coverage
+surface_omega/NORMAL_LOCK/DOWN,surface_omega,DOWN,BOTTOM,18,"{""IN"": 0, ""STRADDLE"": 0, ""OUT"": 3, ""UNKNOWN"": 15}","[""UNKNOWN"", ""OUT""]",0.8333333333333334,True,0.9628482972136224,0.02026041666666667,False
+surface_omega/NORMAL_LOCK/LEFT,surface_omega,LEFT,LEFT,28,"{""IN"": 0, ""STRADDLE"": 0, ""OUT"": 3, ""UNKNOWN"": 25}","[""UNKNOWN"", ""OUT""]",0.8928571428571429,True,0.922824302134647,0.0363020833333334,False
+surface_omega/NORMAL_LOCK/RIGHT,surface_omega,RIGHT,RIGHT,28,"{""IN"": 0, ""STRADDLE"": 0, ""OUT"": 3, ""UNKNOWN"": 25}","[""UNKNOWN"", ""OUT""]",0.8928571428571429,True,0.8626163108921729,0.0363020833333334,False
+surface_omega/NORMAL_LOCK/UP,surface_omega,UP,TOP,18,"{""IN"": 0, ""STRADDLE"": 2, ""OUT"": 3, ""UNKNOWN"": 13}","[""UNKNOWN"", ""STRADDLE"", ""UNKNOWN"", ""STRADDLE"", ""UNKNOWN"", ""OUT""]",0.7222222222222222,True,0.977296181630547,0.020156249999999987,False
+surface_sigma/NORMAL_LOCK/DOWN,surface_sigma,DOWN,BOTTOM,22,"{""IN"": 0, ""STRADDLE"": 0, ""OUT"": 3, ""UNKNOWN"": 19}","[""UNKNOWN"", ""OUT""]",0.8636363636363636,True,0.0,0.0,False
+surface_sigma/NORMAL_LOCK/LEFT,surface_sigma,LEFT,LEFT,27,"{""IN"": 0, ""STRADDLE"": 0, ""OUT"": 3, ""UNKNOWN"": 24}","[""UNKNOWN"", ""OUT""]",0.8888888888888888,True,0.0,0.0,False
+surface_sigma/NORMAL_LOCK/RIGHT,surface_sigma,RIGHT,RIGHT,27,"{""IN"": 0, ""STRADDLE"": 0, ""OUT"": 3, ""UNKNOWN"": 24}","[""UNKNOWN"", ""OUT""]",0.8888888888888888,True,0.0,0.0,False
+surface_sigma/NORMAL_LOCK/UP,surface_sigma,UP,TOP,22,"{""IN"": 0, ""STRADDLE"": 0, ""OUT"": 3, ""UNKNOWN"": 19}","[""UNKNOWN"", ""OUT""]",0.8636363636363636,True,0.0,0.0,False
