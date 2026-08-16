@@ -4,6 +4,8 @@
   "pre_cleanup_total_bytes": 18430413740,
   "final_project_disk_bytes": 30334536,
   "final_project_disk_note": "recorded compact-project measurement; current apparent-size checks may differ by filesystem metadata",
+  "post_geo06_compact_project_disk_bytes": 33760050,
+  "post_geo06_compact_project_disk_note": "measured after GEO-0.6 raw frames were moved to trash; excludes .git and raw RGB-D",
   "disposition_mechanism": "gio trash moved quarantined content to the desktop trash; no permanent direct deletion was used",
   "items": [
     {
@@ -141,6 +143,14 @@
       "final_disposition": "MOVED_TO_GIT_TRACKED_COMPACT_RESULT",
       "reason": "Only compact metrics, fitted surfaces, figures, logs and manifests retained.",
       "recoverability": "tracked in git"
+    },
+    {
+      "path": "results/geo06/raw",
+      "pre_cleanup_size_bytes": 2239123652,
+      "classification": "failed GEO-0.6 raw RGB-D capture",
+      "final_disposition": "MOVED_TO_TRASH",
+      "reason": "GEO-0.6 failed event-coverage and visibility gates; compact validation and representative images were committed before cleanup, then the raw directory was moved with gio trash.",
+      "recoverability": "recoverable from trash until emptied"
     }
   ],
   "unverified_items": [

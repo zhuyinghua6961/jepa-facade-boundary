@@ -107,4 +107,4 @@ READY_FOR_DATASET_EXPANSION: FAIL
 READY_FOR_JEPA: NOT_EVALUATED
 ```
 
-GEO-0.6 raw RGB-D is retained only in the server's independent result directory while the audit is reviewed; it is not tracked in GitHub. The compact manifests, frame metadata, failure images and thresholds are tracked. No GEO-0.5R2 result was rewritten.
+GEO-0.6 raw RGB-D was never tracked in GitHub and, after the failed event-coverage gate was recorded, the `results/geo06/raw` directory was moved to the user trash with `gio trash`. Only compact manifests, frame metadata, failure images and thresholds remain. No GEO-0.5R2 result was rewritten.
