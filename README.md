@@ -7,7 +7,7 @@ Reusable CARLA geometry and RGB-D tooling for active facade-boundary perception 
 The repository contains the GEO-0.5R2 implementation and its reproducible audit. CARLA 0.10.0 UE5 / Town10HD_Opt was used with 640x480 RGB-D sensors, horizontal FOV 90 degrees, synchronous mode, fixed delta 0.05 s, and NORMAL_LOCK camera motion.
 
 ```text
-pytest: 17 passed
+pytest: 34 passed
 RGB-D: 960 pairs
 surface_alpha: bbox 48391
 surface_beta: bbox 48393
