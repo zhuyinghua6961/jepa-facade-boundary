@@ -1,0 +1,13 @@
+candidate_index,bbox_id,automatic_decision,overview_path,instance_overlay_path,operator_accept,operator_notes
+1,48389,REJECTED,docs/assets/act0/candidates/candidate_01_bbox_48389_overview.jpg,docs/assets/act0/candidates/candidate_01_bbox_48389_instance_overlay.jpg,,
+6,48397,REJECTED,docs/assets/act0/candidates/candidate_06_bbox_48397_overview.jpg,docs/assets/act0/candidates/candidate_06_bbox_48397_instance_overlay.jpg,,
+7,48399,REJECTED,docs/assets/act0/candidates/candidate_07_bbox_48399_overview.jpg,docs/assets/act0/candidates/candidate_07_bbox_48399_instance_overlay.jpg,,
+8,48401,REJECTED,docs/assets/act0/candidates/candidate_08_bbox_48401_overview.jpg,docs/assets/act0/candidates/candidate_08_bbox_48401_instance_overlay.jpg,,
+10,48418,REJECTED,docs/assets/act0/candidates/candidate_10_bbox_48418_overview.jpg,docs/assets/act0/candidates/candidate_10_bbox_48418_instance_overlay.jpg,,
+11,48436,REJECTED,docs/assets/act0/candidates/candidate_11_bbox_48436_overview.jpg,docs/assets/act0/candidates/candidate_11_bbox_48436_instance_overlay.jpg,,
+12,48420,REJECTED,docs/assets/act0/candidates/candidate_12_bbox_48420_overview.jpg,docs/assets/act0/candidates/candidate_12_bbox_48420_instance_overlay.jpg,,
+13,48419,REJECTED,docs/assets/act0/candidates/candidate_13_bbox_48419_overview.jpg,docs/assets/act0/candidates/candidate_13_bbox_48419_instance_overlay.jpg,,
+17,48391,REJECTED,docs/assets/act0/candidates/candidate_17_bbox_48391_overview.jpg,docs/assets/act0/candidates/candidate_17_bbox_48391_instance_overlay.jpg,,
+18,48393,REJECTED,docs/assets/act0/candidates/candidate_18_bbox_48393_overview.jpg,docs/assets/act0/candidates/candidate_18_bbox_48393_instance_overlay.jpg,,
+19,48395,REJECTED,docs/assets/act0/candidates/candidate_19_bbox_48395_overview.jpg,docs/assets/act0/candidates/candidate_19_bbox_48395_instance_overlay.jpg,,
+20,47839,REJECTED,docs/assets/act0/candidates/candidate_20_bbox_47839_overview.jpg,docs/assets/act0/candidates/candidate_20_bbox_47839_instance_overlay.jpg,,

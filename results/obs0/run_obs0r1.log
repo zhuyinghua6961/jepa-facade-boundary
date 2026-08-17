@@ -1,0 +1,564 @@
+{
+  "schema": "obs0.validation_r1.v1",
+  "source": "leakage-corrected offline reanalysis of OBS-0 frames",
+  "historical_obs0_files_unchanged": {
+    "results/obs0/validation.json": "28cb5d951954b66252dd34283f5f49d6dd37e49fb1d352f58d0702d0e289c1a6",
+    "results/obs0/probe_results.json": "a9f61941949b9843cd475b5894e68a50e1c22801bc2eb30e1fa6cd578e2fa7e0",
+    "results/obs0/alias_summary.json": "25e128e4031c454ceac8d1fbd20f42600d3eabe5b27007e51846585a1d05d016",
+    "results/obs0/frame_targets.csv": "09fc5d13cab6969e4d87ddb9b1d189cbb4f28b8d30daa37d1b8b5bdd51ab3bdb"
+  },
+  "runtime_safety": {
+    "descriptor_dim": 128,
+    "max_probe_feature_dim": 262,
+    "max_train_rows": 10,
+    "max_linear_system_dimension": 10,
+    "ridge_solver": "adaptive smaller-of-sample-and-feature-space",
+    "opencv_threads": 1,
+    "address_space_limit_bytes": 2147483648
+  },
+  "gates": {
+    "HISTORY_BOUNDARY_LEAKAGE_FIXED": {
+      "status": "PASS",
+      "reason": "grouped previous descriptors and per-trajectory step-0 invalid mask"
+    },
+    "TRAIN_ONLY_PREPROCESSING": {
+      "status": "PASS",
+      "reason": "ridge standardization fitted inside each train-direction split"
+    },
+    "SYNTHETIC_ALIGNMENT_TEST": {
+      "status": "PASS",
+      "metrics": {
+        "raw_ssim": 0.19025127900835984,
+        "phase_aligned_ssim": 0.9912785413549057,
+        "phase_shift_px": 12.666689048453367,
+        "hog_cosine": 0.729135131759645,
+        "color_histogram_distance": 0.0
+      },
+      "known_shift_px": [
+        7,
+        -5
+      ]
+    },
+    "OBS0R1_REPRODUCIBILITY": {
+      "status": "PASS",
+      "records": 20
+    },
+    "FIXED_SCHEDULE_SHORTCUT_PRESENT": {
+      "status": "PASS",
+      "formula_residual_max_m": 0.0
+    },
+    "RELATIVE_ODOMETRY_PREDICTIVITY": {
+      "status": "DIAGNOSTIC_PASS",
+      "evidence": {
+        "MAE_m": 0.12002909796314262,
+        "median_absolute_error_m": 0.11736178467507297,
+        "spearman_rho": 1.0,
+        "prediction_range_m": [
+          0.7373908826382154,
+          4.975994180407372
+        ],
+        "constant_baseline_improvement_m": 1.1299709020368573
+      }
+    },
+    "RGB_INCREMENTAL_VALUE_OVER_ODOMETRY": {
+      "status": "FAIL",
+      "increment_mae_reduction_m": -0.7164236870451653
+    },
+    "RGB_HISTORY_INCREMENTAL_VALUE": {
+      "status": "DIAGNOSTIC_PASS",
+      "increment_mae_reduction_m": 0.22534555160782133
+    },
+    "SINGLE_FRAME_RGB_OBSERVABILITY": {
+      "status": "DIAGNOSTIC_PASS",
+      "evidence": {
+        "MAE_m": 1.0745693745721554,
+        "median_absolute_error_m": 1.1015648136161622,
+        "spearman_rho": 0.10566112966540278,
+        "prediction_range_m": [
+          1.9568987092400316,
+          5.071014877268457
+        ],
+        "constant_baseline_improvement_m": 0.1754306254278446
+      }
+    },
+    "BOUNDARY_DISTANCE_OBSERVABILITY": {
+      "status": "INCONCLUSIVE",
+      "reason": "two trajectories on one facade; no cross-surface validation"
+    }
+  },
+  "probes": {
+    "B0": {
+      "input_definition": "constant mean",
+      "splits": {
+        "train_LEFT_test_RIGHT": {
+          "metrics": {
+            "MAE_m": 1.25,
+            "median_absolute_error_m": 1.25,
+            "spearman_rho": null,
+            "prediction_range_m": [
+              2.75,
+              2.75
+            ],
+            "constant_baseline_improvement_m": 0.0
+          },
+          "constant_baseline": {
+            "MAE_m": 1.25,
+            "median_absolute_error_m": 1.25,
+            "spearman_rho": null,
+            "prediction_range_m": [
+              2.75,
+              2.75
+            ]
+          },
+          "test_count": 10
+        },
+        "train_RIGHT_test_LEFT": {
+          "metrics": {
+            "MAE_m": 1.25,
+            "median_absolute_error_m": 1.25,
+            "spearman_rho": null,
+            "prediction_range_m": [
+              2.75,
+              2.75
+            ],
+            "constant_baseline_improvement_m": 0.0
+          },
+          "constant_baseline": {
+            "MAE_m": 1.25,
+            "median_absolute_error_m": 1.25,
+            "spearman_rho": null,
+            "prediction_range_m": [
+              2.75,
+              2.75
+            ]
+          },
+          "test_count": 10
+        }
+      },
+      "merged_direction_holdout": {
+        "MAE_m": 1.25,
+        "median_absolute_error_m": 1.25,
+        "spearman_rho": null,
+        "prediction_range_m": [
+          2.75,
+          2.75
+        ],
+        "constant_baseline_improvement_m": 0.0
+      }
+    },
+    "B1": {
+      "input_definition": "step index only; FIXED_SCHEDULE_SHORTCUT",
+      "splits": {
+        "train_LEFT_test_RIGHT": {
+          "metrics": {
+            "MAE_m": 0.11363636363636383,
+            "median_absolute_error_m": 0.11363636363636376,
+            "spearman_rho": 0.9999999999999999,
+            "prediction_range_m": [
+              0.7045454545454546,
+              4.795454545454545
+            ],
+            "constant_baseline_improvement_m": 1.1363636363636362
+          },
+          "constant_baseline": {
+            "MAE_m": 1.25,
+            "median_absolute_error_m": 1.25,
+            "spearman_rho": null,
+            "prediction_range_m": [
+              2.75,
+              2.75
+            ]
+          },
+          "test_count": 10
+        },
+        "train_RIGHT_test_LEFT": {
+          "metrics": {
+            "MAE_m": 0.11363636363636383,
+            "median_absolute_error_m": 0.11363636363636376,
+            "spearman_rho": 0.9999999999999999,
+            "prediction_range_m": [
+              0.7045454545454546,
+              4.795454545454545
+            ],
+            "constant_baseline_improvement_m": 1.1363636363636362
+          },
+          "constant_baseline": {
+            "MAE_m": 1.25,
+            "median_absolute_error_m": 1.25,
+            "spearman_rho": null,
+            "prediction_range_m": [
+              2.75,
+              2.75
+            ]
+          },
+          "test_count": 10
+        }
+      },
+      "merged_direction_holdout": {
+        "MAE_m": 0.11363636363636383,
+        "median_absolute_error_m": 0.11363636363636376,
+        "spearman_rho": 1.0,
+        "prediction_range_m": [
+          0.7045454545454546,
+          4.795454545454545
+        ],
+        "constant_baseline_improvement_m": 1.1363636363636362
+      }
+    },
+    "B2": {
+      "input_definition": "relative odometry only; no step index",
+      "splits": {
+        "train_LEFT_test_RIGHT": {
+          "metrics": {
+            "MAE_m": 0.12002909796314262,
+            "median_absolute_error_m": 0.11736178467507297,
+            "spearman_rho": 0.9999999999999999,
+            "prediction_range_m": [
+              0.7373908826382154,
+              4.975994180407372
+            ],
+            "constant_baseline_improvement_m": 1.1299709020368573
+          },
+          "constant_baseline": {
+            "MAE_m": 1.25,
+            "median_absolute_error_m": 1.25,
+            "spearman_rho": null,
+            "prediction_range_m": [
+              2.75,
+              2.75
+            ]
+          },
+          "test_count": 10
+        },
+        "train_RIGHT_test_LEFT": {
+          "metrics": {
+            "MAE_m": 0.12002909796314262,
+            "median_absolute_error_m": 0.11736178467507297,
+            "spearman_rho": 0.9999999999999999,
+            "prediction_range_m": [
+              0.7373908826382154,
+              4.975994180407372
+            ],
+            "constant_baseline_improvement_m": 1.1299709020368573
+          },
+          "constant_baseline": {
+            "MAE_m": 1.25,
+            "median_absolute_error_m": 1.25,
+            "spearman_rho": null,
+            "prediction_range_m": [
+              2.75,
+              2.75
+            ]
+          },
+          "test_count": 10
+        }
+      },
+      "merged_direction_holdout": {
+        "MAE_m": 0.12002909796314262,
+        "median_absolute_error_m": 0.11736178467507297,
+        "spearman_rho": 1.0,
+        "prediction_range_m": [
+          0.7373908826382154,
+          4.975994180407372
+        ],
+        "constant_baseline_improvement_m": 1.1299709020368573
+      }
+    },
+    "V0": {
+      "input_definition": "current RGB only",
+      "splits": {
+        "train_LEFT_test_RIGHT": {
+          "metrics": {
+            "MAE_m": 1.0659239059880978,
+            "median_absolute_error_m": 1.1015648136161622,
+            "spearman_rho": 0.05454545454545454,
+            "prediction_range_m": [
+              2.1240040774696904,
+              5.071014877268457
+            ],
+            "constant_baseline_improvement_m": 0.18407609401190217
+          },
+          "constant_baseline": {
+            "MAE_m": 1.25,
+            "median_absolute_error_m": 1.25,
+            "spearman_rho": null,
+            "prediction_range_m": [
+              2.75,
+              2.75
+            ]
+          },
+          "test_count": 10
+        },
+        "train_RIGHT_test_LEFT": {
+          "metrics": {
+            "MAE_m": 1.083214843156212,
+            "median_absolute_error_m": 1.0949913232545319,
+            "spearman_rho": 0.006060606060606061,
+            "prediction_range_m": [
+              1.9568987092400316,
+              4.8481349846442745
+            ],
+            "constant_baseline_improvement_m": 0.16678515684378792
+          },
+          "constant_baseline": {
+            "MAE_m": 1.25,
+            "median_absolute_error_m": 1.25,
+            "spearman_rho": null,
+            "prediction_range_m": [
+              2.75,
+              2.75
+            ]
+          },
+          "test_count": 10
+        }
+      },
+      "merged_direction_holdout": {
+        "MAE_m": 1.0745693745721554,
+        "median_absolute_error_m": 1.1015648136161622,
+        "spearman_rho": 0.10566112966540278,
+        "prediction_range_m": [
+          1.9568987092400316,
+          5.071014877268457
+        ],
+        "constant_baseline_improvement_m": 0.1754306254278446
+      }
+    },
+    "V1": {
+      "input_definition": "RGB history only; no pose/odometry",
+      "splits": {
+        "train_LEFT_test_RIGHT": {
+          "metrics": {
+            "MAE_m": 0.8573636092280914,
+            "median_absolute_error_m": 0.8215292563887358,
+            "spearman_rho": 0.4666666666666666,
+            "prediction_range_m": [
+              1.886621009826819,
+              5.064203361235757
+            ],
+            "constant_baseline_improvement_m": 0.3926363907719086
+          },
+          "constant_baseline": {
+            "MAE_m": 1.25,
+            "median_absolute_error_m": 1.25,
+            "spearman_rho": null,
+            "prediction_range_m": [
+              2.75,
+              2.75
+            ]
+          },
+          "test_count": 10
+        },
+        "train_RIGHT_test_LEFT": {
+          "metrics": {
+            "MAE_m": 0.8410840367005769,
+            "median_absolute_error_m": 0.9009881936888731,
+            "spearman_rho": 0.5393939393939393,
+            "prediction_range_m": [
+              1.9664803512598241,
+              4.872563808173213
+            ],
+            "constant_baseline_improvement_m": 0.40891596329942315
+          },
+          "constant_baseline": {
+            "MAE_m": 1.25,
+            "median_absolute_error_m": 1.25,
+            "spearman_rho": null,
+            "prediction_range_m": [
+              2.75,
+              2.75
+            ]
+          },
+          "test_count": 10
+        }
+      },
+      "merged_direction_holdout": {
+        "MAE_m": 0.8492238229643341,
+        "median_absolute_error_m": 0.8446089032976734,
+        "spearman_rho": 0.5343434271650369,
+        "prediction_range_m": [
+          1.886621009826819,
+          5.064203361235757
+        ],
+        "constant_baseline_improvement_m": 0.4007761770356659
+      }
+    },
+    "F1": {
+      "input_definition": "RGB history + relative odometry",
+      "splits": {
+        "train_LEFT_test_RIGHT": {
+          "metrics": {
+            "MAE_m": 0.8463903825472174,
+            "median_absolute_error_m": 0.8136493745593769,
+            "spearman_rho": 0.6242424242424242,
+            "prediction_range_m": [
+              1.9134433160221787,
+              5.0644043618115315
+            ],
+            "constant_baseline_improvement_m": 0.40360961745278257
+          },
+          "constant_baseline": {
+            "MAE_m": 1.25,
+            "median_absolute_error_m": 1.25,
+            "spearman_rho": null,
+            "prediction_range_m": [
+              2.75,
+              2.75
+            ]
+          },
+          "test_count": 10
+        },
+        "train_RIGHT_test_LEFT": {
+          "metrics": {
+            "MAE_m": 0.8265151874693984,
+            "median_absolute_error_m": 0.895951930082503,
+            "spearman_rho": 0.5393939393939393,
+            "prediction_range_m": [
+              1.9921615396645445,
+              4.876440784243515
+            ],
+            "constant_baseline_improvement_m": 0.42348481253060155
+          },
+          "constant_baseline": {
+            "MAE_m": 1.25,
+            "median_absolute_error_m": 1.25,
+            "spearman_rho": null,
+            "prediction_range_m": [
+              2.75,
+              2.75
+            ]
+          },
+          "test_count": 10
+        }
+      },
+      "merged_direction_holdout": {
+        "MAE_m": 0.836452785008308,
+        "median_absolute_error_m": 0.8487543579258645,
+        "spearman_rho": 0.5735889896121865,
+        "prediction_range_m": [
+          1.9134433160221787,
+          5.0644043618115315
+        ],
+        "constant_baseline_improvement_m": 0.413547214991692
+      }
+    },
+    "A0": {
+      "input_definition": "absolute pose + action direction",
+      "splits": {
+        "train_LEFT_test_RIGHT": {
+          "metrics": {
+            "MAE_m": 4.131818181818181,
+            "median_absolute_error_m": 4.090909090909091,
+            "spearman_rho": -0.9999999999999999,
+            "prediction_range_m": [
+              4.795454545454545,
+              8.886363636363637
+            ],
+            "constant_baseline_improvement_m": -2.881818181818181
+          },
+          "constant_baseline": {
+            "MAE_m": 1.25,
+            "median_absolute_error_m": 1.25,
+            "spearman_rho": null,
+            "prediction_range_m": [
+              2.75,
+              2.75
+            ]
+          },
+          "test_count": 10
+        },
+        "train_RIGHT_test_LEFT": {
+          "metrics": {
+            "MAE_m": 4.131818181818181,
+            "median_absolute_error_m": 4.090909090909091,
+            "spearman_rho": -0.9999999999999999,
+            "prediction_range_m": [
+              4.795454545454545,
+              8.886363636363637
+            ],
+            "constant_baseline_improvement_m": -2.881818181818181
+          },
+          "constant_baseline": {
+            "MAE_m": 1.25,
+            "median_absolute_error_m": 1.25,
+            "spearman_rho": null,
+            "prediction_range_m": [
+              2.75,
+              2.75
+            ]
+          },
+          "test_count": 10
+        }
+      },
+      "merged_direction_holdout": {
+        "MAE_m": 4.131818181818182,
+        "median_absolute_error_m": 4.090909090909091,
+        "spearman_rho": -1.0,
+        "prediction_range_m": [
+          4.795454545454545,
+          8.886363636363637
+        ],
+        "constant_baseline_improvement_m": -2.881818181818182
+      }
+    },
+    "F2": {
+      "input_definition": "RGB history + absolute pose + action direction",
+      "splits": {
+        "train_LEFT_test_RIGHT": {
+          "metrics": {
+            "MAE_m": 0.8693282300447643,
+            "median_absolute_error_m": 0.9267898088998809,
+            "spearman_rho": 0.4666666666666666,
+            "prediction_range_m": [
+              1.972513018268368,
+              5.063008021408489
+            ],
+            "constant_baseline_improvement_m": 0.38067176995523566
+          },
+          "constant_baseline": {
+            "MAE_m": 1.25,
+            "median_absolute_error_m": 1.25,
+            "spearman_rho": null,
+            "prediction_range_m": [
+              2.75,
+              2.75
+            ]
+          },
+          "test_count": 10
+        },
+        "train_RIGHT_test_LEFT": {
+          "metrics": {
+            "MAE_m": 0.8761045922006296,
+            "median_absolute_error_m": 0.8484201930146855,
+            "spearman_rho": 0.5393939393939393,
+            "prediction_range_m": [
+              2.072740498319181,
+              4.875254050673327
+            ],
+            "constant_baseline_improvement_m": 0.37389540779937036
+          },
+          "constant_baseline": {
+            "MAE_m": 1.25,
+            "median_absolute_error_m": 1.25,
+            "spearman_rho": null,
+            "prediction_range_m": [
+              2.75,
+              2.75
+            ]
+          },
+          "test_count": 10
+        }
+      },
+      "merged_direction_holdout": {
+        "MAE_m": 0.8727164111226969,
+        "median_absolute_error_m": 0.8832176868951389,
+        "spearman_rho": 0.5313245377460254,
+        "prediction_range_m": [
+          1.972513018268368,
+          5.063008021408489
+        ],
+        "constant_baseline_improvement_m": 0.37728358887730307
+      }
+    }
+  },
+  "fixed_schedule_formula": "target=(first_local_straddle_step-step_index)*step_m; B1 is a shortcut baseline, not visual evidence"
+}

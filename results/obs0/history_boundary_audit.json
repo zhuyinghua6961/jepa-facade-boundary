@@ -1,0 +1,17 @@
+{
+  "schema": "obs0r1.history_boundary_audit.v1",
+  "old_obs0_sha256": {
+    "results/obs0/validation.json": "28cb5d951954b66252dd34283f5f49d6dd37e49fb1d352f58d0702d0e289c1a6",
+    "results/obs0/probe_results.json": "a9f61941949b9843cd475b5894e68a50e1c22801bc2eb30e1fa6cd578e2fa7e0",
+    "results/obs0/alias_summary.json": "25e128e4031c454ceac8d1fbd20f42600d3eabe5b27007e51846585a1d05d016",
+    "results/obs0/frame_targets.csv": "09fc5d13cab6969e4d87ddb9b1d189cbb4f28b8d30daa37d1b8b5bdd51ab3bdb"
+  },
+  "records": 20,
+  "group_count": 2,
+  "first_frame_history_valid": {
+    "surface_sigma/MASK-1/10m/LEFT": false,
+    "surface_sigma/MASK-1/10m/RIGHT": false
+  },
+  "cross_group_previous_forbidden": true,
+  "train_only_preprocessing": true
+}

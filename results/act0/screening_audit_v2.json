@@ -1,0 +1,1573 @@
+{
+  "schema": "act0.screening_audit.v2",
+  "phase": "ACT-0S",
+  "source_manifest": "results/act0/scout_manifest.json",
+  "historical_full_physical_gate": {
+    "selected": 0,
+    "candidate_count": 12,
+    "preserved": true
+  },
+  "resource_limits": {
+    "configured_address_space_limit_bytes": 4294967296,
+    "actual_outer_address_space_limit_bytes": 2147483648,
+    "numeric_threads": 1
+  },
+  "thresholds": {
+    "min_contour_views": 2,
+    "min_target_side_fraction": 0.5,
+    "min_external_side_fraction": 0.5,
+    "max_contour_span_range": 0.2,
+    "metric_spread_thresholds_m": [
+      0.05,
+      0.1,
+      0.25,
+      1.0
+    ]
+  },
+  "counts": {
+    "tier_v_pass": 6,
+    "tier_m_official_pass": 0,
+    "tier_p_pass": 3,
+    "scout_pose_insufficient": 2,
+    "instance_grouping_unresolved": 2,
+    "scene_unsuitable": 2,
+    "classifications": {
+      "INSTANCE_GROUPING_UNRESOLVED": 2,
+      "METRIC_ONLY_FAIL": 0,
+      "PHYSICAL_PLANE_ONLY_FAIL": 3,
+      "SCENE_UNSUITABLE": 2,
+      "SCOUT_POSE_INSUFFICIENT": 2,
+      "VISUAL_EVENT_PASS": 3
+    }
+  },
+  "rejection_ablation": {
+    "without_tier_p_tier_v_pass": 6,
+    "scout_edge_not_observed": 2,
+    "instance_grouping_unresolved": 2,
+    "visual_semantics_fail": 2,
+    "individual_current_hard_gate_counts": {
+      "center_target_coverage_out_of_range": 2,
+      "depth_plane_inlier_ratio_too_low": 4,
+      "depth_plane_normal_inconsistent": 2,
+      "depth_plane_residual_too_large": 2,
+      "left_boundary_repeatability_failed": 7,
+      "left_external_contour_insufficient": 7,
+      "left_world_boundary_insufficient": 2,
+      "raycast_depth_disagreement": 7,
+      "raycast_evidence_missing": 2,
+      "right_boundary_repeatability_failed": 7,
+      "right_external_contour_insufficient": 7,
+      "right_world_boundary_insufficient": 2,
+      "target_instance_id_not_stable": 2,
+      "target_mask_fragmented": 4,
+      "terminal_width_too_small_or_degenerate": 3
+    },
+    "current_hard_gate_intersections": {
+      "center_target_coverage_out_of_range + depth_plane_inlier_ratio_too_low + depth_plane_normal_inconsistent + depth_plane_residual_too_large + left_boundary_repeatability_failed + left_external_contour_insufficient + left_world_boundary_insufficient + raycast_evidence_missing + right_boundary_repeatability_failed + right_external_contour_insufficient + right_world_boundary_insufficient + target_instance_id_not_stable + target_mask_fragmented + terminal_width_too_small_or_degenerate": 2,
+      "depth_plane_inlier_ratio_too_low + left_boundary_repeatability_failed + raycast_depth_disagreement": 1,
+      "depth_plane_inlier_ratio_too_low + raycast_depth_disagreement": 1,
+      "left_boundary_repeatability_failed + left_external_contour_insufficient + raycast_depth_disagreement + right_boundary_repeatability_failed + right_external_contour_insufficient": 1,
+      "left_boundary_repeatability_failed + left_external_contour_insufficient + raycast_depth_disagreement + right_boundary_repeatability_failed + right_external_contour_insufficient + terminal_width_too_small_or_degenerate": 1,
+      "left_boundary_repeatability_failed + raycast_depth_disagreement + right_boundary_repeatability_failed + target_mask_fragmented": 2,
+      "left_external_contour_insufficient + right_boundary_repeatability_failed + right_external_contour_insufficient": 1,
+      "left_external_contour_insufficient + right_external_contour_insufficient": 2,
+      "raycast_depth_disagreement": 1
+    }
+  },
+  "gates": {
+    "PUBLIC_ACT0_EVIDENCE": {
+      "status": "FAIL",
+      "candidate_sheets": 12,
+      "reason": "only center-view pixels were persisted; 24 off-center views and residual heatmaps are unavailable"
+    },
+    "SCOUT_SENSOR_PAIRING": {
+      "status": "PASS",
+      "paired_quartets": 36,
+      "quartets": 36
+    },
+    "SCOUT_POSE_COVERAGE": {
+      "status": "FAIL",
+      "insufficient_candidates": 2
+    },
+    "SCREENING_DEFINITION_VALID": {
+      "status": "PASS",
+      "tier_p_can_veto_tier_v": false,
+      "not_observed_counted_as_scene_fail": false
+    },
+    "VISUAL_EVENT_SURFACE_COUNT": {
+      "status": "PASS",
+      "count": 6,
+      "required": 4,
+      "scope": "geometry-reference classification pending operator review"
+    },
+    "METRIC_REPEATABLE_SURFACE_COUNT": {
+      "status": "NOT_EVALUATED",
+      "verified_count": 0,
+      "evaluable_count": 0,
+      "legacy_proxy_sensitivity_counts": {
+        "0.05m": 3,
+        "0.10m": 6,
+        "0.25m": 6,
+        "1.00m": 8
+      }
+    },
+    "PHYSICAL_PLANE_SURFACE_COUNT": {
+      "status": "FAIL",
+      "count": 3,
+      "required": 4
+    },
+    "INSTANCE_GROUPING_RESOLVED": {
+      "status": "FAIL",
+      "unresolved_candidates": 2
+    },
+    "READY_FOR_ADAPTIVE_RESCOUT": {
+      "status": "CONDITIONAL_PASS",
+      "reason": "targeted boundary-view recapture can address pose/evidence gaps without changing historical gates"
+    },
+    "READY_FOR_COUNTERFACTUAL_ROLLOUT": {
+      "status": "FAIL",
+      "reason": "official Tier M and complete public three-view evidence are unavailable"
+    },
+    "READY_FOR_DATASET_EXPANSION": {
+      "status": "NOT_EVALUATED"
+    },
+    "READY_FOR_JEPA": {
+      "status": "NOT_EVALUATED"
+    },
+    "OPERATOR_VISUAL_REVIEW": {
+      "status": "PENDING"
+    }
+  },
+  "candidates": [
+    {
+      "candidate_index": 1,
+      "bbox_id": 48389,
+      "classification": "VISUAL_EVENT_PASS",
+      "classification_rationale": "Both exterior transitions persist across three views; strict plane gate passes, while RIGHT legacy spread is not used by Tier V.",
+      "current_full_physical_gate": "REJECTED",
+      "visual_event_gate": "PASS",
+      "metric_repeatability_gate": "NOT_EVALUATED",
+      "physical_plane_gate": "PASS",
+      "tier_v": {
+        "status": "PASS",
+        "reason": "at least one action side has a stable exterior transition",
+        "sensor_pairing": {
+          "status": "PASS",
+          "view_count": 3,
+          "paired_view_count": 3,
+          "views": [
+            {
+              "view_index": 0,
+              "frame_id": 92278,
+              "paired": true
+            },
+            {
+              "view_index": 1,
+              "frame_id": 92279,
+              "paired": true
+            },
+            {
+              "view_index": 2,
+              "frame_id": 92280,
+              "paired": true
+            }
+          ]
+        },
+        "building_semantic": "PASS",
+        "instance_id_stability": "PASS",
+        "instance_grouping": "RESOLVED_FOR_SELECTED_ID",
+        "largest_component": "PASS",
+        "largest_component_ratio": null,
+        "largest_component_note": "exact ratio was not persisted; legacy threshold result only",
+        "sides": {
+          "LEFT": {
+            "status": "PASS",
+            "reason": "multi-view target/non-target exterior-contour reference",
+            "present_views": 3,
+            "bilateral_views": 3,
+            "span_fractions": [
+              0.4166666666666667,
+              0.4166666666666667,
+              0.4166666666666667
+            ],
+            "span_range": 0.0
+          },
+          "RIGHT": {
+            "status": "PASS",
+            "reason": "multi-view target/non-target exterior-contour reference",
+            "present_views": 3,
+            "bilateral_views": 3,
+            "span_fractions": [
+              0.4166666666666667,
+              0.4166666666666667,
+              0.4166666666666667
+            ],
+            "span_range": 0.0
+          }
+        },
+        "evidence_scope": "geometry reference pending operator visual review",
+        "uses_plane_or_raycast": false
+      },
+      "tier_m": {
+        "status": "NOT_EVALUATED",
+        "reason": "raw contour/depth/K records were not persisted; legacy plane-basis summaries are excluded",
+        "required_sources": [
+          "K",
+          "T_world_camera",
+          "camera_motion_action_axis",
+          "target_side_contour",
+          "z_depth"
+        ],
+        "official": {},
+        "legacy_proxy": {
+          "LEFT": {
+            "view_count": 3,
+            "spread_m": 0.06638122118186604,
+            "source": "legacy_plane_basis_proxy_not_an_official_tier_m_input"
+          },
+          "RIGHT": {
+            "view_count": 3,
+            "spread_m": 1.4906289490322477,
+            "source": "legacy_plane_basis_proxy_not_an_official_tier_m_input"
+          }
+        },
+        "legacy_proxy_sensitivity": {
+          "0.05m": false,
+          "0.10m": true,
+          "0.25m": true,
+          "1.00m": true
+        },
+        "uses_legacy_plane_or_bbox": false
+      },
+      "tier_p": {
+        "status": "PASS",
+        "metrics": {
+          "plane_p95_residual": 0.03728305106632336,
+          "normal_error": 0.0031643137733806254,
+          "plane_inlier_ratio": 0.6362467866323908,
+          "raycast_agreement": 1.0,
+          "physical_width": 44.08919071455194
+        },
+        "checks": {
+          "plane_p95_residual": true,
+          "normal_error": true,
+          "plane_inlier_ratio": true,
+          "raycast_agreement": true,
+          "physical_width": true
+        },
+        "reason": "strict single-plane absolute-3D gate"
+      },
+      "operator_visual_review": "PENDING",
+      "public_image": "docs/assets/act0_screening/candidate_01_screening.jpg"
+    },
+    {
+      "candidate_index": 6,
+      "bbox_id": 48397,
+      "classification": "INSTANCE_GROUPING_UNRESOLVED",
+      "classification_rationale": "Candidate IDs change from 39220 to 35115/35117 and no single target instance survives all three views.",
+      "current_full_physical_gate": "REJECTED",
+      "visual_event_gate": "NOT_OBSERVED",
+      "metric_repeatability_gate": "NOT_EVALUATED",
+      "physical_plane_gate": "NOT_OBSERVED",
+      "tier_v": {
+        "status": "NOT_OBSERVED",
+        "reason": "Candidate IDs change from 39220 to 35115/35117 and no single target instance survives all three views.",
+        "sensor_pairing": {
+          "status": "PASS",
+          "view_count": 3,
+          "paired_view_count": 3,
+          "views": [
+            {
+              "view_index": 0,
+              "frame_id": 92281,
+              "paired": true
+            },
+            {
+              "view_index": 1,
+              "frame_id": 92282,
+              "paired": true
+            },
+            {
+              "view_index": 2,
+              "frame_id": 92283,
+              "paired": true
+            }
+          ]
+        },
+        "building_semantic": "NOT_OBSERVED",
+        "instance_id_stability": "NOT_OBSERVED",
+        "instance_grouping": "UNRESOLVED",
+        "largest_component": "NOT_OBSERVED",
+        "largest_component_ratio": null,
+        "largest_component_note": "exact ratio was not persisted; legacy threshold result only",
+        "sides": {
+          "LEFT": {
+            "status": "NOT_OBSERVED",
+            "reason": "no target/non-target transition in the three scout poses",
+            "present_views": 0,
+            "bilateral_views": 0,
+            "span_fractions": [],
+            "span_range": null
+          },
+          "RIGHT": {
+            "status": "NOT_OBSERVED",
+            "reason": "no target/non-target transition in the three scout poses",
+            "present_views": 0,
+            "bilateral_views": 0,
+            "span_fractions": [],
+            "span_range": null
+          }
+        },
+        "evidence_scope": "geometry reference pending operator visual review",
+        "uses_plane_or_raycast": false
+      },
+      "tier_m": {
+        "status": "NOT_EVALUATED",
+        "reason": "raw contour/depth/K records were not persisted; legacy plane-basis summaries are excluded",
+        "required_sources": [
+          "K",
+          "T_world_camera",
+          "camera_motion_action_axis",
+          "target_side_contour",
+          "z_depth"
+        ],
+        "official": {},
+        "legacy_proxy": {
+          "LEFT": {
+            "view_count": 0,
+            "spread_m": null,
+            "source": "legacy_plane_basis_proxy_not_an_official_tier_m_input"
+          },
+          "RIGHT": {
+            "view_count": 0,
+            "spread_m": null,
+            "source": "legacy_plane_basis_proxy_not_an_official_tier_m_input"
+          }
+        },
+        "legacy_proxy_sensitivity": {
+          "0.05m": false,
+          "0.10m": false,
+          "0.25m": false,
+          "1.00m": false
+        },
+        "uses_legacy_plane_or_bbox": false
+      },
+      "tier_p": {
+        "status": "NOT_OBSERVED",
+        "metrics": {
+          "plane_p95_residual": null,
+          "normal_error": null,
+          "plane_inlier_ratio": null,
+          "raycast_agreement": null,
+          "physical_width": null
+        },
+        "reason": "no target plane or raycast evidence"
+      },
+      "operator_visual_review": "PENDING",
+      "public_image": "docs/assets/act0_screening/candidate_06_screening.jpg"
+    },
+    {
+      "candidate_index": 7,
+      "bbox_id": 48399,
+      "classification": "VISUAL_EVENT_PASS",
+      "classification_rationale": "Selected instance 39225 and its bilateral exterior transitions persist; neighboring stable IDs are recorded but not merged.",
+      "current_full_physical_gate": "REJECTED",
+      "visual_event_gate": "PASS",
+      "metric_repeatability_gate": "NOT_EVALUATED",
+      "physical_plane_gate": "PASS",
+      "tier_v": {
+        "status": "PASS",
+        "reason": "at least one action side has a stable exterior transition",
+        "sensor_pairing": {
+          "status": "PASS",
+          "view_count": 3,
+          "paired_view_count": 3,
+          "views": [
+            {
+              "view_index": 0,
+              "frame_id": 92284,
+              "paired": true
+            },
+            {
+              "view_index": 1,
+              "frame_id": 92285,
+              "paired": true
+            },
+            {
+              "view_index": 2,
+              "frame_id": 92286,
+              "paired": true
+            }
+          ]
+        },
+        "building_semantic": "PASS",
+        "instance_id_stability": "PASS",
+        "instance_grouping": "RESOLVED_FOR_SELECTED_ID",
+        "largest_component": "PASS",
+        "largest_component_ratio": null,
+        "largest_component_note": "exact ratio was not persisted; legacy threshold result only",
+        "sides": {
+          "LEFT": {
+            "status": "PASS",
+            "reason": "multi-view target/non-target exterior-contour reference",
+            "present_views": 3,
+            "bilateral_views": 3,
+            "span_fractions": [
+              0.34791666666666665,
+              0.34791666666666665,
+              0.34791666666666665
+            ],
+            "span_range": 0.0
+          },
+          "RIGHT": {
+            "status": "PASS",
+            "reason": "multi-view target/non-target exterior-contour reference",
+            "present_views": 3,
+            "bilateral_views": 3,
+            "span_fractions": [
+              0.34791666666666665,
+              0.34791666666666665,
+              0.34791666666666665
+            ],
+            "span_range": 0.0
+          }
+        },
+        "evidence_scope": "geometry reference pending operator visual review",
+        "uses_plane_or_raycast": false
+      },
+      "tier_m": {
+        "status": "NOT_EVALUATED",
+        "reason": "raw contour/depth/K records were not persisted; legacy plane-basis summaries are excluded",
+        "required_sources": [
+          "K",
+          "T_world_camera",
+          "camera_motion_action_axis",
+          "target_side_contour",
+          "z_depth"
+        ],
+        "official": {},
+        "legacy_proxy": {
+          "LEFT": {
+            "view_count": 2,
+            "spread_m": 0.2815781547744667,
+            "source": "legacy_plane_basis_proxy_not_an_official_tier_m_input"
+          },
+          "RIGHT": {
+            "view_count": 3,
+            "spread_m": 0.05255082370553765,
+            "source": "legacy_plane_basis_proxy_not_an_official_tier_m_input"
+          }
+        },
+        "legacy_proxy_sensitivity": {
+          "0.05m": false,
+          "0.10m": true,
+          "0.25m": true,
+          "1.00m": true
+        },
+        "uses_legacy_plane_or_bbox": false
+      },
+      "tier_p": {
+        "status": "PASS",
+        "metrics": {
+          "plane_p95_residual": 0.08555106674216865,
+          "normal_error": 0.7320689666641593,
+          "plane_inlier_ratio": 0.5357450473729544,
+          "raycast_agreement": 0.9846153846153847,
+          "physical_width": 42.13113415043212
+        },
+        "checks": {
+          "plane_p95_residual": true,
+          "normal_error": true,
+          "plane_inlier_ratio": true,
+          "raycast_agreement": true,
+          "physical_width": true
+        },
+        "reason": "strict single-plane absolute-3D gate"
+      },
+      "operator_visual_review": "PENDING",
+      "public_image": "docs/assets/act0_screening/candidate_07_screening.jpg"
+    },
+    {
+      "candidate_index": 8,
+      "bbox_id": 48401,
+      "classification": "VISUAL_EVENT_PASS",
+      "classification_rationale": "Selected instance 39226 has stable bilateral transitions and the strict physical-plane gate passes.",
+      "current_full_physical_gate": "REJECTED",
+      "visual_event_gate": "PASS",
+      "metric_repeatability_gate": "NOT_EVALUATED",
+      "physical_plane_gate": "PASS",
+      "tier_v": {
+        "status": "PASS",
+        "reason": "at least one action side has a stable exterior transition",
+        "sensor_pairing": {
+          "status": "PASS",
+          "view_count": 3,
+          "paired_view_count": 3,
+          "views": [
+            {
+              "view_index": 0,
+              "frame_id": 92287,
+              "paired": true
+            },
+            {
+              "view_index": 1,
+              "frame_id": 92288,
+              "paired": true
+            },
+            {
+              "view_index": 2,
+              "frame_id": 92289,
+              "paired": true
+            }
+          ]
+        },
+        "building_semantic": "PASS",
+        "instance_id_stability": "PASS",
+        "instance_grouping": "RESOLVED_FOR_SELECTED_ID",
+        "largest_component": "PASS",
+        "largest_component_ratio": null,
+        "largest_component_note": "exact ratio was not persisted; legacy threshold result only",
+        "sides": {
+          "LEFT": {
+            "status": "PASS",
+            "reason": "multi-view target/non-target exterior-contour reference",
+            "present_views": 3,
+            "bilateral_views": 3,
+            "span_fractions": [
+              0.34791666666666665,
+              0.34791666666666665,
+              0.34791666666666665
+            ],
+            "span_range": 0.0
+          },
+          "RIGHT": {
+            "status": "PASS",
+            "reason": "multi-view target/non-target exterior-contour reference",
+            "present_views": 3,
+            "bilateral_views": 3,
+            "span_fractions": [
+              0.34791666666666665,
+              0.34791666666666665,
+              0.34791666666666665
+            ],
+            "span_range": 0.0
+          }
+        },
+        "evidence_scope": "geometry reference pending operator visual review",
+        "uses_plane_or_raycast": false
+      },
+      "tier_m": {
+        "status": "NOT_EVALUATED",
+        "reason": "raw contour/depth/K records were not persisted; legacy plane-basis summaries are excluded",
+        "required_sources": [
+          "K",
+          "T_world_camera",
+          "camera_motion_action_axis",
+          "target_side_contour",
+          "z_depth"
+        ],
+        "official": {},
+        "legacy_proxy": {
+          "LEFT": {
+            "view_count": 3,
+            "spread_m": 0.036276709151177984,
+            "source": "legacy_plane_basis_proxy_not_an_official_tier_m_input"
+          },
+          "RIGHT": {
+            "view_count": 3,
+            "spread_m": 0.02905144793931193,
+            "source": "legacy_plane_basis_proxy_not_an_official_tier_m_input"
+          }
+        },
+        "legacy_proxy_sensitivity": {
+          "0.05m": true,
+          "0.10m": true,
+          "0.25m": true,
+          "1.00m": true
+        },
+        "uses_legacy_plane_or_bbox": false
+      },
+      "tier_p": {
+        "status": "PASS",
+        "metrics": {
+          "plane_p95_residual": 0.0847000226698956,
+          "normal_error": 0.7562061482960568,
+          "plane_inlier_ratio": 0.5606731620903455,
+          "raycast_agreement": 0.8939393939393939,
+          "physical_width": 42.448278044228616
+        },
+        "checks": {
+          "plane_p95_residual": true,
+          "normal_error": true,
+          "plane_inlier_ratio": true,
+          "raycast_agreement": true,
+          "physical_width": true
+        },
+        "reason": "strict single-plane absolute-3D gate"
+      },
+      "operator_visual_review": "PENDING",
+      "public_image": "docs/assets/act0_screening/candidate_08_screening.jpg"
+    },
+    {
+      "candidate_index": 10,
+      "bbox_id": 48418,
+      "classification": "PHYSICAL_PLANE_ONLY_FAIL",
+      "classification_rationale": "Visual contours and selected instance are stable, but raycast/depth agreement is zero.",
+      "current_full_physical_gate": "REJECTED",
+      "visual_event_gate": "PASS",
+      "metric_repeatability_gate": "NOT_EVALUATED",
+      "physical_plane_gate": "FAIL",
+      "tier_v": {
+        "status": "PASS",
+        "reason": "at least one action side has a stable exterior transition",
+        "sensor_pairing": {
+          "status": "PASS",
+          "view_count": 3,
+          "paired_view_count": 3,
+          "views": [
+            {
+              "view_index": 0,
+              "frame_id": 92290,
+              "paired": true
+            },
+            {
+              "view_index": 1,
+              "frame_id": 92291,
+              "paired": true
+            },
+            {
+              "view_index": 2,
+              "frame_id": 92292,
+              "paired": true
+            }
+          ]
+        },
+        "building_semantic": "PASS",
+        "instance_id_stability": "PASS",
+        "instance_grouping": "RESOLVED_FOR_SELECTED_ID",
+        "largest_component": "PASS",
+        "largest_component_ratio": null,
+        "largest_component_note": "exact ratio was not persisted; legacy threshold result only",
+        "sides": {
+          "LEFT": {
+            "status": "PASS",
+            "reason": "multi-view target/non-target exterior-contour reference",
+            "present_views": 3,
+            "bilateral_views": 3,
+            "span_fractions": [
+              0.5645833333333333,
+              0.7479166666666667,
+              0.7479166666666667
+            ],
+            "span_range": 0.18333333333333335
+          },
+          "RIGHT": {
+            "status": "PASS",
+            "reason": "multi-view target/non-target exterior-contour reference",
+            "present_views": 3,
+            "bilateral_views": 3,
+            "span_fractions": [
+              0.5645833333333333,
+              0.7479166666666667,
+              0.7479166666666667
+            ],
+            "span_range": 0.18333333333333335
+          }
+        },
+        "evidence_scope": "geometry reference pending operator visual review",
+        "uses_plane_or_raycast": false
+      },
+      "tier_m": {
+        "status": "NOT_EVALUATED",
+        "reason": "raw contour/depth/K records were not persisted; legacy plane-basis summaries are excluded",
+        "required_sources": [
+          "K",
+          "T_world_camera",
+          "camera_motion_action_axis",
+          "target_side_contour",
+          "z_depth"
+        ],
+        "official": {},
+        "legacy_proxy": {
+          "LEFT": {
+            "view_count": 3,
+            "spread_m": 0.010275994167849712,
+            "source": "legacy_plane_basis_proxy_not_an_official_tier_m_input"
+          },
+          "RIGHT": {
+            "view_count": 3,
+            "spread_m": 0.010427806849840246,
+            "source": "legacy_plane_basis_proxy_not_an_official_tier_m_input"
+          }
+        },
+        "legacy_proxy_sensitivity": {
+          "0.05m": true,
+          "0.10m": true,
+          "0.25m": true,
+          "1.00m": true
+        },
+        "uses_legacy_plane_or_bbox": false
+      },
+      "tier_p": {
+        "status": "FAIL",
+        "metrics": {
+          "plane_p95_residual": 0.11488384486232622,
+          "normal_error": 0.04435554961025691,
+          "plane_inlier_ratio": 0.6411405295315682,
+          "raycast_agreement": 0.0,
+          "physical_width": 29.970879232244908
+        },
+        "checks": {
+          "plane_p95_residual": true,
+          "normal_error": true,
+          "plane_inlier_ratio": true,
+          "raycast_agreement": false,
+          "physical_width": true
+        },
+        "reason": "strict single-plane absolute-3D gate"
+      },
+      "operator_visual_review": "PENDING",
+      "public_image": "docs/assets/act0_screening/candidate_10_screening.jpg"
+    },
+    {
+      "candidate_index": 11,
+      "bbox_id": 48436,
+      "classification": "PHYSICAL_PLANE_ONLY_FAIL",
+      "classification_rationale": "Selected instance 39766 has stable contours, but plane inlier ratio and raycast/depth agreement fail Tier P.",
+      "current_full_physical_gate": "REJECTED",
+      "visual_event_gate": "PASS",
+      "metric_repeatability_gate": "NOT_EVALUATED",
+      "physical_plane_gate": "FAIL",
+      "tier_v": {
+        "status": "PASS",
+        "reason": "at least one action side has a stable exterior transition",
+        "sensor_pairing": {
+          "status": "PASS",
+          "view_count": 3,
+          "paired_view_count": 3,
+          "views": [
+            {
+              "view_index": 0,
+              "frame_id": 92293,
+              "paired": true
+            },
+            {
+              "view_index": 1,
+              "frame_id": 92294,
+              "paired": true
+            },
+            {
+              "view_index": 2,
+              "frame_id": 92295,
+              "paired": true
+            }
+          ]
+        },
+        "building_semantic": "PASS",
+        "instance_id_stability": "PASS",
+        "instance_grouping": "RESOLVED_FOR_SELECTED_ID",
+        "largest_component": "PASS",
+        "largest_component_ratio": null,
+        "largest_component_note": "exact ratio was not persisted; legacy threshold result only",
+        "sides": {
+          "LEFT": {
+            "status": "PASS",
+            "reason": "multi-view target/non-target exterior-contour reference",
+            "present_views": 3,
+            "bilateral_views": 3,
+            "span_fractions": [
+              0.5958333333333333,
+              0.5958333333333333,
+              0.5958333333333333
+            ],
+            "span_range": 0.0
+          },
+          "RIGHT": {
+            "status": "PASS",
+            "reason": "multi-view target/non-target exterior-contour reference",
+            "present_views": 3,
+            "bilateral_views": 3,
+            "span_fractions": [
+              0.5958333333333333,
+              0.5958333333333333,
+              0.5958333333333333
+            ],
+            "span_range": 0.0
+          }
+        },
+        "evidence_scope": "geometry reference pending operator visual review",
+        "uses_plane_or_raycast": false
+      },
+      "tier_m": {
+        "status": "NOT_EVALUATED",
+        "reason": "raw contour/depth/K records were not persisted; legacy plane-basis summaries are excluded",
+        "required_sources": [
+          "K",
+          "T_world_camera",
+          "camera_motion_action_axis",
+          "target_side_contour",
+          "z_depth"
+        ],
+        "official": {},
+        "legacy_proxy": {
+          "LEFT": {
+            "view_count": 3,
+            "spread_m": 0.01245423172265513,
+            "source": "legacy_plane_basis_proxy_not_an_official_tier_m_input"
+          },
+          "RIGHT": {
+            "view_count": 3,
+            "spread_m": 0.01245423172265513,
+            "source": "legacy_plane_basis_proxy_not_an_official_tier_m_input"
+          }
+        },
+        "legacy_proxy_sensitivity": {
+          "0.05m": true,
+          "0.10m": true,
+          "0.25m": true,
+          "1.00m": true
+        },
+        "uses_legacy_plane_or_bbox": false
+      },
+      "tier_p": {
+        "status": "FAIL",
+        "metrics": {
+          "plane_p95_residual": 0.0901798386168764,
+          "normal_error": 0.2235163679602523,
+          "plane_inlier_ratio": 0.19534883720930232,
+          "raycast_agreement": 0.0,
+          "physical_width": 29.79351415066393
+        },
+        "checks": {
+          "plane_p95_residual": true,
+          "normal_error": true,
+          "plane_inlier_ratio": false,
+          "raycast_agreement": false,
+          "physical_width": true
+        },
+        "reason": "strict single-plane absolute-3D gate"
+      },
+      "operator_visual_review": "PENDING",
+      "public_image": "docs/assets/act0_screening/candidate_11_screening.jpg"
+    },
+    {
+      "candidate_index": 12,
+      "bbox_id": 48420,
+      "classification": "SCOUT_POSE_INSUFFICIENT",
+      "classification_rationale": "Only the right termination is visible in the center image and contour span changes 0.002/0.662/0.083 across offsets.",
+      "current_full_physical_gate": "REJECTED",
+      "visual_event_gate": "NOT_OBSERVED",
+      "metric_repeatability_gate": "NOT_EVALUATED",
+      "physical_plane_gate": "FAIL",
+      "tier_v": {
+        "status": "NOT_OBSERVED",
+        "reason": "Only the right termination is visible in the center image and contour span changes 0.002/0.662/0.083 across offsets.",
+        "sensor_pairing": {
+          "status": "PASS",
+          "view_count": 3,
+          "paired_view_count": 3,
+          "views": [
+            {
+              "view_index": 0,
+              "frame_id": 92296,
+              "paired": true
+            },
+            {
+              "view_index": 1,
+              "frame_id": 92297,
+              "paired": true
+            },
+            {
+              "view_index": 2,
+              "frame_id": 92298,
+              "paired": true
+            }
+          ]
+        },
+        "building_semantic": "PASS",
+        "instance_id_stability": "PASS",
+        "instance_grouping": "RESOLVED_FOR_SELECTED_ID",
+        "largest_component": "PASS",
+        "largest_component_ratio": null,
+        "largest_component_note": "exact ratio was not persisted; legacy threshold result only",
+        "sides": {
+          "LEFT": {
+            "status": "FAIL",
+            "reason": "insufficient bilateral target/non-target support",
+            "present_views": 3,
+            "bilateral_views": 0,
+            "span_fractions": [
+              0.0020833333333333333,
+              0.6625,
+              0.08333333333333333
+            ],
+            "span_range": 0.6604166666666667
+          },
+          "RIGHT": {
+            "status": "FAIL",
+            "reason": "insufficient bilateral target/non-target support",
+            "present_views": 3,
+            "bilateral_views": 1,
+            "span_fractions": [
+              0.0020833333333333333,
+              0.6625,
+              0.08333333333333333
+            ],
+            "span_range": 0.6604166666666667
+          }
+        },
+        "evidence_scope": "geometry reference pending operator visual review",
+        "uses_plane_or_raycast": false
+      },
+      "tier_m": {
+        "status": "NOT_EVALUATED",
+        "reason": "raw contour/depth/K records were not persisted; legacy plane-basis summaries are excluded",
+        "required_sources": [
+          "K",
+          "T_world_camera",
+          "camera_motion_action_axis",
+          "target_side_contour",
+          "z_depth"
+        ],
+        "official": {},
+        "legacy_proxy": {
+          "LEFT": {
+            "view_count": 3,
+            "spread_m": 6.250972187756512,
+            "source": "legacy_plane_basis_proxy_not_an_official_tier_m_input"
+          },
+          "RIGHT": {
+            "view_count": 3,
+            "spread_m": 1.1003767228415715,
+            "source": "legacy_plane_basis_proxy_not_an_official_tier_m_input"
+          }
+        },
+        "legacy_proxy_sensitivity": {
+          "0.05m": false,
+          "0.10m": false,
+          "0.25m": false,
+          "1.00m": false
+        },
+        "uses_legacy_plane_or_bbox": false
+      },
+      "tier_p": {
+        "status": "FAIL",
+        "metrics": {
+          "plane_p95_residual": 0.0,
+          "normal_error": 0.0,
+          "plane_inlier_ratio": 1.0,
+          "raycast_agreement": 0.6666666666666666,
+          "physical_width": 0.0
+        },
+        "checks": {
+          "plane_p95_residual": true,
+          "normal_error": true,
+          "plane_inlier_ratio": true,
+          "raycast_agreement": false,
+          "physical_width": false
+        },
+        "reason": "strict single-plane absolute-3D gate"
+      },
+      "operator_visual_review": "PENDING",
+      "public_image": "docs/assets/act0_screening/candidate_12_screening.jpg"
+    },
+    {
+      "candidate_index": 13,
+      "bbox_id": 48419,
+      "classification": "INSTANCE_GROUPING_UNRESOLVED",
+      "classification_rationale": "Eight stable candidate IDs occupy the scout crop; the retained compact evidence cannot prove which meshes form one facade.",
+      "current_full_physical_gate": "REJECTED",
+      "visual_event_gate": "NOT_OBSERVED",
+      "metric_repeatability_gate": "NOT_EVALUATED",
+      "physical_plane_gate": "FAIL",
+      "tier_v": {
+        "status": "NOT_OBSERVED",
+        "reason": "Eight stable candidate IDs occupy the scout crop; the retained compact evidence cannot prove which meshes form one facade.",
+        "sensor_pairing": {
+          "status": "PASS",
+          "view_count": 3,
+          "paired_view_count": 3,
+          "views": [
+            {
+              "view_index": 0,
+              "frame_id": 92299,
+              "paired": true
+            },
+            {
+              "view_index": 1,
+              "frame_id": 92300,
+              "paired": true
+            },
+            {
+              "view_index": 2,
+              "frame_id": 92301,
+              "paired": true
+            }
+          ]
+        },
+        "building_semantic": "PASS",
+        "instance_id_stability": "PASS",
+        "instance_grouping": "UNRESOLVED",
+        "largest_component": "PASS",
+        "largest_component_ratio": null,
+        "largest_component_note": "exact ratio was not persisted; legacy threshold result only",
+        "sides": {
+          "LEFT": {
+            "status": "PASS",
+            "reason": "multi-view target/non-target exterior-contour reference",
+            "present_views": 3,
+            "bilateral_views": 3,
+            "span_fractions": [
+              0.23125,
+              0.23125,
+              0.23125
+            ],
+            "span_range": 0.0
+          },
+          "RIGHT": {
+            "status": "PASS",
+            "reason": "multi-view target/non-target exterior-contour reference",
+            "present_views": 3,
+            "bilateral_views": 3,
+            "span_fractions": [
+              0.23125,
+              0.23125,
+              0.23125
+            ],
+            "span_range": 0.0
+          }
+        },
+        "evidence_scope": "geometry reference pending operator visual review",
+        "uses_plane_or_raycast": false
+      },
+      "tier_m": {
+        "status": "NOT_EVALUATED",
+        "reason": "raw contour/depth/K records were not persisted; legacy plane-basis summaries are excluded",
+        "required_sources": [
+          "K",
+          "T_world_camera",
+          "camera_motion_action_axis",
+          "target_side_contour",
+          "z_depth"
+        ],
+        "official": {},
+        "legacy_proxy": {
+          "LEFT": {
+            "view_count": 3,
+            "spread_m": 1.94155406286042,
+            "source": "legacy_plane_basis_proxy_not_an_official_tier_m_input"
+          },
+          "RIGHT": {
+            "view_count": 3,
+            "spread_m": 1.7702547423745145,
+            "source": "legacy_plane_basis_proxy_not_an_official_tier_m_input"
+          }
+        },
+        "legacy_proxy_sensitivity": {
+          "0.05m": false,
+          "0.10m": false,
+          "0.25m": false,
+          "1.00m": false
+        },
+        "uses_legacy_plane_or_bbox": false
+      },
+      "tier_p": {
+        "status": "FAIL",
+        "metrics": {
+          "plane_p95_residual": 9.423229270994947e-05,
+          "normal_error": 0.0003643163295509371,
+          "plane_inlier_ratio": 0.6021840873634945,
+          "raycast_agreement": 0.0,
+          "physical_width": 37.78507301906325
+        },
+        "checks": {
+          "plane_p95_residual": true,
+          "normal_error": true,
+          "plane_inlier_ratio": true,
+          "raycast_agreement": false,
+          "physical_width": true
+        },
+        "reason": "strict single-plane absolute-3D gate"
+      },
+      "operator_visual_review": "PENDING",
+      "public_image": "docs/assets/act0_screening/candidate_13_screening.jpg"
+    },
+    {
+      "candidate_index": 17,
+      "bbox_id": 48391,
+      "classification": "SCENE_UNSUITABLE",
+      "classification_rationale": "Target mask fragmentation and visible fire-escape/foreground structure prevent a clean facade event.",
+      "current_full_physical_gate": "REJECTED",
+      "visual_event_gate": "FAIL",
+      "metric_repeatability_gate": "NOT_EVALUATED",
+      "physical_plane_gate": "FAIL",
+      "tier_v": {
+        "status": "FAIL",
+        "reason": "Target mask fragmentation and visible fire-escape/foreground structure prevent a clean facade event.",
+        "sensor_pairing": {
+          "status": "PASS",
+          "view_count": 3,
+          "paired_view_count": 3,
+          "views": [
+            {
+              "view_index": 0,
+              "frame_id": 92302,
+              "paired": true
+            },
+            {
+              "view_index": 1,
+              "frame_id": 92303,
+              "paired": true
+            },
+            {
+              "view_index": 2,
+              "frame_id": 92304,
+              "paired": true
+            }
+          ]
+        },
+        "building_semantic": "PASS",
+        "instance_id_stability": "PASS",
+        "instance_grouping": "RESOLVED_FOR_SELECTED_ID",
+        "largest_component": "FAIL",
+        "largest_component_ratio": null,
+        "largest_component_note": "exact ratio was not persisted; legacy threshold result only",
+        "sides": {
+          "LEFT": {
+            "status": "PASS",
+            "reason": "multi-view target/non-target exterior-contour reference",
+            "present_views": 3,
+            "bilateral_views": 3,
+            "span_fractions": [
+              0.7020833333333333,
+              0.7020833333333333,
+              0.7020833333333333
+            ],
+            "span_range": 0.0
+          },
+          "RIGHT": {
+            "status": "PASS",
+            "reason": "multi-view target/non-target exterior-contour reference",
+            "present_views": 3,
+            "bilateral_views": 3,
+            "span_fractions": [
+              0.7020833333333333,
+              0.7020833333333333,
+              0.7020833333333333
+            ],
+            "span_range": 0.0
+          }
+        },
+        "evidence_scope": "geometry reference pending operator visual review",
+        "uses_plane_or_raycast": false
+      },
+      "tier_m": {
+        "status": "NOT_EVALUATED",
+        "reason": "raw contour/depth/K records were not persisted; legacy plane-basis summaries are excluded",
+        "required_sources": [
+          "K",
+          "T_world_camera",
+          "camera_motion_action_axis",
+          "target_side_contour",
+          "z_depth"
+        ],
+        "official": {},
+        "legacy_proxy": {
+          "LEFT": {
+            "view_count": 3,
+            "spread_m": 0.7302478769162811,
+            "source": "legacy_plane_basis_proxy_not_an_official_tier_m_input"
+          },
+          "RIGHT": {
+            "view_count": 3,
+            "spread_m": 0.6284391074469413,
+            "source": "legacy_plane_basis_proxy_not_an_official_tier_m_input"
+          }
+        },
+        "legacy_proxy_sensitivity": {
+          "0.05m": false,
+          "0.10m": false,
+          "0.25m": false,
+          "1.00m": true
+        },
+        "uses_legacy_plane_or_bbox": false
+      },
+      "tier_p": {
+        "status": "FAIL",
+        "metrics": {
+          "plane_p95_residual": 0.12643215238679015,
+          "normal_error": 0.397296007296498,
+          "plane_inlier_ratio": 0.5210008936550492,
+          "raycast_agreement": 0.03076923076923077,
+          "physical_width": 14.631074100871388
+        },
+        "checks": {
+          "plane_p95_residual": true,
+          "normal_error": true,
+          "plane_inlier_ratio": true,
+          "raycast_agreement": false,
+          "physical_width": true
+        },
+        "reason": "strict single-plane absolute-3D gate"
+      },
+      "operator_visual_review": "PENDING",
+      "public_image": "docs/assets/act0_screening/candidate_17_screening.jpg"
+    },
+    {
+      "candidate_index": 18,
+      "bbox_id": 48393,
+      "classification": "SCENE_UNSUITABLE",
+      "classification_rationale": "Target mask fragmentation and visible fire-escape/foreground structure prevent a clean facade event.",
+      "current_full_physical_gate": "REJECTED",
+      "visual_event_gate": "FAIL",
+      "metric_repeatability_gate": "NOT_EVALUATED",
+      "physical_plane_gate": "FAIL",
+      "tier_v": {
+        "status": "FAIL",
+        "reason": "Target mask fragmentation and visible fire-escape/foreground structure prevent a clean facade event.",
+        "sensor_pairing": {
+          "status": "PASS",
+          "view_count": 3,
+          "paired_view_count": 3,
+          "views": [
+            {
+              "view_index": 0,
+              "frame_id": 92305,
+              "paired": true
+            },
+            {
+              "view_index": 1,
+              "frame_id": 92306,
+              "paired": true
+            },
+            {
+              "view_index": 2,
+              "frame_id": 92307,
+              "paired": true
+            }
+          ]
+        },
+        "building_semantic": "PASS",
+        "instance_id_stability": "PASS",
+        "instance_grouping": "RESOLVED_FOR_SELECTED_ID",
+        "largest_component": "FAIL",
+        "largest_component_ratio": null,
+        "largest_component_note": "exact ratio was not persisted; legacy threshold result only",
+        "sides": {
+          "LEFT": {
+            "status": "PASS",
+            "reason": "multi-view target/non-target exterior-contour reference",
+            "present_views": 3,
+            "bilateral_views": 3,
+            "span_fractions": [
+              0.6916666666666667,
+              0.6916666666666667,
+              0.6916666666666667
+            ],
+            "span_range": 0.0
+          },
+          "RIGHT": {
+            "status": "PASS",
+            "reason": "multi-view target/non-target exterior-contour reference",
+            "present_views": 3,
+            "bilateral_views": 3,
+            "span_fractions": [
+              0.6916666666666667,
+              0.6916666666666667,
+              0.6916666666666667
+            ],
+            "span_range": 0.0
+          }
+        },
+        "evidence_scope": "geometry reference pending operator visual review",
+        "uses_plane_or_raycast": false
+      },
+      "tier_m": {
+        "status": "NOT_EVALUATED",
+        "reason": "raw contour/depth/K records were not persisted; legacy plane-basis summaries are excluded",
+        "required_sources": [
+          "K",
+          "T_world_camera",
+          "camera_motion_action_axis",
+          "target_side_contour",
+          "z_depth"
+        ],
+        "official": {},
+        "legacy_proxy": {
+          "LEFT": {
+            "view_count": 3,
+            "spread_m": 0.8226443342848707,
+            "source": "legacy_plane_basis_proxy_not_an_official_tier_m_input"
+          },
+          "RIGHT": {
+            "view_count": 3,
+            "spread_m": 0.700464488577048,
+            "source": "legacy_plane_basis_proxy_not_an_official_tier_m_input"
+          }
+        },
+        "legacy_proxy_sensitivity": {
+          "0.05m": false,
+          "0.10m": false,
+          "0.25m": false,
+          "1.00m": true
+        },
+        "uses_legacy_plane_or_bbox": false
+      },
+      "tier_p": {
+        "status": "FAIL",
+        "metrics": {
+          "plane_p95_residual": 0.1295098673293987,
+          "normal_error": 0.3463413938879184,
+          "plane_inlier_ratio": 0.5303388494877856,
+          "raycast_agreement": 0.0,
+          "physical_width": 14.632313413952712
+        },
+        "checks": {
+          "plane_p95_residual": true,
+          "normal_error": true,
+          "plane_inlier_ratio": true,
+          "raycast_agreement": false,
+          "physical_width": true
+        },
+        "reason": "strict single-plane absolute-3D gate"
+      },
+      "operator_visual_review": "PENDING",
+      "public_image": "docs/assets/act0_screening/candidate_18_screening.jpg"
+    },
+    {
+      "candidate_index": 19,
+      "bbox_id": 48395,
+      "classification": "PHYSICAL_PLANE_ONLY_FAIL",
+      "classification_rationale": "Selected instance and exterior contours persist, but plane inlier ratio and raycast/depth agreement fail Tier P.",
+      "current_full_physical_gate": "REJECTED",
+      "visual_event_gate": "PASS",
+      "metric_repeatability_gate": "NOT_EVALUATED",
+      "physical_plane_gate": "FAIL",
+      "tier_v": {
+        "status": "PASS",
+        "reason": "at least one action side has a stable exterior transition",
+        "sensor_pairing": {
+          "status": "PASS",
+          "view_count": 3,
+          "paired_view_count": 3,
+          "views": [
+            {
+              "view_index": 0,
+              "frame_id": 92308,
+              "paired": true
+            },
+            {
+              "view_index": 1,
+              "frame_id": 92309,
+              "paired": true
+            },
+            {
+              "view_index": 2,
+              "frame_id": 92310,
+              "paired": true
+            }
+          ]
+        },
+        "building_semantic": "PASS",
+        "instance_id_stability": "PASS",
+        "instance_grouping": "RESOLVED_FOR_SELECTED_ID",
+        "largest_component": "PASS",
+        "largest_component_ratio": null,
+        "largest_component_note": "exact ratio was not persisted; legacy threshold result only",
+        "sides": {
+          "LEFT": {
+            "status": "PASS",
+            "reason": "multi-view target/non-target exterior-contour reference",
+            "present_views": 3,
+            "bilateral_views": 3,
+            "span_fractions": [
+              0.7020833333333333,
+              0.7020833333333333,
+              0.7020833333333333
+            ],
+            "span_range": 0.0
+          },
+          "RIGHT": {
+            "status": "PASS",
+            "reason": "multi-view target/non-target exterior-contour reference",
+            "present_views": 3,
+            "bilateral_views": 3,
+            "span_fractions": [
+              0.7020833333333333,
+              0.7020833333333333,
+              0.7020833333333333
+            ],
+            "span_range": 0.0
+          }
+        },
+        "evidence_scope": "geometry reference pending operator visual review",
+        "uses_plane_or_raycast": false
+      },
+      "tier_m": {
+        "status": "NOT_EVALUATED",
+        "reason": "raw contour/depth/K records were not persisted; legacy plane-basis summaries are excluded",
+        "required_sources": [
+          "K",
+          "T_world_camera",
+          "camera_motion_action_axis",
+          "target_side_contour",
+          "z_depth"
+        ],
+        "official": {},
+        "legacy_proxy": {
+          "LEFT": {
+            "view_count": 3,
+            "spread_m": 0.9375143075920562,
+            "source": "legacy_plane_basis_proxy_not_an_official_tier_m_input"
+          },
+          "RIGHT": {
+            "view_count": 3,
+            "spread_m": 0.061313872121497005,
+            "source": "legacy_plane_basis_proxy_not_an_official_tier_m_input"
+          }
+        },
+        "legacy_proxy_sensitivity": {
+          "0.05m": false,
+          "0.10m": true,
+          "0.25m": true,
+          "1.00m": true
+        },
+        "uses_legacy_plane_or_bbox": false
+      },
+      "tier_p": {
+        "status": "FAIL",
+        "metrics": {
+          "plane_p95_residual": 0.1145330205034266,
+          "normal_error": 0.1887014224278112,
+          "plane_inlier_ratio": 0.47896039603960394,
+          "raycast_agreement": 0.0,
+          "physical_width": 14.11394453255498
+        },
+        "checks": {
+          "plane_p95_residual": true,
+          "normal_error": true,
+          "plane_inlier_ratio": false,
+          "raycast_agreement": false,
+          "physical_width": true
+        },
+        "reason": "strict single-plane absolute-3D gate"
+      },
+      "operator_visual_review": "PENDING",
+      "public_image": "docs/assets/act0_screening/candidate_19_screening.jpg"
+    },
+    {
+      "candidate_index": 20,
+      "bbox_id": 47839,
+      "classification": "SCOUT_POSE_INSUFFICIENT",
+      "classification_rationale": "The persisted center RGB faces a blank near wall and no target instance remains stable across the three offsets.",
+      "current_full_physical_gate": "REJECTED",
+      "visual_event_gate": "NOT_OBSERVED",
+      "metric_repeatability_gate": "NOT_EVALUATED",
+      "physical_plane_gate": "NOT_OBSERVED",
+      "tier_v": {
+        "status": "NOT_OBSERVED",
+        "reason": "The persisted center RGB faces a blank near wall and no target instance remains stable across the three offsets.",
+        "sensor_pairing": {
+          "status": "PASS",
+          "view_count": 3,
+          "paired_view_count": 3,
+          "views": [
+            {
+              "view_index": 0,
+              "frame_id": 92311,
+              "paired": true
+            },
+            {
+              "view_index": 1,
+              "frame_id": 92312,
+              "paired": true
+            },
+            {
+              "view_index": 2,
+              "frame_id": 92313,
+              "paired": true
+            }
+          ]
+        },
+        "building_semantic": "NOT_OBSERVED",
+        "instance_id_stability": "NOT_OBSERVED",
+        "instance_grouping": "UNRESOLVED_DUE_TO_POSE",
+        "largest_component": "NOT_OBSERVED",
+        "largest_component_ratio": null,
+        "largest_component_note": "exact ratio was not persisted; legacy threshold result only",
+        "sides": {
+          "LEFT": {
+            "status": "NOT_OBSERVED",
+            "reason": "no target/non-target transition in the three scout poses",
+            "present_views": 0,
+            "bilateral_views": 0,
+            "span_fractions": [],
+            "span_range": null
+          },
+          "RIGHT": {
+            "status": "NOT_OBSERVED",
+            "reason": "no target/non-target transition in the three scout poses",
+            "present_views": 0,
+            "bilateral_views": 0,
+            "span_fractions": [],
+            "span_range": null
+          }
+        },
+        "evidence_scope": "geometry reference pending operator visual review",
+        "uses_plane_or_raycast": false
+      },
+      "tier_m": {
+        "status": "NOT_EVALUATED",
+        "reason": "raw contour/depth/K records were not persisted; legacy plane-basis summaries are excluded",
+        "required_sources": [
+          "K",
+          "T_world_camera",
+          "camera_motion_action_axis",
+          "target_side_contour",
+          "z_depth"
+        ],
+        "official": {},
+        "legacy_proxy": {
+          "LEFT": {
+            "view_count": 0,
+            "spread_m": null,
+            "source": "legacy_plane_basis_proxy_not_an_official_tier_m_input"
+          },
+          "RIGHT": {
+            "view_count": 0,
+            "spread_m": null,
+            "source": "legacy_plane_basis_proxy_not_an_official_tier_m_input"
+          }
+        },
+        "legacy_proxy_sensitivity": {
+          "0.05m": false,
+          "0.10m": false,
+          "0.25m": false,
+          "1.00m": false
+        },
+        "uses_legacy_plane_or_bbox": false
+      },
+      "tier_p": {
+        "status": "NOT_OBSERVED",
+        "metrics": {
+          "plane_p95_residual": null,
+          "normal_error": null,
+          "plane_inlier_ratio": null,
+          "raycast_agreement": null,
+          "physical_width": null
+        },
+        "reason": "no target plane or raycast evidence"
+      },
+      "operator_visual_review": "PENDING",
+      "public_image": "docs/assets/act0_screening/candidate_20_screening.jpg"
+    }
+  ],
+  "constraints": {
+    "carla_started": false,
+    "new_scout_run": false,
+    "rollout_started": false,
+    "jepa_training_run": false,
+    "models_downloaded": false,
+    "historical_results_modified": false
+  }
+}

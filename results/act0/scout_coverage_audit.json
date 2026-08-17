@@ -1,0 +1,16 @@
+{
+  "schema": "act0.scout_coverage_audit.v2",
+  "candidate_count": 12,
+  "synchronized_quartet_count": 36,
+  "persisted_actual_rgb_views": 12,
+  "expected_actual_rgb_views": 36,
+  "persisted_center_instance_overlays": 12,
+  "persisted_raw_depth_views": 0,
+  "persisted_raw_semantic_views": 0,
+  "persisted_raw_instance_views": 0,
+  "persisted_raycast_residual_heatmaps": 0,
+  "missing_off_center_rgb_views": 24,
+  "raw_sensor_data_path": null,
+  "raw_sensor_data_size_bytes": 0,
+  "conclusion": "compact metadata supports pairing and Tier V/P screening, but not plane-free Tier M or three-view public pixel audit"
+}

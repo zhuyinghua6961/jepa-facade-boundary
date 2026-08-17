@@ -1,0 +1,8 @@
+{
+  "schema": "act0.trajectory_manifest.v1",
+  "status": "NOT_RUN",
+  "reason": "VALID_EXTERNAL_BOUNDARY failed during facade screening",
+  "trajectory_count": 0,
+  "counterfactual_pair_count": 0,
+  "trajectories": []
+}

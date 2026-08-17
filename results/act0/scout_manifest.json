@@ -1,0 +1,3240 @@
+{
+  "schema": "act0.scout_manifest.v1",
+  "map": "Carla/Maps/Town10HD_Opt",
+  "candidate_count": 12,
+  "selected_count": 0,
+  "required_surfaces": 4,
+  "status": "FAIL",
+  "selection_method": "instance stability + z-depth plane + multi-view exterior contours + raycast agreement",
+  "operator_visual_review": "PENDING",
+  "candidates": [
+    {
+      "candidate_index": 1,
+      "bbox_id": 48389,
+      "candidate_surface": "+Y",
+      "surface_id": "act0_bbox_48389",
+      "decision": "REJECTED",
+      "rejection_reasons": [
+        "left_external_contour_insufficient",
+        "right_external_contour_insufficient",
+        "right_boundary_repeatability_failed"
+      ],
+      "bbox_used_for": "candidate pose seed only; not physical boundary truth",
+      "target_instance_id_16bit": 39220,
+      "stable_instance_ids": [
+        39220
+      ],
+      "target_instance_id_stable": true,
+      "center_target_coverage": 0.24584635416666667,
+      "plane": {
+        "origin": [
+          -93.25510761603579,
+          270.3246647728814,
+          11.85574603615985
+        ],
+        "normal": [
+          5.1261367322646356e-05,
+          0.9999999984749509,
+          2.0551656192191455e-05
+        ],
+        "median_residual_m": 0.004777461967361613,
+        "p95_residual_m": 0.03728305106632336,
+        "max_residual_m": 0.14776753218760388,
+        "normal_error_deg": 0.0031643137733806254,
+        "support_count": 1556,
+        "inlier_count": 990,
+        "inlier_ratio": 0.6362467866323908,
+        "inlier_tolerance_m": 0.15
+      },
+      "horizontal_axis": [
+        0.9999999986861361,
+        -5.126136731182072e-05,
+        -1.0535059985408292e-09
+      ],
+      "vertical_axis": [
+        -2.0679515313825692e-25,
+        -2.0551656219193534e-05,
+        0.9999999997888148
+      ],
+      "boundaries": {
+        "LEFT": {
+          "view_count": 3,
+          "per_view_horizontal_m": [
+            -21.771038824606862,
+            -21.92308625201353,
+            -21.79715979059585
+          ],
+          "horizontal_std_m": 0.06638122118186604,
+          "horizontal_coordinate_m": -21.79715979059585,
+          "vertical_range_m": [
+            -11.807705985969362,
+            12.10212713743353
+          ],
+          "world_line": {
+            "start": [
+              -115.05226737799313,
+              270.3255405816692,
+              23.60873686474269
+            ],
+            "end": [
+              -115.05226737799313,
+              270.3260176177325,
+              0.39717385956243767
+            ]
+          }
+        },
+        "RIGHT": {
+          "view_count": 3,
+          "per_view_horizontal_m": [
+            19.208635353839085,
+            22.44396527287933,
+            22.29203092395609
+          ],
+          "horizontal_std_m": 1.4906289490322477,
+          "horizontal_coordinate_m": 22.29203092395609,
+          "vertical_range_m": [
+            -11.026729169235017,
+            9.161932611627165
+          ],
+          "world_line": {
+            "start": [
+              -70.9630767213684,
+              270.3232805094695,
+              23.60873681829446
+            ],
+            "end": [
+              -70.9630767213684,
+              270.32375754553277,
+              0.39717381311421107
+            ]
+          }
+        }
+      },
+      "raycast_audit": {
+        "attempted": 63,
+        "building_hits": 63,
+        "matched": 63,
+        "agreement": 1.0,
+        "tolerance_m": 0.3,
+        "median_residual_m": 0.0003613884683426169,
+        "max_residual_m": 0.16482953306097814
+      },
+      "boundary_audits": {
+        "LEFT": [
+          {
+            "contour_present": true,
+            "contour_span_fraction": 0.4166666666666667,
+            "target_side_fraction": 0.985,
+            "external_side_fraction": 1.0,
+            "local_straddle": true,
+            "reason": "directional row envelope of exterior instance contour"
+          },
+          {
+            "contour_present": true,
+            "contour_span_fraction": 0.4166666666666667,
+            "target_side_fraction": 0.995,
+            "external_side_fraction": 1.0,
+            "local_straddle": true,
+            "reason": "directional row envelope of exterior instance contour"
+          },
+          {
+            "contour_present": true,
+            "contour_span_fraction": 0.4166666666666667,
+            "target_side_fraction": 1.0,
+            "external_side_fraction": 1.0,
+            "local_straddle": true,
+            "reason": "directional row envelope of exterior instance contour"
+          }
+        ],
+        "RIGHT": [
+          {
+            "contour_present": true,
+            "contour_span_fraction": 0.4166666666666667,
+            "target_side_fraction": 0.995,
+            "external_side_fraction": 1.0,
+            "local_straddle": true,
+            "reason": "directional row envelope of exterior instance contour"
+          },
+          {
+            "contour_present": true,
+            "contour_span_fraction": 0.4166666666666667,
+            "target_side_fraction": 0.995,
+            "external_side_fraction": 1.0,
+            "local_straddle": true,
+            "reason": "directional row envelope of exterior instance contour"
+          },
+          {
+            "contour_present": true,
+            "contour_span_fraction": 0.4166666666666667,
+            "target_side_fraction": 1.0,
+            "external_side_fraction": 1.0,
+            "local_straddle": true,
+            "reason": "directional row envelope of exterior instance contour"
+          }
+        ]
+      },
+      "views": [
+        {
+          "view_index": 0,
+          "frame_id": 92278,
+          "timestamp": 1042.5553587905451,
+          "camera_transform": {
+            "location": {
+              "x": -96.83336639404297,
+              "y": 308.7154541015625,
+              "z": 12.002955436706543
+            },
+            "rotation": {
+              "pitch": 0.0,
+              "yaw": -90.0,
+              "roll": 0.0
+            }
+          },
+          "sensor_frames": {
+            "rgb": 92278,
+            "depth": 92278,
+            "semantic": 92278,
+            "instance": 92278
+          },
+          "sensor_timestamps": {
+            "rgb": 1042.5553587905451,
+            "depth": 1042.5553587905451,
+            "semantic": 1042.5553587905451,
+            "instance": 1042.5553587905451
+          },
+          "candidate_ids": [
+            39220
+          ]
+        },
+        {
+          "view_index": 1,
+          "frame_id": 92279,
+          "timestamp": 1042.6053587912902,
+          "camera_transform": {
+            "location": {
+              "x": -92.99478912353516,
+              "y": 308.7154541015625,
+              "z": 12.002955436706543
+            },
+            "rotation": {
+              "pitch": 0.0,
+              "yaw": -90.0,
+              "roll": 0.0
+            }
+          },
+          "sensor_frames": {
+            "rgb": 92279,
+            "depth": 92279,
+            "semantic": 92279,
+            "instance": 92279
+          },
+          "sensor_timestamps": {
+            "rgb": 1042.6053587912902,
+            "depth": 1042.6053587912902,
+            "semantic": 1042.6053587912902,
+            "instance": 1042.6053587912902
+          },
+          "candidate_ids": [
+            39220
+          ]
+        },
+        {
+          "view_index": 2,
+          "frame_id": 92280,
+          "timestamp": 1042.6553587920353,
+          "camera_transform": {
+            "location": {
+              "x": -89.1562271118164,
+              "y": 308.7154541015625,
+              "z": 12.002955436706543
+            },
+            "rotation": {
+              "pitch": 0.0,
+              "yaw": -90.0,
+              "roll": 0.0
+            }
+          },
+          "sensor_frames": {
+            "rgb": 92280,
+            "depth": 92280,
+            "semantic": 92280,
+            "instance": 92280
+          },
+          "sensor_timestamps": {
+            "rgb": 1042.6553587920353,
+            "depth": 1042.6553587920353,
+            "semantic": 1042.6553587920353,
+            "instance": 1042.6553587920353
+          },
+          "candidate_ids": [
+            39220
+          ]
+        }
+      ],
+      "overview_path": "docs/assets/act0/candidates/candidate_01_bbox_48389_overview.jpg",
+      "instance_overlay_path": "docs/assets/act0/candidates/candidate_01_bbox_48389_instance_overlay.jpg",
+      "surface": null
+    },
+    {
+      "candidate_index": 6,
+      "bbox_id": 48397,
+      "candidate_surface": "+X",
+      "surface_id": "act0_bbox_48397",
+      "decision": "REJECTED",
+      "rejection_reasons": [
+        "target_instance_id_not_stable",
+        "center_target_coverage_out_of_range",
+        "target_mask_fragmented",
+        "left_external_contour_insufficient",
+        "left_world_boundary_insufficient",
+        "left_boundary_repeatability_failed",
+        "right_external_contour_insufficient",
+        "right_world_boundary_insufficient",
+        "right_boundary_repeatability_failed",
+        "depth_plane_residual_too_large",
+        "depth_plane_normal_inconsistent",
+        "depth_plane_inlier_ratio_too_low",
+        "raycast_evidence_missing",
+        "terminal_width_too_small_or_degenerate"
+      ],
+      "bbox_used_for": "candidate pose seed only; not physical boundary truth",
+      "target_instance_id_16bit": null,
+      "stable_instance_ids": [],
+      "target_instance_id_stable": false,
+      "center_target_coverage": 0.0,
+      "plane": {
+        "origin": [
+          29.951152801513672,
+          191.23792552947998,
+          10.276723861694336
+        ],
+        "normal": [
+          6.123233995736766e-17,
+          -1.0,
+          0.0
+        ],
+        "median_residual_m": null,
+        "p95_residual_m": null,
+        "max_residual_m": null,
+        "normal_error_deg": null,
+        "support_count": 0
+      },
+      "horizontal_axis": [
+        -1.0,
+        -6.123233995736766e-17,
+        0.0
+      ],
+      "vertical_axis": [
+        0.0,
+        0.0,
+        1.0
+      ],
+      "boundaries": {
+        "LEFT": {
+          "view_count": 0,
+          "world_line": null,
+          "horizontal_std_m": null
+        },
+        "RIGHT": {
+          "view_count": 0,
+          "world_line": null,
+          "horizontal_std_m": null
+        }
+      },
+      "raycast_audit": {
+        "attempted": 0,
+        "building_hits": 0,
+        "matched": 0,
+        "agreement": null,
+        "tolerance_m": 0.3,
+        "median_residual_m": null,
+        "max_residual_m": null
+      },
+      "boundary_audits": {
+        "LEFT": [
+          {
+            "contour_present": false,
+            "contour_span_fraction": 0.0,
+            "target_side_fraction": 0.0,
+            "external_side_fraction": 0.0,
+            "local_straddle": false,
+            "reason": "no directional exterior instance contour"
+          },
+          {
+            "contour_present": false,
+            "contour_span_fraction": 0.0,
+            "target_side_fraction": 0.0,
+            "external_side_fraction": 0.0,
+            "local_straddle": false,
+            "reason": "no directional exterior instance contour"
+          },
+          {
+            "contour_present": false,
+            "contour_span_fraction": 0.0,
+            "target_side_fraction": 0.0,
+            "external_side_fraction": 0.0,
+            "local_straddle": false,
+            "reason": "no directional exterior instance contour"
+          }
+        ],
+        "RIGHT": [
+          {
+            "contour_present": false,
+            "contour_span_fraction": 0.0,
+            "target_side_fraction": 0.0,
+            "external_side_fraction": 0.0,
+            "local_straddle": false,
+            "reason": "no directional exterior instance contour"
+          },
+          {
+            "contour_present": false,
+            "contour_span_fraction": 0.0,
+            "target_side_fraction": 0.0,
+            "external_side_fraction": 0.0,
+            "local_straddle": false,
+            "reason": "no directional exterior instance contour"
+          },
+          {
+            "contour_present": false,
+            "contour_span_fraction": 0.0,
+            "target_side_fraction": 0.0,
+            "external_side_fraction": 0.0,
+            "local_straddle": false,
+            "reason": "no directional exterior instance contour"
+          }
+        ]
+      },
+      "views": [
+        {
+          "view_index": 0,
+          "frame_id": 92281,
+          "timestamp": 1042.7053587927803,
+          "camera_transform": {
+            "location": {
+              "x": 33.702537536621094,
+              "y": 153.72409057617188,
+              "z": 10.276723861694336
+            },
+            "rotation": {
+              "pitch": 0.0,
+              "yaw": 90.0,
+              "roll": -0.0
+            }
+          },
+          "sensor_frames": {
+            "rgb": 92281,
+            "depth": 92281,
+            "semantic": 92281,
+            "instance": 92281
+          },
+          "sensor_timestamps": {
+            "rgb": 1042.7053587927803,
+            "depth": 1042.7053587927803,
+            "semantic": 1042.7053587927803,
+            "instance": 1042.7053587927803
+          },
+          "candidate_ids": [
+            39220
+          ]
+        },
+        {
+          "view_index": 1,
+          "frame_id": 92282,
+          "timestamp": 1042.7553587935254,
+          "camera_transform": {
+            "location": {
+              "x": 29.95115089416504,
+              "y": 153.72409057617188,
+              "z": 10.276723861694336
+            },
+            "rotation": {
+              "pitch": 0.0,
+              "yaw": 90.0,
+              "roll": -0.0
+            }
+          },
+          "sensor_frames": {
+            "rgb": 92282,
+            "depth": 92282,
+            "semantic": 92282,
+            "instance": 92282
+          },
+          "sensor_timestamps": {
+            "rgb": 1042.7553587935254,
+            "depth": 1042.7553587935254,
+            "semantic": 1042.7553587935254,
+            "instance": 1042.7553587935254
+          },
+          "candidate_ids": [
+            35115,
+            35117
+          ]
+        },
+        {
+          "view_index": 2,
+          "frame_id": 92283,
+          "timestamp": 1042.8053587942704,
+          "camera_transform": {
+            "location": {
+              "x": 26.199769973754883,
+              "y": 153.72409057617188,
+              "z": 10.276723861694336
+            },
+            "rotation": {
+              "pitch": 0.0,
+              "yaw": 90.0,
+              "roll": -0.0
+            }
+          },
+          "sensor_frames": {
+            "rgb": 92283,
+            "depth": 92283,
+            "semantic": 92283,
+            "instance": 92283
+          },
+          "sensor_timestamps": {
+            "rgb": 1042.8053587942704,
+            "depth": 1042.8053587942704,
+            "semantic": 1042.8053587942704,
+            "instance": 1042.8053587942704
+          },
+          "candidate_ids": [
+            35115,
+            35117
+          ]
+        }
+      ],
+      "overview_path": "docs/assets/act0/candidates/candidate_06_bbox_48397_overview.jpg",
+      "instance_overlay_path": "docs/assets/act0/candidates/candidate_06_bbox_48397_instance_overlay.jpg",
+      "surface": null
+    },
+    {
+      "candidate_index": 7,
+      "bbox_id": 48399,
+      "candidate_surface": "+X",
+      "surface_id": "act0_bbox_48399",
+      "decision": "REJECTED",
+      "rejection_reasons": [
+        "left_external_contour_insufficient",
+        "right_external_contour_insufficient"
+      ],
+      "bbox_used_for": "candidate pose seed only; not physical boundary truth",
+      "target_instance_id_16bit": 39225,
+      "stable_instance_ids": [
+        39225,
+        39226
+      ],
+      "target_instance_id_stable": true,
+      "center_target_coverage": 0.180380859375,
+      "plane": {
+        "origin": [
+          8.515564032306242,
+          256.76004049954275,
+          10.573569993727496
+        ],
+        "normal": [
+          -0.9999183750693846,
+          -0.00019249654030186955,
+          -0.012775215993608908
+        ],
+        "median_residual_m": 0.039173360311804295,
+        "p95_residual_m": 0.08555106674216865,
+        "max_residual_m": 0.16348410628951687,
+        "normal_error_deg": 0.7320689666641593,
+        "support_count": 1161,
+        "inlier_count": 622,
+        "inlier_ratio": 0.5357450473729544,
+        "inlier_tolerance_m": 0.15
+      },
+      "horizontal_axis": [
+        -0.00019248083135130448,
+        0.9999999814725409,
+        -2.4591849259397097e-06
+      ],
+      "vertical_axis": [
+        -0.012775216230301206,
+        -1.5644698535786927e-18,
+        0.999918393595332
+      ],
+      "boundaries": {
+        "LEFT": {
+          "view_count": 2,
+          "per_view_horizontal_m": [
+            -20.980736735078658,
+            -21.54389304462759
+          ],
+          "horizontal_std_m": 0.2815781547744667,
+          "horizontal_coordinate_m": -21.262314889853123,
+          "vertical_range_m": [
+            -9.517100340263573,
+            8.991049748013097
+          ],
+          "world_line": {
+            "start": [
+              8.403112745335905,
+              235.4977260036263,
+              19.69553162470221
+            ],
+            "end": [
+              8.64126609510222,
+              235.4977260036263,
+              1.0552275676282985
+            ]
+          }
+        },
+        "RIGHT": {
+          "view_count": 3,
+          "per_view_horizontal_m": [
+            20.86881926057899,
+            20.811501414805107,
+            20.9399759138386
+          ],
+          "horizontal_std_m": 0.05255082370553765,
+          "horizontal_coordinate_m": 20.86881926057899,
+          "vertical_range_m": [
+            -9.513011296897366,
+            9.242976105793147
+          ],
+          "world_line": {
+            "start": [
+              8.395003309608857,
+              277.62885937347556,
+              19.695428016452194
+            ],
+            "end": [
+              8.633156659375171,
+              277.62885937347556,
+              1.0551239593782835
+            ]
+          }
+        }
+      },
+      "raycast_audit": {
+        "attempted": 65,
+        "building_hits": 65,
+        "matched": 64,
+        "agreement": 0.9846153846153847,
+        "tolerance_m": 0.3,
+        "median_residual_m": 0.15417547898315848,
+        "max_residual_m": 0.31889916221581066
+      },
+      "boundary_audits": {
+        "LEFT": [
+          {
+            "contour_present": true,
+            "contour_span_fraction": 0.34791666666666665,
+            "target_side_fraction": 0.718562874251497,
+            "external_side_fraction": 1.0,
+            "local_straddle": true,
+            "reason": "directional row envelope of exterior instance contour"
+          },
+          {
+            "contour_present": true,
+            "contour_span_fraction": 0.34791666666666665,
+            "target_side_fraction": 1.0,
+            "external_side_fraction": 1.0,
+            "local_straddle": true,
+            "reason": "directional row envelope of exterior instance contour"
+          },
+          {
+            "contour_present": true,
+            "contour_span_fraction": 0.34791666666666665,
+            "target_side_fraction": 1.0,
+            "external_side_fraction": 1.0,
+            "local_straddle": true,
+            "reason": "directional row envelope of exterior instance contour"
+          }
+        ],
+        "RIGHT": [
+          {
+            "contour_present": true,
+            "contour_span_fraction": 0.34791666666666665,
+            "target_side_fraction": 1.0,
+            "external_side_fraction": 1.0,
+            "local_straddle": true,
+            "reason": "directional row envelope of exterior instance contour"
+          },
+          {
+            "contour_present": true,
+            "contour_span_fraction": 0.34791666666666665,
+            "target_side_fraction": 1.0,
+            "external_side_fraction": 1.0,
+            "local_straddle": true,
+            "reason": "directional row envelope of exterior instance contour"
+          },
+          {
+            "contour_present": true,
+            "contour_span_fraction": 0.34791666666666665,
+            "target_side_fraction": 1.0,
+            "external_side_fraction": 1.0,
+            "local_straddle": true,
+            "reason": "directional row envelope of exterior instance contour"
+          }
+        ]
+      },
+      "views": [
+        {
+          "view_index": 0,
+          "frame_id": 92284,
+          "timestamp": 1042.8553587950155,
+          "camera_transform": {
+            "location": {
+              "x": -30.965429306030273,
+              "y": 252.67141723632812,
+              "z": 10.276723861694336
+            },
+            "rotation": {
+              "pitch": 0.0,
+              "yaw": 7.0167091267055864e-15,
+              "roll": -0.0
+            }
+          },
+          "sensor_frames": {
+            "rgb": 92284,
+            "depth": 92284,
+            "semantic": 92284,
+            "instance": 92284
+          },
+          "sensor_timestamps": {
+            "rgb": 1042.8553587950155,
+            "depth": 1042.8553587950155,
+            "semantic": 1042.8553587950155,
+            "instance": 1042.8553587950155
+          },
+          "candidate_ids": [
+            39225,
+            39226
+          ]
+        },
+        {
+          "view_index": 1,
+          "frame_id": 92285,
+          "timestamp": 1042.9053587957605,
+          "camera_transform": {
+            "location": {
+              "x": -30.965429306030273,
+              "y": 256.4228210449219,
+              "z": 10.276723861694336
+            },
+            "rotation": {
+              "pitch": 0.0,
+              "yaw": 7.0167091267055864e-15,
+              "roll": -0.0
+            }
+          },
+          "sensor_frames": {
+            "rgb": 92285,
+            "depth": 92285,
+            "semantic": 92285,
+            "instance": 92285
+          },
+          "sensor_timestamps": {
+            "rgb": 1042.9053587957605,
+            "depth": 1042.9053587957605,
+            "semantic": 1042.9053587957605,
+            "instance": 1042.9053587957605
+          },
+          "candidate_ids": [
+            39225,
+            39226,
+            39232
+          ]
+        },
+        {
+          "view_index": 2,
+          "frame_id": 92286,
+          "timestamp": 1042.9553587965056,
+          "camera_transform": {
+            "location": {
+              "x": -30.965429306030273,
+              "y": 260.1741943359375,
+              "z": 10.276723861694336
+            },
+            "rotation": {
+              "pitch": 0.0,
+              "yaw": 7.0167091267055864e-15,
+              "roll": -0.0
+            }
+          },
+          "sensor_frames": {
+            "rgb": 92286,
+            "depth": 92286,
+            "semantic": 92286,
+            "instance": 92286
+          },
+          "sensor_timestamps": {
+            "rgb": 1042.9553587965056,
+            "depth": 1042.9553587965056,
+            "semantic": 1042.9553587965056,
+            "instance": 1042.9553587965056
+          },
+          "candidate_ids": [
+            39225,
+            44222,
+            35089,
+            39226
+          ]
+        }
+      ],
+      "overview_path": "docs/assets/act0/candidates/candidate_07_bbox_48399_overview.jpg",
+      "instance_overlay_path": "docs/assets/act0/candidates/candidate_07_bbox_48399_instance_overlay.jpg",
+      "surface": null
+    },
+    {
+      "candidate_index": 8,
+      "bbox_id": 48401,
+      "candidate_surface": "+X",
+      "surface_id": "act0_bbox_48401",
+      "decision": "REJECTED",
+      "rejection_reasons": [
+        "left_external_contour_insufficient",
+        "right_external_contour_insufficient"
+      ],
+      "bbox_used_for": "candidate pose seed only; not physical boundary truth",
+      "target_instance_id_16bit": 39226,
+      "stable_instance_ids": [
+        39226,
+        39233
+      ],
+      "target_instance_id_stable": true,
+      "center_target_coverage": 0.18094401041666666,
+      "plane": {
+        "origin": [
+          105.4167285274367,
+          235.88513628729314,
+          10.355930289150642
+        ],
+        "normal": [
+          -0.9999129038729786,
+          -2.4305811969164287e-05,
+          -0.013197881554824443
+        ],
+        "median_residual_m": 0.03470813302799983,
+        "p95_residual_m": 0.0847000226698956,
+        "max_residual_m": 0.14815981245270188,
+        "normal_error_deg": 0.7562061482960568,
+        "support_count": 1129,
+        "inlier_count": 633,
+        "inlier_ratio": 0.5606731620903455,
+        "inlier_tolerance_m": 0.15
+      },
+      "horizontal_axis": [
+        -2.430369503425666e-05,
+        0.9999999997046137,
+        -3.2078522755600397e-07
+      ],
+      "vertical_axis": [
+        -0.013197881558722915,
+        -1.6161918029204084e-18,
+        0.9999129041683391
+      ],
+      "boundaries": {
+        "LEFT": {
+          "view_count": 3,
+          "per_view_horizontal_m": [
+            -21.017798929619595,
+            -21.10610228506384,
+            -21.07054632626113
+          ],
+          "horizontal_std_m": 0.036276709151177984,
+          "horizontal_coordinate_m": -21.07054632626113,
+          "vertical_range_m": [
+            -9.299415991489855,
+            9.216033183714398
+          ],
+          "world_line": {
+            "start": [
+              105.29478600310424,
+              214.81458996725596,
+              19.633482890238298
+            ],
+            "end": [
+              105.54078634561809,
+              214.81458996725596,
+              0.9957253217257982
+            ]
+          }
+        },
+        "RIGHT": {
+          "view_count": 3,
+          "per_view_horizontal_m": [
+            21.342162500192778,
+            21.377731717967485,
+            21.413323722716996
+          ],
+          "horizontal_std_m": 0.02905144793931193,
+          "horizontal_coordinate_m": 21.377731717967485,
+          "vertical_range_m": [
+            -9.397929285157595,
+            9.315545444727627
+          ],
+          "world_line": {
+            "start": [
+              105.29375435309993,
+              257.2628679989459,
+              19.633469273457766
+            ],
+            "end": [
+              105.53975469561378,
+              257.2628679989459,
+              0.9957117049452666
+            ]
+          }
+        }
+      },
+      "raycast_audit": {
+        "attempted": 66,
+        "building_hits": 66,
+        "matched": 59,
+        "agreement": 0.8939393939393939,
+        "tolerance_m": 0.3,
+        "median_residual_m": 0.15408407480568986,
+        "max_residual_m": 23.410552475749963
+      },
+      "boundary_audits": {
+        "LEFT": [
+          {
+            "contour_present": true,
+            "contour_span_fraction": 0.34791666666666665,
+            "target_side_fraction": 0.8922155688622755,
+            "external_side_fraction": 1.0,
+            "local_straddle": true,
+            "reason": "directional row envelope of exterior instance contour"
+          },
+          {
+            "contour_present": true,
+            "contour_span_fraction": 0.34791666666666665,
+            "target_side_fraction": 0.9341317365269461,
+            "external_side_fraction": 1.0,
+            "local_straddle": true,
+            "reason": "directional row envelope of exterior instance contour"
+          },
+          {
+            "contour_present": true,
+            "contour_span_fraction": 0.34791666666666665,
+            "target_side_fraction": 0.7485029940119761,
+            "external_side_fraction": 1.0,
+            "local_straddle": true,
+            "reason": "directional row envelope of exterior instance contour"
+          }
+        ],
+        "RIGHT": [
+          {
+            "contour_present": true,
+            "contour_span_fraction": 0.34791666666666665,
+            "target_side_fraction": 1.0,
+            "external_side_fraction": 1.0,
+            "local_straddle": true,
+            "reason": "directional row envelope of exterior instance contour"
+          },
+          {
+            "contour_present": true,
+            "contour_span_fraction": 0.34791666666666665,
+            "target_side_fraction": 1.0,
+            "external_side_fraction": 1.0,
+            "local_straddle": true,
+            "reason": "directional row envelope of exterior instance contour"
+          },
+          {
+            "contour_present": true,
+            "contour_span_fraction": 0.34791666666666665,
+            "target_side_fraction": 1.0,
+            "external_side_fraction": 1.0,
+            "local_straddle": true,
+            "reason": "directional row envelope of exterior instance contour"
+          }
+        ]
+      },
+      "views": [
+        {
+          "view_index": 0,
+          "frame_id": 92287,
+          "timestamp": 1043.0053587972507,
+          "camera_transform": {
+            "location": {
+              "x": 65.93104553222656,
+              "y": 232.2698211669922,
+              "z": 10.276723861694336
+            },
+            "rotation": {
+              "pitch": 0.0,
+              "yaw": 7.0167091267055864e-15,
+              "roll": -0.0
+            }
+          },
+          "sensor_frames": {
+            "rgb": 92287,
+            "depth": 92287,
+            "semantic": 92287,
+            "instance": 92287
+          },
+          "sensor_timestamps": {
+            "rgb": 1043.0053587972507,
+            "depth": 1043.0053587972507,
+            "semantic": 1043.0053587972507,
+            "instance": 1043.0053587972507
+          },
+          "candidate_ids": [
+            39226,
+            39230,
+            39233
+          ]
+        },
+        {
+          "view_index": 1,
+          "frame_id": 92288,
+          "timestamp": 1043.0553587979957,
+          "camera_transform": {
+            "location": {
+              "x": 65.93104553222656,
+              "y": 236.02120971679688,
+              "z": 10.276723861694336
+            },
+            "rotation": {
+              "pitch": 0.0,
+              "yaw": 7.0167091267055864e-15,
+              "roll": -0.0
+            }
+          },
+          "sensor_frames": {
+            "rgb": 92288,
+            "depth": 92288,
+            "semantic": 92288,
+            "instance": 92288
+          },
+          "sensor_timestamps": {
+            "rgb": 1043.0553587979957,
+            "depth": 1043.0553587979957,
+            "semantic": 1043.0553587979957,
+            "instance": 1043.0553587979957
+          },
+          "candidate_ids": [
+            39226,
+            39233
+          ]
+        },
+        {
+          "view_index": 2,
+          "frame_id": 92289,
+          "timestamp": 1043.1053587987408,
+          "camera_transform": {
+            "location": {
+              "x": 65.93104553222656,
+              "y": 239.77259826660156,
+              "z": 10.276723861694336
+            },
+            "rotation": {
+              "pitch": 0.0,
+              "yaw": 7.0167091267055864e-15,
+              "roll": -0.0
+            }
+          },
+          "sensor_frames": {
+            "rgb": 92289,
+            "depth": 92289,
+            "semantic": 92289,
+            "instance": 92289
+          },
+          "sensor_timestamps": {
+            "rgb": 1043.1053587987408,
+            "depth": 1043.1053587987408,
+            "semantic": 1043.1053587987408,
+            "instance": 1043.1053587987408
+          },
+          "candidate_ids": [
+            39226,
+            39233
+          ]
+        }
+      ],
+      "overview_path": "docs/assets/act0/candidates/candidate_08_bbox_48401_overview.jpg",
+      "instance_overlay_path": "docs/assets/act0/candidates/candidate_08_bbox_48401_instance_overlay.jpg",
+      "surface": null
+    },
+    {
+      "candidate_index": 10,
+      "bbox_id": 48418,
+      "candidate_surface": "+X",
+      "surface_id": "act0_bbox_48418",
+      "decision": "REJECTED",
+      "rejection_reasons": [
+        "raycast_depth_disagreement"
+      ],
+      "bbox_used_for": "candidate pose seed only; not physical boundary truth",
+      "target_instance_id_16bit": 39249,
+      "stable_instance_ids": [
+        39249
+      ],
+      "target_instance_id_stable": true,
+      "center_target_coverage": 0.43436848958333335,
+      "plane": {
+        "origin": [
+          225.36280765436504,
+          152.70439859569345,
+          15.121657346980466
+        ],
+        "normal": [
+          0.9999997003456078,
+          -0.00035226985951921687,
+          0.0006893581368916631
+        ],
+        "median_residual_m": 0.007089126696281818,
+        "p95_residual_m": 0.11488384486232622,
+        "max_residual_m": 0.15097534006753918,
+        "normal_error_deg": 0.04435554961025691,
+        "support_count": 2455,
+        "inlier_count": 1574,
+        "inlier_ratio": 0.6411405295315682,
+        "inlier_tolerance_m": 0.15
+      },
+      "horizontal_axis": [
+        -0.0003522697758172992,
+        -0.999999937952971,
+        -2.4284010910876247e-07
+      ],
+      "vertical_axis": [
+        -0.0006893581796642899,
+        5.293955920339377e-23,
+        0.9999997623926218
+      ],
+      "boundaries": {
+        "LEFT": {
+          "view_count": 3,
+          "per_view_horizontal_m": [
+            -14.971684621109349,
+            -14.959099002816657,
+            -14.946513678798874
+          ],
+          "horizontal_std_m": 0.010275994167849712,
+          "horizontal_coordinate_m": -14.959099002816657,
+          "vertical_range_m": [
+            -13.179791921558365,
+            11.930572320895914
+          ],
+          "world_line": {
+            "start": [
+              225.3598528551997,
+              167.66349667034245,
+              27.052230465753603
+            ],
+            "end": [
+              225.37716350355782,
+              167.66349667034245,
+              1.940982415537274
+            ]
+          }
+        },
+        "RIGHT": {
+          "view_count": 3,
+          "per_view_horizontal_m": [
+            14.99900738465537,
+            15.01178022942825,
+            15.024550190519518
+          ],
+          "horizontal_std_m": 0.010427806849840246,
+          "horizontal_coordinate_m": 15.01178022942825,
+          "vertical_range_m": [
+            -13.180681695939647,
+            11.930572320895914
+          ],
+          "world_line": {
+            "start": [
+              225.34929502029152,
+              137.69261929770155,
+              27.052223187622022
+            ],
+            "end": [
+              225.36660566864964,
+              137.69261929770155,
+              1.940975137405692
+            ]
+          }
+        }
+      },
+      "raycast_audit": {
+        "attempted": 63,
+        "building_hits": 63,
+        "matched": 0,
+        "agreement": 0.0,
+        "tolerance_m": 0.3,
+        "median_residual_m": 0.8053385884010034,
+        "max_residual_m": 0.9975325769114999
+      },
+      "boundary_audits": {
+        "LEFT": [
+          {
+            "contour_present": true,
+            "contour_span_fraction": 0.5645833333333333,
+            "target_side_fraction": 0.9446494464944649,
+            "external_side_fraction": 1.0,
+            "local_straddle": true,
+            "reason": "directional row envelope of exterior instance contour"
+          },
+          {
+            "contour_present": true,
+            "contour_span_fraction": 0.7479166666666667,
+            "target_side_fraction": 1.0,
+            "external_side_fraction": 1.0,
+            "local_straddle": true,
+            "reason": "directional row envelope of exterior instance contour"
+          },
+          {
+            "contour_present": true,
+            "contour_span_fraction": 0.7479166666666667,
+            "target_side_fraction": 1.0,
+            "external_side_fraction": 1.0,
+            "local_straddle": true,
+            "reason": "directional row envelope of exterior instance contour"
+          }
+        ],
+        "RIGHT": [
+          {
+            "contour_present": true,
+            "contour_span_fraction": 0.5645833333333333,
+            "target_side_fraction": 0.959409594095941,
+            "external_side_fraction": 1.0,
+            "local_straddle": true,
+            "reason": "directional row envelope of exterior instance contour"
+          },
+          {
+            "contour_present": true,
+            "contour_span_fraction": 0.7479166666666667,
+            "target_side_fraction": 1.0,
+            "external_side_fraction": 1.0,
+            "local_straddle": true,
+            "reason": "directional row envelope of exterior instance contour"
+          },
+          {
+            "contour_present": true,
+            "contour_span_fraction": 0.7479166666666667,
+            "target_side_fraction": 1.0,
+            "external_side_fraction": 1.0,
+            "local_straddle": true,
+            "reason": "directional row envelope of exterior instance contour"
+          }
+        ]
+      },
+      "views": [
+        {
+          "view_index": 0,
+          "frame_id": 92290,
+          "timestamp": 1043.1553587994858,
+          "camera_transform": {
+            "location": {
+              "x": 251.2582244873047,
+              "y": 155.19447326660156,
+              "z": 14.006122589111328
+            },
+            "rotation": {
+              "pitch": 0.0,
+              "yaw": 180.0,
+              "roll": -0.0
+            }
+          },
+          "sensor_frames": {
+            "rgb": 92290,
+            "depth": 92290,
+            "semantic": 92290,
+            "instance": 92290
+          },
+          "sensor_timestamps": {
+            "rgb": 1043.1553587994858,
+            "depth": 1043.1553587994858,
+            "semantic": 1043.1553587994858,
+            "instance": 1043.1553587994858
+          },
+          "candidate_ids": [
+            39249
+          ]
+        },
+        {
+          "view_index": 1,
+          "frame_id": 92291,
+          "timestamp": 1043.205358800231,
+          "camera_transform": {
+            "location": {
+              "x": 251.2582244873047,
+              "y": 152.677490234375,
+              "z": 14.006122589111328
+            },
+            "rotation": {
+              "pitch": 0.0,
+              "yaw": 180.0,
+              "roll": -0.0
+            }
+          },
+          "sensor_frames": {
+            "rgb": 92291,
+            "depth": 92291,
+            "semantic": 92291,
+            "instance": 92291
+          },
+          "sensor_timestamps": {
+            "rgb": 1043.205358800231,
+            "depth": 1043.205358800231,
+            "semantic": 1043.205358800231,
+            "instance": 1043.205358800231
+          },
+          "candidate_ids": [
+            39249
+          ]
+        },
+        {
+          "view_index": 2,
+          "frame_id": 92292,
+          "timestamp": 1043.255358800976,
+          "camera_transform": {
+            "location": {
+              "x": 251.2582244873047,
+              "y": 150.16050720214844,
+              "z": 14.006122589111328
+            },
+            "rotation": {
+              "pitch": 0.0,
+              "yaw": 180.0,
+              "roll": -0.0
+            }
+          },
+          "sensor_frames": {
+            "rgb": 92292,
+            "depth": 92292,
+            "semantic": 92292,
+            "instance": 92292
+          },
+          "sensor_timestamps": {
+            "rgb": 1043.255358800976,
+            "depth": 1043.255358800976,
+            "semantic": 1043.255358800976,
+            "instance": 1043.255358800976
+          },
+          "candidate_ids": [
+            39249
+          ]
+        }
+      ],
+      "overview_path": "docs/assets/act0/candidates/candidate_10_bbox_48418_overview.jpg",
+      "instance_overlay_path": "docs/assets/act0/candidates/candidate_10_bbox_48418_instance_overlay.jpg",
+      "surface": null
+    },
+    {
+      "candidate_index": 11,
+      "bbox_id": 48436,
+      "candidate_surface": "+X",
+      "surface_id": "act0_bbox_48436",
+      "decision": "REJECTED",
+      "rejection_reasons": [
+        "depth_plane_inlier_ratio_too_low",
+        "raycast_depth_disagreement"
+      ],
+      "bbox_used_for": "candidate pose seed only; not physical boundary truth",
+      "target_instance_id_16bit": 39766,
+      "stable_instance_ids": [
+        35112,
+        39458,
+        39766
+      ],
+      "target_instance_id_stable": true,
+      "center_target_coverage": 0.23180013020833334,
+      "plane": {
+        "origin": [
+          143.96026150709918,
+          21.174788010302848,
+          10.191040774855491
+        ],
+        "normal": [
+          0.9999923907324922,
+          -0.0037736973023116452,
+          0.0009887799477747022
+        ],
+        "median_residual_m": 0.018052882751555095,
+        "p95_residual_m": 0.0901798386168764,
+        "max_residual_m": 0.1355397735728737,
+        "normal_error_deg": 0.2235163679602523,
+        "support_count": 1505,
+        "inlier_count": 294,
+        "inlier_ratio": 0.19534883720930232,
+        "inlier_tolerance_m": 0.15
+      },
+      "horizontal_axis": [
+        -0.0037736954575398186,
+        -0.9999928795789851,
+        -3.73138279051368e-06
+      ],
+      "vertical_axis": [
+        -0.0009887869883543534,
+        -4.235164736271502e-22,
+        0.9999995111500264
+      ],
+      "boundaries": {
+        "LEFT": {
+          "view_count": 3,
+          "per_view_horizontal_m": [
+            -16.555630017656735,
+            -16.540376761227293,
+            -16.525123504797847
+          ],
+          "horizontal_std_m": 0.01245423172265513,
+          "horizontal_coordinate_m": -16.540376761227293,
+          "vertical_range_m": [
+            -7.019839087816459,
+            16.797805797852916
+          ],
+          "world_line": {
+            "start": [
+              144.00610047267784,
+              37.71504699708386,
+              26.9584863298968
+            ],
+            "end": [
+              144.0296209772994,
+              37.71504699708386,
+              3.1712668371643797
+            ]
+          }
+        },
+        "RIGHT": {
+          "view_count": 3,
+          "per_view_horizontal_m": [
+            13.237884133007196,
+            13.253137389436638,
+            13.268390645866084
+          ],
+          "horizontal_std_m": 0.01245423172265513,
+          "horizontal_coordinate_m": 13.253137389436638,
+          "vertical_range_m": [
+            -7.019839087816459,
+            16.750446596975753
+          ],
+          "world_line": {
+            "start": [
+              143.89366882366335,
+              7.921744988784191,
+              26.95837515889083
+            ],
+            "end": [
+              143.9171893282849,
+              7.921744988784191,
+              3.171155666158409
+            ]
+          }
+        }
+      },
+      "raycast_audit": {
+        "attempted": 69,
+        "building_hits": 69,
+        "matched": 0,
+        "agreement": 0.0,
+        "tolerance_m": 0.3,
+        "median_residual_m": 29.842160588635043,
+        "max_residual_m": 34.09973671138237
+      },
+      "boundary_audits": {
+        "LEFT": [
+          {
+            "contour_present": true,
+            "contour_span_fraction": 0.5958333333333333,
+            "target_side_fraction": 0.9965034965034965,
+            "external_side_fraction": 1.0,
+            "local_straddle": true,
+            "reason": "directional row envelope of exterior instance contour"
+          },
+          {
+            "contour_present": true,
+            "contour_span_fraction": 0.5958333333333333,
+            "target_side_fraction": 0.9685314685314685,
+            "external_side_fraction": 1.0,
+            "local_straddle": true,
+            "reason": "directional row envelope of exterior instance contour"
+          },
+          {
+            "contour_present": true,
+            "contour_span_fraction": 0.5958333333333333,
+            "target_side_fraction": 0.9895104895104895,
+            "external_side_fraction": 1.0,
+            "local_straddle": true,
+            "reason": "directional row envelope of exterior instance contour"
+          }
+        ],
+        "RIGHT": [
+          {
+            "contour_present": true,
+            "contour_span_fraction": 0.5958333333333333,
+            "target_side_fraction": 0.986013986013986,
+            "external_side_fraction": 1.0,
+            "local_straddle": true,
+            "reason": "directional row envelope of exterior instance contour"
+          },
+          {
+            "contour_present": true,
+            "contour_span_fraction": 0.5958333333333333,
+            "target_side_fraction": 0.9965034965034965,
+            "external_side_fraction": 1.0,
+            "local_straddle": true,
+            "reason": "directional row envelope of exterior instance contour"
+          },
+          {
+            "contour_present": true,
+            "contour_span_fraction": 0.5958333333333333,
+            "target_side_fraction": 0.993006993006993,
+            "external_side_fraction": 1.0,
+            "local_straddle": true,
+            "reason": "directional row envelope of exterior instance contour"
+          }
+        ]
+      },
+      "views": [
+        {
+          "view_index": 0,
+          "frame_id": 92293,
+          "timestamp": 1043.305358801721,
+          "camera_transform": {
+            "location": {
+              "x": 172.47488403320312,
+              "y": 25.46881103515625,
+              "z": 14.992393493652344
+            },
+            "rotation": {
+              "pitch": 0.0,
+              "yaw": 180.0,
+              "roll": -0.0
+            }
+          },
+          "sensor_frames": {
+            "rgb": 92293,
+            "depth": 92293,
+            "semantic": 92293,
+            "instance": 92293
+          },
+          "sensor_timestamps": {
+            "rgb": 1043.305358801721,
+            "depth": 1043.305358801721,
+            "semantic": 1043.305358801721,
+            "instance": 1043.305358801721
+          },
+          "candidate_ids": [
+            39766,
+            39458,
+            35112,
+            35127,
+            35125,
+            35075,
+            35121,
+            35126,
+            35128
+          ]
+        },
+        {
+          "view_index": 1,
+          "frame_id": 92294,
+          "timestamp": 1043.355358802466,
+          "camera_transform": {
+            "location": {
+              "x": 172.47488403320312,
+              "y": 22.816946029663086,
+              "z": 14.992393493652344
+            },
+            "rotation": {
+              "pitch": 0.0,
+              "yaw": 180.0,
+              "roll": -0.0
+            }
+          },
+          "sensor_frames": {
+            "rgb": 92294,
+            "depth": 92294,
+            "semantic": 92294,
+            "instance": 92294
+          },
+          "sensor_timestamps": {
+            "rgb": 1043.355358802466,
+            "depth": 1043.355358802466,
+            "semantic": 1043.355358802466,
+            "instance": 1043.355358802466
+          },
+          "candidate_ids": [
+            39766,
+            39458,
+            35112,
+            35127,
+            35075,
+            39462,
+            35125
+          ]
+        },
+        {
+          "view_index": 2,
+          "frame_id": 92295,
+          "timestamp": 1043.4053588032111,
+          "camera_transform": {
+            "location": {
+              "x": 172.47488403320312,
+              "y": 20.165081024169922,
+              "z": 14.992393493652344
+            },
+            "rotation": {
+              "pitch": 0.0,
+              "yaw": 180.0,
+              "roll": -0.0
+            }
+          },
+          "sensor_frames": {
+            "rgb": 92295,
+            "depth": 92295,
+            "semantic": 92295,
+            "instance": 92295
+          },
+          "sensor_timestamps": {
+            "rgb": 1043.4053588032111,
+            "depth": 1043.4053588032111,
+            "semantic": 1043.4053588032111,
+            "instance": 1043.4053588032111
+          },
+          "candidate_ids": [
+            39766,
+            39458,
+            35112,
+            35120,
+            35119,
+            35118,
+            35048,
+            39462,
+            44628,
+            46168,
+            44622,
+            44624,
+            44620,
+            44626,
+            44322,
+            46176,
+            46210,
+            46164
+          ]
+        }
+      ],
+      "overview_path": "docs/assets/act0/candidates/candidate_11_bbox_48436_overview.jpg",
+      "instance_overlay_path": "docs/assets/act0/candidates/candidate_11_bbox_48436_instance_overlay.jpg",
+      "surface": null
+    },
+    {
+      "candidate_index": 12,
+      "bbox_id": 48420,
+      "candidate_surface": "+Y",
+      "surface_id": "act0_bbox_48420",
+      "decision": "REJECTED",
+      "rejection_reasons": [
+        "left_external_contour_insufficient",
+        "left_boundary_repeatability_failed",
+        "right_external_contour_insufficient",
+        "right_boundary_repeatability_failed",
+        "raycast_depth_disagreement",
+        "terminal_width_too_small_or_degenerate"
+      ],
+      "bbox_used_for": "candidate pose seed only; not physical boundary truth",
+      "target_instance_id_16bit": 44224,
+      "stable_instance_ids": [
+        44224
+      ],
+      "target_instance_id_stable": true,
+      "center_target_coverage": 0.5306282552083333,
+      "plane": {
+        "origin": [
+          -46.44570621334457,
+          267.31727266311646,
+          5.737627188116314
+        ],
+        "normal": [
+          -0.0,
+          1.0,
+          -0.0
+        ],
+        "median_residual_m": 0.0,
+        "p95_residual_m": 0.0,
+        "max_residual_m": 0.0,
+        "normal_error_deg": 0.0,
+        "support_count": 3926,
+        "inlier_count": 3926,
+        "inlier_ratio": 1.0,
+        "inlier_tolerance_m": 0.15
+      },
+      "horizontal_axis": [
+        1.0,
+        0.0,
+        0.0
+      ],
+      "vertical_axis": [
+        -0.0,
+        -0.0,
+        1.0
+      ],
+      "boundaries": {
+        "LEFT": {
+          "view_count": 3,
+          "per_view_horizontal_m": [
+            -9.318047161321402,
+            3.6574021310403353,
+            4.209864027877089
+          ],
+          "horizontal_std_m": 6.250972187756512,
+          "horizontal_coordinate_m": 3.6574021310403353,
+          "vertical_range_m": [
+            -2.4655118839442745,
+            2.585230617225167
+          ],
+          "world_line": {
+            "start": [
+              -42.788304082304236,
+              267.31727266311646,
+              8.322857805341481
+            ],
+            "end": [
+              -42.788304082304236,
+              267.31727266311646,
+              3.27124777711928
+            ]
+          }
+        },
+        "RIGHT": {
+          "view_count": 3,
+          "per_view_horizontal_m": [
+            1.7342474908425771,
+            3.6574021310403353,
+            4.33131781526351
+          ],
+          "horizontal_std_m": 1.1003767228415715,
+          "horizontal_coordinate_m": 3.6574021310403353,
+          "vertical_range_m": [
+            -2.4655118839442745,
+            2.585230617225167
+          ],
+          "world_line": {
+            "start": [
+              -42.788304082304236,
+              267.31727266311646,
+              8.322857805341481
+            ],
+            "end": [
+              -42.788304082304236,
+              267.31727266311646,
+              3.27124777711928
+            ]
+          }
+        }
+      },
+      "raycast_audit": {
+        "attempted": 63,
+        "building_hits": 63,
+        "matched": 42,
+        "agreement": 0.6666666666666666,
+        "tolerance_m": 0.3,
+        "median_residual_m": 0.0004926640208684252,
+        "max_residual_m": 8.380374193706203
+      },
+      "boundary_audits": {
+        "LEFT": [
+          {
+            "contour_present": true,
+            "contour_span_fraction": 0.0020833333333333333,
+            "target_side_fraction": 1.0,
+            "external_side_fraction": 0.0,
+            "local_straddle": false,
+            "reason": "directional row envelope of exterior instance contour"
+          },
+          {
+            "contour_present": true,
+            "contour_span_fraction": 0.6625,
+            "target_side_fraction": 0.0031446540880503146,
+            "external_side_fraction": 0.0,
+            "local_straddle": false,
+            "reason": "directional row envelope of exterior instance contour"
+          },
+          {
+            "contour_present": true,
+            "contour_span_fraction": 0.08333333333333333,
+            "target_side_fraction": 0.1,
+            "external_side_fraction": 0.0,
+            "local_straddle": false,
+            "reason": "directional row envelope of exterior instance contour"
+          }
+        ],
+        "RIGHT": [
+          {
+            "contour_present": true,
+            "contour_span_fraction": 0.0020833333333333333,
+            "target_side_fraction": 1.0,
+            "external_side_fraction": 0.0,
+            "local_straddle": false,
+            "reason": "directional row envelope of exterior instance contour"
+          },
+          {
+            "contour_present": true,
+            "contour_span_fraction": 0.6625,
+            "target_side_fraction": 1.0,
+            "external_side_fraction": 1.0,
+            "local_straddle": true,
+            "reason": "directional row envelope of exterior instance contour"
+          },
+          {
+            "contour_present": true,
+            "contour_span_fraction": 0.08333333333333333,
+            "target_side_fraction": 0.125,
+            "external_side_fraction": 0.0,
+            "local_straddle": false,
+            "reason": "directional row envelope of exterior instance contour"
+          }
+        ]
+      },
+      "views": [
+        {
+          "view_index": 0,
+          "frame_id": 92296,
+          "timestamp": 1043.4553588039562,
+          "camera_transform": {
+            "location": {
+              "x": -50.237606048583984,
+              "y": 272.86944580078125,
+              "z": 7.099644660949707
+            },
+            "rotation": {
+              "pitch": 0.0,
+              "yaw": -90.0,
+              "roll": 0.0
+            }
+          },
+          "sensor_frames": {
+            "rgb": 92296,
+            "depth": 92296,
+            "semantic": 92296,
+            "instance": 92296
+          },
+          "sensor_timestamps": {
+            "rgb": 1043.4553588039562,
+            "depth": 1043.4553588039562,
+            "semantic": 1043.4553588039562,
+            "instance": 1043.4553588039562
+          },
+          "candidate_ids": [
+            44224
+          ]
+        },
+        {
+          "view_index": 1,
+          "frame_id": 92297,
+          "timestamp": 1043.5053588047012,
+          "camera_transform": {
+            "location": {
+              "x": -46.09358215332031,
+              "y": 272.86944580078125,
+              "z": 7.099644660949707
+            },
+            "rotation": {
+              "pitch": 0.0,
+              "yaw": -90.0,
+              "roll": 0.0
+            }
+          },
+          "sensor_frames": {
+            "rgb": 92297,
+            "depth": 92297,
+            "semantic": 92297,
+            "instance": 92297
+          },
+          "sensor_timestamps": {
+            "rgb": 1043.5053588047012,
+            "depth": 1043.5053588047012,
+            "semantic": 1043.5053588047012,
+            "instance": 1043.5053588047012
+          },
+          "candidate_ids": [
+            44224
+          ]
+        },
+        {
+          "view_index": 2,
+          "frame_id": 92298,
+          "timestamp": 1043.5553588054463,
+          "camera_transform": {
+            "location": {
+              "x": -41.94955825805664,
+              "y": 272.86944580078125,
+              "z": 7.099644660949707
+            },
+            "rotation": {
+              "pitch": 0.0,
+              "yaw": -90.0,
+              "roll": 0.0
+            }
+          },
+          "sensor_frames": {
+            "rgb": 92298,
+            "depth": 92298,
+            "semantic": 92298,
+            "instance": 92298
+          },
+          "sensor_timestamps": {
+            "rgb": 1043.5553588054463,
+            "depth": 1043.5553588054463,
+            "semantic": 1043.5553588054463,
+            "instance": 1043.5553588054463
+          },
+          "candidate_ids": [
+            44224,
+            44222
+          ]
+        }
+      ],
+      "overview_path": "docs/assets/act0/candidates/candidate_12_bbox_48420_overview.jpg",
+      "instance_overlay_path": "docs/assets/act0/candidates/candidate_12_bbox_48420_instance_overlay.jpg",
+      "surface": null
+    },
+    {
+      "candidate_index": 13,
+      "bbox_id": 48419,
+      "candidate_surface": "+X",
+      "surface_id": "act0_bbox_48419",
+      "decision": "REJECTED",
+      "rejection_reasons": [
+        "left_external_contour_insufficient",
+        "left_boundary_repeatability_failed",
+        "right_external_contour_insufficient",
+        "right_boundary_repeatability_failed",
+        "raycast_depth_disagreement"
+      ],
+      "bbox_used_for": "candidate pose seed only; not physical boundary truth",
+      "target_instance_id_16bit": 39290,
+      "stable_instance_ids": [
+        35092,
+        39290,
+        45164,
+        45204,
+        45208,
+        45212,
+        45216,
+        45224
+      ],
+      "target_instance_id_stable": true,
+      "center_target_coverage": 0.10258463541666667,
+      "plane": {
+        "origin": [
+          -70.70434873709407,
+          184.4364527034016,
+          7.871934125584032
+        ],
+        "normal": [
+          0.9999999999797846,
+          -3.142928995087315e-06,
+          -5.527453324610985e-06
+        ],
+        "median_residual_m": 2.7035087034535528e-05,
+        "p95_residual_m": 9.423229270994947e-05,
+        "max_residual_m": 0.0004521646213626084,
+        "normal_error_deg": 0.0003643163295509371,
+        "support_count": 641,
+        "inlier_count": 386,
+        "inlier_ratio": 0.6021840873634945,
+        "inlier_tolerance_m": 0.15
+      },
+      "horizontal_axis": [
+        -3.1429289950393026e-06,
+        -0.9999999999950611,
+        1.7372393322997446e-11
+      ],
+      "vertical_axis": [
+        5.527453324638286e-06,
+        -0.0,
+        0.9999999999847237
+      ],
+      "boundaries": {
+        "LEFT": {
+          "view_count": 3,
+          "per_view_horizontal_m": [
+            -21.084229447615684,
+            -16.94023225525334,
+            -21.03307479835715
+          ],
+          "horizontal_std_m": 1.94155406286042,
+          "horizontal_coordinate_m": -21.03307479835715,
+          "vertical_range_m": [
+            3.346493754844843,
+            6.484322767129256
+          ],
+          "world_line": {
+            "start": [
+              -70.70424678938488,
+              205.46952750165488,
+              14.356339591057765
+            ],
+            "end": [
+              -70.70432284240736,
+              205.46952750165488,
+              0.597196272092118
+            ]
+          }
+        },
+        "RIGHT": {
+          "view_count": 3,
+          "per_view_horizontal_m": [
+            15.785700212531161,
+            19.929697404893503,
+            16.751998220706096
+          ],
+          "horizontal_std_m": 1.7702547423745145,
+          "horizontal_coordinate_m": 16.751998220706096,
+          "vertical_range_m": [
+            -7.535651914838296,
+            6.536703406191598
+          ],
+          "world_line": {
+            "start": [
+              -70.70436554518645,
+              167.68445448277825,
+              14.356339591714182
+            ],
+            "end": [
+              -70.70444159820893,
+              167.68445448277825,
+              0.5971962727485352
+            ]
+          }
+        }
+      },
+      "raycast_audit": {
+        "attempted": 65,
+        "building_hits": 65,
+        "matched": 0,
+        "agreement": 0.0,
+        "tolerance_m": 0.3,
+        "median_residual_m": 0.4097713575510553,
+        "max_residual_m": 2.2993313970962874
+      },
+      "boundary_audits": {
+        "LEFT": [
+          {
+            "contour_present": true,
+            "contour_span_fraction": 0.23125,
+            "target_side_fraction": 0.972972972972973,
+            "external_side_fraction": 1.0,
+            "local_straddle": true,
+            "reason": "directional row envelope of exterior instance contour"
+          },
+          {
+            "contour_present": true,
+            "contour_span_fraction": 0.23125,
+            "target_side_fraction": 0.972972972972973,
+            "external_side_fraction": 1.0,
+            "local_straddle": true,
+            "reason": "directional row envelope of exterior instance contour"
+          },
+          {
+            "contour_present": true,
+            "contour_span_fraction": 0.23125,
+            "target_side_fraction": 1.0,
+            "external_side_fraction": 1.0,
+            "local_straddle": true,
+            "reason": "directional row envelope of exterior instance contour"
+          }
+        ],
+        "RIGHT": [
+          {
+            "contour_present": true,
+            "contour_span_fraction": 0.23125,
+            "target_side_fraction": 0.9819819819819819,
+            "external_side_fraction": 1.0,
+            "local_straddle": true,
+            "reason": "directional row envelope of exterior instance contour"
+          },
+          {
+            "contour_present": true,
+            "contour_span_fraction": 0.23125,
+            "target_side_fraction": 0.9819819819819819,
+            "external_side_fraction": 1.0,
+            "local_straddle": true,
+            "reason": "directional row envelope of exterior instance contour"
+          },
+          {
+            "contour_present": true,
+            "contour_span_fraction": 0.23125,
+            "target_side_fraction": 1.0,
+            "external_side_fraction": 1.0,
+            "local_straddle": true,
+            "reason": "directional row envelope of exterior instance contour"
+          }
+        ]
+      },
+      "views": [
+        {
+          "view_index": 0,
+          "frame_id": 92299,
+          "timestamp": 1043.6053588061914,
+          "camera_transform": {
+            "location": {
+              "x": -28.866018295288086,
+              "y": 191.7272186279297,
+              "z": 7.100000381469727
+            },
+            "rotation": {
+              "pitch": 0.0,
+              "yaw": 180.0,
+              "roll": -0.0
+            }
+          },
+          "sensor_frames": {
+            "rgb": 92299,
+            "depth": 92299,
+            "semantic": 92299,
+            "instance": 92299
+          },
+          "sensor_timestamps": {
+            "rgb": 1043.6053588061914,
+            "depth": 1043.6053588061914,
+            "semantic": 1043.6053588061914,
+            "instance": 1043.6053588061914
+          },
+          "candidate_ids": [
+            39290,
+            35092,
+            45208,
+            45212,
+            45216,
+            45204,
+            45164,
+            45224
+          ]
+        },
+        {
+          "view_index": 1,
+          "frame_id": 92300,
+          "timestamp": 1043.6553588069364,
+          "camera_transform": {
+            "location": {
+              "x": -28.866018295288086,
+              "y": 187.58322143554688,
+              "z": 7.100000381469727
+            },
+            "rotation": {
+              "pitch": 0.0,
+              "yaw": 180.0,
+              "roll": -0.0
+            }
+          },
+          "sensor_frames": {
+            "rgb": 92300,
+            "depth": 92300,
+            "semantic": 92300,
+            "instance": 92300
+          },
+          "sensor_timestamps": {
+            "rgb": 1043.6553588069364,
+            "depth": 1043.6553588069364,
+            "semantic": 1043.6553588069364,
+            "instance": 1043.6553588069364
+          },
+          "candidate_ids": [
+            39290,
+            35092,
+            45208,
+            45212,
+            45216,
+            45204,
+            45164,
+            45224
+          ]
+        },
+        {
+          "view_index": 2,
+          "frame_id": 92301,
+          "timestamp": 1043.7053588076815,
+          "camera_transform": {
+            "location": {
+              "x": -28.866018295288086,
+              "y": 183.439208984375,
+              "z": 7.100000381469727
+            },
+            "rotation": {
+              "pitch": 0.0,
+              "yaw": 180.0,
+              "roll": -0.0
+            }
+          },
+          "sensor_frames": {
+            "rgb": 92301,
+            "depth": 92301,
+            "semantic": 92301,
+            "instance": 92301
+          },
+          "sensor_timestamps": {
+            "rgb": 1043.7053588076815,
+            "depth": 1043.7053588076815,
+            "semantic": 1043.7053588076815,
+            "instance": 1043.7053588076815
+          },
+          "candidate_ids": [
+            39290,
+            35092,
+            45208,
+            45212,
+            45224,
+            45254,
+            45216,
+            45164,
+            45204,
+            45250
+          ]
+        }
+      ],
+      "overview_path": "docs/assets/act0/candidates/candidate_13_bbox_48419_overview.jpg",
+      "instance_overlay_path": "docs/assets/act0/candidates/candidate_13_bbox_48419_instance_overlay.jpg",
+      "surface": null
+    },
+    {
+      "candidate_index": 17,
+      "bbox_id": 48391,
+      "candidate_surface": "+X",
+      "surface_id": "act0_bbox_48391",
+      "decision": "REJECTED",
+      "rejection_reasons": [
+        "target_mask_fragmented",
+        "left_boundary_repeatability_failed",
+        "right_boundary_repeatability_failed",
+        "raycast_depth_disagreement"
+      ],
+      "bbox_used_for": "candidate pose seed only; not physical boundary truth",
+      "target_instance_id_16bit": 39221,
+      "stable_instance_ids": [
+        39221,
+        39229
+      ],
+      "target_instance_id_stable": true,
+      "center_target_coverage": 0.17184895833333333,
+      "plane": {
+        "origin": [
+          110.48952174963713,
+          161.87416056933884,
+          12.107387661090433
+        ],
+        "normal": [
+          0.9999759590624409,
+          0.002933456817810022,
+          -0.00628300312348637
+        ],
+        "median_residual_m": 0.026239309183866473,
+        "p95_residual_m": 0.12643215238679015,
+        "max_residual_m": 0.16814610961436208,
+        "normal_error_deg": 0.397296007296498,
+        "support_count": 1119,
+        "inlier_count": 583,
+        "inlier_ratio": 0.5210008936550492,
+        "inlier_tolerance_m": 0.15
+      },
+      "horizontal_axis": [
+        0.0029333989159815495,
+        -0.9999956974062929,
+        -1.843099765000726e-05
+      ],
+      "vertical_axis": [
+        0.0062830301568123845,
+        -0.0,
+        0.9999802615712216
+      ],
+      "boundaries": {
+        "LEFT": {
+          "view_count": 3,
+          "per_view_horizontal_m": [
+            -6.483612098784079,
+            -6.394936066902509,
+            -4.892089139515375
+          ],
+          "horizontal_std_m": 0.7302478769162811,
+          "horizontal_coordinate_m": -6.394936066902509,
+          "vertical_range_m": [
+            -11.617400989832765,
+            7.484920304678494
+          ],
+          "world_line": {
+            "start": [
+              110.51826686541648,
+              168.26906912142968,
+              19.668041679172823
+            ],
+            "end": [
+              110.39807390131433,
+              168.26906912142968,
+              0.5386425386065348
+            ]
+          }
+        },
+        "RIGHT": {
+          "view_count": 3,
+          "per_view_horizontal_m": [
+            8.236138033968878,
+            7.196098843760842,
+            8.698945771147976
+          ],
+          "horizontal_std_m": 0.6284391074469413,
+          "horizontal_coordinate_m": 8.236138033968878,
+          "vertical_range_m": [
+            -11.466977659443062,
+            7.622698687203486
+          ],
+          "world_line": {
+            "start": [
+              110.56118564232362,
+              153.63805797212564,
+              19.667772013880455
+            ],
+            "end": [
+              110.44099267822148,
+              153.63805797212564,
+              0.5383728733141648
+            ]
+          }
+        }
+      },
+      "raycast_audit": {
+        "attempted": 65,
+        "building_hits": 64,
+        "matched": 2,
+        "agreement": 0.03076923076923077,
+        "tolerance_m": 0.3,
+        "median_residual_m": 20.722741466841274,
+        "max_residual_m": 23.523743916131277
+      },
+      "boundary_audits": {
+        "LEFT": [
+          {
+            "contour_present": true,
+            "contour_span_fraction": 0.7020833333333333,
+            "target_side_fraction": 0.8189910979228486,
+            "external_side_fraction": 1.0,
+            "local_straddle": true,
+            "reason": "directional row envelope of exterior instance contour"
+          },
+          {
+            "contour_present": true,
+            "contour_span_fraction": 0.7020833333333333,
+            "target_side_fraction": 0.8664688427299704,
+            "external_side_fraction": 1.0,
+            "local_straddle": true,
+            "reason": "directional row envelope of exterior instance contour"
+          },
+          {
+            "contour_present": true,
+            "contour_span_fraction": 0.7020833333333333,
+            "target_side_fraction": 0.8664688427299704,
+            "external_side_fraction": 1.0,
+            "local_straddle": true,
+            "reason": "directional row envelope of exterior instance contour"
+          }
+        ],
+        "RIGHT": [
+          {
+            "contour_present": true,
+            "contour_span_fraction": 0.7020833333333333,
+            "target_side_fraction": 0.9376854599406528,
+            "external_side_fraction": 1.0,
+            "local_straddle": true,
+            "reason": "directional row envelope of exterior instance contour"
+          },
+          {
+            "contour_present": true,
+            "contour_span_fraction": 0.7020833333333333,
+            "target_side_fraction": 0.9258160237388724,
+            "external_side_fraction": 1.0,
+            "local_straddle": true,
+            "reason": "directional row envelope of exterior instance contour"
+          },
+          {
+            "contour_present": true,
+            "contour_span_fraction": 0.7020833333333333,
+            "target_side_fraction": 0.9258160237388724,
+            "external_side_fraction": 1.0,
+            "local_straddle": true,
+            "reason": "directional row envelope of exterior instance contour"
+          }
+        ]
+      },
+      "views": [
+        {
+          "view_index": 0,
+          "frame_id": 92302,
+          "timestamp": 1043.7553588084265,
+          "camera_transform": {
+            "location": {
+              "x": 130.4175262451172,
+              "y": 162.5082244873047,
+              "z": 10.268207550048828
+            },
+            "rotation": {
+              "pitch": 0.0,
+              "yaw": 180.0,
+              "roll": -0.0
+            }
+          },
+          "sensor_frames": {
+            "rgb": 92302,
+            "depth": 92302,
+            "semantic": 92302,
+            "instance": 92302
+          },
+          "sensor_timestamps": {
+            "rgb": 1043.7553588084265,
+            "depth": 1043.7553588084265,
+            "semantic": 1043.7553588084265,
+            "instance": 1043.7553588084265
+          },
+          "candidate_ids": [
+            39221,
+            39229,
+            39228
+          ]
+        },
+        {
+          "view_index": 1,
+          "frame_id": 92303,
+          "timestamp": 1043.8053588091716,
+          "camera_transform": {
+            "location": {
+              "x": 130.4175262451172,
+              "y": 161.00534057617188,
+              "z": 10.268207550048828
+            },
+            "rotation": {
+              "pitch": 0.0,
+              "yaw": 180.0,
+              "roll": -0.0
+            }
+          },
+          "sensor_frames": {
+            "rgb": 92303,
+            "depth": 92303,
+            "semantic": 92303,
+            "instance": 92303
+          },
+          "sensor_timestamps": {
+            "rgb": 1043.8053588091716,
+            "depth": 1043.8053588091716,
+            "semantic": 1043.8053588091716,
+            "instance": 1043.8053588091716
+          },
+          "candidate_ids": [
+            39221,
+            39229
+          ]
+        },
+        {
+          "view_index": 2,
+          "frame_id": 92304,
+          "timestamp": 1043.8553588099167,
+          "camera_transform": {
+            "location": {
+              "x": 130.4175262451172,
+              "y": 159.5024871826172,
+              "z": 10.268207550048828
+            },
+            "rotation": {
+              "pitch": 0.0,
+              "yaw": 180.0,
+              "roll": -0.0
+            }
+          },
+          "sensor_frames": {
+            "rgb": 92304,
+            "depth": 92304,
+            "semantic": 92304,
+            "instance": 92304
+          },
+          "sensor_timestamps": {
+            "rgb": 1043.8553588099167,
+            "depth": 1043.8553588099167,
+            "semantic": 1043.8553588099167,
+            "instance": 1043.8553588099167
+          },
+          "candidate_ids": [
+            39221,
+            39229
+          ]
+        }
+      ],
+      "overview_path": "docs/assets/act0/candidates/candidate_17_bbox_48391_overview.jpg",
+      "instance_overlay_path": "docs/assets/act0/candidates/candidate_17_bbox_48391_instance_overlay.jpg",
+      "surface": null
+    },
+    {
+      "candidate_index": 18,
+      "bbox_id": 48393,
+      "candidate_surface": "+X",
+      "surface_id": "act0_bbox_48393",
+      "decision": "REJECTED",
+      "rejection_reasons": [
+        "target_mask_fragmented",
+        "left_boundary_repeatability_failed",
+        "right_boundary_repeatability_failed",
+        "raycast_depth_disagreement"
+      ],
+      "bbox_used_for": "candidate pose seed only; not physical boundary truth",
+      "target_instance_id_16bit": 39222,
+      "stable_instance_ids": [
+        39222,
+        39224
+      ],
+      "target_instance_id_stable": true,
+      "center_target_coverage": 0.21593424479166667,
+      "plane": {
+        "origin": [
+          16.419136777055243,
+          214.1396892598621,
+          12.435968061914059
+        ],
+        "normal": [
+          0.000590033723295531,
+          -0.9999817302662599,
+          -0.006015895103999802
+        ],
+        "median_residual_m": 0.029492737634170058,
+        "p95_residual_m": 0.1295098673293987,
+        "max_residual_m": 0.16682555499129278,
+        "normal_error_deg": 0.3463413938879184,
+        "support_count": 1269,
+        "inlier_count": 673,
+        "inlier_ratio": 0.5303388494877856,
+        "inlier_tolerance_m": 0.15
+      },
+      "horizontal_axis": [
+        -0.9999998259300875,
+        -0.0005900230462417687,
+        -3.54958160504335e-06
+      ],
+      "vertical_axis": [
+        3.6845933205562065e-19,
+        -0.006015896151186318,
+        0.9999819043330225
+      ],
+      "boundaries": {
+        "LEFT": {
+          "view_count": 3,
+          "per_view_horizontal_m": [
+            -7.6349910806620525,
+            -7.223933726223194,
+            -5.721065335483659
+          ],
+          "horizontal_std_m": 0.8226443342848707,
+          "horizontal_coordinate_m": -7.223933726223194,
+          "vertical_range_m": [
+            -12.123265000230145,
+            7.520808113588867
+          ],
+          "world_line": {
+            "start": [
+              23.643069245808924,
+              214.09880083117642,
+              19.94109317726884
+            ],
+            "end": [
+              23.643069245808924,
+              214.21627691894412,
+              0.4138342274316269
+            ]
+          }
+        },
+        "RIGHT": {
+          "view_count": 3,
+          "per_view_horizontal_m": [
+            7.408379687729518,
+            7.3738605493893425,
+            8.876728940128878
+          ],
+          "horizontal_std_m": 0.700464488577048,
+          "horizontal_coordinate_m": 7.408379687729518,
+          "vertical_range_m": [
+            -11.83298907906074,
+            7.444042377313841
+          ],
+          "world_line": {
+            "start": [
+              9.01075837890173,
+              214.09016742904234,
+              19.941041238678306
+            ],
+            "end": [
+              9.01075837890173,
+              214.20764351681004,
+              0.4137822888410927
+            ]
+          }
+        }
+      },
+      "raycast_audit": {
+        "attempted": 66,
+        "building_hits": 66,
+        "matched": 0,
+        "agreement": 0.0,
+        "tolerance_m": 0.3,
+        "median_residual_m": 20.95150856332013,
+        "max_residual_m": 23.30228035228902
+      },
+      "boundary_audits": {
+        "LEFT": [
+          {
+            "contour_present": true,
+            "contour_span_fraction": 0.6916666666666667,
+            "target_side_fraction": 0.8554216867469879,
+            "external_side_fraction": 1.0,
+            "local_straddle": true,
+            "reason": "directional row envelope of exterior instance contour"
+          },
+          {
+            "contour_present": true,
+            "contour_span_fraction": 0.6916666666666667,
+            "target_side_fraction": 0.7198795180722891,
+            "external_side_fraction": 1.0,
+            "local_straddle": true,
+            "reason": "directional row envelope of exterior instance contour"
+          },
+          {
+            "contour_present": true,
+            "contour_span_fraction": 0.6916666666666667,
+            "target_side_fraction": 0.7198795180722891,
+            "external_side_fraction": 1.0,
+            "local_straddle": true,
+            "reason": "directional row envelope of exterior instance contour"
+          }
+        ],
+        "RIGHT": [
+          {
+            "contour_present": true,
+            "contour_span_fraction": 0.6916666666666667,
+            "target_side_fraction": 0.9939759036144579,
+            "external_side_fraction": 1.0,
+            "local_straddle": true,
+            "reason": "directional row envelope of exterior instance contour"
+          },
+          {
+            "contour_present": true,
+            "contour_span_fraction": 0.6916666666666667,
+            "target_side_fraction": 0.8132530120481928,
+            "external_side_fraction": 1.0,
+            "local_straddle": true,
+            "reason": "directional row envelope of exterior instance contour"
+          },
+          {
+            "contour_present": true,
+            "contour_span_fraction": 0.6916666666666667,
+            "target_side_fraction": 0.8132530120481928,
+            "external_side_fraction": 1.0,
+            "local_straddle": true,
+            "reason": "directional row envelope of exterior instance contour"
+          }
+        ]
+      },
+      "views": [
+        {
+          "view_index": 0,
+          "frame_id": 92305,
+          "timestamp": 1043.9053588106617,
+          "camera_transform": {
+            "location": {
+              "x": 17.882421493530273,
+              "y": 194.21311950683594,
+              "z": 10.268207550048828
+            },
+            "rotation": {
+              "pitch": 0.0,
+              "yaw": 90.0,
+              "roll": -0.0
+            }
+          },
+          "sensor_frames": {
+            "rgb": 92305,
+            "depth": 92305,
+            "semantic": 92305,
+            "instance": 92305
+          },
+          "sensor_timestamps": {
+            "rgb": 1043.9053588106617,
+            "depth": 1043.9053588106617,
+            "semantic": 1043.9053588106617,
+            "instance": 1043.9053588106617
+          },
+          "candidate_ids": [
+            39222,
+            39224
+          ]
+        },
+        {
+          "view_index": 1,
+          "frame_id": 92306,
+          "timestamp": 1043.9553588114068,
+          "camera_transform": {
+            "location": {
+              "x": 16.379552841186523,
+              "y": 194.21311950683594,
+              "z": 10.268207550048828
+            },
+            "rotation": {
+              "pitch": 0.0,
+              "yaw": 90.0,
+              "roll": -0.0
+            }
+          },
+          "sensor_frames": {
+            "rgb": 92306,
+            "depth": 92306,
+            "semantic": 92306,
+            "instance": 92306
+          },
+          "sensor_timestamps": {
+            "rgb": 1043.9553588114068,
+            "depth": 1043.9553588114068,
+            "semantic": 1043.9553588114068,
+            "instance": 1043.9553588114068
+          },
+          "candidate_ids": [
+            39222,
+            39224
+          ]
+        },
+        {
+          "view_index": 2,
+          "frame_id": 92307,
+          "timestamp": 1044.0053588121518,
+          "camera_transform": {
+            "location": {
+              "x": 14.876684188842773,
+              "y": 194.21311950683594,
+              "z": 10.268207550048828
+            },
+            "rotation": {
+              "pitch": 0.0,
+              "yaw": 90.0,
+              "roll": -0.0
+            }
+          },
+          "sensor_frames": {
+            "rgb": 92307,
+            "depth": 92307,
+            "semantic": 92307,
+            "instance": 92307
+          },
+          "sensor_timestamps": {
+            "rgb": 1044.0053588121518,
+            "depth": 1044.0053588121518,
+            "semantic": 1044.0053588121518,
+            "instance": 1044.0053588121518
+          },
+          "candidate_ids": [
+            39222,
+            39224
+          ]
+        }
+      ],
+      "overview_path": "docs/assets/act0/candidates/candidate_18_bbox_48393_overview.jpg",
+      "instance_overlay_path": "docs/assets/act0/candidates/candidate_18_bbox_48393_instance_overlay.jpg",
+      "surface": null
+    },
+    {
+      "candidate_index": 19,
+      "bbox_id": 48395,
+      "candidate_surface": "+X",
+      "surface_id": "act0_bbox_48395",
+      "decision": "REJECTED",
+      "rejection_reasons": [
+        "left_boundary_repeatability_failed",
+        "depth_plane_inlier_ratio_too_low",
+        "raycast_depth_disagreement"
+      ],
+      "bbox_used_for": "candidate pose seed only; not physical boundary truth",
+      "target_instance_id_16bit": 39223,
+      "stable_instance_ids": [
+        39223
+      ],
+      "target_instance_id_stable": true,
+      "center_target_coverage": 0.24203125,
+      "plane": {
+        "origin": [
+          -14.608250264746458,
+          227.67615380151636,
+          12.78077678789386
+        ],
+        "normal": [
+          -0.0009137185605940335,
+          -0.9999945765618128,
+          -0.0031641689829875466
+        ],
+        "median_residual_m": 0.029849476878638537,
+        "p95_residual_m": 0.1145330205034266,
+        "max_residual_m": 0.14366056901649277,
+        "normal_error_deg": 0.1887014224278112,
+        "support_count": 1616,
+        "inlier_count": 774,
+        "inlier_ratio": 0.47896039603960394,
+        "inlier_tolerance_m": 0.15
+      },
+      "horizontal_axis": [
+        -0.9999995825591089,
+        0.0009137139865194805,
+        2.8911611355007427e-06
+      ],
+      "vertical_axis": [
+        1.9354702844760763e-19,
+        -0.0031641703038416177,
+        0.9999949940006142
+      ],
+      "boundaries": {
+        "LEFT": {
+          "view_count": 3,
+          "per_view_horizontal_m": [
+            -8.555871844493184,
+            -7.0741745712788235,
+            -6.295605971199187
+          ],
+          "horizontal_std_m": 0.9375143075920562,
+          "horizontal_coordinate_m": -7.0741745712788235,
+          "vertical_range_m": [
+            -12.45447526522644,
+            7.160428307676865
+          ],
+          "world_line": {
+            "start": [
+              -7.53407864651737,
+              227.64703136684383,
+              19.94173277419979
+            ],
+            "end": [
+              -7.53407864651737,
+              227.70879482529614,
+              0.42219263140721885
+            ]
+          }
+        },
+        "RIGHT": {
+          "view_count": 3,
+          "per_view_horizontal_m": [
+            7.039769961276156,
+            6.915832043991335,
+            7.051263943016747
+          ],
+          "horizontal_std_m": 0.061313872121497005,
+          "horizontal_coordinate_m": 7.039769961276156,
+          "vertical_range_m": [
+            -12.106730700463602,
+            7.154766462367603
+          ],
+          "world_line": {
+            "start": [
+              -21.648017287334767,
+              227.6599274753682,
+              19.94177357988769
+            ],
+            "end": [
+              -21.648017287334767,
+              227.7216909338205,
+              0.4222334370951195
+            ]
+          }
+        }
+      },
+      "raycast_audit": {
+        "attempted": 65,
+        "building_hits": 65,
+        "matched": 0,
+        "agreement": 0.0,
+        "tolerance_m": 0.3,
+        "median_residual_m": 20.673740456379623,
+        "max_residual_m": 23.20750688024241
+      },
+      "boundary_audits": {
+        "LEFT": [
+          {
+            "contour_present": true,
+            "contour_span_fraction": 0.7020833333333333,
+            "target_side_fraction": 0.887240356083086,
+            "external_side_fraction": 1.0,
+            "local_straddle": true,
+            "reason": "directional row envelope of exterior instance contour"
+          },
+          {
+            "contour_present": true,
+            "contour_span_fraction": 0.7020833333333333,
+            "target_side_fraction": 0.7388724035608308,
+            "external_side_fraction": 1.0,
+            "local_straddle": true,
+            "reason": "directional row envelope of exterior instance contour"
+          },
+          {
+            "contour_present": true,
+            "contour_span_fraction": 0.7020833333333333,
+            "target_side_fraction": 0.7181008902077152,
+            "external_side_fraction": 1.0,
+            "local_straddle": true,
+            "reason": "directional row envelope of exterior instance contour"
+          }
+        ],
+        "RIGHT": [
+          {
+            "contour_present": true,
+            "contour_span_fraction": 0.7020833333333333,
+            "target_side_fraction": 1.0,
+            "external_side_fraction": 1.0,
+            "local_straddle": true,
+            "reason": "directional row envelope of exterior instance contour"
+          },
+          {
+            "contour_present": true,
+            "contour_span_fraction": 0.7020833333333333,
+            "target_side_fraction": 0.884272997032641,
+            "external_side_fraction": 1.0,
+            "local_straddle": true,
+            "reason": "directional row envelope of exterior instance contour"
+          },
+          {
+            "contour_present": true,
+            "contour_span_fraction": 0.7020833333333333,
+            "target_side_fraction": 0.8783382789317508,
+            "external_side_fraction": 1.0,
+            "local_straddle": true,
+            "reason": "directional row envelope of exterior instance contour"
+          }
+        ]
+      },
+      "views": [
+        {
+          "view_index": 0,
+          "frame_id": 92308,
+          "timestamp": 1044.0553588128969,
+          "camera_transform": {
+            "location": {
+              "x": -12.775487899780273,
+              "y": 207.75294494628906,
+              "z": 10.268207550048828
+            },
+            "rotation": {
+              "pitch": 0.0,
+              "yaw": 90.0,
+              "roll": -0.0
+            }
+          },
+          "sensor_frames": {
+            "rgb": 92308,
+            "depth": 92308,
+            "semantic": 92308,
+            "instance": 92308
+          },
+          "sensor_timestamps": {
+            "rgb": 1044.0553588128969,
+            "depth": 1044.0553588128969,
+            "semantic": 1044.0553588128969,
+            "instance": 1044.0553588128969
+          },
+          "candidate_ids": [
+            39223,
+            39231,
+            39225
+          ]
+        },
+        {
+          "view_index": 1,
+          "frame_id": 92309,
+          "timestamp": 1044.105358813642,
+          "camera_transform": {
+            "location": {
+              "x": -14.278355598449707,
+              "y": 207.75294494628906,
+              "z": 10.268207550048828
+            },
+            "rotation": {
+              "pitch": 0.0,
+              "yaw": 90.0,
+              "roll": -0.0
+            }
+          },
+          "sensor_frames": {
+            "rgb": 92309,
+            "depth": 92309,
+            "semantic": 92309,
+            "instance": 92309
+          },
+          "sensor_timestamps": {
+            "rgb": 1044.105358813642,
+            "depth": 1044.105358813642,
+            "semantic": 1044.105358813642,
+            "instance": 1044.105358813642
+          },
+          "candidate_ids": [
+            39223
+          ]
+        },
+        {
+          "view_index": 2,
+          "frame_id": 92310,
+          "timestamp": 1044.155358814387,
+          "camera_transform": {
+            "location": {
+              "x": -15.781222343444824,
+              "y": 207.75294494628906,
+              "z": 10.268207550048828
+            },
+            "rotation": {
+              "pitch": 0.0,
+              "yaw": 90.0,
+              "roll": -0.0
+            }
+          },
+          "sensor_frames": {
+            "rgb": 92310,
+            "depth": 92310,
+            "semantic": 92310,
+            "instance": 92310
+          },
+          "sensor_timestamps": {
+            "rgb": 1044.155358814387,
+            "depth": 1044.155358814387,
+            "semantic": 1044.155358814387,
+            "instance": 1044.155358814387
+          },
+          "candidate_ids": [
+            39223
+          ]
+        }
+      ],
+      "overview_path": "docs/assets/act0/candidates/candidate_19_bbox_48395_overview.jpg",
+      "instance_overlay_path": "docs/assets/act0/candidates/candidate_19_bbox_48395_instance_overlay.jpg",
+      "surface": null
+    },
+    {
+      "candidate_index": 20,
+      "bbox_id": 47839,
+      "candidate_surface": "+X",
+      "surface_id": "act0_bbox_47839",
+      "decision": "REJECTED",
+      "rejection_reasons": [
+        "target_instance_id_not_stable",
+        "center_target_coverage_out_of_range",
+        "target_mask_fragmented",
+        "left_external_contour_insufficient",
+        "left_world_boundary_insufficient",
+        "left_boundary_repeatability_failed",
+        "right_external_contour_insufficient",
+        "right_world_boundary_insufficient",
+        "right_boundary_repeatability_failed",
+        "depth_plane_residual_too_large",
+        "depth_plane_normal_inconsistent",
+        "depth_plane_inlier_ratio_too_low",
+        "raycast_evidence_missing",
+        "terminal_width_too_small_or_degenerate"
+      ],
+      "bbox_used_for": "candidate pose seed only; not physical boundary truth",
+      "target_instance_id_16bit": null,
+      "stable_instance_ids": [],
+      "target_instance_id_stable": false,
+      "center_target_coverage": 0.0,
+      "plane": {
+        "origin": [
+          27.777631759643555,
+          112.07498931884766,
+          8.3689546585083
+        ],
+        "normal": [
+          -1.0,
+          1.2246467991473532e-16,
+          0.0
+        ],
+        "median_residual_m": null,
+        "p95_residual_m": null,
+        "max_residual_m": null,
+        "normal_error_deg": null,
+        "support_count": 0
+      },
+      "horizontal_axis": [
+        1.2246467991473532e-16,
+        1.0,
+        0.0
+      ],
+      "vertical_axis": [
+        0.0,
+        0.0,
+        1.0
+      ],
+      "boundaries": {
+        "LEFT": {
+          "view_count": 0,
+          "world_line": null,
+          "horizontal_std_m": null
+        },
+        "RIGHT": {
+          "view_count": 0,
+          "world_line": null,
+          "horizontal_std_m": null
+        }
+      },
+      "raycast_audit": {
+        "attempted": 0,
+        "building_hits": 0,
+        "matched": 0,
+        "agreement": null,
+        "tolerance_m": 0.3,
+        "median_residual_m": null,
+        "max_residual_m": null
+      },
+      "boundary_audits": {
+        "LEFT": [
+          {
+            "contour_present": false,
+            "contour_span_fraction": 0.0,
+            "target_side_fraction": 0.0,
+            "external_side_fraction": 0.0,
+            "local_straddle": false,
+            "reason": "no directional exterior instance contour"
+          },
+          {
+            "contour_present": false,
+            "contour_span_fraction": 0.0,
+            "target_side_fraction": 0.0,
+            "external_side_fraction": 0.0,
+            "local_straddle": false,
+            "reason": "no directional exterior instance contour"
+          },
+          {
+            "contour_present": false,
+            "contour_span_fraction": 0.0,
+            "target_side_fraction": 0.0,
+            "external_side_fraction": 0.0,
+            "local_straddle": false,
+            "reason": "no directional exterior instance contour"
+          }
+        ],
+        "RIGHT": [
+          {
+            "contour_present": false,
+            "contour_span_fraction": 0.0,
+            "target_side_fraction": 0.0,
+            "external_side_fraction": 0.0,
+            "local_straddle": false,
+            "reason": "no directional exterior instance contour"
+          },
+          {
+            "contour_present": false,
+            "contour_span_fraction": 0.0,
+            "target_side_fraction": 0.0,
+            "external_side_fraction": 0.0,
+            "local_straddle": false,
+            "reason": "no directional exterior instance contour"
+          },
+          {
+            "contour_present": false,
+            "contour_span_fraction": 0.0,
+            "target_side_fraction": 0.0,
+            "external_side_fraction": 0.0,
+            "local_straddle": false,
+            "reason": "no directional exterior instance contour"
+          }
+        ]
+      },
+      "views": [
+        {
+          "view_index": 0,
+          "frame_id": 92311,
+          "timestamp": 1044.205358815132,
+          "camera_transform": {
+            "location": {
+              "x": 9.777631759643555,
+              "y": 110.76940155029297,
+              "z": 8.3689546585083
+            },
+            "rotation": {
+              "pitch": 0.0,
+              "yaw": 0.0,
+              "roll": -0.0
+            }
+          },
+          "sensor_frames": {
+            "rgb": 92311,
+            "depth": 92311,
+            "semantic": 92311,
+            "instance": 92311
+          },
+          "sensor_timestamps": {
+            "rgb": 1044.205358815132,
+            "depth": 1044.205358815132,
+            "semantic": 1044.205358815132,
+            "instance": 1044.205358815132
+          },
+          "candidate_ids": [
+            39223,
+            39291,
+            44222,
+            65535,
+            44446,
+            44220
+          ]
+        },
+        {
+          "view_index": 1,
+          "frame_id": 92312,
+          "timestamp": 1044.2553588158771,
+          "camera_transform": {
+            "location": {
+              "x": 9.777631759643555,
+              "y": 112.07498931884766,
+              "z": 8.3689546585083
+            },
+            "rotation": {
+              "pitch": 0.0,
+              "yaw": 0.0,
+              "roll": -0.0
+            }
+          },
+          "sensor_frames": {
+            "rgb": 92312,
+            "depth": 92312,
+            "semantic": 92312,
+            "instance": 92312
+          },
+          "sensor_timestamps": {
+            "rgb": 1044.2553588158771,
+            "depth": 1044.2553588158771,
+            "semantic": 1044.2553588158771,
+            "instance": 1044.2553588158771
+          },
+          "candidate_ids": [
+            44566
+          ]
+        },
+        {
+          "view_index": 2,
+          "frame_id": 92313,
+          "timestamp": 1044.3053588166222,
+          "camera_transform": {
+            "location": {
+              "x": 9.777631759643555,
+              "y": 113.38057708740234,
+              "z": 8.3689546585083
+            },
+            "rotation": {
+              "pitch": 0.0,
+              "yaw": 0.0,
+              "roll": -0.0
+            }
+          },
+          "sensor_frames": {
+            "rgb": 92313,
+            "depth": 92313,
+            "semantic": 92313,
+            "instance": 92313
+          },
+          "sensor_timestamps": {
+            "rgb": 1044.3053588166222,
+            "depth": 1044.3053588166222,
+            "semantic": 1044.3053588166222,
+            "instance": 1044.3053588166222
+          },
+          "candidate_ids": [
+            44566
+          ]
+        }
+      ],
+      "overview_path": "docs/assets/act0/candidates/candidate_20_bbox_47839_overview.jpg",
+      "instance_overlay_path": "docs/assets/act0/candidates/candidate_20_bbox_47839_instance_overlay.jpg",
+      "surface": null
+    }
+  ],
+  "final_surface_ids": []
+}

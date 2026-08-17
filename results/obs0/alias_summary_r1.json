@@ -1,0 +1,140 @@
+{
+  "schema": "obs0.alias_summary_r1.v1",
+  "pair_count": 190,
+  "metrics": [
+    "raw_ssim",
+    "phase_aligned_ssim",
+    "hog_cosine",
+    "color_histogram_distance"
+  ],
+  "thresholds": {
+    "phase_ssim_0.90_gap_1.0m": {
+      "eligible_pairs": 144,
+      "candidate_count": 35,
+      "candidate_ratio": 0.24305555555555555
+    },
+    "phase_ssim_0.90_gap_2.0m": {
+      "eligible_pairs": 84,
+      "candidate_count": 4,
+      "candidate_ratio": 0.047619047619047616
+    },
+    "phase_ssim_0.90_gap_3.0m": {
+      "eligible_pairs": 40,
+      "candidate_count": 0,
+      "candidate_ratio": 0.0
+    },
+    "phase_ssim_0.95_gap_1.0m": {
+      "eligible_pairs": 144,
+      "candidate_count": 6,
+      "candidate_ratio": 0.041666666666666664
+    },
+    "phase_ssim_0.95_gap_2.0m": {
+      "eligible_pairs": 84,
+      "candidate_count": 0,
+      "candidate_ratio": 0.0
+    },
+    "phase_ssim_0.95_gap_3.0m": {
+      "eligible_pairs": 40,
+      "candidate_count": 0,
+      "candidate_ratio": 0.0
+    },
+    "phase_ssim_0.98_gap_1.0m": {
+      "eligible_pairs": 144,
+      "candidate_count": 0,
+      "candidate_ratio": 0.0
+    },
+    "phase_ssim_0.98_gap_2.0m": {
+      "eligible_pairs": 84,
+      "candidate_count": 0,
+      "candidate_ratio": 0.0
+    },
+    "phase_ssim_0.98_gap_3.0m": {
+      "eligible_pairs": 40,
+      "candidate_count": 0,
+      "candidate_ratio": 0.0
+    }
+  },
+  "top_ranked_candidates": [
+    {
+      "rank_key": 0.9998166498923406,
+      "left_index": 0,
+      "right_index": 10,
+      "left_trajectory": "surface_sigma/MASK-1/10m/LEFT",
+      "right_trajectory": "surface_sigma/MASK-1/10m/RIGHT",
+      "left_step": 0,
+      "right_step": 0,
+      "remaining_distance_gap_m": 0.0,
+      "cross_direction": true,
+      "raw_ssim": 0.9998166498923406,
+      "phase_aligned_ssim": 0.9998166498923406,
+      "phase_shift_px": 0.0018477299670645482,
+      "hog_cosine": 0.9995509555872187,
+      "color_histogram_distance": 0.008308511227369308
+    },
+    {
+      "rank_key": 0.9813542855000796,
+      "left_index": 14,
+      "right_index": 15,
+      "left_trajectory": "surface_sigma/MASK-1/10m/RIGHT",
+      "right_trajectory": "surface_sigma/MASK-1/10m/RIGHT",
+      "left_step": 4,
+      "right_step": 5,
+      "remaining_distance_gap_m": 0.5,
+      "cross_direction": false,
+      "raw_ssim": 0.14120331736467995,
+      "phase_aligned_ssim": 0.9813542855000796,
+      "phase_shift_px": 7.332414281603358,
+      "hog_cosine": 0.9587266059577513,
+      "color_histogram_distance": 0.0044311522506177425
+    },
+    {
+      "rank_key": 0.9807193770103222,
+      "left_index": 1,
+      "right_index": 2,
+      "left_trajectory": "surface_sigma/MASK-1/10m/LEFT",
+      "right_trajectory": "surface_sigma/MASK-1/10m/LEFT",
+      "left_step": 1,
+      "right_step": 2,
+      "remaining_distance_gap_m": 0.5,
+      "cross_direction": false,
+      "raw_ssim": 0.16835365864439714,
+      "phase_aligned_ssim": 0.9807193770103222,
+      "phase_shift_px": 7.444250164194082,
+      "hog_cosine": 0.9648972685789633,
+      "color_histogram_distance": 0.006736651994287968
+    },
+    {
+      "rank_key": 0.9793434743479211,
+      "left_index": 5,
+      "right_index": 6,
+      "left_trajectory": "surface_sigma/MASK-1/10m/LEFT",
+      "right_trajectory": "surface_sigma/MASK-1/10m/LEFT",
+      "left_step": 5,
+      "right_step": 6,
+      "remaining_distance_gap_m": 0.5,
+      "cross_direction": false,
+      "raw_ssim": 0.158904925762034,
+      "phase_aligned_ssim": 0.9793434743479211,
+      "phase_shift_px": 7.381065161829568,
+      "hog_cosine": 0.9587658428481884,
+      "color_histogram_distance": 0.0053139240480959415
+    },
+    {
+      "rank_key": 0.9774438067177007,
+      "left_index": 16,
+      "right_index": 17,
+      "left_trajectory": "surface_sigma/MASK-1/10m/RIGHT",
+      "right_trajectory": "surface_sigma/MASK-1/10m/RIGHT",
+      "left_step": 6,
+      "right_step": 7,
+      "remaining_distance_gap_m": 0.5,
+      "cross_direction": false,
+      "raw_ssim": 0.15959242891810732,
+      "phase_aligned_ssim": 0.9774438067177007,
+      "phase_shift_px": 7.361647420404075,
+      "hog_cosine": 0.9609349889411914,
+      "color_histogram_distance": 0.005096436012536287
+    }
+  ],
+  "interpretation": "reports whether this metric suite found high-similarity candidates; it does not prove perceptual aliasing is absent"
+}

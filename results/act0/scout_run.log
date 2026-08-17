@@ -1,0 +1,18 @@
+{"candidate_index": 1, "bbox_id": 48389, "decision": "REJECTED", "reasons": ["left_external_contour_insufficient", "right_external_contour_insufficient", "right_boundary_repeatability_failed"]}
+{"candidate_index": 6, "bbox_id": 48397, "decision": "REJECTED", "reasons": ["target_instance_id_not_stable", "center_target_coverage_out_of_range", "target_mask_fragmented", "left_external_contour_insufficient", "left_world_boundary_insufficient", "left_boundary_repeatability_failed", "right_external_contour_insufficient", "right_world_boundary_insufficient", "right_boundary_repeatability_failed", "depth_plane_residual_too_large", "depth_plane_normal_inconsistent", "depth_plane_inlier_ratio_too_low", "raycast_evidence_missing", "terminal_width_too_small_or_degenerate"]}
+{"candidate_index": 7, "bbox_id": 48399, "decision": "REJECTED", "reasons": ["left_external_contour_insufficient", "right_external_contour_insufficient"]}
+{"candidate_index": 8, "bbox_id": 48401, "decision": "REJECTED", "reasons": ["left_external_contour_insufficient", "right_external_contour_insufficient"]}
+{"candidate_index": 10, "bbox_id": 48418, "decision": "REJECTED", "reasons": ["raycast_depth_disagreement"]}
+{"candidate_index": 11, "bbox_id": 48436, "decision": "REJECTED", "reasons": ["depth_plane_inlier_ratio_too_low", "raycast_depth_disagreement"]}
+{"candidate_index": 12, "bbox_id": 48420, "decision": "REJECTED", "reasons": ["left_external_contour_insufficient", "left_boundary_repeatability_failed", "right_external_contour_insufficient", "right_boundary_repeatability_failed", "raycast_depth_disagreement", "terminal_width_too_small_or_degenerate"]}
+{"candidate_index": 13, "bbox_id": 48419, "decision": "REJECTED", "reasons": ["left_external_contour_insufficient", "left_boundary_repeatability_failed", "right_external_contour_insufficient", "right_boundary_repeatability_failed", "raycast_depth_disagreement"]}
+{"candidate_index": 17, "bbox_id": 48391, "decision": "REJECTED", "reasons": ["target_mask_fragmented", "left_boundary_repeatability_failed", "right_boundary_repeatability_failed", "raycast_depth_disagreement"]}
+{"candidate_index": 18, "bbox_id": 48393, "decision": "REJECTED", "reasons": ["target_mask_fragmented", "left_boundary_repeatability_failed", "right_boundary_repeatability_failed", "raycast_depth_disagreement"]}
+{"candidate_index": 19, "bbox_id": 48395, "decision": "REJECTED", "reasons": ["left_boundary_repeatability_failed", "depth_plane_inlier_ratio_too_low", "raycast_depth_disagreement"]}
+{"candidate_index": 20, "bbox_id": 47839, "decision": "REJECTED", "reasons": ["target_instance_id_not_stable", "center_target_coverage_out_of_range", "target_mask_fragmented", "left_external_contour_insufficient", "left_world_boundary_insufficient", "left_boundary_repeatability_failed", "right_external_contour_insufficient", "right_world_boundary_insufficient", "right_boundary_repeatability_failed", "depth_plane_residual_too_large", "depth_plane_normal_inconsistent", "depth_plane_inlier_ratio_too_low", "raycast_evidence_missing", "terminal_width_too_small_or_degenerate"]}
+{
+  "status": "FAIL",
+  "candidate_count": 12,
+  "selected_count": 0,
+  "final_surface_ids": []
+}

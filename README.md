@@ -7,7 +7,7 @@ Reusable CARLA geometry and RGB-D tooling for active facade-boundary perception 
 The repository contains the GEO-0.5R2 implementation and its reproducible audit. CARLA 0.10.0 UE5 / Town10HD_Opt was used with 640x480 RGB-D sensors, horizontal FOV 90 degrees, synchronous mode, fixed delta 0.05 s, and NORMAL_LOCK camera motion.
 
 ```text
-pytest: 34 passed
+pytest: 61 passed
 RGB-D: 960 pairs
 surface_alpha: bbox 48391
 surface_beta: bbox 48393
@@ -140,3 +140,65 @@ IN x3 -> APPROACH -> STRADDLE x3 -> STOP
 The pilot stopped after three consecutive directional STRADDLE frames; it did not attempt OUT, TOP, BOTTOM, or underground motion. RGB/depth/semantic/instance frame IDs and timestamps are paired, camera orientation stayed locked, and the recovered boundary points use z-depth back-projection. Surface-horizontal boundary spread is `0.0013 m` for LEFT and `0.0405 m` for RIGHT under a `1.0 m` threshold; vertical spread is reported separately because visible line height changes with the view. Operator visual review is pending; `READY_FOR_JEPA` remains `NOT_EVALUATED`.
 
 See [`docs/MASK1_VISUAL_AUDIT.md`](docs/MASK1_VISUAL_AUDIT.md) and [`results/mask1/validation.json`](results/mask1/validation.json). MASK-1 is a feasibility pilot, not a dataset expansion or JEPA experiment.
+
+## OBS-0R1 leakage-corrected audit
+
+OBS-0R1 reanalyzes the 20 pre-STRADDLE MASK-1 RGB frames without changing the
+historical OBS-0 files. Previous-frame descriptors are grouped by trajectory,
+every trajectory step 0 has an invalid-history mask, and all preprocessing is
+fitted inside the training direction. The fixed 128-value descriptor and
+sample-space ridge solve bound the largest linear system to 10 x 10. Under a
+2 GiB process limit and single-threaded numeric libraries, the full run used
+182,620 KiB peak RSS and completed in 7.51 seconds.
+
+```text
+HISTORY_BOUNDARY_LEAKAGE_FIXED: PASS
+TRAIN_ONLY_PREPROCESSING: PASS
+SYNTHETIC_ALIGNMENT_TEST: PASS
+OBS0R1_REPRODUCIBILITY: PASS
+RGB_INCREMENTAL_VALUE_OVER_ODOMETRY: FAIL
+BOUNDARY_DISTANCE_OBSERVABILITY: INCONCLUSIVE
+READY_FOR_JEPA: NOT_EVALUATED
+```
+
+The step-index shortcut reaches 0.114 m direction-holdout MAE and relative
+odometry reaches 0.120 m. RGB history plus odometry is worse at 0.836 m, so
+OBS-0R1 does not claim incremental visual value. The detailed evidence and
+similarity candidates are in [`docs/OBS0R1_AUDIT.md`](docs/OBS0R1_AUDIT.md).
+No JEPA training was performed.
+
+## ACT-0S screening-definition audit
+
+ACT-0S reuses the existing 12-candidate, 36-quartet ACT-0 scout without
+starting CARLA or changing the historical full physical result (`0/12`). It
+separates visual-event suitability (Tier V), plane-free metric repeatability
+(Tier M), and strict physical-plane quality (Tier P). Tier P no longer vetoes
+Tier V.
+
+The compact scout retained frame/timestamp/pose metadata for all 36 quartets,
+but persisted pixels only for each candidate's center RGB and center instance
+overlay. Raw depth, mask/contour pixels, K records, and the 24 off-center RGB
+views were not retained. Therefore the old plane-basis spread is published
+only as a sensitivity proxy: official Tier M and complete three-view public
+evidence fail closed instead of being reconstructed.
+
+```text
+Tier V geometry-reference pass: 6/12
+Tier M official pass: 0 verified; NOT_EVALUATED
+Tier P strict pass: 3/12
+PUBLIC_ACT0_EVIDENCE: FAIL
+SCOUT_SENSOR_PAIRING: PASS
+SCOUT_POSE_COVERAGE: FAIL
+SCREENING_DEFINITION_VALID: PASS
+INSTANCE_GROUPING_RESOLVED: FAIL
+READY_FOR_ADAPTIVE_RESCOUT: CONDITIONAL_PASS
+READY_FOR_COUNTERFACTUAL_ROLLOUT: FAIL
+READY_FOR_DATASET_EXPANSION: NOT_EVALUATED
+OPERATOR_VISUAL_REVIEW: PENDING
+READY_FOR_JEPA: NOT_EVALUATED
+```
+
+Six compact-evidence classifications pass Tier V, but that does not authorize
+a rollout. The next permissible step is a small adaptive rescout that retains
+the missing boundary-side pixels and plane-free Tier M inputs. See
+[`docs/ACT0_SCREENING_AUDIT.md`](docs/ACT0_SCREENING_AUDIT.md).

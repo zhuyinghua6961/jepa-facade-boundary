@@ -199,6 +199,17 @@ def rgb_descriptor(image: np.ndarray) -> np.ndarray:
     return np.concatenate([grayscale_descriptor(image), color_histogram(image), hog_descriptor(compact)])
 
 
+def fixed_length_descriptor(descriptor: np.ndarray, length: int = 128) -> np.ndarray:
+    """Deterministically subsample a descriptor to a fixed memory budget."""
+    values = np.asarray(descriptor, dtype=np.float32).reshape(-1)
+    if length <= 0:
+        raise ValueError("length must be positive")
+    if len(values) < length:
+        raise ValueError("descriptor is shorter than requested fixed length")
+    indices = np.linspace(0, len(values) - 1, num=length, dtype=np.int64)
+    return values[indices]
+
+
 def aligned_ssim(left: np.ndarray, right: np.ndarray) -> tuple[float, float]:
     """Return phase-aligned global SSIM and the estimated x/y shift."""
     a = cv2.cvtColor(np.asarray(left), cv2.COLOR_RGB2GRAY).astype(np.float32) / 255.0
@@ -207,7 +218,9 @@ def aligned_ssim(left: np.ndarray, right: np.ndarray) -> tuple[float, float]:
     b = cv2.resize(b, (320, 240), interpolation=cv2.INTER_AREA)
     try:
         shift, _response = cv2.phaseCorrelate(a, b)
-        matrix = np.float32([[1, 0, shift[0]], [0, 1, shift[1]]])
+        # phaseCorrelate(a, b) reports the translation from ``a`` to ``b``;
+        # warping ``b`` back onto ``a`` therefore requires the inverse shift.
+        matrix = np.float32([[1, 0, -shift[0]], [0, 1, -shift[1]]])
         b = cv2.warpAffine(b, matrix, (b.shape[1], b.shape[0]), borderMode=cv2.BORDER_REFLECT)
     except cv2.error:
         shift = (0.0, 0.0)
@@ -223,20 +236,33 @@ def aligned_ssim(left: np.ndarray, right: np.ndarray) -> tuple[float, float]:
 
 def ridge_fit_predict(train_x: np.ndarray, train_y: np.ndarray,
                       test_x: np.ndarray, alpha: float = 1.0) -> np.ndarray:
-    """Fit a standardized ridge regression without sklearn."""
+    """Fit ridge with the smaller of the sample- and feature-space systems."""
     x = np.asarray(train_x, dtype=float)
     z = np.asarray(test_x, dtype=float)
+    y = np.asarray(train_y, dtype=float)
+    if x.ndim != 2 or z.ndim != 2 or x.shape[1] != z.shape[1]:
+        raise ValueError("train_x and test_x must be 2-D with equal feature counts")
+    if len(x) != len(y) or len(x) == 0:
+        raise ValueError("train_y must contain one target per non-empty train row")
+    if alpha <= 0:
+        raise ValueError("alpha must be positive")
     mean = x.mean(axis=0)
     scale = x.std(axis=0)
     scale[scale < 1e-8] = 1.0
     x = (x - mean) / scale
     z = (z - mean) / scale
-    x = np.column_stack([np.ones(len(x)), x])
-    z = np.column_stack([np.ones(len(z)), z])
-    penalty = np.eye(x.shape[1], dtype=float) * float(alpha)
-    penalty[0, 0] = 0.0
-    weights = np.linalg.solve(x.T @ x + penalty, x.T @ np.asarray(train_y, dtype=float))
-    return z @ weights
+    target_mean = y.mean(axis=0)
+    centered_y = y - target_mean
+    if x.shape[1] <= x.shape[0]:
+        system = x.T @ x + np.eye(x.shape[1], dtype=float) * float(alpha)
+        weights = np.linalg.solve(system, x.T @ centered_y)
+    else:
+        # The OBS probes are deliberately wide and tiny.  Solving in sample
+        # space prevents feature_dim^2 allocation and feature_dim^3 compute.
+        system = x @ x.T + np.eye(x.shape[0], dtype=float) * float(alpha)
+        dual = np.linalg.solve(system, centered_y)
+        weights = x.T @ dual
+    return z @ weights + target_mean
 
 
 def regression_metrics(target: Sequence[float], prediction: Sequence[float],
@@ -260,3 +286,66 @@ def regression_metrics(target: Sequence[float], prediction: Sequence[float],
     if baseline_mae is not None:
         result["constant_baseline_improvement_m"] = float(baseline_mae - result["MAE_m"])
     return result
+
+
+def grouped_history_descriptors(records: Sequence[dict], descriptor_key: str = "descriptor",
+                                group_key: str = "trajectory_id",
+                                order_key: str = "step_index") -> tuple[np.ndarray, np.ndarray]:
+    """Build previous-frame descriptors independently inside each trajectory.
+
+    The returned ``history_valid_mask`` is false for every trajectory's first
+    frame.  No ordering, normalization or feature value crosses a group.
+    """
+    current = [np.asarray(row[descriptor_key], dtype=float) for row in records]
+    previous = [value.copy() for value in current]
+    valid = np.zeros(len(records), dtype=bool)
+    groups: dict[object, list[int]] = {}
+    for index, row in enumerate(records):
+        groups.setdefault(row[group_key], []).append(index)
+    for indices in groups.values():
+        ordered = sorted(indices, key=lambda index: records[index][order_key])
+        for position, index in enumerate(ordered):
+            if position == 0:
+                previous[index] = current[index].copy()
+                valid[index] = False
+            else:
+                previous[index] = current[ordered[position - 1]].copy()
+                valid[index] = True
+    return np.asarray(previous), valid
+
+
+def _ssim_gray(left: np.ndarray, right: np.ndarray) -> float:
+    a = np.asarray(left, dtype=np.float32)
+    b = np.asarray(right, dtype=np.float32)
+    mean_a, mean_b = float(a.mean()), float(b.mean())
+    var_a, var_b = float(a.var()), float(b.var())
+    cov = float(((a - mean_a) * (b - mean_b)).mean())
+    c1, c2 = 0.01 ** 2, 0.03 ** 2
+    score = ((2 * mean_a * mean_b + c1) * (2 * cov + c2) /
+             max((mean_a * mean_a + mean_b * mean_b + c1) *
+                 (var_a + var_b + c2), 1e-12))
+    return float(np.clip(score, -1.0, 1.0))
+
+
+def raw_ssim(left: np.ndarray, right: np.ndarray) -> float:
+    """Global SSIM before geometric alignment."""
+    a = cv2.cvtColor(np.asarray(left), cv2.COLOR_RGB2GRAY).astype(np.float32) / 255.0
+    b = cv2.cvtColor(np.asarray(right), cv2.COLOR_RGB2GRAY).astype(np.float32) / 255.0
+    a = cv2.resize(a, (320, 240), interpolation=cv2.INTER_AREA)
+    b = cv2.resize(b, (320, 240), interpolation=cv2.INTER_AREA)
+    return _ssim_gray(a, b)
+
+
+def similarity_metrics(left: np.ndarray, right: np.ndarray) -> dict:
+    """Return raw/aligned SSIM, HOG cosine and colour-histogram distance."""
+    phase_score, shift = aligned_ssim(left, right)
+    hog_left = hog_descriptor(cv2.resize(np.asarray(left), (160, 120), interpolation=cv2.INTER_AREA))
+    hog_right = hog_descriptor(cv2.resize(np.asarray(right), (160, 120), interpolation=cv2.INTER_AREA))
+    cosine = float(np.dot(hog_left, hog_right) /
+                   max(float(np.linalg.norm(hog_left) * np.linalg.norm(hog_right)), 1e-12))
+    hist_left = color_histogram(left)
+    hist_right = color_histogram(right)
+    hist_distance = float(0.5 * np.abs(hist_left - hist_right).sum())
+    return {"raw_ssim": raw_ssim(left, right), "phase_aligned_ssim": phase_score,
+            "phase_shift_px": shift, "hog_cosine": cosine,
+            "color_histogram_distance": hist_distance}

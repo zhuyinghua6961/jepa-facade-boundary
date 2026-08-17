@@ -1,0 +1,117 @@
+schema: act0.config.v1
+map: Town10HD_Opt
+server:
+  host: localhost
+  port: 2100
+sensor:
+  width: 640
+  height: 480
+  horizontal_fov_deg: 90.0
+  fixed_delta_seconds: 0.05
+scout:
+  candidate_indices: [1, 6, 7, 8, 10, 11, 12, 13, 17, 18, 19, 20]
+  view_offsets_fraction: [-0.08, 0.0, 0.08]
+  distance_width_fraction: 0.80
+  min_distance_m: 18.0
+  min_target_coverage: 0.10
+  max_target_coverage: 0.90
+  min_component_ratio: 0.90
+  min_contour_span_fraction: 0.50
+  min_boundary_views: 2
+  max_boundary_std_m: 0.30
+  max_plane_p95_residual_m: 0.15
+  max_normal_error_deg: 20.0
+  min_plane_inlier_ratio: 0.50
+  min_raycast_agreement: 0.80
+  raycast_tolerance_m: 0.30
+  min_width_m: 6.0
+  required_surfaces: 4
+capture:
+  standoff_distances_m: [10.0, 15.0]
+  starts:
+    - {edge: LEFT, edge_distance_m: 0.7, step_m: 0.20}
+    - {edge: RIGHT, edge_distance_m: 2.2, step_m: 0.35}
+    - {edge: LEFT, edge_distance_m: 4.5, step_m: 0.50}
+  mirror_odd_surfaces: true
+  horizon_m: 5.5
+  frozen_confirmation_frames: 3
+  max_position_error_m: 0.01
+  max_rotation_error_deg: 0.05
+  min_initial_rgb_ssim: 0.99
+  max_initial_rgb_mae: 2.0
+  local_min_side_fraction: 0.05
+  local_min_span_fraction: 0.70
+  tie_tolerance_m: 0.05
+runtime_safety:
+  python_address_space_limit_bytes: 4294967296
+  numeric_threads: 1
+  carla_address_space_limit_bytes: 17179869184
+  carla_cpu_set: 20-27
+  carla_nice: 15
+screening_audit:
+  min_contour_views: 2
+  min_target_side_fraction: 0.50
+  min_external_side_fraction: 0.50
+  max_contour_span_range: 0.20
+  metric_spread_thresholds_m: [0.05, 0.10, 0.25, 1.00]
+  existing_evidence_interpretation:
+    1:
+      classification: VISUAL_EVENT_PASS
+      tier_v_status: PASS
+      instance_grouping: RESOLVED_FOR_SELECTED_ID
+      rationale: Both exterior transitions persist across three views; strict plane gate passes, while RIGHT legacy spread is not used by Tier V.
+    6:
+      classification: INSTANCE_GROUPING_UNRESOLVED
+      tier_v_status: NOT_OBSERVED
+      instance_grouping: UNRESOLVED
+      rationale: Candidate IDs change from 39220 to 35115/35117 and no single target instance survives all three views.
+    7:
+      classification: VISUAL_EVENT_PASS
+      tier_v_status: PASS
+      instance_grouping: RESOLVED_FOR_SELECTED_ID
+      rationale: Selected instance 39225 and its bilateral exterior transitions persist; neighboring stable IDs are recorded but not merged.
+    8:
+      classification: VISUAL_EVENT_PASS
+      tier_v_status: PASS
+      instance_grouping: RESOLVED_FOR_SELECTED_ID
+      rationale: Selected instance 39226 has stable bilateral transitions and the strict physical-plane gate passes.
+    10:
+      classification: PHYSICAL_PLANE_ONLY_FAIL
+      tier_v_status: PASS
+      instance_grouping: RESOLVED_FOR_SELECTED_ID
+      rationale: Visual contours and selected instance are stable, but raycast/depth agreement is zero.
+    11:
+      classification: PHYSICAL_PLANE_ONLY_FAIL
+      tier_v_status: PASS
+      instance_grouping: RESOLVED_FOR_SELECTED_ID
+      rationale: Selected instance 39766 has stable contours, but plane inlier ratio and raycast/depth agreement fail Tier P.
+    12:
+      classification: SCOUT_POSE_INSUFFICIENT
+      tier_v_status: NOT_OBSERVED
+      instance_grouping: RESOLVED_FOR_SELECTED_ID
+      rationale: Only the right termination is visible in the center image and contour span changes 0.002/0.662/0.083 across offsets.
+    13:
+      classification: INSTANCE_GROUPING_UNRESOLVED
+      tier_v_status: NOT_OBSERVED
+      instance_grouping: UNRESOLVED
+      rationale: Eight stable candidate IDs occupy the scout crop; the retained compact evidence cannot prove which meshes form one facade.
+    17:
+      classification: SCENE_UNSUITABLE
+      tier_v_status: FAIL
+      instance_grouping: RESOLVED_FOR_SELECTED_ID
+      rationale: Target mask fragmentation and visible fire-escape/foreground structure prevent a clean facade event.
+    18:
+      classification: SCENE_UNSUITABLE
+      tier_v_status: FAIL
+      instance_grouping: RESOLVED_FOR_SELECTED_ID
+      rationale: Target mask fragmentation and visible fire-escape/foreground structure prevent a clean facade event.
+    19:
+      classification: PHYSICAL_PLANE_ONLY_FAIL
+      tier_v_status: PASS
+      instance_grouping: RESOLVED_FOR_SELECTED_ID
+      rationale: Selected instance and exterior contours persist, but plane inlier ratio and raycast/depth agreement fail Tier P.
+    20:
+      classification: SCOUT_POSE_INSUFFICIENT
+      tier_v_status: NOT_OBSERVED
+      instance_grouping: UNRESOLVED_DUE_TO_POSE
+      rationale: The persisted center RGB faces a blank near wall and no target instance remains stable across the three offsets.
