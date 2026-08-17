@@ -55,3 +55,14 @@ act0r1:
   bbox_id: 48389
   direction: LEFT
   maximum_saved_frames: 8
+act0r2:
+  candidate_index: 1
+  bbox_id: 48389
+  maximum_saved_frames: 15
+  center_max_position_error_m: 0.01
+  center_max_rotation_error_deg: 0.05
+  approach_outside_margin_px: 8.0
+  initial_carla_address_space_limit_bytes: 17179869184
+  effective_carla_address_space_limit_bytes: 34359738368
+  carla_cpu_set: "16-23"
+  python_cpu_set: "15"

@@ -6,13 +6,18 @@ import yaml
 
 from boundary_sweep.act0r import (action_axis_from_transforms,
                                   boundary_type_consensus,
+                                  checkpoint_pose_alignment,
                                   classify_boundary_pixels,
                                   config_outcome_override_audit,
-                                  contour_span_metrics, official_tier_m,
+                                  contour_span_metrics,
+                                  event_ordering_from_geometry,
+                                  official_tier_m,
+                                  physical_termination_pixel_gate,
                                   pose_repeatability, sha256_file,
                                   select_repeated_pose_group,
                                   tier_v_from_pixel_frames,
                                   verify_manifest_hashes)
+from boundary_sweep.carla_utils import transform_dict_from_matrix
 
 
 def _classification_thresholds():
@@ -207,3 +212,118 @@ def test_act0r1_offline_audit_is_pixel_derived_if_available():
     assert gates["READY_FOR_COUNTERFACTUAL_ROLLOUT"]["status"] == "NOT_EVALUATED"
     assert gates["READY_FOR_JEPA"]["status"] == "NOT_EVALUATED"
     assert len(list(Path("docs/assets/act0r1").glob("offline_*.jpg"))) == 6
+
+
+def test_checkpoint_matrix_conversion_and_pose_alignment():
+    matrix = np.array([
+        [0.0, 1.0, 0.0, -92.99478912353516],
+        [-1.0, 0.0, 0.0, 288.3297424316406],
+        [0.0, 0.0, 1.0, 12.002955436706543],
+        [0.0, 0.0, 0.0, 1.0],
+    ])
+    pose = transform_dict_from_matrix(matrix)
+    assert pose["location"]["y"] == 288.3297424316406
+    assert abs(pose["rotation"]["yaw"] + 90.0) < 1e-9
+    assert checkpoint_pose_alignment(matrix, matrix, 0.01, 0.05)["status"] == "PASS"
+    moved = matrix.copy()
+    moved[0, 3] += 0.011
+    assert checkpoint_pose_alignment(moved, matrix, 0.01, 0.05)["status"] == "FAIL"
+
+
+def _event_metric(termination=False):
+    return {
+        "contour_present": termination,
+        "span_over_target_bbox_height": 1.0 if termination else 0.0,
+        "target_side_fraction": 1.0 if termination else 0.0,
+        "external_side_fraction": 1.0 if termination else 0.0,
+        "boundary_classification": {
+            "boundary_type": "PHYSICAL_TERMINATION" if termination else "UNRESOLVED"},
+    }
+
+
+def test_event_ordering_uses_pixel_boundary_and_world_reprojection_not_roles():
+    transforms = []
+    for camera_y in (1.0, -0.6, -2.0):
+        transform = np.eye(4)
+        transform[1, 3] = camera_y
+        transforms.append(transform)
+    K = np.array([[100.0, 0.0, 50.0], [0.0, 100.0, 40.0], [0.0, 0.0, 1.0]])
+    world_line = [[10.0, -6.0, z] for z in (-1.0, 0.0, 1.0)]
+    thresholds = {"tier_v_min_span_over_target_bbox": 0.8,
+                  "min_target_side_fraction": 0.8,
+                  "min_external_side_fraction": 0.8,
+                  "approach_outside_margin_px": 8.0}
+    metrics = [_event_metric(False), _event_metric(False), _event_metric(True)]
+    metrics[0].update({"contour_present": True,
+                       "span_over_target_bbox_height": 0.01})
+    metrics[1].update({"contour_present": True,
+                       "span_over_target_bbox_height": 0.43,
+                       "boundary_classification": {
+                           "boundary_type": "PHYSICAL_TERMINATION"}})
+    result = event_ordering_from_geometry(
+        metrics, transforms, K, world_line, "LEFT", 100, thresholds)
+    assert result["status"] == "PASS"
+    assert [row["state"] for row in result["observations"]] == [
+        "NO_VALID_EXTERNAL_BOUNDARY", "APPROACH", "FIRST_PHYSICAL_TERMINATION"]
+    assert result["uses_role_labels"] is False
+
+
+def test_event_ordering_fails_without_pixel_derived_approach():
+    transforms = [np.eye(4) for _ in range(2)]
+    transforms[0][1, 3] = 1.0
+    transforms[1][1, 3] = -2.0
+    K = np.array([[100.0, 0.0, 50.0], [0.0, 100.0, 40.0], [0.0, 0.0, 1.0]])
+    thresholds = {"tier_v_min_span_over_target_bbox": 0.8,
+                  "min_target_side_fraction": 0.8,
+                  "min_external_side_fraction": 0.8,
+                  "approach_outside_margin_px": 8.0}
+    result = event_ordering_from_geometry(
+        [_event_metric(False), _event_metric(True)], transforms, K,
+        [[10.0, -6.0, 0.0]], "LEFT", 100, thresholds)
+    assert result["status"] == "FAIL"
+
+
+def test_physical_termination_pixel_gate_rejects_weak_span():
+    thresholds = {"tier_v_min_span_over_target_bbox": 0.8,
+                  "min_target_side_fraction": 0.8,
+                  "min_external_side_fraction": 0.8}
+    metric = _event_metric(True)
+    assert physical_termination_pixel_gate(metric, thresholds)
+    metric["span_over_target_bbox_height"] = 0.79
+    assert not physical_termination_pixel_gate(metric, thresholds)
+
+
+def test_act0r2_capture_reads_checkpoint_pose_instead_of_named_poses():
+    source = Path("scripts/check_sensor_health.py").read_text()
+    section = source.split("def act0r2(", 1)[1].split("def postprocess(", 1)[0]
+    assert 'plan["locator_center_pose"]' in section
+    assert 'plan["camera_motion_axis"]' in section
+    assert 'config["poses"]' not in section
+    config = yaml.safe_load(Path("configs/experiments/cap0.yaml").read_text())
+    assert config["act0r2"]["maximum_saved_frames"] == 15
+
+
+def test_published_act0r2_bilateral_result_if_available():
+    path = Path("results/act0r2/validation.json")
+    if not path.exists():
+        return
+    result = json.loads(path.read_text())
+    gates = result["gates"]
+    assert result["schema"] == "act0r2.validation.v1"
+    assert result["frame_count"] == 15
+    assert result["constraints"]["roles_used_as_labels"] is False
+    for direction in ("LEFT", "RIGHT"):
+        side = result["directions"][direction]
+        assert side["computed_states"][:3] == [
+            "NO_VALID_EXTERNAL_BOUNDARY", "APPROACH", "FIRST_PHYSICAL_TERMINATION"]
+        assert side["boundary_consensus"]["boundary_type"] == "PHYSICAL_TERMINATION"
+        assert side["boundary_consensus"]["consensus_count"] >= 3
+        assert side["tier_v"]["status"] == "PASS"
+        assert side["same_pose"]["status"] == "PASS"
+        assert side["same_pose_world_repeatability"]["status"] == "PASS"
+    assert gates["READY_FOR_NEXT_SURFACE"]["status"] == "CONDITIONAL_PASS"
+    assert gates["MULTIVIEW_REPEATABILITY"]["status"] == "NOT_EVALUATED"
+    assert gates["EXTERNAL_VISUAL_REVIEW"]["status"] == "PENDING"
+    assert gates["READY_FOR_COUNTERFACTUAL_ROLLOUT"]["status"] == "NOT_EVALUATED"
+    assert gates["READY_FOR_JEPA"]["status"] == "NOT_EVALUATED"
+    assert len(list(Path("docs/assets/act0r2").glob("*.jpg"))) == 6

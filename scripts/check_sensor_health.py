@@ -21,13 +21,26 @@ from PIL import Image, ImageDraw
 PROJECT_ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(PROJECT_ROOT))
 
+from boundary_sweep.act0r import (boundary_type_consensus,
+                                  checkpoint_pose_alignment,
+                                  classify_boundary_pixels,
+                                  contour_action_axis_coordinate,
+                                  contour_span_metrics,
+                                  event_ordering_from_geometry,
+                                  official_tier_m,
+                                  physical_termination_pixel_gate,
+                                  pose_repeatability,
+                                  select_repeated_pose_group,
+                                  tier_v_from_pixel_frames,
+                                  verify_manifest_hashes)
 from boundary_sweep.cap0 import (HEALTH_GATES, classify_root_cause,
                                  enforce_saved_frame_limit,
                                  evaluate_motion_sequence_rgb,
                                  evaluate_rgb_sequence, sha256_file,
                                  should_run_act0r1, verify_search_plan)
-from boundary_sweep.carla_utils import discover_carla_root, import_carla
-from boundary_sweep.segmentation import decode_instance_channels
+from boundary_sweep.carla_utils import (discover_carla_root, import_carla,
+                                        transform_from_matrix)
+from boundary_sweep.segmentation import (BUILDING_TAG, decode_instance_channels)
 from boundary_sweep.sensors import (ConsecutiveIncompleteFramesError,
                                     SensorFrameError, SynchronousRGBDSeg)
 
@@ -552,6 +565,567 @@ def act0r1(args, config, carla, client):
     return 0
 
 
+def _act0r2_pose(center_matrix, action_axis, displacement_m, direction):
+    matrix = np.asarray(center_matrix, dtype=float).copy()
+    axis = np.asarray(action_axis, dtype=float)
+    axis /= max(float(np.linalg.norm(axis)), 1e-12)
+    sign = -1.0 if direction == "LEFT" else 1.0 if direction == "RIGHT" else 0.0
+    matrix[:3, 3] += sign * float(displacement_m) * axis
+    return matrix
+
+
+def _act0r2_pose_sha(matrix) -> str:
+    payload = json.dumps(np.asarray(matrix, dtype=float).tolist(), separators=(",", ":"))
+    return hashlib.sha256(payload.encode("ascii")).hexdigest()
+
+
+def _act0r2_arrays(entry):
+    rgb = np.asarray(Image.open(PROJECT_ROOT / entry["files"]["rgb"]["path"]).convert("RGB"))
+    semantic_rgb = np.asarray(Image.open(
+        PROJECT_ROOT / entry["files"]["semantic"]["path"]).convert("RGB"))
+    instance_rgb = np.asarray(Image.open(
+        PROJECT_ROOT / entry["files"]["instance"]["path"]).convert("RGB"))
+    semantic = decode_instance_channels(semantic_rgb)["semantic_tag"]
+    instance_channels = decode_instance_channels(instance_rgb)
+    instance = instance_channels["instance_id_16bit"]
+    depth = np.load(PROJECT_ROOT / entry["files"]["depth_m"]["path"], allow_pickle=False)
+    return rgb, depth, semantic, instance, instance_channels["semantic_tag"]
+
+
+def _mask_bbox(mask):
+    ys, xs = np.where(mask)
+    if not len(xs):
+        return None
+    return {"x_min": int(xs.min()), "y_min": int(ys.min()),
+            "x_max": int(xs.max()), "y_max": int(ys.max()),
+            "width_px": int(xs.max() - xs.min() + 1),
+            "height_px": int(ys.max() - ys.min() + 1)}
+
+
+def _act0r2_frame_metric(entry, direction, action_axis, act0r_config):
+    _rgb, depth, semantic, instance, instance_semantic = _act0r2_arrays(entry)
+    target_id = int(entry["target_instance_id"])
+    mask = (semantic == BUILDING_TAG) & (instance == target_id)
+    span = contour_span_metrics(mask, direction)
+    contour = span.pop("contour")
+    boundary = classify_boundary_pixels(
+        mask, contour, depth, semantic, instance, target_id, direction,
+        act0r_config["boundary_classification"])
+    metric = contour_action_axis_coordinate(
+        contour, depth, np.asarray(entry["K"], dtype=float),
+        np.asarray(entry["T_world_camera"], dtype=float), action_axis)
+    metric["world_points_sample"] = metric["world_points_sample"][:64]
+    count = int(mask.sum())
+    return {
+        "frame_id": int(entry["frame_id"]),
+        "capture_role": entry["capture_role"],
+        "role_used_as_scientific_label": False,
+        "target_pixel_count": count,
+        "target_coverage": float(mask.mean()),
+        "mask_bbox": _mask_bbox(mask),
+        "target_instance_camera_building_fraction": (
+            float(np.mean(instance_semantic[instance == target_id] == BUILDING_TAG))
+            if np.any(instance == target_id) else 0.0),
+        **span,
+        "boundary_classification": boundary,
+        "tier_m_frame": metric,
+    }
+
+
+def _act0r2_center_boundary_present(metric, act0r_config):
+    thresholds = {
+        **act0r_config["contour"],
+        "tier_v_min_span_over_target_bbox": act0r_config["search"][
+            "search_min_span_over_target_bbox"],
+    }
+    return physical_termination_pixel_gate(metric, thresholds)
+
+
+def _save_act0r2_frame(rig, sample, raw_root, stem, plan, direction, role,
+                       displacement_m, center_pose, center_frame_id, center_pose_sha,
+                       settle):
+    metadata = rig.save(sample, raw_root, stem)
+    actual = np.asarray(metadata["T_world_camera"], dtype=float)
+    metadata.update({
+        "sequence_id": f"act0r2_candidate_01_{direction.lower()}",
+        "candidate_index": 1,
+        "bbox_id": int(plan["bbox_id"]),
+        "direction": direction,
+        "capture_role": role,
+        "role_used_as_scientific_label": False,
+        "target_instance_id": int(plan["target_instance_id"]),
+        "commanded_displacement_m": float(displacement_m),
+        "actual_displacement_from_center_m": float(np.linalg.norm(
+            actual[:3, 3] - np.asarray(center_pose, dtype=float)[:3, 3])),
+        "shared_center_frame_id": int(center_frame_id),
+        "shared_center_pose_sha256": center_pose_sha,
+        "settle": settle,
+        "metadata_path": str(raw_root / f"{stem}.json"),
+    })
+    (raw_root / f"{stem}.json").write_text(json.dumps(metadata, indent=2) + "\n")
+    return metadata
+
+
+def _act0r2_pairing(entry):
+    frames = entry.get("sensor_frames", {})
+    stamps = entry.get("sensor_timestamps", {})
+    return (set(frames) == {"rgb", "depth", "semantic", "instance"} and
+            len(set(frames.values())) == 1 and set(stamps) == set(frames) and
+            max(stamps.values()) - min(stamps.values()) <= 1e-6)
+
+
+def _act0r2_overlay(entry, direction, metric):
+    rgb, _depth, semantic, instance, _instance_semantic = _act0r2_arrays(entry)
+    mask = (semantic == BUILDING_TAG) & (instance == int(entry["target_instance_id"]))
+    span = contour_span_metrics(mask, direction)
+    image = rgb.copy()
+    image[mask] = (0.62 * image[mask] + 0.38 * np.array([35, 220, 80])).astype(np.uint8)
+    image[span["contour"]] = (255, 215, 0)
+    return Image.fromarray(image, mode="RGB")
+
+
+def _act0r2_role_sheet(entries, metrics, states, direction, output):
+    canvas = Image.new("RGB", (1280, 630), (20, 20, 20))
+    draw = ImageDraw.Draw(canvas)
+    for index, (entry, metric, state) in enumerate(zip(entries, metrics, states)):
+        tile = _act0r2_overlay(entry, direction, metric).resize((320, 240))
+        x, y = (index % 4) * 320, (index // 4) * 280 + 70
+        canvas.paste(tile, (x, y))
+        draw.text((x + 6, y - 24), f"{entry['capture_role']} frame={entry['frame_id']}",
+                  fill=(255, 230, 70))
+        draw.text((x + 6, y + 222),
+                  f"pixel={state} d={entry['actual_displacement_from_center_m']:.3f}m",
+                  fill=(245, 245, 245))
+    draw.text((8, 7), f"ACT-0R2 candidate 1 {direction}: role is provenance only",
+              fill=(255, 230, 70))
+    output.parent.mkdir(parents=True, exist_ok=True)
+    canvas.save(output, quality=84, optimize=True, progressive=True)
+
+
+def _act0r2_evidence_sheet(entry, direction, metric, output):
+    rgb, depth, semantic, instance, _instance_semantic = _act0r2_arrays(entry)
+    target_id = int(entry["target_instance_id"])
+    mask = (semantic == BUILDING_TAG) & (instance == target_id)
+    contour = contour_span_metrics(mask, direction)["contour"]
+    panels = [np.asarray(_act0r2_overlay(entry, direction, metric))]
+    semantic_panel = rgb.copy()
+    semantic_panel[semantic == BUILDING_TAG] = (50, 175, 235)
+    semantic_panel[contour] = (255, 215, 0)
+    panels.append(semantic_panel)
+    instance_panel = np.zeros_like(rgb)
+    instance_panel[..., 0] = (instance & 255).astype(np.uint8)
+    instance_panel[..., 1] = ((instance >> 8) & 255).astype(np.uint8)
+    instance_panel[..., 2] = semantic.astype(np.uint8) * 9
+    instance_panel[contour] = (255, 255, 0)
+    panels.append(instance_panel)
+    target_depth = float(np.median(depth[mask])) if mask.any() else 0.0
+    residual = np.clip((depth - target_depth) / 8.0, -1.0, 1.0)
+    depth_panel = np.zeros_like(rgb)
+    depth_panel[..., 0] = np.where(residual < 0, -residual * 255, 0).astype(np.uint8)
+    depth_panel[..., 2] = np.where(residual > 0, residual * 255, 0).astype(np.uint8)
+    depth_panel[..., 1] = (255 - np.abs(residual) * 180).astype(np.uint8)
+    depth_panel[contour] = (255, 255, 0)
+    panels.append(depth_panel)
+    canvas = Image.new("RGB", (1280, 560), (20, 20, 20))
+    labels = ["RGB + target mask + contour", "semantic", "instance evidence",
+              "z-depth residual: red closer / blue farther"]
+    draw = ImageDraw.Draw(canvas)
+    for index, (panel, label) in enumerate(zip(panels, labels)):
+        canvas.paste(Image.fromarray(panel).resize((320, 240)), (index * 320, 38))
+        draw.text((index * 320 + 6, 282), label, fill=(245, 245, 245))
+    classification = metric["boundary_classification"]
+    draw.text((8, 7),
+              f"candidate 1 {direction} first termination frame={entry['frame_id']} type={classification['boundary_type']}",
+              fill=(255, 230, 70))
+    detail = [
+        f"coverage={metric['target_coverage']:.6f} span/bbox={metric['span_over_target_bbox_height']:.3f}",
+        f"bilateral={classification.get('bilateral_sample_count')} valid_depth={classification.get('valid_depth_pair_count')}",
+        f"external-target depth median={classification.get('external_minus_target_depth_median_m')} m",
+        f"external Building={classification.get('external_building_fraction')} non-target ID={classification.get('external_non_target_instance_fraction')}",
+        "EXTERNAL_VISUAL_REVIEW=PENDING",
+    ]
+    for index, line in enumerate(detail):
+        draw.text((12, 330 + index * 38), line, fill=(238, 238, 238))
+    output.parent.mkdir(parents=True, exist_ok=True)
+    canvas.save(output, quality=84, optimize=True, progressive=True)
+
+
+def _write_act0r2_docs(validation, output):
+    gates = validation["gates"]
+    lines = [
+        "# ACT-0R2 Candidate 1 Bilateral Event Audit", "",
+        "This run used the checkpoint `locator_center_pose` and action axis directly.",
+        "Role names are provenance only. CARLA pixels, z-depth, K and per-frame",
+        "`T_world_camera` determine every scientific state. No rollout or JEPA training ran.", "",
+        "External visual review is **PENDING**.", "", "## Gates", "",
+        "| Gate | Status |", "| --- | --- |",
+    ]
+    for name, value in gates.items():
+        lines.append(f"| {name} | {value.get('status')} |")
+    raw = validation["raw"]
+    resources = validation["resources"]
+    lines.extend(["", "## Runtime and raw integrity", "",
+                  f"- Persisted frames: {validation['frame_count']} (one shared CENTER plus seven per side)",
+                  f"- Raw files: {raw['file_count']}; bytes: {raw['size_bytes']}",
+                  f"- Manifest payload hashes: {raw['hash_audit']['checked_file_count']} checked, {raw['hash_audit']['status']}",
+                  f"- Python AS limit: {resources.get('actual_python_address_space_limit_bytes')} bytes",
+                  f"- Python peak RSS/VMS: {resources.get('python_peak_rss_bytes')} / {resources.get('python_peak_vms_bytes')} bytes",
+                  f"- CARLA peak RSS: {resources.get('carla_peak_rss_bytes')} bytes",
+                  f"- CARLA initial/effective AS limits: {resources.get('initial_carla_address_space_limit_bytes')} / {resources.get('effective_carla_address_space_limit_bytes')} bytes",
+                  "- The 16 GiB CARLA launch failed during engine initialization; the bounded capture used 32 GiB. The Python limit remained 4 GiB.",
+                  "", "## Bilateral evidence", "",
+                  "![Shared CENTER and first bilateral events](assets/act0r2/same_start_comparison.jpg)", "",
+                  "![CENTER bilateral absence](assets/act0r2/center_bilateral_absence.jpg)", "",
+                  "![LEFT roles](assets/act0r2/left_all_roles.jpg)", "",
+                  "![RIGHT roles](assets/act0r2/right_all_roles.jpg)", "",
+                  "![LEFT first termination](assets/act0r2/left_first_termination.jpg)", "",
+                  "![RIGHT first termination](assets/act0r2/right_first_termination.jpg)", "",
+                  "## Per-direction summary", "",
+                  "| Direction | Event order | Boundary | Tier V | Same-pose world spread |",
+                  "| --- | --- | --- | --- | ---: |"])
+    for direction in ("LEFT", "RIGHT"):
+        row = validation["directions"].get(direction, {})
+        lines.append(f"| {direction} | {row.get('event_ordering', {}).get('status')} | "
+                     f"{row.get('boundary_consensus', {}).get('boundary_type')} | "
+                     f"{row.get('tier_v', {}).get('status')} | "
+                     f"{row.get('same_pose_world_repeatability', {}).get('spread_m')} m |")
+    lines.extend(["", "## Per-frame pixel states", "",
+                  "| Direction | Frame | Role (provenance) | Pixel/geometric state | Coverage | Span/bbox | Boundary u |",
+                  "| --- | ---: | --- | --- | ---: | ---: | ---: |"])
+    for direction in ("LEFT", "RIGHT"):
+        row = validation["directions"][direction]
+        for metric, observation in zip(row["frames"], row["event_ordering"]["observations"]):
+            u = observation.get("projected_boundary_median_u_px")
+            lines.append(f"| {direction} | {metric['frame_id']} | {metric['capture_role']} | "
+                         f"{observation['state']} | {metric['target_coverage']:.6f} | "
+                         f"{metric['span_over_target_bbox_height']:.6f} | {u:.6f} px |")
+    lines.extend(["", "Same-pose spread is not multiview repeatability.",
+                  "`MULTIVIEW_REPEATABILITY` remains `NOT_EVALUATED`.", "",
+                  "The first offline pass labeled weak partial contours UNKNOWN before applying the",
+                  "unchanged Tier V threshold and world-line projection. The corrected precedence",
+                  "maps a two-pixel far-outside contour to NO_VALID_EXTERNAL_BOUNDARY and the",
+                  "partial near-outside contour to APPROACH. No threshold or raw frame changed.", ""])
+    output.write_text("\n".join(lines))
+
+
+def postprocess_act0r2(args, config, act0r_config):
+    result_root = Path(args.act0r2_result_root)
+    manifest = json.loads((result_root / "capture_manifest.json").read_text())
+    manifest.setdefault("resources", {}).pop("gpu_processes_at_end", None)
+    (result_root / "capture_manifest.json").write_text(json.dumps(manifest, indent=2) + "\n")
+    frames = manifest["frames"]
+    plan = manifest["checkpoint_plan"]
+    axis = np.asarray(plan["camera_motion_axis"], dtype=float)
+    axis /= max(float(np.linalg.norm(axis)), 1e-12)
+    center = next(row for row in frames if row["direction"] == "CENTER")
+    alignment = checkpoint_pose_alignment(
+        center["T_world_camera"], plan["locator_center_pose"],
+        config["act0r2"]["center_max_position_error_m"],
+        config["act0r2"]["center_max_rotation_error_deg"])
+    center_metrics = {direction: _act0r2_frame_metric(
+        center, direction, axis, act0r_config) for direction in ("LEFT", "RIGHT")}
+    center_absent = {direction: not _act0r2_center_boundary_present(
+        center_metrics[direction], act0r_config) for direction in ("LEFT", "RIGHT")}
+    event_thresholds = {**act0r_config["contour"],
+                        "approach_outside_margin_px": config["act0r2"][
+                            "approach_outside_margin_px"]}
+    directions, csv_rows = {}, []
+    for direction in ("LEFT", "RIGHT"):
+        entries = [row for row in frames if row["direction"] == direction]
+        metrics = [_act0r2_frame_metric(row, direction, axis, act0r_config)
+                   for row in entries]
+        transforms = [np.asarray(row["T_world_camera"], dtype=float) for row in entries]
+        frozen = select_repeated_pose_group(
+            transforms, minimum_count=4,
+            position_tolerance_m=config["act0r2"]["center_max_position_error_m"],
+            rotation_tolerance_deg=config["act0r2"]["center_max_rotation_error_deg"])
+        frozen_metrics = [metrics[index] for index in frozen.get("indices", [])]
+        classifications = [row["boundary_classification"] for row in frozen_metrics]
+        consensus = boundary_type_consensus(
+            classifications, act0r_config["offline_audit"]["boundary_consensus_min_frames"])
+        tier_v = tier_v_from_pixel_frames(
+            frozen_metrics, act0r_config["contour"],
+            act0r_config["offline_audit"]["tier_v_min_pass_frames"])
+        same_pose = pose_repeatability(
+            [transforms[index] for index in frozen.get("indices", [])],
+            config["act0r2"]["center_max_position_error_m"],
+            config["act0r2"]["center_max_rotation_error_deg"])
+        tier_m = official_tier_m(
+            [row["tier_m_frame"] for row in frozen_metrics],
+            act0r_config["tier_m"]["sensitivity_thresholds_m"],
+            act0r_config["tier_m"]["gate_spread_m"])
+        first_valid = next((row for row in metrics
+                            if physical_termination_pixel_gate(row, event_thresholds)), None)
+        world_points = first_valid["tier_m_frame"]["world_points_sample"] if first_valid else []
+        ordering = event_ordering_from_geometry(
+            metrics, transforms, np.asarray(center["K"], dtype=float), world_points,
+            direction, int(center["sensor_config"]["width"]), event_thresholds)
+        state_by_index = [row["state"] for row in ordering["observations"]]
+        for entry, metric, state in zip(entries, metrics, state_by_index):
+            csv_rows.append({"direction": direction, "frame_id": entry["frame_id"],
+                             "capture_role": entry["capture_role"], "computed_state": state,
+                             "target_coverage": metric["target_coverage"],
+                             "contour_present": metric["contour_present"],
+                             "span_over_target_bbox_height": metric["span_over_target_bbox_height"],
+                             "boundary_type": metric["boundary_classification"]["boundary_type"],
+                             "action_axis_median_m": metric["tier_m_frame"]["action_axis_median_m"]})
+        directions[direction] = {
+            "frame_count": len(entries), "frames": metrics,
+            "computed_states": state_by_index,
+            "frozen_pose_group": frozen, "event_ordering": ordering,
+            "boundary_consensus": consensus, "tier_v": tier_v,
+            "same_pose": same_pose, "same_pose_world_repeatability": tier_m,
+        }
+    pairing = all(_act0r2_pairing(row) for row in frames)
+    hashes = verify_manifest_hashes(frames, PROJECT_ROOT)
+    center_sha = _act0r2_pose_sha(center["T_world_camera"])
+    bilateral_same_start = (len([row for row in frames if row["direction"] == "CENTER"]) == 1 and
+                            all(row.get("shared_center_frame_id") == center["frame_id"] and
+                                row.get("shared_center_pose_sha256") == center_sha
+                                for row in frames if row["direction"] != "CENTER"))
+    side_pass = {}
+    for direction in ("LEFT", "RIGHT"):
+        row = directions[direction]
+        side_pass[direction] = (
+            row["event_ordering"]["status"] == "PASS" and
+            row["boundary_consensus"].get("boundary_type") == "PHYSICAL_TERMINATION" and
+            row["tier_v"]["status"] == "PASS" and
+            row["same_pose"]["status"] == "PASS" and
+            row["same_pose_world_repeatability"]["status"] == "PASS")
+    same_pose_all = all(directions[d]["same_pose"]["status"] == "PASS" for d in directions)
+    world_repeat_all = all(directions[d]["same_pose_world_repeatability"]["status"] == "PASS"
+                           for d in directions)
+    ready = (alignment["status"] == "PASS" and pairing and bilateral_same_start and
+             all(center_absent.values()) and all(side_pass.values()))
+    gates = {
+        "CHECKPOINT_POSE_ALIGNMENT": alignment,
+        "SENSOR_PAIRING": {"status": "PASS" if pairing else "FAIL", "frame_count": len(frames)},
+        "BILATERAL_SAME_START": {"status": "PASS" if bilateral_same_start else "FAIL",
+                                  "shared_center_frame_id": center["frame_id"]},
+        "CENTER_LEFT_BOUNDARY_ABSENT": {"status": "PASS" if center_absent["LEFT"] else "FAIL"},
+        "CENTER_RIGHT_BOUNDARY_ABSENT": {"status": "PASS" if center_absent["RIGHT"] else "FAIL"},
+        "LEFT_EVENT_ORDERING": {"status": directions["LEFT"]["event_ordering"]["status"]},
+        "RIGHT_EVENT_ORDERING": {"status": directions["RIGHT"]["event_ordering"]["status"]},
+        "LEFT_PHYSICAL_TERMINATION": {"status": "PASS" if directions["LEFT"]["boundary_consensus"].get("boundary_type") == "PHYSICAL_TERMINATION" else "FAIL"},
+        "RIGHT_PHYSICAL_TERMINATION": {"status": "PASS" if directions["RIGHT"]["boundary_consensus"].get("boundary_type") == "PHYSICAL_TERMINATION" else "FAIL"},
+        "LEFT_TIER_V": {"status": directions["LEFT"]["tier_v"]["status"]},
+        "RIGHT_TIER_V": {"status": directions["RIGHT"]["tier_v"]["status"]},
+        "SAME_POSE_CONFIRMATION": {"status": "PASS" if same_pose_all else "FAIL"},
+        "SAME_POSE_WORLD_BOUNDARY_REPEATABILITY": {"status": "PASS" if world_repeat_all else "FAIL"},
+        "MULTIVIEW_REPEATABILITY": {"status": "NOT_EVALUATED"},
+        "EXTERNAL_VISUAL_REVIEW": {"status": "PENDING"},
+        "READY_FOR_NEXT_SURFACE": {"status": "CONDITIONAL_PASS" if ready else "FAIL"},
+        "READY_FOR_COUNTERFACTUAL_ROLLOUT": {"status": "NOT_EVALUATED"},
+        "READY_FOR_JEPA": {"status": "NOT_EVALUATED"},
+    }
+    raw_root = PROJECT_ROOT / args.act0r2_raw_root
+    validation = {
+        "schema": "act0r2.validation.v1", "candidate_index": 1,
+        "checkpoint_plan": plan, "frame_count": len(frames),
+        "raw": {"path": args.act0r2_raw_root,
+                "file_count": sum(1 for path in raw_root.rglob("*") if path.is_file()),
+                "size_bytes": sum(path.stat().st_size for path in raw_root.rglob("*") if path.is_file()),
+                "hash_audit": hashes},
+        "center_metrics": center_metrics, "directions": directions, "gates": gates,
+        "thresholds": {"contour": act0r_config["contour"],
+                       "boundary_classification": act0r_config["boundary_classification"],
+                       "tier_m": act0r_config["tier_m"],
+                       "approach_outside_margin_px": event_thresholds["approach_outside_margin_px"]},
+        "resources": {**manifest.get("resources", {}),
+                      "initial_carla_address_space_limit_bytes": config["act0r2"][
+                          "initial_carla_address_space_limit_bytes"],
+                      "effective_carla_address_space_limit_bytes": config["act0r2"][
+                          "effective_carla_address_space_limit_bytes"],
+                      "carla_cpu_set": config["act0r2"]["carla_cpu_set"],
+                      "python_cpu_set": config["act0r2"]["python_cpu_set"]},
+        "constraints": {"roles_used_as_labels": False, "rollout_run": False,
+                        "other_candidates_captured": False, "jepa_training_run": False,
+                        "models_downloaded": False, "multiview_repeatability_claimed": False},
+    }
+    (result_root / "validation.json").write_text(json.dumps(validation, indent=2) + "\n")
+    with (result_root / "frame_metrics.csv").open("w", newline="") as handle:
+        writer = csv.DictWriter(handle, fieldnames=list(csv_rows[0]), lineterminator="\n")
+        writer.writeheader(); writer.writerows(csv_rows)
+    assets = Path(args.act0r2_assets_root); assets.mkdir(parents=True, exist_ok=True)
+    for direction in ("LEFT", "RIGHT"):
+        entries = [row for row in frames if row["direction"] == direction]
+        row = directions[direction]
+        _act0r2_role_sheet(entries, row["frames"], row["computed_states"], direction,
+                           assets / f"{direction.lower()}_all_roles.jpg")
+        first = row["event_ordering"]["first_physical_termination_index"]
+        if first is not None:
+            _act0r2_evidence_sheet(entries[first], direction, row["frames"][first],
+                                   assets / f"{direction.lower()}_first_termination.jpg")
+    center_image = Image.open(PROJECT_ROOT / center["files"]["rgb"]["path"]).convert("RGB")
+    center_canvas = Image.new("RGB", (640, 520), (20, 20, 20)); center_canvas.paste(center_image, (0, 40))
+    ImageDraw.Draw(center_canvas).text((8, 10),
+        f"shared CENTER frame={center['frame_id']} LEFT absent={center_absent['LEFT']} RIGHT absent={center_absent['RIGHT']}",
+        fill=(255, 230, 70))
+    center_canvas.save(assets / "center_bilateral_absence.jpg", quality=84, optimize=True, progressive=True)
+    comparison = Image.new("RGB", (960, 290), (20, 20, 20)); draw = ImageDraw.Draw(comparison)
+    comparison.paste(center_image.resize((320, 240)), (0, 40)); draw.text((8, 10), "one shared CENTER", fill=(255, 230, 70))
+    for index, direction in enumerate(("LEFT", "RIGHT"), start=1):
+        first = directions[direction]["event_ordering"]["first_physical_termination_index"]
+        entries = [row for row in frames if row["direction"] == direction]
+        if first is not None:
+            comparison.paste(_act0r2_overlay(entries[first], direction,
+                directions[direction]["frames"][first]).resize((320, 240)), (index * 320, 40))
+        draw.text((index * 320 + 8, 10), f"{direction} first physical termination", fill=(255, 230, 70))
+    comparison.save(assets / "same_start_comparison.jpg", quality=84, optimize=True, progressive=True)
+    _write_act0r2_docs(validation, PROJECT_ROOT / "docs/ACT0R2_VISUAL_AUDIT.md")
+    print(json.dumps({"frame_count": len(frames), "gates": gates,
+                      "directions": {key: {"states": value["computed_states"],
+                                            "boundary": value["boundary_consensus"],
+                                            "tier_v": value["tier_v"]["status"],
+                                            "same_pose_spread_m": value["same_pose_world_repeatability"].get("spread_m")}
+                                     for key, value in directions.items()}}, indent=2))
+    return 0 if ready else 2
+
+
+def act0r2(args, config, act0r_config, carla, client):
+    checkpoint_path = PROJECT_ROOT / config["checkpoint"]["path"]
+    if verify_search_plan(checkpoint_path, config["checkpoint"]["sha256"])["status"] != "PASS":
+        raise RuntimeError("search checkpoint changed")
+    checkpoint = json.loads(checkpoint_path.read_text())
+    plan = next(row for row in checkpoint["plans"] if row["candidate_index"] == 1)
+    if int(plan["bbox_id"]) != int(config["act0r2"]["bbox_id"]):
+        raise RuntimeError("candidate 1 checkpoint bbox changed")
+    for direction in ("LEFT", "RIGHT"):
+        if len(plan["searches"][direction]["saved_roles"]) != 7:
+            raise RuntimeError(f"checkpoint {direction} must contain seven saved roles")
+    result_root, raw_root = Path(args.act0r2_result_root), Path(args.act0r2_raw_root)
+    result_root.mkdir(parents=True, exist_ok=True)
+    if raw_root.exists() and any(raw_root.rglob("*")):
+        raise RuntimeError("ACT-0R2 raw output is non-empty")
+    raw_root.mkdir(parents=True, exist_ok=True)
+    trace = TraceWriter(raw_root / "timing_trace.jsonl",
+                        config["resources"]["python_rss_watchdog_bytes"], args.carla_pid)
+    world = client.get_world()
+    if act0r_config["map"] not in world.get_map().name:
+        raise RuntimeError(f"ACT-0R2 requires {act0r_config['map']}, got {world.get_map().name}")
+    center_matrix = np.asarray(plan["locator_center_pose"], dtype=float)
+    center_transform = transform_from_matrix(carla, center_matrix)
+    center_pose_sha = _act0r2_pose_sha(center_matrix)
+    sensor = config["sensor"]
+    frames = []
+    rig = SynchronousRGBDSeg(world, carla, center_transform, sensor["width"], sensor["height"],
+                            sensor["horizontal_fov_deg"], sensor["fixed_delta_seconds"],
+                            trace_hook=trace)
+    try:
+        warmup = rig.warmup(config["warmup"]["minimum_discarded_ticks"],
+                            config["warmup"]["required_consecutive_complete"],
+                            config["warmup"]["maximum_ticks"])
+        center_sample = _attempt_capture(rig, {"sequence_id": "act0r2_candidate_01_shared_center",
+                                               "capture_role": "CENTER",
+                                               "role_used_as_scientific_label": False}, trace)
+        center_meta = _save_act0r2_frame(
+            rig, center_sample, raw_root, "center_00_shared", plan, "CENTER", "CENTER", 0.0,
+            center_sample["T_world_camera"], center_sample["frame_id"],
+            _act0r2_pose_sha(center_sample["T_world_camera"]), {"discarded_frames": []})
+        frames.append(center_meta)
+        alignment = checkpoint_pose_alignment(
+            center_meta["T_world_camera"], center_matrix,
+            config["act0r2"]["center_max_position_error_m"],
+            config["act0r2"]["center_max_rotation_error_deg"])
+        center_metrics = {direction: _act0r2_frame_metric(
+            center_meta, direction, plan["camera_motion_axis"], act0r_config)
+                          for direction in ("LEFT", "RIGHT")}
+        invalid_center = alignment["status"] != "PASS" or any(
+            _act0r2_center_boundary_present(center_metrics[d], act0r_config)
+            for d in ("LEFT", "RIGHT"))
+        if invalid_center:
+            manifest = {"schema": "act0r2.capture_manifest.v1", "status": "STOPPED_AT_CENTER",
+                        "checkpoint_plan": plan, "frames": frames, "warmup": warmup,
+                        "center_alignment": alignment, "center_metrics": center_metrics,
+                        "resources": trace.summary()}
+            (result_root / "capture_manifest.json").write_text(json.dumps(manifest, indent=2) + "\n")
+            left_absent = not _act0r2_center_boundary_present(center_metrics["LEFT"], act0r_config)
+            right_absent = not _act0r2_center_boundary_present(center_metrics["RIGHT"], act0r_config)
+            gates = {
+                "CHECKPOINT_POSE_ALIGNMENT": alignment,
+                "SENSOR_PAIRING": {"status": "PASS" if _act0r2_pairing(center_meta) else "FAIL"},
+                "BILATERAL_SAME_START": {"status": "FAIL", "reason": "stopped at CENTER"},
+                "CENTER_LEFT_BOUNDARY_ABSENT": {"status": "PASS" if left_absent else "FAIL"},
+                "CENTER_RIGHT_BOUNDARY_ABSENT": {"status": "PASS" if right_absent else "FAIL"},
+                "LEFT_EVENT_ORDERING": {"status": "FAIL", "reason": "not captured"},
+                "RIGHT_EVENT_ORDERING": {"status": "FAIL", "reason": "not captured"},
+                "LEFT_PHYSICAL_TERMINATION": {"status": "FAIL", "reason": "not captured"},
+                "RIGHT_PHYSICAL_TERMINATION": {"status": "FAIL", "reason": "not captured"},
+                "LEFT_TIER_V": {"status": "FAIL", "reason": "not captured"},
+                "RIGHT_TIER_V": {"status": "FAIL", "reason": "not captured"},
+                "SAME_POSE_CONFIRMATION": {"status": "FAIL", "reason": "not captured"},
+                "SAME_POSE_WORLD_BOUNDARY_REPEATABILITY": {"status": "FAIL", "reason": "not captured"},
+                "MULTIVIEW_REPEATABILITY": {"status": "NOT_EVALUATED"},
+                "EXTERNAL_VISUAL_REVIEW": {"status": "PENDING"},
+                "READY_FOR_NEXT_SURFACE": {"status": "FAIL"},
+                "READY_FOR_COUNTERFACTUAL_ROLLOUT": {"status": "NOT_EVALUATED"},
+                "READY_FOR_JEPA": {"status": "NOT_EVALUATED"},
+            }
+            validation = {"schema": "act0r2.validation.v1", "status": "STOPPED_AT_CENTER",
+                          "candidate_index": 1, "frame_count": 1,
+                          "checkpoint_plan": plan, "center_metrics": center_metrics,
+                          "directions": {}, "gates": gates,
+                          "constraints": {"roles_used_as_labels": False, "rollout_run": False,
+                                          "other_candidates_captured": False,
+                                          "jepa_training_run": False}}
+            (result_root / "validation.json").write_text(json.dumps(validation, indent=2) + "\n")
+            assets = Path(args.act0r2_assets_root); assets.mkdir(parents=True, exist_ok=True)
+            image = Image.open(PROJECT_ROOT / center_meta["files"]["rgb"]["path"]).convert("RGB")
+            canvas = Image.new("RGB", (640, 520), (20, 20, 20)); canvas.paste(image, (0, 40))
+            ImageDraw.Draw(canvas).text((8, 10),
+                f"ACT-0R2 STOPPED AT CENTER left_absent={left_absent} right_absent={right_absent}",
+                fill=(255, 230, 70))
+            canvas.save(assets / "center_bilateral_absence.jpg", quality=84, optimize=True,
+                        progressive=True)
+            (PROJECT_ROOT / "docs/ACT0R2_VISUAL_AUDIT.md").write_text(
+                "# ACT-0R2 Visual Audit\n\nCapture stopped at CENTER because a mandatory "
+                "alignment or bilateral boundary-absence gate failed. Role names were not "
+                "used as labels.\n\n![CENTER evidence](assets/act0r2/center_bilateral_absence.jpg)\n")
+            print(json.dumps({"status": "STOPPED_AT_CENTER", "gates": gates}, indent=2))
+            return 2
+        center_actual = np.asarray(center_meta["T_world_camera"], dtype=float)
+        shared_sha = _act0r2_pose_sha(center_actual)
+        for direction in ("LEFT", "RIGHT"):
+            for index, role in enumerate(plan["searches"][direction]["saved_roles"]):
+                enforce_saved_frame_limit(len(frames) + 1, config["act0r2"]["maximum_saved_frames"])
+                commanded = _act0r2_pose(center_matrix, plan["camera_motion_axis"],
+                                         role["displacement_m"], direction)
+                rig.set_transform(transform_from_matrix(carla, commanded))
+                settle = rig.settle(config["teleport"]["settle_ticks"])
+                sample = _attempt_capture(rig, {
+                    "sequence_id": f"act0r2_candidate_01_{direction.lower()}",
+                    "capture_role": role["role"], "role_used_as_scientific_label": False,
+                    "commanded_displacement_m": role["displacement_m"],
+                    "checkpoint_pose_source": "locator_center_pose + camera_motion_axis",
+                }, trace)
+                stem = f"{direction.lower()}_{index:02d}_{role['role'].lower()}"
+                frames.append(_save_act0r2_frame(
+                    rig, sample, raw_root, stem, plan, direction, role["role"],
+                    role["displacement_m"], center_actual, center_meta["frame_id"], shared_sha, settle))
+                print(json.dumps({"phase": "ACT0R2_SAVE", "direction": direction,
+                                  "role": role["role"], "frame_id": sample["frame_id"],
+                                  "saved_count": len(frames)}), flush=True)
+        trace.assert_rss()
+    finally:
+        rig.close()
+    resource_summary = trace.summary()
+    resource_summary.pop("gpu_processes_at_end", None)
+    manifest = {
+        "schema": "act0r2.capture_manifest.v1", "status": "CAPTURE_COMPLETE",
+        "checkpoint_path": config["checkpoint"]["path"],
+        "checkpoint_sha256": config["checkpoint"]["sha256"],
+        "checkpoint_plan": plan, "warmup": warmup, "frames": frames,
+        "saved_frame_count": len(frames), "maximum_saved_frames": config["act0r2"]["maximum_saved_frames"],
+        "resources": {**resource_summary,
+                      "configured_python_address_space_limit_bytes": config["resources"]["python_address_space_limit_bytes"],
+                      "actual_python_address_space_limit_bytes": args.actual_as_limit},
+        "constraints": {"poses_old_new_used": False, "rollout_run": False,
+                        "other_candidates_captured": False, "jepa_training_run": False},
+    }
+    (result_root / "capture_manifest.json").write_text(json.dumps(manifest, indent=2) + "\n")
+    return postprocess_act0r2(args, config, act0r_config)
+
+
 def postprocess(args, config):
     """Recompute compact gates and figures from persisted bytes without CARLA."""
     cap0_path = Path(args.result_root) / "validation.json"
@@ -604,9 +1178,11 @@ def postprocess(args, config):
 
 def main(argv=None):
     parser = argparse.ArgumentParser()
-    parser.add_argument("mode", choices=("diagnose", "as2-probe", "act0r1", "postprocess"))
+    parser.add_argument("mode", choices=("diagnose", "as2-probe", "act0r1", "act0r2",
+                                         "act0r2-postprocess", "postprocess"))
     parser.add_argument("--config", default="configs/experiments/cap0.yaml")
-    parser.add_argument("--carla-root", required=True)
+    parser.add_argument("--act0r-config", default="configs/experiments/act0r.yaml")
+    parser.add_argument("--carla-root")
     parser.add_argument("--host")
     parser.add_argument("--port", type=int)
     parser.add_argument("--carla-pid", type=int)
@@ -617,10 +1193,16 @@ def main(argv=None):
     parser.add_argument("--act0r1-result-root", default="results/act0r1")
     parser.add_argument("--act0r1-raw-root", default="results/act0r1/raw")
     parser.add_argument("--act0r1-assets-root", default="docs/assets/act0r1")
+    parser.add_argument("--act0r2-result-root", default="results/act0r2")
+    parser.add_argument("--act0r2-raw-root", default="results/act0r2/raw")
+    parser.add_argument("--act0r2-assets-root", default="docs/assets/act0r2")
     args = parser.parse_args(argv)
     config = yaml.safe_load((PROJECT_ROOT / args.config).read_text())
+    act0r_config = yaml.safe_load((PROJECT_ROOT / args.act0r_config).read_text())
     if args.mode == "postprocess":
         return postprocess(args, config)
+    if args.mode == "act0r2-postprocess":
+        return postprocess_act0r2(args, config, act0r_config)
     root = discover_carla_root(args.carla_root)
     carla = import_carla(str(root))
     client = carla.Client(args.host or config["server"]["host"],
@@ -630,6 +1212,8 @@ def main(argv=None):
         return diagnose(args, config, carla, client)
     if args.mode == "as2-probe":
         return as2_probe(args, config, carla, client)
+    if args.mode == "act0r2":
+        return act0r2(args, config, act0r_config, carla, client)
     return act0r1(args, config, carla, client)
 
 

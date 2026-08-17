@@ -11,7 +11,7 @@ from typing import Mapping, Sequence
 import numpy as np
 
 from .act0 import directional_instance_contour
-from .geometry import camera_to_world, pixel_depth_to_camera_point
+from .geometry import camera_to_world, pixel_depth_to_camera_point, world_to_pixel
 
 
 FORBIDDEN_OUTCOME_CONFIG_KEYS = {
@@ -396,6 +396,110 @@ def pose_repeatability(transforms: Sequence[np.ndarray], max_position_error_m: f
             "max_rotation_error_deg": max_rotation,
             "position_threshold_m": float(max_position_error_m),
             "rotation_threshold_deg": float(max_rotation_error_deg)}
+
+
+def checkpoint_pose_alignment(actual_transform, checkpoint_transform,
+                              max_position_error_m: float,
+                              max_rotation_error_deg: float) -> dict:
+    """Compare a sensor-data pose with the persisted checkpoint pose."""
+    actual = np.asarray(actual_transform, dtype=float)
+    expected = np.asarray(checkpoint_transform, dtype=float)
+    position_error = float(np.linalg.norm(actual[:3, 3] - expected[:3, 3]))
+    relative = expected[:3, :3].T @ actual[:3, :3]
+    cosine = float(np.clip((np.trace(relative) - 1.0) / 2.0, -1.0, 1.0))
+    rotation_error = float(math.degrees(math.acos(cosine)))
+    passed = (position_error <= float(max_position_error_m) and
+              rotation_error <= float(max_rotation_error_deg))
+    return {
+        "status": "PASS" if passed else "FAIL",
+        "position_error_m": position_error,
+        "rotation_error_deg": rotation_error,
+        "position_threshold_m": float(max_position_error_m),
+        "rotation_threshold_deg": float(max_rotation_error_deg),
+    }
+
+
+def physical_termination_pixel_gate(frame_metric: Mapping,
+                                    thresholds: Mapping) -> bool:
+    """Return whether one frame contains a valid pixel-derived termination."""
+    classification = frame_metric.get("boundary_classification", {})
+    return bool(
+        frame_metric.get("contour_present") and
+        classification.get("boundary_type") == "PHYSICAL_TERMINATION" and
+        float(frame_metric.get("span_over_target_bbox_height", 0.0)) >=
+        float(thresholds["tier_v_min_span_over_target_bbox"]) and
+        float(frame_metric.get("target_side_fraction", 0.0)) >=
+        float(thresholds["min_target_side_fraction"]) and
+        float(frame_metric.get("external_side_fraction", 0.0)) >=
+        float(thresholds["min_external_side_fraction"])
+    )
+
+
+def event_ordering_from_geometry(frame_metrics: Sequence[Mapping],
+                                 transforms: Sequence[np.ndarray],
+                                 K: np.ndarray,
+                                 boundary_world_points: Sequence[Sequence[float]],
+                                 direction: str,
+                                 image_width: int,
+                                 thresholds: Mapping) -> dict:
+    """Classify approach/order from pixels plus a recovered physical world line.
+
+    Role names are intentionally absent. A no-contour frame is APPROACH only
+    when the recovered termination projects just outside the relevant image
+    edge; otherwise it remains NO_VALID_EXTERNAL_BOUNDARY or UNKNOWN.
+    """
+    if direction not in {"LEFT", "RIGHT"}:
+        raise ValueError("direction must be LEFT or RIGHT")
+    if len(frame_metrics) != len(transforms):
+        raise ValueError("frame metrics and transforms must have equal length")
+    points = np.asarray(boundary_world_points, dtype=float).reshape((-1, 3))
+    margin = float(thresholds["approach_outside_margin_px"])
+    observations = []
+    for index, (metric, transform) in enumerate(zip(frame_metrics, transforms)):
+        projected = world_to_pixel(points, transform, K) if len(points) else np.empty((0, 3))
+        valid = projected[np.isfinite(projected).all(axis=1)] if len(projected) else projected
+        median_u = float(np.median(valid[:, 0])) if len(valid) else None
+        boundary_type = metric.get("boundary_classification", {}).get(
+            "boundary_type", "UNRESOLVED")
+        if physical_termination_pixel_gate(metric, thresholds):
+            state = "PHYSICAL_TERMINATION"
+        elif boundary_type in {"FOREGROUND_OCCLUSION", "INTERNAL_INSTANCE_SEAM"}:
+            state = "UNKNOWN"
+        elif median_u is None:
+            state = "UNKNOWN"
+        elif direction == "LEFT" and -margin <= median_u < 0.0:
+            state = "APPROACH"
+        elif direction == "RIGHT" and image_width - 1.0 < median_u <= image_width - 1.0 + margin:
+            state = "APPROACH"
+        elif ((direction == "LEFT" and median_u < -margin) or
+              (direction == "RIGHT" and median_u > image_width - 1.0 + margin)):
+            state = "NO_VALID_EXTERNAL_BOUNDARY"
+        else:
+            state = "UNKNOWN"
+        observations.append({"frame_index": index, "state": state,
+                             "projected_boundary_median_u_px": median_u})
+    first = next((row["frame_index"] for row in observations
+                  if row["state"] == "PHYSICAL_TERMINATION"), None)
+    no_indices = [row["frame_index"] for row in observations
+                  if row["state"] == "NO_VALID_EXTERNAL_BOUNDARY"]
+    approach_indices = [row["frame_index"] for row in observations
+                        if row["state"] == "APPROACH"]
+    ordered = bool(first is not None and
+                   any(index < first for index in no_indices) and
+                   any(index < first and any(no < index for no in no_indices)
+                       for index in approach_indices))
+    if first is not None:
+        observations[first]["state"] = "FIRST_PHYSICAL_TERMINATION"
+    return {
+        "status": "PASS" if ordered else "FAIL",
+        "observations": observations,
+        "first_physical_termination_index": first,
+        "required_sequence": ["NO_VALID_EXTERNAL_BOUNDARY", "APPROACH",
+                              "FIRST_PHYSICAL_TERMINATION"],
+        "uses_role_labels": False,
+        "boundary_reference_source": "pixel z-depth backprojection",
+        "approach_outside_margin_px": margin,
+    }
 
 
 def sha256_file(path: str | Path) -> str:

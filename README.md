@@ -329,3 +329,53 @@ The corrected attribution is `TWO_GIB_ADDRESS_SPACE_FAILURE=CONFIRMED`;
 the historical triangle artifact cause is
 `LIKELY_BUT_NOT_UNIQUELY_PROVEN`. See
 [`docs/ACT0R1_OFFLINE_BOUNDARY_AUDIT.md`](docs/ACT0R1_OFFLINE_BOUNDARY_AUDIT.md).
+
+## ACT-0R2 checkpoint-aligned bilateral event capture
+
+ACT-0R2 captures candidate 1 only. It reads `locator_center_pose`, the action
+axis and both seven-role displacement lists directly from the immutable ACT-0R
+search checkpoint; the named CAP-0 `OLD` and `NEW` poses are not used. One
+actual CENTER quartet is shared by LEFT and RIGHT, for a hard total of 15
+persisted quartets.
+
+The CENTER pose differs from the checkpoint by 0.00000763 m and 0 degrees.
+Neither physical termination is present at CENTER. Both directions then show
+the same pixel/geometric sequence under unchanged thresholds:
+
+```text
+NO_VALID_EXTERNAL_BOUNDARY
+APPROACH
+FIRST_PHYSICAL_TERMINATION
+PHYSICAL_TERMINATION x 4
+```
+
+The four identical-pose termination frames classify as
+`PHYSICAL_TERMINATION` with 4/4 agreement on each side. Both Tier V gates pass,
+and each same-pose action-axis world-coordinate spread is 0.000 m. This is a
+same-pose sensor confirmation, not multiview repeatability.
+
+```text
+CHECKPOINT_POSE_ALIGNMENT: PASS
+SENSOR_PAIRING: PASS
+BILATERAL_SAME_START: PASS
+CENTER_LEFT_BOUNDARY_ABSENT: PASS
+CENTER_RIGHT_BOUNDARY_ABSENT: PASS
+LEFT_EVENT_ORDERING: PASS
+RIGHT_EVENT_ORDERING: PASS
+LEFT_PHYSICAL_TERMINATION: PASS
+RIGHT_PHYSICAL_TERMINATION: PASS
+LEFT_TIER_V: PASS
+RIGHT_TIER_V: PASS
+SAME_POSE_CONFIRMATION: PASS
+SAME_POSE_WORLD_BOUNDARY_REPEATABILITY: PASS
+MULTIVIEW_REPEATABILITY: NOT_EVALUATED
+EXTERNAL_VISUAL_REVIEW: PENDING
+READY_FOR_NEXT_SURFACE: CONDITIONAL_PASS
+READY_FOR_COUNTERFACTUAL_ROLLOUT: NOT_EVALUATED
+READY_FOR_JEPA: NOT_EVALUATED
+```
+
+Raw RGB, z-depth and segmentation payloads remain server-local and ignored by
+Git. See [`docs/ACT0R2_VISUAL_AUDIT.md`](docs/ACT0R2_VISUAL_AUDIT.md) for the
+public compressed evidence. No other candidate, rollout, model download or
+JEPA training was run.

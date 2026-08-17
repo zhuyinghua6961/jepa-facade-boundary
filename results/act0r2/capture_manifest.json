@@ -1,0 +1,2769 @@
+{
+  "schema": "act0r2.capture_manifest.v1",
+  "status": "CAPTURE_COMPLETE",
+  "checkpoint_path": "results/act0r/search_plan_checkpoint.json",
+  "checkpoint_sha256": "a56310883bb15513ea25c97c919d7faf14edb217b1a05fb0c4e12b060c664f73",
+  "checkpoint_plan": {
+    "candidate_index": 1,
+    "bbox_id": 48389,
+    "target_instance_id": 39220,
+    "center_distance_m": 18.0,
+    "locator_center_pose": [
+      [
+        6.123233995736766e-17,
+        1.0,
+        0.0,
+        -92.99478912353516
+      ],
+      [
+        -1.0,
+        6.123233995736766e-17,
+        0.0,
+        288.3297424316406
+      ],
+      [
+        0.0,
+        -0.0,
+        1.0,
+        12.002955436706543
+      ],
+      [
+        0.0,
+        0.0,
+        0.0,
+        1.0
+      ]
+    ],
+    "camera_motion_axis": [
+      1.0,
+      0.0,
+      0.0
+    ],
+    "searches": {
+      "LEFT": {
+        "status": "PASS",
+        "capture_count": 9,
+        "coarse_bracket_m": [
+          3.0,
+          4.0625
+        ],
+        "final_inside_m": 4.0,
+        "first_legal_event_m": 4.0625,
+        "binary_iterations": 4,
+        "saved_roles": [
+          {
+            "role": "INSIDE",
+            "displacement_m": 3.0
+          },
+          {
+            "role": "PRE_EDGE",
+            "displacement_m": 4.0
+          },
+          {
+            "role": "STRADDLE",
+            "displacement_m": 4.0625
+          },
+          {
+            "role": "STRADDLE_REPEAT_1",
+            "displacement_m": 4.0625
+          },
+          {
+            "role": "STRADDLE_REPEAT_2",
+            "displacement_m": 4.0625
+          },
+          {
+            "role": "STRADDLE_REPEAT_3",
+            "displacement_m": 4.0625
+          },
+          {
+            "role": "POST_EDGE",
+            "displacement_m": 5.0625
+          }
+        ]
+      },
+      "RIGHT": {
+        "status": "PASS",
+        "capture_count": 9,
+        "coarse_bracket_m": [
+          3.0,
+          4.0625
+        ],
+        "final_inside_m": 4.0,
+        "first_legal_event_m": 4.0625,
+        "binary_iterations": 4,
+        "saved_roles": [
+          {
+            "role": "INSIDE",
+            "displacement_m": 3.0
+          },
+          {
+            "role": "PRE_EDGE",
+            "displacement_m": 4.0
+          },
+          {
+            "role": "STRADDLE",
+            "displacement_m": 4.0625
+          },
+          {
+            "role": "STRADDLE_REPEAT_1",
+            "displacement_m": 4.0625
+          },
+          {
+            "role": "STRADDLE_REPEAT_2",
+            "displacement_m": 4.0625
+          },
+          {
+            "role": "STRADDLE_REPEAT_3",
+            "displacement_m": 4.0625
+          },
+          {
+            "role": "POST_EDGE",
+            "displacement_m": 5.0625
+          }
+        ]
+      }
+    }
+  },
+  "warmup": {
+    "discarded_frames": 5,
+    "consecutive_complete": 5
+  },
+  "frames": [
+    {
+      "frame_id": 3783,
+      "timestamp": 57.93895977676584,
+      "sensor_frames": {
+        "rgb": 3783,
+        "depth": 3783,
+        "semantic": 3783,
+        "instance": 3783
+      },
+      "sensor_timestamps": {
+        "rgb": 57.93895977676584,
+        "depth": 57.93895977676584,
+        "semantic": 57.93895977676584,
+        "instance": 57.93895977676584
+      },
+      "raw_byte_lengths": {
+        "rgb": 1228800,
+        "depth": 1228800,
+        "semantic": 1228800,
+        "instance": 1228800
+      },
+      "K": [
+        [
+          320.00000000000006,
+          0.0,
+          319.5
+        ],
+        [
+          0.0,
+          320.00000000000006,
+          239.5
+        ],
+        [
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "T_world_camera": [
+        [
+          6.123233995736766e-17,
+          1.0,
+          0.0,
+          -92.99478149414062
+        ],
+        [
+          -1.0,
+          6.123233995736766e-17,
+          0.0,
+          288.3297424316406
+        ],
+        [
+          0.0,
+          -0.0,
+          1.0,
+          12.002955436706543
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "camera_transform": {
+        "location": {
+          "x": -92.99478149414062,
+          "y": 288.3297424316406,
+          "z": 12.002955436706543
+        },
+        "rotation": {
+          "pitch": 0.0,
+          "yaw": -90.0,
+          "roll": 0.0
+        }
+      },
+      "commanded_action": {
+        "sequence_id": "act0r2_candidate_01_shared_center",
+        "capture_role": "CENTER",
+        "role_used_as_scientific_label": false
+      },
+      "executed_delta_pose": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "sensor_config": {
+        "width": 640,
+        "height": 480,
+        "horizontal_fov_deg": 90.0,
+        "fixed_delta_seconds": 0.05,
+        "blueprints": {
+          "rgb": "sensor.camera.rgb",
+          "depth": "sensor.camera.depth",
+          "semantic": "sensor.camera.semantic_segmentation",
+          "instance": "sensor.camera.instance_segmentation"
+        },
+        "raw_buffer_ownership": "bytes copied inside callback",
+        "raw_channel_order": "BGRA from CARLA; RGB PNG decoded from saved bytes"
+      },
+      "files": {
+        "rgb_bgra": {
+          "path": "results/act0r2/raw/center_00_shared_rgb.bgra.bin",
+          "sha256": "54cf1dba7de3891e4fbf5fcb760df7cf702fdd055a12e430075ed84d47aff153",
+          "size_bytes": 1228800
+        },
+        "rgb": {
+          "path": "results/act0r2/raw/center_00_shared_rgb.png",
+          "sha256": "f5a051faf246bb90ad7d54ef276dea01535226bd4fc95edc814906286ecb5fbc",
+          "size_bytes": 531624
+        },
+        "depth_raw": {
+          "path": "results/act0r2/raw/center_00_shared_depth.raw.bin",
+          "sha256": "fe1ae967c9a53fbf52aa65637f96dce5ac44110c554d5de5ce0f0ee1f663c23a",
+          "size_bytes": 1228800
+        },
+        "depth_m": {
+          "path": "results/act0r2/raw/center_00_shared_depth_m.npy",
+          "sha256": "45d679cb91ef8fed1d19c715168d805a01f5ae1a6ae8a612f3cf5b112f6def40",
+          "size_bytes": 1228928
+        },
+        "semantic": {
+          "path": "results/act0r2/raw/center_00_shared_semantic_raw.png",
+          "sha256": "780c35610badfed9d78868c3b84eeb788591337169345f74bd3306010aadedb6",
+          "size_bytes": 1954
+        },
+        "instance": {
+          "path": "results/act0r2/raw/center_00_shared_instance_raw.png",
+          "sha256": "6ab3dea9e0f4c554d404922c3fe7eb86083713a1ccc90fdcfbbef3034b18ece5",
+          "size_bytes": 2019
+        }
+      },
+      "sequence_id": "act0r2_candidate_01_center",
+      "candidate_index": 1,
+      "bbox_id": 48389,
+      "direction": "CENTER",
+      "capture_role": "CENTER",
+      "role_used_as_scientific_label": false,
+      "target_instance_id": 39220,
+      "commanded_displacement_m": 0.0,
+      "actual_displacement_from_center_m": 0.0,
+      "shared_center_frame_id": 3783,
+      "shared_center_pose_sha256": "0a408dcaa92093ea0c1cc5e232574cc968582531caf62440afaa900f1992159c",
+      "settle": {
+        "discarded_frames": []
+      },
+      "metadata_path": "results/act0r2/raw/center_00_shared.json"
+    },
+    {
+      "frame_id": 3787,
+      "timestamp": 58.138959779746074,
+      "sensor_frames": {
+        "rgb": 3787,
+        "depth": 3787,
+        "semantic": 3787,
+        "instance": 3787
+      },
+      "sensor_timestamps": {
+        "rgb": 58.138959779746074,
+        "depth": 58.138959779746074,
+        "semantic": 58.138959779746074,
+        "instance": 58.138959779746074
+      },
+      "raw_byte_lengths": {
+        "rgb": 1228800,
+        "depth": 1228800,
+        "semantic": 1228800,
+        "instance": 1228800
+      },
+      "K": [
+        [
+          320.00000000000006,
+          0.0,
+          319.5
+        ],
+        [
+          0.0,
+          320.00000000000006,
+          239.5
+        ],
+        [
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "T_world_camera": [
+        [
+          6.123233995736766e-17,
+          1.0,
+          0.0,
+          -95.99478149414062
+        ],
+        [
+          -1.0,
+          6.123233995736766e-17,
+          0.0,
+          288.3297424316406
+        ],
+        [
+          0.0,
+          -0.0,
+          1.0,
+          12.002955436706543
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "camera_transform": {
+        "location": {
+          "x": -95.99478149414062,
+          "y": 288.3297424316406,
+          "z": 12.002955436706543
+        },
+        "rotation": {
+          "pitch": 0.0,
+          "yaw": -90.0,
+          "roll": 0.0
+        }
+      },
+      "commanded_action": {
+        "sequence_id": "act0r2_candidate_01_left",
+        "capture_role": "INSIDE",
+        "role_used_as_scientific_label": false,
+        "commanded_displacement_m": 3.0,
+        "checkpoint_pose_source": "locator_center_pose + camera_motion_axis"
+      },
+      "executed_delta_pose": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "sensor_config": {
+        "width": 640,
+        "height": 480,
+        "horizontal_fov_deg": 90.0,
+        "fixed_delta_seconds": 0.05,
+        "blueprints": {
+          "rgb": "sensor.camera.rgb",
+          "depth": "sensor.camera.depth",
+          "semantic": "sensor.camera.semantic_segmentation",
+          "instance": "sensor.camera.instance_segmentation"
+        },
+        "raw_buffer_ownership": "bytes copied inside callback",
+        "raw_channel_order": "BGRA from CARLA; RGB PNG decoded from saved bytes"
+      },
+      "files": {
+        "rgb_bgra": {
+          "path": "results/act0r2/raw/left_00_inside_rgb.bgra.bin",
+          "sha256": "400274f2d72013061dc4c013c5469809a1ec0be8d67abedd2108079878cfa48a",
+          "size_bytes": 1228800
+        },
+        "rgb": {
+          "path": "results/act0r2/raw/left_00_inside_rgb.png",
+          "sha256": "98f5647f3af32b69bab770e132ef076fcb9a4ca431c57a9458ed8b5a7a448834",
+          "size_bytes": 514504
+        },
+        "depth_raw": {
+          "path": "results/act0r2/raw/left_00_inside_depth.raw.bin",
+          "sha256": "9c1ca399f5118f3de0fe92437b6ec0642a2901b91ade723c939576b18ecbc8b1",
+          "size_bytes": 1228800
+        },
+        "depth_m": {
+          "path": "results/act0r2/raw/left_00_inside_depth_m.npy",
+          "sha256": "5b4c69ebf15f7827f815a668a619115453e297fd714facd2ebf19b0c6d3dac67",
+          "size_bytes": 1228928
+        },
+        "semantic": {
+          "path": "results/act0r2/raw/left_00_inside_semantic_raw.png",
+          "sha256": "780c35610badfed9d78868c3b84eeb788591337169345f74bd3306010aadedb6",
+          "size_bytes": 1954
+        },
+        "instance": {
+          "path": "results/act0r2/raw/left_00_inside_instance_raw.png",
+          "sha256": "bbdaf4c85226fa1d7e2e68da833dfbb8ba38cd14f01afa19eb443bdea16a3b03",
+          "size_bytes": 1993
+        }
+      },
+      "sequence_id": "act0r2_candidate_01_left",
+      "candidate_index": 1,
+      "bbox_id": 48389,
+      "direction": "LEFT",
+      "capture_role": "INSIDE",
+      "role_used_as_scientific_label": false,
+      "target_instance_id": 39220,
+      "commanded_displacement_m": 3.0,
+      "actual_displacement_from_center_m": 3.0,
+      "shared_center_frame_id": 3783,
+      "shared_center_pose_sha256": "0a408dcaa92093ea0c1cc5e232574cc968582531caf62440afaa900f1992159c",
+      "settle": {
+        "discarded_frames": [
+          3784,
+          3785,
+          3786
+        ]
+      },
+      "metadata_path": "results/act0r2/raw/left_00_inside.json"
+    },
+    {
+      "frame_id": 3791,
+      "timestamp": 58.338959782726306,
+      "sensor_frames": {
+        "rgb": 3791,
+        "depth": 3791,
+        "semantic": 3791,
+        "instance": 3791
+      },
+      "sensor_timestamps": {
+        "rgb": 58.338959782726306,
+        "depth": 58.338959782726306,
+        "semantic": 58.338959782726306,
+        "instance": 58.338959782726306
+      },
+      "raw_byte_lengths": {
+        "rgb": 1228800,
+        "depth": 1228800,
+        "semantic": 1228800,
+        "instance": 1228800
+      },
+      "K": [
+        [
+          320.00000000000006,
+          0.0,
+          319.5
+        ],
+        [
+          0.0,
+          320.00000000000006,
+          239.5
+        ],
+        [
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "T_world_camera": [
+        [
+          6.123233995736766e-17,
+          1.0,
+          0.0,
+          -96.99478149414062
+        ],
+        [
+          -1.0,
+          6.123233995736766e-17,
+          0.0,
+          288.3297424316406
+        ],
+        [
+          0.0,
+          -0.0,
+          1.0,
+          12.002955436706543
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "camera_transform": {
+        "location": {
+          "x": -96.99478149414062,
+          "y": 288.3297424316406,
+          "z": 12.002955436706543
+        },
+        "rotation": {
+          "pitch": 0.0,
+          "yaw": -90.0,
+          "roll": 0.0
+        }
+      },
+      "commanded_action": {
+        "sequence_id": "act0r2_candidate_01_left",
+        "capture_role": "PRE_EDGE",
+        "role_used_as_scientific_label": false,
+        "commanded_displacement_m": 4.0,
+        "checkpoint_pose_source": "locator_center_pose + camera_motion_axis"
+      },
+      "executed_delta_pose": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "sensor_config": {
+        "width": 640,
+        "height": 480,
+        "horizontal_fov_deg": 90.0,
+        "fixed_delta_seconds": 0.05,
+        "blueprints": {
+          "rgb": "sensor.camera.rgb",
+          "depth": "sensor.camera.depth",
+          "semantic": "sensor.camera.semantic_segmentation",
+          "instance": "sensor.camera.instance_segmentation"
+        },
+        "raw_buffer_ownership": "bytes copied inside callback",
+        "raw_channel_order": "BGRA from CARLA; RGB PNG decoded from saved bytes"
+      },
+      "files": {
+        "rgb_bgra": {
+          "path": "results/act0r2/raw/left_01_pre_edge_rgb.bgra.bin",
+          "sha256": "132326c4ade87bae92103786aecdef114417d8f67c5ccd05ad250bfaeb1b7a2e",
+          "size_bytes": 1228800
+        },
+        "rgb": {
+          "path": "results/act0r2/raw/left_01_pre_edge_rgb.png",
+          "sha256": "9da8dbd6daab248bc5303aec12bc27b6ef52c119ba18d287db15697bf04f954a",
+          "size_bytes": 511857
+        },
+        "depth_raw": {
+          "path": "results/act0r2/raw/left_01_pre_edge_depth.raw.bin",
+          "sha256": "d646fe60dc1bfe8b9243a1d454a9e5b95804cf87c86c7b43a0e2dc78dc115641",
+          "size_bytes": 1228800
+        },
+        "depth_m": {
+          "path": "results/act0r2/raw/left_01_pre_edge_depth_m.npy",
+          "sha256": "8a57e09e3364d9197c7448fe2a73cfbb983d3f6dc9867608b61a2c1cb1432777",
+          "size_bytes": 1228928
+        },
+        "semantic": {
+          "path": "results/act0r2/raw/left_01_pre_edge_semantic_raw.png",
+          "sha256": "a4efef16d5fd0e4cbd34f6297d430f43c4a9e4537a83f1bc6fd19b92c524967a",
+          "size_bytes": 2053
+        },
+        "instance": {
+          "path": "results/act0r2/raw/left_01_pre_edge_instance_raw.png",
+          "sha256": "927017b794f58cb1ca1842afd86b634d0fbcbece30d25f75c01235e819ecabb7",
+          "size_bytes": 2171
+        }
+      },
+      "sequence_id": "act0r2_candidate_01_left",
+      "candidate_index": 1,
+      "bbox_id": 48389,
+      "direction": "LEFT",
+      "capture_role": "PRE_EDGE",
+      "role_used_as_scientific_label": false,
+      "target_instance_id": 39220,
+      "commanded_displacement_m": 4.0,
+      "actual_displacement_from_center_m": 4.0,
+      "shared_center_frame_id": 3783,
+      "shared_center_pose_sha256": "0a408dcaa92093ea0c1cc5e232574cc968582531caf62440afaa900f1992159c",
+      "settle": {
+        "discarded_frames": [
+          3788,
+          3789,
+          3790
+        ]
+      },
+      "metadata_path": "results/act0r2/raw/left_01_pre_edge.json"
+    },
+    {
+      "frame_id": 3795,
+      "timestamp": 58.53895978570654,
+      "sensor_frames": {
+        "rgb": 3795,
+        "depth": 3795,
+        "semantic": 3795,
+        "instance": 3795
+      },
+      "sensor_timestamps": {
+        "rgb": 58.53895978570654,
+        "depth": 58.53895978570654,
+        "semantic": 58.53895978570654,
+        "instance": 58.53895978570654
+      },
+      "raw_byte_lengths": {
+        "rgb": 1228800,
+        "depth": 1228800,
+        "semantic": 1228800,
+        "instance": 1228800
+      },
+      "K": [
+        [
+          320.00000000000006,
+          0.0,
+          319.5
+        ],
+        [
+          0.0,
+          320.00000000000006,
+          239.5
+        ],
+        [
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "T_world_camera": [
+        [
+          6.123233995736766e-17,
+          1.0,
+          0.0,
+          -97.05728149414062
+        ],
+        [
+          -1.0,
+          6.123233995736766e-17,
+          0.0,
+          288.3297424316406
+        ],
+        [
+          0.0,
+          -0.0,
+          1.0,
+          12.002955436706543
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "camera_transform": {
+        "location": {
+          "x": -97.05728149414062,
+          "y": 288.3297424316406,
+          "z": 12.002955436706543
+        },
+        "rotation": {
+          "pitch": 0.0,
+          "yaw": -90.0,
+          "roll": 0.0
+        }
+      },
+      "commanded_action": {
+        "sequence_id": "act0r2_candidate_01_left",
+        "capture_role": "STRADDLE",
+        "role_used_as_scientific_label": false,
+        "commanded_displacement_m": 4.0625,
+        "checkpoint_pose_source": "locator_center_pose + camera_motion_axis"
+      },
+      "executed_delta_pose": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "sensor_config": {
+        "width": 640,
+        "height": 480,
+        "horizontal_fov_deg": 90.0,
+        "fixed_delta_seconds": 0.05,
+        "blueprints": {
+          "rgb": "sensor.camera.rgb",
+          "depth": "sensor.camera.depth",
+          "semantic": "sensor.camera.semantic_segmentation",
+          "instance": "sensor.camera.instance_segmentation"
+        },
+        "raw_buffer_ownership": "bytes copied inside callback",
+        "raw_channel_order": "BGRA from CARLA; RGB PNG decoded from saved bytes"
+      },
+      "files": {
+        "rgb_bgra": {
+          "path": "results/act0r2/raw/left_02_straddle_rgb.bgra.bin",
+          "sha256": "93453e3b12f456278f12439b66d4a3bd5d1d2fd04f18b58df5234832cae8ba18",
+          "size_bytes": 1228800
+        },
+        "rgb": {
+          "path": "results/act0r2/raw/left_02_straddle_rgb.png",
+          "sha256": "81902f29e6c845bd422a2940da07dcc8574f1220fb09611ef9812e414d83d379",
+          "size_bytes": 505923
+        },
+        "depth_raw": {
+          "path": "results/act0r2/raw/left_02_straddle_depth.raw.bin",
+          "sha256": "15adcb56995a4d7e62cbbc880027cdccb10dd737a2c6ebdd8f458c5cb354e32c",
+          "size_bytes": 1228800
+        },
+        "depth_m": {
+          "path": "results/act0r2/raw/left_02_straddle_depth_m.npy",
+          "sha256": "a7c3ef4616123838a3875d87885ac410f07d65444cff90dbc6a26892db6b4f95",
+          "size_bytes": 1228928
+        },
+        "semantic": {
+          "path": "results/act0r2/raw/left_02_straddle_semantic_raw.png",
+          "sha256": "dc771ff251558786e7e780dbc19947d799e3870e755d6c3ce8e04c5157f53cbb",
+          "size_bytes": 2103
+        },
+        "instance": {
+          "path": "results/act0r2/raw/left_02_straddle_instance_raw.png",
+          "sha256": "fda488dd7cc293518bb7caf8db881371cdbd4aeb03f39e06fb1ac0314f61b8f3",
+          "size_bytes": 2242
+        }
+      },
+      "sequence_id": "act0r2_candidate_01_left",
+      "candidate_index": 1,
+      "bbox_id": 48389,
+      "direction": "LEFT",
+      "capture_role": "STRADDLE",
+      "role_used_as_scientific_label": false,
+      "target_instance_id": 39220,
+      "commanded_displacement_m": 4.0625,
+      "actual_displacement_from_center_m": 4.0625,
+      "shared_center_frame_id": 3783,
+      "shared_center_pose_sha256": "0a408dcaa92093ea0c1cc5e232574cc968582531caf62440afaa900f1992159c",
+      "settle": {
+        "discarded_frames": [
+          3792,
+          3793,
+          3794
+        ]
+      },
+      "metadata_path": "results/act0r2/raw/left_02_straddle.json"
+    },
+    {
+      "frame_id": 3799,
+      "timestamp": 58.73895978868677,
+      "sensor_frames": {
+        "rgb": 3799,
+        "depth": 3799,
+        "semantic": 3799,
+        "instance": 3799
+      },
+      "sensor_timestamps": {
+        "rgb": 58.73895978868677,
+        "depth": 58.73895978868677,
+        "semantic": 58.73895978868677,
+        "instance": 58.73895978868677
+      },
+      "raw_byte_lengths": {
+        "rgb": 1228800,
+        "depth": 1228800,
+        "semantic": 1228800,
+        "instance": 1228800
+      },
+      "K": [
+        [
+          320.00000000000006,
+          0.0,
+          319.5
+        ],
+        [
+          0.0,
+          320.00000000000006,
+          239.5
+        ],
+        [
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "T_world_camera": [
+        [
+          6.123233995736766e-17,
+          1.0,
+          0.0,
+          -97.05728149414062
+        ],
+        [
+          -1.0,
+          6.123233995736766e-17,
+          0.0,
+          288.3297424316406
+        ],
+        [
+          0.0,
+          -0.0,
+          1.0,
+          12.002955436706543
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "camera_transform": {
+        "location": {
+          "x": -97.05728149414062,
+          "y": 288.3297424316406,
+          "z": 12.002955436706543
+        },
+        "rotation": {
+          "pitch": 0.0,
+          "yaw": -90.0,
+          "roll": 0.0
+        }
+      },
+      "commanded_action": {
+        "sequence_id": "act0r2_candidate_01_left",
+        "capture_role": "STRADDLE_REPEAT_1",
+        "role_used_as_scientific_label": false,
+        "commanded_displacement_m": 4.0625,
+        "checkpoint_pose_source": "locator_center_pose + camera_motion_axis"
+      },
+      "executed_delta_pose": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "sensor_config": {
+        "width": 640,
+        "height": 480,
+        "horizontal_fov_deg": 90.0,
+        "fixed_delta_seconds": 0.05,
+        "blueprints": {
+          "rgb": "sensor.camera.rgb",
+          "depth": "sensor.camera.depth",
+          "semantic": "sensor.camera.semantic_segmentation",
+          "instance": "sensor.camera.instance_segmentation"
+        },
+        "raw_buffer_ownership": "bytes copied inside callback",
+        "raw_channel_order": "BGRA from CARLA; RGB PNG decoded from saved bytes"
+      },
+      "files": {
+        "rgb_bgra": {
+          "path": "results/act0r2/raw/left_03_straddle_repeat_1_rgb.bgra.bin",
+          "sha256": "162c5c328133456a264ecadde63c7b96e61c58eb0ccaf9dd5a88e7b6c744ae91",
+          "size_bytes": 1228800
+        },
+        "rgb": {
+          "path": "results/act0r2/raw/left_03_straddle_repeat_1_rgb.png",
+          "sha256": "701481a0aa2bd2c12aa561edc4247ff0257bd16d2cb5df325324a72a76e5a8c6",
+          "size_bytes": 511609
+        },
+        "depth_raw": {
+          "path": "results/act0r2/raw/left_03_straddle_repeat_1_depth.raw.bin",
+          "sha256": "15adcb56995a4d7e62cbbc880027cdccb10dd737a2c6ebdd8f458c5cb354e32c",
+          "size_bytes": 1228800
+        },
+        "depth_m": {
+          "path": "results/act0r2/raw/left_03_straddle_repeat_1_depth_m.npy",
+          "sha256": "a7c3ef4616123838a3875d87885ac410f07d65444cff90dbc6a26892db6b4f95",
+          "size_bytes": 1228928
+        },
+        "semantic": {
+          "path": "results/act0r2/raw/left_03_straddle_repeat_1_semantic_raw.png",
+          "sha256": "dc771ff251558786e7e780dbc19947d799e3870e755d6c3ce8e04c5157f53cbb",
+          "size_bytes": 2103
+        },
+        "instance": {
+          "path": "results/act0r2/raw/left_03_straddle_repeat_1_instance_raw.png",
+          "sha256": "fda488dd7cc293518bb7caf8db881371cdbd4aeb03f39e06fb1ac0314f61b8f3",
+          "size_bytes": 2242
+        }
+      },
+      "sequence_id": "act0r2_candidate_01_left",
+      "candidate_index": 1,
+      "bbox_id": 48389,
+      "direction": "LEFT",
+      "capture_role": "STRADDLE_REPEAT_1",
+      "role_used_as_scientific_label": false,
+      "target_instance_id": 39220,
+      "commanded_displacement_m": 4.0625,
+      "actual_displacement_from_center_m": 4.0625,
+      "shared_center_frame_id": 3783,
+      "shared_center_pose_sha256": "0a408dcaa92093ea0c1cc5e232574cc968582531caf62440afaa900f1992159c",
+      "settle": {
+        "discarded_frames": [
+          3796,
+          3797,
+          3798
+        ]
+      },
+      "metadata_path": "results/act0r2/raw/left_03_straddle_repeat_1.json"
+    },
+    {
+      "frame_id": 3803,
+      "timestamp": 58.938959791667,
+      "sensor_frames": {
+        "rgb": 3803,
+        "depth": 3803,
+        "semantic": 3803,
+        "instance": 3803
+      },
+      "sensor_timestamps": {
+        "rgb": 58.938959791667,
+        "depth": 58.938959791667,
+        "semantic": 58.938959791667,
+        "instance": 58.938959791667
+      },
+      "raw_byte_lengths": {
+        "rgb": 1228800,
+        "depth": 1228800,
+        "semantic": 1228800,
+        "instance": 1228800
+      },
+      "K": [
+        [
+          320.00000000000006,
+          0.0,
+          319.5
+        ],
+        [
+          0.0,
+          320.00000000000006,
+          239.5
+        ],
+        [
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "T_world_camera": [
+        [
+          6.123233995736766e-17,
+          1.0,
+          0.0,
+          -97.05728149414062
+        ],
+        [
+          -1.0,
+          6.123233995736766e-17,
+          0.0,
+          288.3297424316406
+        ],
+        [
+          0.0,
+          -0.0,
+          1.0,
+          12.002955436706543
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "camera_transform": {
+        "location": {
+          "x": -97.05728149414062,
+          "y": 288.3297424316406,
+          "z": 12.002955436706543
+        },
+        "rotation": {
+          "pitch": 0.0,
+          "yaw": -90.0,
+          "roll": 0.0
+        }
+      },
+      "commanded_action": {
+        "sequence_id": "act0r2_candidate_01_left",
+        "capture_role": "STRADDLE_REPEAT_2",
+        "role_used_as_scientific_label": false,
+        "commanded_displacement_m": 4.0625,
+        "checkpoint_pose_source": "locator_center_pose + camera_motion_axis"
+      },
+      "executed_delta_pose": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "sensor_config": {
+        "width": 640,
+        "height": 480,
+        "horizontal_fov_deg": 90.0,
+        "fixed_delta_seconds": 0.05,
+        "blueprints": {
+          "rgb": "sensor.camera.rgb",
+          "depth": "sensor.camera.depth",
+          "semantic": "sensor.camera.semantic_segmentation",
+          "instance": "sensor.camera.instance_segmentation"
+        },
+        "raw_buffer_ownership": "bytes copied inside callback",
+        "raw_channel_order": "BGRA from CARLA; RGB PNG decoded from saved bytes"
+      },
+      "files": {
+        "rgb_bgra": {
+          "path": "results/act0r2/raw/left_04_straddle_repeat_2_rgb.bgra.bin",
+          "sha256": "2b0ed7a736a899ae71d49f57457ea1d4d90afbd5c86b41db852802fd976ad59e",
+          "size_bytes": 1228800
+        },
+        "rgb": {
+          "path": "results/act0r2/raw/left_04_straddle_repeat_2_rgb.png",
+          "sha256": "bd0043652ebb3a7c635c2ef75826e0792daf360334ed0dd1034a2bb80b98cd46",
+          "size_bytes": 514391
+        },
+        "depth_raw": {
+          "path": "results/act0r2/raw/left_04_straddle_repeat_2_depth.raw.bin",
+          "sha256": "15adcb56995a4d7e62cbbc880027cdccb10dd737a2c6ebdd8f458c5cb354e32c",
+          "size_bytes": 1228800
+        },
+        "depth_m": {
+          "path": "results/act0r2/raw/left_04_straddle_repeat_2_depth_m.npy",
+          "sha256": "a7c3ef4616123838a3875d87885ac410f07d65444cff90dbc6a26892db6b4f95",
+          "size_bytes": 1228928
+        },
+        "semantic": {
+          "path": "results/act0r2/raw/left_04_straddle_repeat_2_semantic_raw.png",
+          "sha256": "dc771ff251558786e7e780dbc19947d799e3870e755d6c3ce8e04c5157f53cbb",
+          "size_bytes": 2103
+        },
+        "instance": {
+          "path": "results/act0r2/raw/left_04_straddle_repeat_2_instance_raw.png",
+          "sha256": "fda488dd7cc293518bb7caf8db881371cdbd4aeb03f39e06fb1ac0314f61b8f3",
+          "size_bytes": 2242
+        }
+      },
+      "sequence_id": "act0r2_candidate_01_left",
+      "candidate_index": 1,
+      "bbox_id": 48389,
+      "direction": "LEFT",
+      "capture_role": "STRADDLE_REPEAT_2",
+      "role_used_as_scientific_label": false,
+      "target_instance_id": 39220,
+      "commanded_displacement_m": 4.0625,
+      "actual_displacement_from_center_m": 4.0625,
+      "shared_center_frame_id": 3783,
+      "shared_center_pose_sha256": "0a408dcaa92093ea0c1cc5e232574cc968582531caf62440afaa900f1992159c",
+      "settle": {
+        "discarded_frames": [
+          3800,
+          3801,
+          3802
+        ]
+      },
+      "metadata_path": "results/act0r2/raw/left_04_straddle_repeat_2.json"
+    },
+    {
+      "frame_id": 3807,
+      "timestamp": 59.138959794647235,
+      "sensor_frames": {
+        "rgb": 3807,
+        "depth": 3807,
+        "semantic": 3807,
+        "instance": 3807
+      },
+      "sensor_timestamps": {
+        "rgb": 59.138959794647235,
+        "depth": 59.138959794647235,
+        "semantic": 59.138959794647235,
+        "instance": 59.138959794647235
+      },
+      "raw_byte_lengths": {
+        "rgb": 1228800,
+        "depth": 1228800,
+        "semantic": 1228800,
+        "instance": 1228800
+      },
+      "K": [
+        [
+          320.00000000000006,
+          0.0,
+          319.5
+        ],
+        [
+          0.0,
+          320.00000000000006,
+          239.5
+        ],
+        [
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "T_world_camera": [
+        [
+          6.123233995736766e-17,
+          1.0,
+          0.0,
+          -97.05728149414062
+        ],
+        [
+          -1.0,
+          6.123233995736766e-17,
+          0.0,
+          288.3297424316406
+        ],
+        [
+          0.0,
+          -0.0,
+          1.0,
+          12.002955436706543
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "camera_transform": {
+        "location": {
+          "x": -97.05728149414062,
+          "y": 288.3297424316406,
+          "z": 12.002955436706543
+        },
+        "rotation": {
+          "pitch": 0.0,
+          "yaw": -90.0,
+          "roll": 0.0
+        }
+      },
+      "commanded_action": {
+        "sequence_id": "act0r2_candidate_01_left",
+        "capture_role": "STRADDLE_REPEAT_3",
+        "role_used_as_scientific_label": false,
+        "commanded_displacement_m": 4.0625,
+        "checkpoint_pose_source": "locator_center_pose + camera_motion_axis"
+      },
+      "executed_delta_pose": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "sensor_config": {
+        "width": 640,
+        "height": 480,
+        "horizontal_fov_deg": 90.0,
+        "fixed_delta_seconds": 0.05,
+        "blueprints": {
+          "rgb": "sensor.camera.rgb",
+          "depth": "sensor.camera.depth",
+          "semantic": "sensor.camera.semantic_segmentation",
+          "instance": "sensor.camera.instance_segmentation"
+        },
+        "raw_buffer_ownership": "bytes copied inside callback",
+        "raw_channel_order": "BGRA from CARLA; RGB PNG decoded from saved bytes"
+      },
+      "files": {
+        "rgb_bgra": {
+          "path": "results/act0r2/raw/left_05_straddle_repeat_3_rgb.bgra.bin",
+          "sha256": "e456d5c14ba05321b5e57e0ad7b18832ccabc4dde33e308f1b07d046b5b9c59e",
+          "size_bytes": 1228800
+        },
+        "rgb": {
+          "path": "results/act0r2/raw/left_05_straddle_repeat_3_rgb.png",
+          "sha256": "6b2d1851e86921a0f47ab319512c92aaa1f1bd62121aeccd383af1b2856e50da",
+          "size_bytes": 508710
+        },
+        "depth_raw": {
+          "path": "results/act0r2/raw/left_05_straddle_repeat_3_depth.raw.bin",
+          "sha256": "15adcb56995a4d7e62cbbc880027cdccb10dd737a2c6ebdd8f458c5cb354e32c",
+          "size_bytes": 1228800
+        },
+        "depth_m": {
+          "path": "results/act0r2/raw/left_05_straddle_repeat_3_depth_m.npy",
+          "sha256": "a7c3ef4616123838a3875d87885ac410f07d65444cff90dbc6a26892db6b4f95",
+          "size_bytes": 1228928
+        },
+        "semantic": {
+          "path": "results/act0r2/raw/left_05_straddle_repeat_3_semantic_raw.png",
+          "sha256": "dc771ff251558786e7e780dbc19947d799e3870e755d6c3ce8e04c5157f53cbb",
+          "size_bytes": 2103
+        },
+        "instance": {
+          "path": "results/act0r2/raw/left_05_straddle_repeat_3_instance_raw.png",
+          "sha256": "fda488dd7cc293518bb7caf8db881371cdbd4aeb03f39e06fb1ac0314f61b8f3",
+          "size_bytes": 2242
+        }
+      },
+      "sequence_id": "act0r2_candidate_01_left",
+      "candidate_index": 1,
+      "bbox_id": 48389,
+      "direction": "LEFT",
+      "capture_role": "STRADDLE_REPEAT_3",
+      "role_used_as_scientific_label": false,
+      "target_instance_id": 39220,
+      "commanded_displacement_m": 4.0625,
+      "actual_displacement_from_center_m": 4.0625,
+      "shared_center_frame_id": 3783,
+      "shared_center_pose_sha256": "0a408dcaa92093ea0c1cc5e232574cc968582531caf62440afaa900f1992159c",
+      "settle": {
+        "discarded_frames": [
+          3804,
+          3805,
+          3806
+        ]
+      },
+      "metadata_path": "results/act0r2/raw/left_05_straddle_repeat_3.json"
+    },
+    {
+      "frame_id": 3811,
+      "timestamp": 59.33895979762747,
+      "sensor_frames": {
+        "rgb": 3811,
+        "depth": 3811,
+        "semantic": 3811,
+        "instance": 3811
+      },
+      "sensor_timestamps": {
+        "rgb": 59.33895979762747,
+        "depth": 59.33895979762747,
+        "semantic": 59.33895979762747,
+        "instance": 59.33895979762747
+      },
+      "raw_byte_lengths": {
+        "rgb": 1228800,
+        "depth": 1228800,
+        "semantic": 1228800,
+        "instance": 1228800
+      },
+      "K": [
+        [
+          320.00000000000006,
+          0.0,
+          319.5
+        ],
+        [
+          0.0,
+          320.00000000000006,
+          239.5
+        ],
+        [
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "T_world_camera": [
+        [
+          6.123233995736766e-17,
+          1.0,
+          0.0,
+          -98.05728149414062
+        ],
+        [
+          -1.0,
+          6.123233995736766e-17,
+          0.0,
+          288.3297424316406
+        ],
+        [
+          0.0,
+          -0.0,
+          1.0,
+          12.002955436706543
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "camera_transform": {
+        "location": {
+          "x": -98.05728149414062,
+          "y": 288.3297424316406,
+          "z": 12.002955436706543
+        },
+        "rotation": {
+          "pitch": 0.0,
+          "yaw": -90.0,
+          "roll": 0.0
+        }
+      },
+      "commanded_action": {
+        "sequence_id": "act0r2_candidate_01_left",
+        "capture_role": "POST_EDGE",
+        "role_used_as_scientific_label": false,
+        "commanded_displacement_m": 5.0625,
+        "checkpoint_pose_source": "locator_center_pose + camera_motion_axis"
+      },
+      "executed_delta_pose": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "sensor_config": {
+        "width": 640,
+        "height": 480,
+        "horizontal_fov_deg": 90.0,
+        "fixed_delta_seconds": 0.05,
+        "blueprints": {
+          "rgb": "sensor.camera.rgb",
+          "depth": "sensor.camera.depth",
+          "semantic": "sensor.camera.semantic_segmentation",
+          "instance": "sensor.camera.instance_segmentation"
+        },
+        "raw_buffer_ownership": "bytes copied inside callback",
+        "raw_channel_order": "BGRA from CARLA; RGB PNG decoded from saved bytes"
+      },
+      "files": {
+        "rgb_bgra": {
+          "path": "results/act0r2/raw/left_06_post_edge_rgb.bgra.bin",
+          "sha256": "28c582edf94f4331ac9bf53995ecb99cd20b2a6646e996fe4b5d31117d7037f5",
+          "size_bytes": 1228800
+        },
+        "rgb": {
+          "path": "results/act0r2/raw/left_06_post_edge_rgb.png",
+          "sha256": "ddb6de160baa744132d4660801960aff4f6a200b3bffee7668020443bb7d89ea",
+          "size_bytes": 506967
+        },
+        "depth_raw": {
+          "path": "results/act0r2/raw/left_06_post_edge_depth.raw.bin",
+          "sha256": "ce30649d9e1d4559d23d772fc1eff381c17131f830fe0ed41f40593980a434b8",
+          "size_bytes": 1228800
+        },
+        "depth_m": {
+          "path": "results/act0r2/raw/left_06_post_edge_depth_m.npy",
+          "sha256": "f764f0b38a1eedb8148a87ac6d88098a6c63143a4aea6d720e62e65748bfd32b",
+          "size_bytes": 1228928
+        },
+        "semantic": {
+          "path": "results/act0r2/raw/left_06_post_edge_semantic_raw.png",
+          "sha256": "c249814874ce2556ca3e34b53098b458c87e25f707ef142f24ab281f409f68c3",
+          "size_bytes": 2335
+        },
+        "instance": {
+          "path": "results/act0r2/raw/left_06_post_edge_instance_raw.png",
+          "sha256": "bf30f97b3947110f1d064278e573afe0f67c8f44cb43eb512fc35efea6ecd752",
+          "size_bytes": 2487
+        }
+      },
+      "sequence_id": "act0r2_candidate_01_left",
+      "candidate_index": 1,
+      "bbox_id": 48389,
+      "direction": "LEFT",
+      "capture_role": "POST_EDGE",
+      "role_used_as_scientific_label": false,
+      "target_instance_id": 39220,
+      "commanded_displacement_m": 5.0625,
+      "actual_displacement_from_center_m": 5.0625,
+      "shared_center_frame_id": 3783,
+      "shared_center_pose_sha256": "0a408dcaa92093ea0c1cc5e232574cc968582531caf62440afaa900f1992159c",
+      "settle": {
+        "discarded_frames": [
+          3808,
+          3809,
+          3810
+        ]
+      },
+      "metadata_path": "results/act0r2/raw/left_06_post_edge.json"
+    },
+    {
+      "frame_id": 3815,
+      "timestamp": 59.5389598006077,
+      "sensor_frames": {
+        "rgb": 3815,
+        "depth": 3815,
+        "semantic": 3815,
+        "instance": 3815
+      },
+      "sensor_timestamps": {
+        "rgb": 59.5389598006077,
+        "depth": 59.5389598006077,
+        "semantic": 59.5389598006077,
+        "instance": 59.5389598006077
+      },
+      "raw_byte_lengths": {
+        "rgb": 1228800,
+        "depth": 1228800,
+        "semantic": 1228800,
+        "instance": 1228800
+      },
+      "K": [
+        [
+          320.00000000000006,
+          0.0,
+          319.5
+        ],
+        [
+          0.0,
+          320.00000000000006,
+          239.5
+        ],
+        [
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "T_world_camera": [
+        [
+          6.123233995736766e-17,
+          1.0,
+          0.0,
+          -89.99478149414062
+        ],
+        [
+          -1.0,
+          6.123233995736766e-17,
+          0.0,
+          288.3297424316406
+        ],
+        [
+          0.0,
+          -0.0,
+          1.0,
+          12.002955436706543
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "camera_transform": {
+        "location": {
+          "x": -89.99478149414062,
+          "y": 288.3297424316406,
+          "z": 12.002955436706543
+        },
+        "rotation": {
+          "pitch": 0.0,
+          "yaw": -90.0,
+          "roll": 0.0
+        }
+      },
+      "commanded_action": {
+        "sequence_id": "act0r2_candidate_01_right",
+        "capture_role": "INSIDE",
+        "role_used_as_scientific_label": false,
+        "commanded_displacement_m": 3.0,
+        "checkpoint_pose_source": "locator_center_pose + camera_motion_axis"
+      },
+      "executed_delta_pose": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "sensor_config": {
+        "width": 640,
+        "height": 480,
+        "horizontal_fov_deg": 90.0,
+        "fixed_delta_seconds": 0.05,
+        "blueprints": {
+          "rgb": "sensor.camera.rgb",
+          "depth": "sensor.camera.depth",
+          "semantic": "sensor.camera.semantic_segmentation",
+          "instance": "sensor.camera.instance_segmentation"
+        },
+        "raw_buffer_ownership": "bytes copied inside callback",
+        "raw_channel_order": "BGRA from CARLA; RGB PNG decoded from saved bytes"
+      },
+      "files": {
+        "rgb_bgra": {
+          "path": "results/act0r2/raw/right_00_inside_rgb.bgra.bin",
+          "sha256": "5b827879e6293a624d3b9658bb35116083fd8d88ca0ac490cf55c6363687e40c",
+          "size_bytes": 1228800
+        },
+        "rgb": {
+          "path": "results/act0r2/raw/right_00_inside_rgb.png",
+          "sha256": "487e108aff61e817575a00c6c68fde6be9a0159f9c59e4bc4c2beca9e6c2c406",
+          "size_bytes": 510676
+        },
+        "depth_raw": {
+          "path": "results/act0r2/raw/right_00_inside_depth.raw.bin",
+          "sha256": "2ebe6ce9448ee7945195bde967ed5211f3fdfb80a32f62ea089f7d34f44c8383",
+          "size_bytes": 1228800
+        },
+        "depth_m": {
+          "path": "results/act0r2/raw/right_00_inside_depth_m.npy",
+          "sha256": "6956cd33112ac0db8da8e6248dbaf7132cfa9c7d4a9abf50735733571b30a600",
+          "size_bytes": 1228928
+        },
+        "semantic": {
+          "path": "results/act0r2/raw/right_00_inside_semantic_raw.png",
+          "sha256": "780c35610badfed9d78868c3b84eeb788591337169345f74bd3306010aadedb6",
+          "size_bytes": 1954
+        },
+        "instance": {
+          "path": "results/act0r2/raw/right_00_inside_instance_raw.png",
+          "sha256": "dbc41f48107fbb8451ed6e4ef015d5e7aa050e675d4da677315d73c96384844f",
+          "size_bytes": 2034
+        }
+      },
+      "sequence_id": "act0r2_candidate_01_right",
+      "candidate_index": 1,
+      "bbox_id": 48389,
+      "direction": "RIGHT",
+      "capture_role": "INSIDE",
+      "role_used_as_scientific_label": false,
+      "target_instance_id": 39220,
+      "commanded_displacement_m": 3.0,
+      "actual_displacement_from_center_m": 3.0,
+      "shared_center_frame_id": 3783,
+      "shared_center_pose_sha256": "0a408dcaa92093ea0c1cc5e232574cc968582531caf62440afaa900f1992159c",
+      "settle": {
+        "discarded_frames": [
+          3812,
+          3813,
+          3814
+        ]
+      },
+      "metadata_path": "results/act0r2/raw/right_00_inside.json"
+    },
+    {
+      "frame_id": 3819,
+      "timestamp": 59.73895980358793,
+      "sensor_frames": {
+        "rgb": 3819,
+        "depth": 3819,
+        "semantic": 3819,
+        "instance": 3819
+      },
+      "sensor_timestamps": {
+        "rgb": 59.73895980358793,
+        "depth": 59.73895980358793,
+        "semantic": 59.73895980358793,
+        "instance": 59.73895980358793
+      },
+      "raw_byte_lengths": {
+        "rgb": 1228800,
+        "depth": 1228800,
+        "semantic": 1228800,
+        "instance": 1228800
+      },
+      "K": [
+        [
+          320.00000000000006,
+          0.0,
+          319.5
+        ],
+        [
+          0.0,
+          320.00000000000006,
+          239.5
+        ],
+        [
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "T_world_camera": [
+        [
+          6.123233995736766e-17,
+          1.0,
+          0.0,
+          -88.99478149414062
+        ],
+        [
+          -1.0,
+          6.123233995736766e-17,
+          0.0,
+          288.3297424316406
+        ],
+        [
+          0.0,
+          -0.0,
+          1.0,
+          12.002955436706543
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "camera_transform": {
+        "location": {
+          "x": -88.99478149414062,
+          "y": 288.3297424316406,
+          "z": 12.002955436706543
+        },
+        "rotation": {
+          "pitch": 0.0,
+          "yaw": -90.0,
+          "roll": 0.0
+        }
+      },
+      "commanded_action": {
+        "sequence_id": "act0r2_candidate_01_right",
+        "capture_role": "PRE_EDGE",
+        "role_used_as_scientific_label": false,
+        "commanded_displacement_m": 4.0,
+        "checkpoint_pose_source": "locator_center_pose + camera_motion_axis"
+      },
+      "executed_delta_pose": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "sensor_config": {
+        "width": 640,
+        "height": 480,
+        "horizontal_fov_deg": 90.0,
+        "fixed_delta_seconds": 0.05,
+        "blueprints": {
+          "rgb": "sensor.camera.rgb",
+          "depth": "sensor.camera.depth",
+          "semantic": "sensor.camera.semantic_segmentation",
+          "instance": "sensor.camera.instance_segmentation"
+        },
+        "raw_buffer_ownership": "bytes copied inside callback",
+        "raw_channel_order": "BGRA from CARLA; RGB PNG decoded from saved bytes"
+      },
+      "files": {
+        "rgb_bgra": {
+          "path": "results/act0r2/raw/right_01_pre_edge_rgb.bgra.bin",
+          "sha256": "852b2200af9c056728bedfa31fdc9ac81b38185f4d80da291392ecea2bd55d58",
+          "size_bytes": 1228800
+        },
+        "rgb": {
+          "path": "results/act0r2/raw/right_01_pre_edge_rgb.png",
+          "sha256": "bb09c701806db57fd9072d07f452e54e125b10040aa77e90755e3d2446e397a0",
+          "size_bytes": 502165
+        },
+        "depth_raw": {
+          "path": "results/act0r2/raw/right_01_pre_edge_depth.raw.bin",
+          "sha256": "c0ad4bea96dddb886942acc13acdd4de3156aaac357dc3eb75ed780f3ce810ac",
+          "size_bytes": 1228800
+        },
+        "depth_m": {
+          "path": "results/act0r2/raw/right_01_pre_edge_depth_m.npy",
+          "sha256": "60b98912cf65db84b727b8410df60bef409961b7af0d06e74c45d9072817b975",
+          "size_bytes": 1228928
+        },
+        "semantic": {
+          "path": "results/act0r2/raw/right_01_pre_edge_semantic_raw.png",
+          "sha256": "3ec604f7d68ab3f6a299e08f2c126b444714e537eb8cae4e0f3ba06feb015d6e",
+          "size_bytes": 1980
+        },
+        "instance": {
+          "path": "results/act0r2/raw/right_01_pre_edge_instance_raw.png",
+          "sha256": "432906f17677183b757e8d79ab000fe9454360b1ba87ed75d19b92c2584d0155",
+          "size_bytes": 2159
+        }
+      },
+      "sequence_id": "act0r2_candidate_01_right",
+      "candidate_index": 1,
+      "bbox_id": 48389,
+      "direction": "RIGHT",
+      "capture_role": "PRE_EDGE",
+      "role_used_as_scientific_label": false,
+      "target_instance_id": 39220,
+      "commanded_displacement_m": 4.0,
+      "actual_displacement_from_center_m": 4.0,
+      "shared_center_frame_id": 3783,
+      "shared_center_pose_sha256": "0a408dcaa92093ea0c1cc5e232574cc968582531caf62440afaa900f1992159c",
+      "settle": {
+        "discarded_frames": [
+          3816,
+          3817,
+          3818
+        ]
+      },
+      "metadata_path": "results/act0r2/raw/right_01_pre_edge.json"
+    },
+    {
+      "frame_id": 3823,
+      "timestamp": 59.938959806568164,
+      "sensor_frames": {
+        "rgb": 3823,
+        "depth": 3823,
+        "semantic": 3823,
+        "instance": 3823
+      },
+      "sensor_timestamps": {
+        "rgb": 59.938959806568164,
+        "depth": 59.938959806568164,
+        "semantic": 59.938959806568164,
+        "instance": 59.938959806568164
+      },
+      "raw_byte_lengths": {
+        "rgb": 1228800,
+        "depth": 1228800,
+        "semantic": 1228800,
+        "instance": 1228800
+      },
+      "K": [
+        [
+          320.00000000000006,
+          0.0,
+          319.5
+        ],
+        [
+          0.0,
+          320.00000000000006,
+          239.5
+        ],
+        [
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "T_world_camera": [
+        [
+          6.123233995736766e-17,
+          1.0,
+          0.0,
+          -88.93228149414062
+        ],
+        [
+          -1.0,
+          6.123233995736766e-17,
+          0.0,
+          288.3297424316406
+        ],
+        [
+          0.0,
+          -0.0,
+          1.0,
+          12.002955436706543
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "camera_transform": {
+        "location": {
+          "x": -88.93228149414062,
+          "y": 288.3297424316406,
+          "z": 12.002955436706543
+        },
+        "rotation": {
+          "pitch": 0.0,
+          "yaw": -90.0,
+          "roll": 0.0
+        }
+      },
+      "commanded_action": {
+        "sequence_id": "act0r2_candidate_01_right",
+        "capture_role": "STRADDLE",
+        "role_used_as_scientific_label": false,
+        "commanded_displacement_m": 4.0625,
+        "checkpoint_pose_source": "locator_center_pose + camera_motion_axis"
+      },
+      "executed_delta_pose": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "sensor_config": {
+        "width": 640,
+        "height": 480,
+        "horizontal_fov_deg": 90.0,
+        "fixed_delta_seconds": 0.05,
+        "blueprints": {
+          "rgb": "sensor.camera.rgb",
+          "depth": "sensor.camera.depth",
+          "semantic": "sensor.camera.semantic_segmentation",
+          "instance": "sensor.camera.instance_segmentation"
+        },
+        "raw_buffer_ownership": "bytes copied inside callback",
+        "raw_channel_order": "BGRA from CARLA; RGB PNG decoded from saved bytes"
+      },
+      "files": {
+        "rgb_bgra": {
+          "path": "results/act0r2/raw/right_02_straddle_rgb.bgra.bin",
+          "sha256": "5f9b5c79726631855d94d5850fe2e6f114bcddee3a9db53b0277e87905b82f39",
+          "size_bytes": 1228800
+        },
+        "rgb": {
+          "path": "results/act0r2/raw/right_02_straddle_rgb.png",
+          "sha256": "06a45b1c52e8e290d65604d2ea074a3d332ab371256bf09f5d33e14f648bb07f",
+          "size_bytes": 501358
+        },
+        "depth_raw": {
+          "path": "results/act0r2/raw/right_02_straddle_depth.raw.bin",
+          "sha256": "63e74466b3523839c370c0dd5b530e8da780be5e9d4ddfb41394e51d0d06508f",
+          "size_bytes": 1228800
+        },
+        "depth_m": {
+          "path": "results/act0r2/raw/right_02_straddle_depth_m.npy",
+          "sha256": "20779a090b62f05cdec3b057fe6a9265730fd9f1a06243fd5d81cbb05596f22f",
+          "size_bytes": 1228928
+        },
+        "semantic": {
+          "path": "results/act0r2/raw/right_02_straddle_semantic_raw.png",
+          "sha256": "19d71318f8d99d7b0cc03bcf91982691e887bfc92888712eed19f3fa58593d37",
+          "size_bytes": 1988
+        },
+        "instance": {
+          "path": "results/act0r2/raw/right_02_straddle_instance_raw.png",
+          "sha256": "039042d602d4460938a6a532ef4ecb553b53eaa765ae4f2b23661926848e31f8",
+          "size_bytes": 2192
+        }
+      },
+      "sequence_id": "act0r2_candidate_01_right",
+      "candidate_index": 1,
+      "bbox_id": 48389,
+      "direction": "RIGHT",
+      "capture_role": "STRADDLE",
+      "role_used_as_scientific_label": false,
+      "target_instance_id": 39220,
+      "commanded_displacement_m": 4.0625,
+      "actual_displacement_from_center_m": 4.0625,
+      "shared_center_frame_id": 3783,
+      "shared_center_pose_sha256": "0a408dcaa92093ea0c1cc5e232574cc968582531caf62440afaa900f1992159c",
+      "settle": {
+        "discarded_frames": [
+          3820,
+          3821,
+          3822
+        ]
+      },
+      "metadata_path": "results/act0r2/raw/right_02_straddle.json"
+    },
+    {
+      "frame_id": 3827,
+      "timestamp": 60.138959809548396,
+      "sensor_frames": {
+        "rgb": 3827,
+        "depth": 3827,
+        "semantic": 3827,
+        "instance": 3827
+      },
+      "sensor_timestamps": {
+        "rgb": 60.138959809548396,
+        "depth": 60.138959809548396,
+        "semantic": 60.138959809548396,
+        "instance": 60.138959809548396
+      },
+      "raw_byte_lengths": {
+        "rgb": 1228800,
+        "depth": 1228800,
+        "semantic": 1228800,
+        "instance": 1228800
+      },
+      "K": [
+        [
+          320.00000000000006,
+          0.0,
+          319.5
+        ],
+        [
+          0.0,
+          320.00000000000006,
+          239.5
+        ],
+        [
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "T_world_camera": [
+        [
+          6.123233995736766e-17,
+          1.0,
+          0.0,
+          -88.93228149414062
+        ],
+        [
+          -1.0,
+          6.123233995736766e-17,
+          0.0,
+          288.3297424316406
+        ],
+        [
+          0.0,
+          -0.0,
+          1.0,
+          12.002955436706543
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "camera_transform": {
+        "location": {
+          "x": -88.93228149414062,
+          "y": 288.3297424316406,
+          "z": 12.002955436706543
+        },
+        "rotation": {
+          "pitch": 0.0,
+          "yaw": -90.0,
+          "roll": 0.0
+        }
+      },
+      "commanded_action": {
+        "sequence_id": "act0r2_candidate_01_right",
+        "capture_role": "STRADDLE_REPEAT_1",
+        "role_used_as_scientific_label": false,
+        "commanded_displacement_m": 4.0625,
+        "checkpoint_pose_source": "locator_center_pose + camera_motion_axis"
+      },
+      "executed_delta_pose": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "sensor_config": {
+        "width": 640,
+        "height": 480,
+        "horizontal_fov_deg": 90.0,
+        "fixed_delta_seconds": 0.05,
+        "blueprints": {
+          "rgb": "sensor.camera.rgb",
+          "depth": "sensor.camera.depth",
+          "semantic": "sensor.camera.semantic_segmentation",
+          "instance": "sensor.camera.instance_segmentation"
+        },
+        "raw_buffer_ownership": "bytes copied inside callback",
+        "raw_channel_order": "BGRA from CARLA; RGB PNG decoded from saved bytes"
+      },
+      "files": {
+        "rgb_bgra": {
+          "path": "results/act0r2/raw/right_03_straddle_repeat_1_rgb.bgra.bin",
+          "sha256": "f8b722f8620e9a9e601a610fba7b565634af9fdf307d8561354c5588d85fa0f4",
+          "size_bytes": 1228800
+        },
+        "rgb": {
+          "path": "results/act0r2/raw/right_03_straddle_repeat_1_rgb.png",
+          "sha256": "1533090102e466acff5e7f1c4d6eb33740dbf4f1b742b2d3d0cc764d8496d5d1",
+          "size_bytes": 498298
+        },
+        "depth_raw": {
+          "path": "results/act0r2/raw/right_03_straddle_repeat_1_depth.raw.bin",
+          "sha256": "63e74466b3523839c370c0dd5b530e8da780be5e9d4ddfb41394e51d0d06508f",
+          "size_bytes": 1228800
+        },
+        "depth_m": {
+          "path": "results/act0r2/raw/right_03_straddle_repeat_1_depth_m.npy",
+          "sha256": "20779a090b62f05cdec3b057fe6a9265730fd9f1a06243fd5d81cbb05596f22f",
+          "size_bytes": 1228928
+        },
+        "semantic": {
+          "path": "results/act0r2/raw/right_03_straddle_repeat_1_semantic_raw.png",
+          "sha256": "19d71318f8d99d7b0cc03bcf91982691e887bfc92888712eed19f3fa58593d37",
+          "size_bytes": 1988
+        },
+        "instance": {
+          "path": "results/act0r2/raw/right_03_straddle_repeat_1_instance_raw.png",
+          "sha256": "039042d602d4460938a6a532ef4ecb553b53eaa765ae4f2b23661926848e31f8",
+          "size_bytes": 2192
+        }
+      },
+      "sequence_id": "act0r2_candidate_01_right",
+      "candidate_index": 1,
+      "bbox_id": 48389,
+      "direction": "RIGHT",
+      "capture_role": "STRADDLE_REPEAT_1",
+      "role_used_as_scientific_label": false,
+      "target_instance_id": 39220,
+      "commanded_displacement_m": 4.0625,
+      "actual_displacement_from_center_m": 4.0625,
+      "shared_center_frame_id": 3783,
+      "shared_center_pose_sha256": "0a408dcaa92093ea0c1cc5e232574cc968582531caf62440afaa900f1992159c",
+      "settle": {
+        "discarded_frames": [
+          3824,
+          3825,
+          3826
+        ]
+      },
+      "metadata_path": "results/act0r2/raw/right_03_straddle_repeat_1.json"
+    },
+    {
+      "frame_id": 3831,
+      "timestamp": 60.33895981252863,
+      "sensor_frames": {
+        "rgb": 3831,
+        "depth": 3831,
+        "semantic": 3831,
+        "instance": 3831
+      },
+      "sensor_timestamps": {
+        "rgb": 60.33895981252863,
+        "depth": 60.33895981252863,
+        "semantic": 60.33895981252863,
+        "instance": 60.33895981252863
+      },
+      "raw_byte_lengths": {
+        "rgb": 1228800,
+        "depth": 1228800,
+        "semantic": 1228800,
+        "instance": 1228800
+      },
+      "K": [
+        [
+          320.00000000000006,
+          0.0,
+          319.5
+        ],
+        [
+          0.0,
+          320.00000000000006,
+          239.5
+        ],
+        [
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "T_world_camera": [
+        [
+          6.123233995736766e-17,
+          1.0,
+          0.0,
+          -88.93228149414062
+        ],
+        [
+          -1.0,
+          6.123233995736766e-17,
+          0.0,
+          288.3297424316406
+        ],
+        [
+          0.0,
+          -0.0,
+          1.0,
+          12.002955436706543
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "camera_transform": {
+        "location": {
+          "x": -88.93228149414062,
+          "y": 288.3297424316406,
+          "z": 12.002955436706543
+        },
+        "rotation": {
+          "pitch": 0.0,
+          "yaw": -90.0,
+          "roll": 0.0
+        }
+      },
+      "commanded_action": {
+        "sequence_id": "act0r2_candidate_01_right",
+        "capture_role": "STRADDLE_REPEAT_2",
+        "role_used_as_scientific_label": false,
+        "commanded_displacement_m": 4.0625,
+        "checkpoint_pose_source": "locator_center_pose + camera_motion_axis"
+      },
+      "executed_delta_pose": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "sensor_config": {
+        "width": 640,
+        "height": 480,
+        "horizontal_fov_deg": 90.0,
+        "fixed_delta_seconds": 0.05,
+        "blueprints": {
+          "rgb": "sensor.camera.rgb",
+          "depth": "sensor.camera.depth",
+          "semantic": "sensor.camera.semantic_segmentation",
+          "instance": "sensor.camera.instance_segmentation"
+        },
+        "raw_buffer_ownership": "bytes copied inside callback",
+        "raw_channel_order": "BGRA from CARLA; RGB PNG decoded from saved bytes"
+      },
+      "files": {
+        "rgb_bgra": {
+          "path": "results/act0r2/raw/right_04_straddle_repeat_2_rgb.bgra.bin",
+          "sha256": "58db0aff8564ddeb81cb6b11be2269171c92e3ffd53a03b1ef64c4da66a036ba",
+          "size_bytes": 1228800
+        },
+        "rgb": {
+          "path": "results/act0r2/raw/right_04_straddle_repeat_2_rgb.png",
+          "sha256": "1c1b363ac3992d10272907c2ba74d4f5224d9ad481d39b33f1031ecbd9618a3d",
+          "size_bytes": 508935
+        },
+        "depth_raw": {
+          "path": "results/act0r2/raw/right_04_straddle_repeat_2_depth.raw.bin",
+          "sha256": "63e74466b3523839c370c0dd5b530e8da780be5e9d4ddfb41394e51d0d06508f",
+          "size_bytes": 1228800
+        },
+        "depth_m": {
+          "path": "results/act0r2/raw/right_04_straddle_repeat_2_depth_m.npy",
+          "sha256": "20779a090b62f05cdec3b057fe6a9265730fd9f1a06243fd5d81cbb05596f22f",
+          "size_bytes": 1228928
+        },
+        "semantic": {
+          "path": "results/act0r2/raw/right_04_straddle_repeat_2_semantic_raw.png",
+          "sha256": "19d71318f8d99d7b0cc03bcf91982691e887bfc92888712eed19f3fa58593d37",
+          "size_bytes": 1988
+        },
+        "instance": {
+          "path": "results/act0r2/raw/right_04_straddle_repeat_2_instance_raw.png",
+          "sha256": "039042d602d4460938a6a532ef4ecb553b53eaa765ae4f2b23661926848e31f8",
+          "size_bytes": 2192
+        }
+      },
+      "sequence_id": "act0r2_candidate_01_right",
+      "candidate_index": 1,
+      "bbox_id": 48389,
+      "direction": "RIGHT",
+      "capture_role": "STRADDLE_REPEAT_2",
+      "role_used_as_scientific_label": false,
+      "target_instance_id": 39220,
+      "commanded_displacement_m": 4.0625,
+      "actual_displacement_from_center_m": 4.0625,
+      "shared_center_frame_id": 3783,
+      "shared_center_pose_sha256": "0a408dcaa92093ea0c1cc5e232574cc968582531caf62440afaa900f1992159c",
+      "settle": {
+        "discarded_frames": [
+          3828,
+          3829,
+          3830
+        ]
+      },
+      "metadata_path": "results/act0r2/raw/right_04_straddle_repeat_2.json"
+    },
+    {
+      "frame_id": 3835,
+      "timestamp": 60.53895981550886,
+      "sensor_frames": {
+        "rgb": 3835,
+        "depth": 3835,
+        "semantic": 3835,
+        "instance": 3835
+      },
+      "sensor_timestamps": {
+        "rgb": 60.53895981550886,
+        "depth": 60.53895981550886,
+        "semantic": 60.53895981550886,
+        "instance": 60.53895981550886
+      },
+      "raw_byte_lengths": {
+        "rgb": 1228800,
+        "depth": 1228800,
+        "semantic": 1228800,
+        "instance": 1228800
+      },
+      "K": [
+        [
+          320.00000000000006,
+          0.0,
+          319.5
+        ],
+        [
+          0.0,
+          320.00000000000006,
+          239.5
+        ],
+        [
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "T_world_camera": [
+        [
+          6.123233995736766e-17,
+          1.0,
+          0.0,
+          -88.93228149414062
+        ],
+        [
+          -1.0,
+          6.123233995736766e-17,
+          0.0,
+          288.3297424316406
+        ],
+        [
+          0.0,
+          -0.0,
+          1.0,
+          12.002955436706543
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "camera_transform": {
+        "location": {
+          "x": -88.93228149414062,
+          "y": 288.3297424316406,
+          "z": 12.002955436706543
+        },
+        "rotation": {
+          "pitch": 0.0,
+          "yaw": -90.0,
+          "roll": 0.0
+        }
+      },
+      "commanded_action": {
+        "sequence_id": "act0r2_candidate_01_right",
+        "capture_role": "STRADDLE_REPEAT_3",
+        "role_used_as_scientific_label": false,
+        "commanded_displacement_m": 4.0625,
+        "checkpoint_pose_source": "locator_center_pose + camera_motion_axis"
+      },
+      "executed_delta_pose": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "sensor_config": {
+        "width": 640,
+        "height": 480,
+        "horizontal_fov_deg": 90.0,
+        "fixed_delta_seconds": 0.05,
+        "blueprints": {
+          "rgb": "sensor.camera.rgb",
+          "depth": "sensor.camera.depth",
+          "semantic": "sensor.camera.semantic_segmentation",
+          "instance": "sensor.camera.instance_segmentation"
+        },
+        "raw_buffer_ownership": "bytes copied inside callback",
+        "raw_channel_order": "BGRA from CARLA; RGB PNG decoded from saved bytes"
+      },
+      "files": {
+        "rgb_bgra": {
+          "path": "results/act0r2/raw/right_05_straddle_repeat_3_rgb.bgra.bin",
+          "sha256": "40d9137c632b692c79cccc6ec80a48fc00b120ff802b2e49e05d0826f99fa297",
+          "size_bytes": 1228800
+        },
+        "rgb": {
+          "path": "results/act0r2/raw/right_05_straddle_repeat_3_rgb.png",
+          "sha256": "4676c1a22e6637258a0c71772ffda062f6bb71bc165d7069005ef78516ee9b24",
+          "size_bytes": 510265
+        },
+        "depth_raw": {
+          "path": "results/act0r2/raw/right_05_straddle_repeat_3_depth.raw.bin",
+          "sha256": "63e74466b3523839c370c0dd5b530e8da780be5e9d4ddfb41394e51d0d06508f",
+          "size_bytes": 1228800
+        },
+        "depth_m": {
+          "path": "results/act0r2/raw/right_05_straddle_repeat_3_depth_m.npy",
+          "sha256": "20779a090b62f05cdec3b057fe6a9265730fd9f1a06243fd5d81cbb05596f22f",
+          "size_bytes": 1228928
+        },
+        "semantic": {
+          "path": "results/act0r2/raw/right_05_straddle_repeat_3_semantic_raw.png",
+          "sha256": "19d71318f8d99d7b0cc03bcf91982691e887bfc92888712eed19f3fa58593d37",
+          "size_bytes": 1988
+        },
+        "instance": {
+          "path": "results/act0r2/raw/right_05_straddle_repeat_3_instance_raw.png",
+          "sha256": "039042d602d4460938a6a532ef4ecb553b53eaa765ae4f2b23661926848e31f8",
+          "size_bytes": 2192
+        }
+      },
+      "sequence_id": "act0r2_candidate_01_right",
+      "candidate_index": 1,
+      "bbox_id": 48389,
+      "direction": "RIGHT",
+      "capture_role": "STRADDLE_REPEAT_3",
+      "role_used_as_scientific_label": false,
+      "target_instance_id": 39220,
+      "commanded_displacement_m": 4.0625,
+      "actual_displacement_from_center_m": 4.0625,
+      "shared_center_frame_id": 3783,
+      "shared_center_pose_sha256": "0a408dcaa92093ea0c1cc5e232574cc968582531caf62440afaa900f1992159c",
+      "settle": {
+        "discarded_frames": [
+          3832,
+          3833,
+          3834
+        ]
+      },
+      "metadata_path": "results/act0r2/raw/right_05_straddle_repeat_3.json"
+    },
+    {
+      "frame_id": 3839,
+      "timestamp": 60.73895981848909,
+      "sensor_frames": {
+        "rgb": 3839,
+        "depth": 3839,
+        "semantic": 3839,
+        "instance": 3839
+      },
+      "sensor_timestamps": {
+        "rgb": 60.73895981848909,
+        "depth": 60.73895981848909,
+        "semantic": 60.73895981848909,
+        "instance": 60.73895981848909
+      },
+      "raw_byte_lengths": {
+        "rgb": 1228800,
+        "depth": 1228800,
+        "semantic": 1228800,
+        "instance": 1228800
+      },
+      "K": [
+        [
+          320.00000000000006,
+          0.0,
+          319.5
+        ],
+        [
+          0.0,
+          320.00000000000006,
+          239.5
+        ],
+        [
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "T_world_camera": [
+        [
+          6.123233995736766e-17,
+          1.0,
+          0.0,
+          -87.93228149414062
+        ],
+        [
+          -1.0,
+          6.123233995736766e-17,
+          0.0,
+          288.3297424316406
+        ],
+        [
+          0.0,
+          -0.0,
+          1.0,
+          12.002955436706543
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "camera_transform": {
+        "location": {
+          "x": -87.93228149414062,
+          "y": 288.3297424316406,
+          "z": 12.002955436706543
+        },
+        "rotation": {
+          "pitch": 0.0,
+          "yaw": -90.0,
+          "roll": 0.0
+        }
+      },
+      "commanded_action": {
+        "sequence_id": "act0r2_candidate_01_right",
+        "capture_role": "POST_EDGE",
+        "role_used_as_scientific_label": false,
+        "commanded_displacement_m": 5.0625,
+        "checkpoint_pose_source": "locator_center_pose + camera_motion_axis"
+      },
+      "executed_delta_pose": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "sensor_config": {
+        "width": 640,
+        "height": 480,
+        "horizontal_fov_deg": 90.0,
+        "fixed_delta_seconds": 0.05,
+        "blueprints": {
+          "rgb": "sensor.camera.rgb",
+          "depth": "sensor.camera.depth",
+          "semantic": "sensor.camera.semantic_segmentation",
+          "instance": "sensor.camera.instance_segmentation"
+        },
+        "raw_buffer_ownership": "bytes copied inside callback",
+        "raw_channel_order": "BGRA from CARLA; RGB PNG decoded from saved bytes"
+      },
+      "files": {
+        "rgb_bgra": {
+          "path": "results/act0r2/raw/right_06_post_edge_rgb.bgra.bin",
+          "sha256": "0e5882d42f2ac78ba70f6763cae26aa2be516a2c1476cee49086a242269c9bd1",
+          "size_bytes": 1228800
+        },
+        "rgb": {
+          "path": "results/act0r2/raw/right_06_post_edge_rgb.png",
+          "sha256": "f0acff5f50a4ee49ef23476628c09fe3ca3fd6772e6ddee2dbb1ee62445ca666",
+          "size_bytes": 496372
+        },
+        "depth_raw": {
+          "path": "results/act0r2/raw/right_06_post_edge_depth.raw.bin",
+          "sha256": "53110988308aac9fd10232b74310d0cc2170d893307ed2a6574c4e34ac8ca676",
+          "size_bytes": 1228800
+        },
+        "depth_m": {
+          "path": "results/act0r2/raw/right_06_post_edge_depth_m.npy",
+          "sha256": "5259085493d2dfc9f0dba9eefcdd10085979bb9d86ca63cb00ff0c49384350d4",
+          "size_bytes": 1228928
+        },
+        "semantic": {
+          "path": "results/act0r2/raw/right_06_post_edge_semantic_raw.png",
+          "sha256": "d1838e421f9fe315ee6eed3bff356a26150a62ca4460c93b0fc11ec72513b6e0",
+          "size_bytes": 2085
+        },
+        "instance": {
+          "path": "results/act0r2/raw/right_06_post_edge_instance_raw.png",
+          "sha256": "3e2a7b36dfefa2db639eb6ec387648bf6a11b87989bb8f7a0570db0eb02106f9",
+          "size_bytes": 2394
+        }
+      },
+      "sequence_id": "act0r2_candidate_01_right",
+      "candidate_index": 1,
+      "bbox_id": 48389,
+      "direction": "RIGHT",
+      "capture_role": "POST_EDGE",
+      "role_used_as_scientific_label": false,
+      "target_instance_id": 39220,
+      "commanded_displacement_m": 5.0625,
+      "actual_displacement_from_center_m": 5.0625,
+      "shared_center_frame_id": 3783,
+      "shared_center_pose_sha256": "0a408dcaa92093ea0c1cc5e232574cc968582531caf62440afaa900f1992159c",
+      "settle": {
+        "discarded_frames": [
+          3836,
+          3837,
+          3838
+        ]
+      },
+      "metadata_path": "results/act0r2/raw/right_06_post_edge.json"
+    }
+  ],
+  "saved_frame_count": 15,
+  "maximum_saved_frames": 15,
+  "resources": {
+    "python_peak_rss_bytes": 297938944,
+    "python_peak_vms_bytes": 2605555712,
+    "carla_peak_rss_bytes": 5405904896,
+    "rss_watchdog_limit_bytes": 1610612736,
+    "rss_watchdog_exceeded": false,
+    "configured_python_address_space_limit_bytes": 4294967296,
+    "actual_python_address_space_limit_bytes": 4294967296
+  },
+  "constraints": {
+    "poses_old_new_used": false,
+    "rollout_run": false,
+    "other_candidates_captured": false,
+    "jepa_training_run": false
+  }
+}

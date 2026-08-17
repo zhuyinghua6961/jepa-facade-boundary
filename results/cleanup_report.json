@@ -481,6 +481,40 @@
       "recoverability": "recoverable from trash until emptied"
     }
   ],
+  "act0r2_cleanup": [
+    {
+      "path": "results/act0r2/raw",
+      "pre_cleanup_size_bytes": 63270187,
+      "classification": "unique canonical ACT-0R2 bilateral quartet raw",
+      "final_disposition": "KEPT",
+      "reason": "The only checkpoint-aligned 15-frame candidate 1 CENTER/LEFT/RIGHT capture is retained server-side with 90 verified payload hashes and is excluded from Git.",
+      "recoverability": "server-local canonical copy"
+    },
+    {
+      "path": "results/act0r2/compact_results",
+      "pre_cleanup_size_bytes": 518450,
+      "classification": "compact ACT-0R2 validation, capture manifest and frame metrics",
+      "final_disposition": "MOVED_TO_GIT_TRACKED_COMPACT_RESULT",
+      "reason": "Publishes checkpoint provenance, paired-frame metadata, pixel-derived bilateral states, frozen-pose consensus and fail-closed gates without raw payloads.",
+      "recoverability": "tracked compact result after publication"
+    },
+    {
+      "path": "docs/assets/act0r2",
+      "pre_cleanup_size_bytes": 579852,
+      "classification": "compressed ACT-0R2 bilateral public visual evidence",
+      "final_disposition": "MOVED_TO_GIT_TRACKED_COMPACT_RESULT",
+      "reason": "Six compressed JPG files show the shared CENTER, both role sequences, first physical terminations and mask/semantic/depth evidence.",
+      "recoverability": "tracked compact result after publication"
+    },
+    {
+      "path": "boundary_sweep/__pycache__",
+      "pre_cleanup_size_bytes": 8491,
+      "classification": "regenerable ACT-0R2 Python bytecode",
+      "final_disposition": "MOVED_TO_TRASH",
+      "reason": "Generated during bounded offline validation and moved with gio trash after all checks passed.",
+      "recoverability": "recoverable from trash until emptied"
+    }
+  ],
   "unverified_items": [
     ".carla_pkg",
     ".venv",

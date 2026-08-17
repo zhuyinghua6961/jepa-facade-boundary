@@ -4,9 +4,12 @@ from __future__ import annotations
 
 import glob
 import importlib
+import math
 import os
 import sys
 from pathlib import Path
+
+import numpy as np
 
 
 def discover_carla_root(explicit: str | None = None) -> Path | None:
@@ -59,6 +62,33 @@ def transform_from_dict(carla, value: dict):
     )
 
 
+def transform_dict_from_matrix(value) -> dict:
+    """Convert a CARLA local-to-world matrix into location/Euler fields."""
+    matrix = np.asarray(value, dtype=float)
+    if matrix.shape != (4, 4) or not np.all(np.isfinite(matrix)):
+        raise ValueError("transform matrix must be a finite 4x4 array")
+    rotation = matrix[:3, :3]
+    if not np.allclose(rotation.T @ rotation, np.eye(3), atol=1e-5):
+        raise ValueError("transform rotation is not orthonormal")
+    horizontal = math.hypot(float(rotation[0, 0]), float(rotation[1, 0]))
+    pitch = math.degrees(math.atan2(float(rotation[2, 0]), horizontal))
+    if horizontal > 1e-8:
+        yaw = math.degrees(math.atan2(float(rotation[1, 0]), float(rotation[0, 0])))
+        roll = math.degrees(math.atan2(float(-rotation[2, 1]), float(rotation[2, 2])))
+    else:
+        yaw = math.degrees(math.atan2(float(-rotation[0, 1]), float(rotation[1, 1])))
+        roll = 0.0
+    return {
+        "location": {axis: float(matrix[index, 3])
+                     for index, axis in enumerate(("x", "y", "z"))},
+        "rotation": {"pitch": pitch, "yaw": yaw, "roll": roll},
+    }
+
+
+def transform_from_matrix(carla, value):
+    """Build a ``carla.Transform`` directly from a persisted 4x4 pose."""
+    return transform_from_dict(carla, transform_dict_from_matrix(value))
+
+
 def vector_dict(vector) -> dict:
     return {k: float(getattr(vector, k)) for k in ("x", "y", "z")}
-

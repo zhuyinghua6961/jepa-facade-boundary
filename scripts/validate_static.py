@@ -70,6 +70,9 @@ def main(argv=None):
     act0r1_offline_path = Path("results/act0r1/offline_boundary_audit.json")
     act0r1_offline_frames_path = Path("results/act0r1/offline_frame_metrics.csv")
     act0r1_offline_hashes_path = Path("results/act0r1/offline_raw_hash_audit.csv")
+    act0r2_path = Path("results/act0r2/validation.json")
+    act0r2_manifest_path = Path("results/act0r2/capture_manifest.json")
+    act0r2_frames_path = Path("results/act0r2/frame_metrics.csv")
     r1 = json.loads(r1_path.read_text()) if r1_path.exists() else {}
     mask1 = json.loads(mask1_path.read_text()) if mask1_path.exists() else {}
     mask1_r1 = json.loads(mask1_r1_path.read_text()) if mask1_r1_path.exists() else {}
@@ -92,6 +95,8 @@ def main(argv=None):
     cap0_root_cause = json.loads(cap0_root_cause_path.read_text()) if cap0_root_cause_path.exists() else {}
     act0r1 = json.loads(act0r1_path.read_text()) if act0r1_path.exists() else {}
     act0r1_offline = json.loads(act0r1_offline_path.read_text()) if act0r1_offline_path.exists() else {}
+    act0r2 = json.loads(act0r2_path.read_text()) if act0r2_path.exists() else {}
+    act0r2_manifest = json.loads(act0r2_manifest_path.read_text()) if act0r2_manifest_path.exists() else {}
     act0s_matrix_count = 0
     if act0s_matrix_path.exists():
         with act0s_matrix_path.open(newline="") as handle:
@@ -102,6 +107,7 @@ def main(argv=None):
     cap0_gates = cap0.get("gates", {})
     act0r1_gates = act0r1.get("gates", {})
     act0r1_offline_gates = act0r1_offline.get("gates", {})
+    act0r2_gates = act0r2.get("gates", {})
     act0r1_offline_frame_count = 0
     if act0r1_offline_frames_path.exists():
         with act0r1_offline_frames_path.open(newline="") as handle:
@@ -112,6 +118,11 @@ def main(argv=None):
             act0r1_offline_hash_count = sum(1 for _row in csv.DictReader(handle))
     act0r1_offline_assets = sorted(
         Path("docs/assets/act0r1").glob("offline_*.jpg"))
+    act0r2_assets = sorted(Path("docs/assets/act0r2").glob("*.jpg"))
+    act0r2_frame_count = 0
+    if act0r2_frames_path.exists():
+        with act0r2_frames_path.open(newline="") as handle:
+            act0r2_frame_count = sum(1 for _row in csv.DictReader(handle))
     act0r_frame_count = 0
     if act0r_frame_manifest_path.exists():
         with act0r_frame_manifest_path.open(newline="") as handle:
@@ -410,18 +421,97 @@ def main(argv=None):
                                             "manual_boundary_used") is False and
                                         act0r1_offline.get("constraints", {}).get(
                                             "historical_results_modified") is False,
+        "act0r2_required_compact_files": all(path.exists() for path in (
+                                                act0r2_path, act0r2_manifest_path,
+                                                act0r2_frames_path,
+                                                Path("docs/ACT0R2_VISUAL_AUDIT.md"))) and
+                                           act0r2.get("schema") == "act0r2.validation.v1" and
+                                           act0r2_frame_count == 14,
+        "act0r2_checkpoint_pose_source": act0r2_manifest.get("status") == "CAPTURE_COMPLETE" and
+                                          act0r2_manifest.get("saved_frame_count") == 15 and
+                                          len(act0r2_manifest.get("frames", [])) == 15 and
+                                          act0r2_manifest.get("checkpoint_plan", {}).get(
+                                              "locator_center_pose") ==
+                                          act0r_search.get("plans", [{}])[0].get(
+                                              "locator_center_pose") and
+                                          act0r2_manifest.get("constraints", {}).get(
+                                              "poses_old_new_used") is False,
+        "act0r2_raw_hash_and_pairing": act0r2.get("raw", {}).get(
+                                            "hash_audit", {}).get("status") == "PASS" and
+                                        act0r2.get("raw", {}).get(
+                                            "hash_audit", {}).get("checked_file_count") == 90 and
+                                        act0r2_gates.get("SENSOR_PAIRING", {}).get(
+                                            "status") == "PASS" and
+                                        act0r2_gates.get("SENSOR_PAIRING", {}).get(
+                                            "frame_count") == 15,
+        "act0r2_center_alignment_and_same_start": act0r2_gates.get(
+                                            "CHECKPOINT_POSE_ALIGNMENT", {}).get(
+                                            "status") == "PASS" and
+                                        act0r2_gates.get(
+                                            "CHECKPOINT_POSE_ALIGNMENT", {}).get(
+                                            "position_error_m", 1.0) <= 0.01 and
+                                        act0r2_gates.get(
+                                            "CHECKPOINT_POSE_ALIGNMENT", {}).get(
+                                            "rotation_error_deg", 1.0) <= 0.05 and
+                                        act0r2_gates.get("BILATERAL_SAME_START", {}).get(
+                                            "status") == "PASS" and
+                                        act0r2_gates.get("CENTER_LEFT_BOUNDARY_ABSENT", {}).get(
+                                            "status") == "PASS" and
+                                        act0r2_gates.get("CENTER_RIGHT_BOUNDARY_ABSENT", {}).get(
+                                            "status") == "PASS",
+        "act0r2_bilateral_event_ordering": all(
+                                        act0r2.get("directions", {}).get(direction, {}).get(
+                                            "computed_states", [])[:3] == [
+                                                "NO_VALID_EXTERNAL_BOUNDARY", "APPROACH",
+                                                "FIRST_PHYSICAL_TERMINATION"] and
+                                        act0r2.get("directions", {}).get(direction, {}).get(
+                                            "event_ordering", {}).get("status") == "PASS" and
+                                        act0r2.get("directions", {}).get(direction, {}).get(
+                                            "event_ordering", {}).get("uses_role_labels") is False
+                                        for direction in ("LEFT", "RIGHT")),
+        "act0r2_bilateral_physical_boundary": all(
+                                        act0r2.get("directions", {}).get(direction, {}).get(
+                                            "boundary_consensus", {}).get("boundary_type") ==
+                                            "PHYSICAL_TERMINATION" and
+                                        act0r2.get("directions", {}).get(direction, {}).get(
+                                            "boundary_consensus", {}).get("consensus_count") == 4 and
+                                        act0r2.get("directions", {}).get(direction, {}).get(
+                                            "tier_v", {}).get("status") == "PASS"
+                                        for direction in ("LEFT", "RIGHT")),
+        "act0r2_same_pose_not_multiview": all(
+                                        act0r2.get("directions", {}).get(direction, {}).get(
+                                            "same_pose", {}).get("status") == "PASS" and
+                                        act0r2.get("directions", {}).get(direction, {}).get(
+                                            "same_pose_world_repeatability", {}).get("status") ==
+                                            "PASS" and
+                                        act0r2.get("directions", {}).get(direction, {}).get(
+                                            "same_pose_world_repeatability", {}).get("spread_m") == 0.0
+                                        for direction in ("LEFT", "RIGHT")) and
+                                        act0r2_gates.get("MULTIVIEW_REPEATABILITY", {}).get(
+                                            "status") == "NOT_EVALUATED",
+        "act0r2_terminal_gates": act0r2_gates.get("EXTERNAL_VISUAL_REVIEW", {}).get(
+                                        "status") == "PENDING" and
+                                  act0r2_gates.get("READY_FOR_NEXT_SURFACE", {}).get(
+                                        "status") == "CONDITIONAL_PASS" and
+                                  act0r2_gates.get("READY_FOR_COUNTERFACTUAL_ROLLOUT", {}).get(
+                                        "status") == "NOT_EVALUATED" and
+                                  act0r2_gates.get("READY_FOR_JEPA", {}).get(
+                                        "status") == "NOT_EVALUATED",
+        "act0r2_public_assets": len(act0r2_assets) == 6 and
+                                all(path.stat().st_size < 2_000_000 for path in act0r2_assets),
         "cap0_checkpoint_unchanged": hashlib.sha256(
                                       act0r_search_path.read_bytes()).hexdigest() ==
                                       "a56310883bb15513ea25c97c919d7faf14edb217b1a05fb0c4e12b060c664f73",
     }
-    result = {"schema": "boundary_sweep.static_validation.v8", "checks": checks, "missing": missing, "private_path_files": forbidden,
+    result = {"schema": "boundary_sweep.static_validation.v9", "checks": checks, "missing": missing, "private_path_files": forbidden,
               "geometry_reference_count": reference.get("geometry_reference_count"), "depth_metric": depth_result,
               "surface_stats_consistent": surface_checks, "gates": gates,
               "mask1r1_gates": mask1_r1.get("gates", {}), "obs0_gates": obs0.get("gates", {}),
               "obs0r1_gates": obs0r1_gates, "obs0r1_runtime_safety": runtime_safety,
               "act0s_gates": act0s_gates, "act0r_gates": act0r_gates,
               "cap0_gates": cap0_gates, "act0r1_gates": act0r1_gates,
-              "act0r1_offline_gates": act0r1_offline_gates}
+              "act0r1_offline_gates": act0r1_offline_gates,
+              "act0r2_gates": act0r2_gates}
     print(json.dumps(result, indent=2))
     return 0 if all(checks.values()) else 1
 
