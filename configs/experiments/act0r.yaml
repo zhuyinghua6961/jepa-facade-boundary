@@ -44,6 +44,11 @@ tier_m:
 repeatability:
   max_position_error_m: 0.01
   max_rotation_error_deg: 0.05
+offline_audit:
+  target_semantic_min_fraction: 0.99
+  repeated_pose_min_frames: 4
+  boundary_consensus_min_frames: 3
+  tier_v_min_pass_frames: 3
 runtime_safety:
   configured_python_address_space_limit_bytes: 4294967296
   actual_outer_python_address_space_limit_bytes: 2147483648

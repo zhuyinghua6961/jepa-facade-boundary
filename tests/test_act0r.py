@@ -4,10 +4,14 @@ from pathlib import Path
 import numpy as np
 import yaml
 
-from boundary_sweep.act0r import (classify_boundary_pixels,
+from boundary_sweep.act0r import (action_axis_from_transforms,
+                                  boundary_type_consensus,
+                                  classify_boundary_pixels,
                                   config_outcome_override_audit,
                                   contour_span_metrics, official_tier_m,
                                   pose_repeatability, sha256_file,
+                                  select_repeated_pose_group,
+                                  tier_v_from_pixel_frames,
                                   verify_manifest_hashes)
 
 
@@ -106,6 +110,66 @@ def test_raw_manifest_hashes_are_verified(tmp_path):
     assert verify_manifest_hashes([entry], tmp_path)["status"] == "FAIL"
 
 
+def test_boundary_type_requires_three_of_four_independent_frames():
+    rows = [{"boundary_type": value} for value in
+            ("PHYSICAL_TERMINATION", "PHYSICAL_TERMINATION",
+             "PHYSICAL_TERMINATION", "FOREGROUND_OCCLUSION")]
+    result = boundary_type_consensus(rows, 3)
+    assert result["status"] == "PASS"
+    assert result["boundary_type"] == "PHYSICAL_TERMINATION"
+    tied = boundary_type_consensus(rows[:2] + [
+        {"boundary_type": "FOREGROUND_OCCLUSION"},
+        {"boundary_type": "FOREGROUND_OCCLUSION"}], 3)
+    assert tied["status"] == "FAIL"
+    assert tied["boundary_type"] == "UNRESOLVED"
+
+
+def test_repeated_pose_group_is_selected_without_role_labels():
+    transforms = []
+    for x in (0.0, 1.0, 2.0, 2.0, 2.0, 2.0, 3.0):
+        matrix = np.eye(4)
+        matrix[0, 3] = x
+        transforms.append(matrix)
+    result = select_repeated_pose_group(transforms, 4, 0.01, 0.05)
+    assert result["status"] == "PASS"
+    assert result["indices"] == [2, 3, 4, 5]
+    assert result["uses_role_labels"] is False
+
+
+def test_actual_action_axis_comes_from_camera_transforms():
+    transforms = []
+    for x in (0.0, -1.0, -2.0, -2.0, -3.0):
+        matrix = np.eye(4)
+        matrix[:3, 3] = [x, 4.0, 7.0]
+        transforms.append(matrix)
+    result = action_axis_from_transforms(transforms)
+    assert result["status"] == "PASS"
+    assert np.allclose(result["axis"], [-1.0, 0.0, 0.0])
+    assert result["max_orthogonal_residual_m"] < 1e-12
+    assert result["uses_commanded_action"] is False
+
+
+def test_tier_v_uses_repeated_pixel_metrics_only():
+    rows = [{
+        "contour_present": True,
+        "span_over_target_bbox_height": 0.85,
+        "target_side_fraction": 1.0,
+        "external_side_fraction": 1.0,
+    } for _ in range(4)]
+    thresholds = {
+        "tier_v_min_span_over_target_bbox": 0.8,
+        "min_target_side_fraction": 0.8,
+        "min_external_side_fraction": 0.8,
+    }
+    result = tier_v_from_pixel_frames(rows, thresholds, 3)
+    assert result["status"] == "PASS"
+    assert result["pass_count"] == 4
+    assert result["uses_role_labels"] is False
+    rows[0]["span_over_target_bbox_height"] = 0.7
+    rows[1]["span_over_target_bbox_height"] = 0.7
+    assert tier_v_from_pixel_frames(rows, thresholds, 3)["status"] == "FAIL"
+
+
 def test_published_incomplete_capture_fails_closed_and_has_audit_assets():
     validation_path = Path("results/act0r/validation.json")
     search_path = Path("results/act0r/search_plan_checkpoint.json")
@@ -124,3 +188,22 @@ def test_published_incomplete_capture_fails_closed_and_has_audit_assets():
     assert search["complete"] is True
     assert [row["candidate_index"] for row in search["plans"]] == [1, 7, 10, 19]
     assert len(list(Path("docs/assets/act0r").glob("*.jpg"))) == 7
+
+
+def test_act0r1_offline_audit_is_pixel_derived_if_available():
+    path = Path("results/act0r1/offline_boundary_audit.json")
+    if not path.exists():
+        return
+    result = json.loads(path.read_text())
+    gates = result["gates"]
+    assert result["schema"] == "act0r1.offline_boundary_audit.v1"
+    assert len(result["frame_metrics"]) == 8
+    assert result["role_label_policy"]["capture_roles_used_as_ground_truth"] is False
+    assert result["constraints"]["legacy_plane_used"] is False
+    assert result["constraints"]["legacy_bbox_used"] is False
+    assert gates["RAW_HASH_AUDIT"]["status"] == "PASS"
+    assert gates["SENSOR_PAIRING"]["status"] == "PASS"
+    assert gates["EXTERNAL_VISUAL_REVIEW"]["status"] == "PENDING"
+    assert gates["READY_FOR_COUNTERFACTUAL_ROLLOUT"]["status"] == "NOT_EVALUATED"
+    assert gates["READY_FOR_JEPA"]["status"] == "NOT_EVALUATED"
+    assert len(list(Path("docs/assets/act0r1").glob("offline_*.jpg"))) == 6

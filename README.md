@@ -292,3 +292,40 @@ See [`docs/CAP0_SENSOR_AUDIT.md`](docs/CAP0_SENSOR_AUDIT.md) and
 arrays and segmentation frames remain server-local and ignored by Git. No
 RIGHT side, other candidate, rollout, dataset expansion, model download or
 JEPA training was run.
+
+## ACT-0R1 offline physical-boundary audit
+
+The offline follow-up reads only the eight retained ACT-0R1 quartets. It
+revalidates 56 files, hashes, sensor pairing and the immutable search
+checkpoint; decodes instance 39220 from persisted pixels; and computes the
+LEFT contour, bilateral depth/semantic/instance evidence, pixel Tier V and
+plane-free Tier M without starting CARLA.
+
+The four automatically selected identical-pose frames independently classify
+the LEFT edge as `PHYSICAL_TERMINATION` (4/4 agreement). Tier V passes and
+the action-axis world-coordinate spread is `0.000 m` under the unchanged
+`0.250 m` gate. Same-pose error is `0 m / 0 deg`.
+
+The planned role strings are not ground truth: all eight frames already show
+the LEFT contour and target coverage stays near 0.246. They do not establish
+an IN/PRE/STRADDLE state sequence.
+
+```text
+RAW_HASH_AUDIT: PASS
+SENSOR_PAIRING: PASS
+TARGET_MASK_PIXEL_VALID: PASS
+ROLE_LABEL_INDEPENDENCE: PASS
+LEFT_BOUNDARY_TYPE_RESOLVED: PASS (PHYSICAL_TERMINATION)
+TIER_V: PASS
+OFFICIAL_TIER_M: PASS
+SAME_POSE_CONFIRMATION: PASS
+EXTERNAL_VISUAL_REVIEW: PENDING
+READY_FOR_CANDIDATE1_RIGHT: CONDITIONAL_PASS
+READY_FOR_COUNTERFACTUAL_ROLLOUT: NOT_EVALUATED
+READY_FOR_JEPA: NOT_EVALUATED
+```
+
+The corrected attribution is `TWO_GIB_ADDRESS_SPACE_FAILURE=CONFIRMED`;
+the historical triangle artifact cause is
+`LIKELY_BUT_NOT_UNIQUELY_PROVEN`. See
+[`docs/ACT0R1_OFFLINE_BOUNDARY_AUDIT.md`](docs/ACT0R1_OFFLINE_BOUNDARY_AUDIT.md).
