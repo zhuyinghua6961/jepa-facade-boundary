@@ -61,6 +61,12 @@ def main(argv=None):
     act0r_search_path = Path("results/act0r/search_plan_checkpoint.json")
     act0r_frame_manifest_path = Path("results/act0r/frame_manifest.csv")
     act0r_operator_path = Path("results/act0r/operator_review_template.csv")
+    cap0_path = Path("results/cap0/validation.json")
+    cap0_probe_path = Path("results/cap0/as2_probe.json")
+    cap0_root_cause_path = Path("results/cap0/root_cause.json")
+    cap0_matrix_path = Path("results/cap0/health_matrix.csv")
+    cap0_manifest_path = Path("results/cap0/diagnostic_manifest.json")
+    act0r1_path = Path("results/act0r1/validation.json")
     r1 = json.loads(r1_path.read_text()) if r1_path.exists() else {}
     mask1 = json.loads(mask1_path.read_text()) if mask1_path.exists() else {}
     mask1_r1 = json.loads(mask1_r1_path.read_text()) if mask1_r1_path.exists() else {}
@@ -78,6 +84,10 @@ def main(argv=None):
     act0s_coverage = json.loads(act0s_coverage_path.read_text()) if act0s_coverage_path.exists() else {}
     act0r = json.loads(act0r_validation_path.read_text()) if act0r_validation_path.exists() else {}
     act0r_search = json.loads(act0r_search_path.read_text()) if act0r_search_path.exists() else {}
+    cap0 = json.loads(cap0_path.read_text()) if cap0_path.exists() else {}
+    cap0_probe = json.loads(cap0_probe_path.read_text()) if cap0_probe_path.exists() else {}
+    cap0_root_cause = json.loads(cap0_root_cause_path.read_text()) if cap0_root_cause_path.exists() else {}
+    act0r1 = json.loads(act0r1_path.read_text()) if act0r1_path.exists() else {}
     act0s_matrix_count = 0
     if act0s_matrix_path.exists():
         with act0s_matrix_path.open(newline="") as handle:
@@ -85,6 +95,8 @@ def main(argv=None):
     act0s_assets = sorted(Path("docs/assets/act0_screening").glob("candidate_*_screening.jpg"))
     act0s_gates = act0s.get("gates", {})
     act0r_gates = act0r.get("gates", {})
+    cap0_gates = cap0.get("gates", {})
+    act0r1_gates = act0r1.get("gates", {})
     act0r_frame_count = 0
     if act0r_frame_manifest_path.exists():
         with act0r_frame_manifest_path.open(newline="") as handle:
@@ -230,13 +242,78 @@ def main(argv=None):
                                         act0r_gates.get("PUBLIC_VISUAL_EVIDENCE", {}).get("status") == "FAIL" and
                                         Path("docs/assets/act0r/candidate_01_current_center.jpg").exists() and
                                         Path("docs/assets/act0r/candidate_19_right_unresolved.jpg").exists(),
+        "cap0_required_compact_files": all(path.exists() for path in
+                                            (cap0_path, cap0_probe_path, cap0_root_cause_path,
+                                             cap0_matrix_path, cap0_manifest_path,
+                                             Path("docs/CAP0_SENSOR_AUDIT.md"),
+                                             Path("configs/experiments/cap0.yaml"))),
+        "cap0_matrix_complete": cap0.get("schema") == "cap0.validation.v1" and
+                                cap0.get("saved_frame_count") == 15 and
+                                set(cap0.get("tests", {})) == {"H1", "H2", "H3", "H4", "H5"} and
+                                all(row.get("capture_status") == "PASS" and
+                                    len(row.get("frames", [])) == 3
+                                    for row in cap0.get("tests", {}).values()),
+        "cap0_health_gates": all(cap0_gates.get(name, {}).get("status") == "PASS"
+                                 for name in ("TICK_FAIL_FAST", "QUEUE_DEADLINE",
+                                              "RAW_BUFFER_OWNERSHIP", "RAW_LENGTH_AND_HASH",
+                                              "GPU_WARMUP_COMPLETE",
+                                              "KNOWN_GOOD_POSE_RGB_INTEGRITY",
+                                              "QUARTET_PAIRING_HEALTH",
+                                              "POST_TELEPORT_HEALTH", "RENDER_INTEGRITY",
+                                              "ROOT_CAUSE_CLASSIFIED", "RSS_WATCHDOG")),
+        "cap0_address_space_probe_disclosed": cap0_probe.get("status") == "FAIL" and
+                                              cap0_probe.get("script_completed") is False and
+                                              cap0_probe.get("termination") == "EXTERNAL_TIMEOUT" and
+                                              cap0_probe.get("outer_exit_code") == 124 and
+                                              cap0_probe.get("actual_outer_address_space_limit_bytes") == 2147483648,
+        "cap0_root_cause": cap0_root_cause.get("status") == "PASS" and
+                           cap0_root_cause.get("classification") == "PYTHON_ADDRESS_SPACE_LIMIT_FAILURE" and
+                           cap0_root_cause.get("confidence") == "CONFIRMED",
+        "cap0_resource_limits": cap0.get("resources", {}).get("configured_python_as_limit_bytes") == 4294967296 and
+                                cap0.get("resources", {}).get("actual_outer_python_as_limit_bytes") == 4294967296 and
+                                cap0.get("resources", {}).get("rss_watchdog_exceeded") is False,
+        "act0r1_required_compact_files": all(path.exists() for path in
+                                              (act0r1_path, Path("docs/ACT0R1_PILOT_AUDIT.md"),
+                                               Path("docs/assets/act0r1/left_all_roles.jpg"),
+                                               Path("docs/assets/act0r1/straddle_raw_vs_png.jpg"),
+                                               Path("docs/assets/act0r1/straddle_sensors.jpg"))),
+        "act0r1_capture_complete": act0r1.get("schema") == "act0r1.validation.v1" and
+                                    len(act0r1.get("frames", [])) == 8 and
+                                    [row.get("capture_role") for row in act0r1.get("frames", [])] ==
+                                    ["CENTER", "INSIDE", "PRE_EDGE", "STRADDLE",
+                                     "STRADDLE_REPEAT_1", "STRADDLE_REPEAT_2",
+                                     "STRADDLE_REPEAT_3", "POST_EDGE"],
+        "act0r1_capture_gates": all(act0r1_gates.get(name, {}).get("status") == "PASS"
+                                    for name in ("CAPTURE_STACK_RECOVERED",
+                                                 "CANDIDATE1_LEFT_CAPTURE_COMPLETE",
+                                                 "SENSOR_QUADRUPLET_PAIRING",
+                                                 "RGB_VISUAL_INTEGRITY",
+                                                 "SAME_POSE_CONFIRMATION",
+                                                 "TARGET_INSTANCE_STABILITY",
+                                                 "READY_TO_RESUME_ACT0R")),
+        "act0r1_ssim_scope": act0r1_gates.get("RGB_VISUAL_INTEGRITY", {}).get(
+                                "threshold_application") ==
+                                "consecutive SSIM is gated only within frozen-pose groups" and
+                                min(act0r1_gates.get("RGB_VISUAL_INTEGRITY", {}).get(
+                                    "same_pose_consecutive_ssim", [0.0])) >= 0.9,
+        "act0r1_terminal_gates": act0r1_gates.get(
+                                    "READY_FOR_COUNTERFACTUAL_ROLLOUT", {}).get(
+                                    "status") == "NOT_EVALUATED" and
+                                    act0r1_gates.get("READY_FOR_JEPA", {}).get(
+                                    "status") == "NOT_EVALUATED" and
+                                    act0r1.get("constraints", {}).get("rollout_run") is False and
+                                    act0r1.get("constraints", {}).get("jepa_training_run") is False,
+        "cap0_checkpoint_unchanged": hashlib.sha256(
+                                      act0r_search_path.read_bytes()).hexdigest() ==
+                                      "a56310883bb15513ea25c97c919d7faf14edb217b1a05fb0c4e12b060c664f73",
     }
-    result = {"schema": "boundary_sweep.static_validation.v6", "checks": checks, "missing": missing, "private_path_files": forbidden,
+    result = {"schema": "boundary_sweep.static_validation.v7", "checks": checks, "missing": missing, "private_path_files": forbidden,
               "geometry_reference_count": reference.get("geometry_reference_count"), "depth_metric": depth_result,
               "surface_stats_consistent": surface_checks, "gates": gates,
               "mask1r1_gates": mask1_r1.get("gates", {}), "obs0_gates": obs0.get("gates", {}),
               "obs0r1_gates": obs0r1_gates, "obs0r1_runtime_safety": runtime_safety,
-              "act0s_gates": act0s_gates, "act0r_gates": act0r_gates}
+              "act0s_gates": act0s_gates, "act0r_gates": act0r_gates,
+              "cap0_gates": cap0_gates, "act0r1_gates": act0r1_gates}
     print(json.dumps(result, indent=2))
     return 0 if all(checks.values()) else 1
 

@@ -1507,7 +1507,7 @@ def main(argv=None):
     host = args.host or config["server"]["host"]
     port = args.port or int(config["server"]["port"])
     client = carla.Client(host, port)
-    client.set_timeout(20.0)
+    client.set_timeout(10.0)
     if args.command == "scout":
         return scout(args, config, carla, client)
     if args.command == "adaptive-rescout":

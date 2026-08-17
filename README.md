@@ -244,3 +244,51 @@ The detailed failure evidence is in
 [`docs/ACT0R_VISUAL_AUDIT.md`](docs/ACT0R_VISUAL_AUDIT.md). Raw ACT-0R arrays
 remain server-local and are not tracked by Git. No rollout, dataset expansion,
 model download, or JEPA training was run.
+
+## CAP-0 sensor diagnosis and ACT-0R1 recovery pilot
+
+CAP-0 replaced the former long client wait with a bounded sensor path: client
+timeout at most 10 s, tick and single-frame queue deadline at most 5 s, two
+consecutive incomplete frames as the stop condition, callback-owned raw bytes,
+five discarded warmup frames and three settle ticks after teleport. On a fresh
+Town10HD_Opt server all five bounded checks passed:
+
+```text
+H1 OLD RGB-only: PASS
+H2 NEW RGB-only: PASS
+H3 OLD RGB/depth/semantic/instance: PASS
+H4 NEW RGB/depth/semantic/instance: PASS
+H5 quartet after 0.5 m teleport: PASS
+CAPTURE_STACK_RECOVERED: PASS
+```
+
+The OLD RGB-only path passed with a 4 GiB Python address-space limit but the
+single permitted 2 GiB probe stalled near that virtual-address ceiling and was
+terminated by its 90 s outer timeout. The result is recorded as
+`PYTHON_ADDRESS_SPACE_LIMIT_FAILURE: CONFIRMED`; the probe did not complete
+normally and is not presented as an RSS failure.
+
+ACT-0R1 then reused the immutable search checkpoint and captured only candidate
+1 LEFT: CENTER, INSIDE, PRE_EDGE, STRADDLE, three frozen-pose STRADDLE repeats
+and POST_EDGE. All eight RGB/depth/semantic/instance quartets are paired, raw
+BGRA decodes exactly to the persisted PNG, target instance ID is stable at
+`39220`, and frozen-pose position/rotation error is `0 m / 0 deg`. The
+frozen-pose consecutive SSIM values are `0.991, 0.997, 0.996`; SSIM between
+deliberately different camera positions is diagnostic only.
+
+```text
+CANDIDATE1_LEFT_CAPTURE_COMPLETE: PASS
+SENSOR_QUADRUPLET_PAIRING: PASS
+RGB_VISUAL_INTEGRITY: PASS
+SAME_POSE_CONFIRMATION: PASS
+TARGET_INSTANCE_STABILITY: PASS
+READY_TO_RESUME_ACT0R: PASS
+READY_FOR_COUNTERFACTUAL_ROLLOUT: NOT_EVALUATED
+READY_FOR_JEPA: NOT_EVALUATED
+```
+
+See [`docs/CAP0_SENSOR_AUDIT.md`](docs/CAP0_SENSOR_AUDIT.md) and
+[`docs/ACT0R1_PILOT_AUDIT.md`](docs/ACT0R1_PILOT_AUDIT.md). Raw BGRA, depth
+arrays and segmentation frames remain server-local and ignored by Git. No
+RIGHT side, other candidate, rollout, dataset expansion, model download or
+JEPA training was run.

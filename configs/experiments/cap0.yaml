@@ -1,0 +1,57 @@
+schema: cap0.config.v1
+map: Town10HD_Opt
+server:
+  host: localhost
+  port: 2100
+  client_timeout_s: 10.0
+sensor:
+  width: 640
+  height: 480
+  horizontal_fov_deg: 90.0
+  fixed_delta_seconds: 0.05
+  tick_timeout_s: 5.0
+  queue_deadline_s: 5.0
+  max_consecutive_incomplete_frames: 2
+warmup:
+  minimum_discarded_ticks: 5
+  required_consecutive_complete: 3
+  maximum_ticks: 12
+teleport:
+  settle_ticks: 3
+diagnostic:
+  formal_frames_per_test: 3
+  maximum_saved_frames: 15
+  internal_duration_limit_s: 165.0
+  historical_candidate1_rgb: docs/assets/act0/candidates/candidate_01_bbox_48389_overview.jpg
+poses:
+  OLD:
+    location: {x: -92.994789, y: 308.715454, z: 12.002955}
+    rotation: {pitch: 0.0, yaw: -90.0, roll: 0.0}
+  NEW:
+    location: {x: -92.994789, y: 288.329742, z: 12.002955}
+    rotation: {pitch: 0.0, yaw: -90.0, roll: 0.0}
+  TELEPORT_DELTA:
+    x: 0.5
+    y: 0.0
+    z: 0.0
+visual:
+  min_entropy_bits: 3.5
+  min_unique_colors: 256
+  min_consecutive_ssim: 0.90
+  min_historical_ssim: 0.35
+resources:
+  python_address_space_limit_bytes: 4294967296
+  python_rss_watchdog_bytes: 1610612736
+  two_gib_probe_address_space_limit_bytes: 2147483648
+  numeric_threads: 1
+  carla_address_space_limit_bytes: 17179869184
+  carla_cpu_set: 20-27
+  carla_nice: 15
+checkpoint:
+  path: results/act0r/search_plan_checkpoint.json
+  sha256: a56310883bb15513ea25c97c919d7faf14edb217b1a05fb0c4e12b060c664f73
+act0r1:
+  candidate_index: 1
+  bbox_id: 48389
+  direction: LEFT
+  maximum_saved_frames: 8

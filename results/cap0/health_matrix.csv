@@ -1,0 +1,6 @@
+test_id,pose_name,sensor_types,capture_status,saved_frames,warmup_status,pairing_valid,raw_png_exact,hashes_valid,rgb_integrity,duration_s,error
+H1,OLD,rgb,PASS,3,PASS,True,True,True,PASS,0.930506336999315,
+H2,NEW,rgb,PASS,3,PASS,True,True,True,PASS,0.7568456940007309,
+H3,OLD,rgb+depth+semantic+instance,PASS,3,PASS,True,True,True,PASS,1.3973594330000196,
+H4,NEW,rgb+depth+semantic+instance,PASS,3,PASS,True,True,True,PASS,1.3797068370004126,
+H5,OLD_PLUS_0.5M,rgb+depth+semantic+instance,PASS,3,PASS,True,True,True,PASS,1.5586025659995357,

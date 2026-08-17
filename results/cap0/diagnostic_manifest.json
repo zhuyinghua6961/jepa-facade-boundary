@@ -1,0 +1,2501 @@
+{
+  "schema": "cap0.diagnostic_manifest.v1",
+  "tests": {
+    "H1": {
+      "test_id": "H1",
+      "sensor_types": [
+        "rgb"
+      ],
+      "pose_name": "OLD",
+      "capture_status": "PASS",
+      "frames": [
+        {
+          "frame_id": 3796,
+          "timestamp": 73.53125020263542,
+          "sensor_frames": {
+            "rgb": 3796
+          },
+          "sensor_timestamps": {
+            "rgb": 73.53125020263542
+          },
+          "raw_byte_lengths": {
+            "rgb": 1228800
+          },
+          "K": [
+            [
+              320.00000000000006,
+              0.0,
+              319.5
+            ],
+            [
+              0.0,
+              320.00000000000006,
+              239.5
+            ],
+            [
+              0.0,
+              0.0,
+              1.0
+            ]
+          ],
+          "T_world_camera": [
+            [
+              6.123233995736766e-17,
+              1.0,
+              0.0,
+              -92.99478149414062
+            ],
+            [
+              -1.0,
+              6.123233995736766e-17,
+              0.0,
+              308.7154541015625
+            ],
+            [
+              0.0,
+              -0.0,
+              1.0,
+              12.002955436706543
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ],
+          "camera_transform": {
+            "location": {
+              "x": -92.99478149414062,
+              "y": 308.7154541015625,
+              "z": 12.002955436706543
+            },
+            "rotation": {
+              "pitch": 0.0,
+              "yaw": -90.0,
+              "roll": 0.0
+            }
+          },
+          "commanded_action": {
+            "test_id": "H1",
+            "capture_role": "FORMAL",
+            "formal_index": 0
+          },
+          "executed_delta_pose": [
+            [
+              1.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              1.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ],
+          "sensor_config": {
+            "width": 640,
+            "height": 480,
+            "horizontal_fov_deg": 90.0,
+            "fixed_delta_seconds": 0.05,
+            "blueprints": {
+              "rgb": "sensor.camera.rgb"
+            },
+            "raw_buffer_ownership": "bytes copied inside callback",
+            "raw_channel_order": "BGRA from CARLA; RGB PNG decoded from saved bytes"
+          },
+          "files": {
+            "rgb_bgra": {
+              "path": "results/cap0/raw/H1/h1_00_frame_3796_rgb.bgra.bin",
+              "sha256": "f0d55d313f2b92a906fc625bd328f942e4453de62f7310a8fb571eb443771ac1",
+              "size_bytes": 1228800
+            },
+            "rgb": {
+              "path": "results/cap0/raw/H1/h1_00_frame_3796_rgb.png",
+              "sha256": "c4fccd5bd9a320d1a4b90afa2b7d85718d72e25a90a537ac32313b170fef2c3e",
+              "size_bytes": 583321
+            }
+          },
+          "test_id": "H1",
+          "pose_name": "OLD",
+          "formal_index": 0,
+          "metadata_path": "results/cap0/raw/H1/h1_00_frame_3796.json"
+        },
+        {
+          "frame_id": 3797,
+          "timestamp": 73.58125020338048,
+          "sensor_frames": {
+            "rgb": 3797
+          },
+          "sensor_timestamps": {
+            "rgb": 73.58125020338048
+          },
+          "raw_byte_lengths": {
+            "rgb": 1228800
+          },
+          "K": [
+            [
+              320.00000000000006,
+              0.0,
+              319.5
+            ],
+            [
+              0.0,
+              320.00000000000006,
+              239.5
+            ],
+            [
+              0.0,
+              0.0,
+              1.0
+            ]
+          ],
+          "T_world_camera": [
+            [
+              6.123233995736766e-17,
+              1.0,
+              0.0,
+              -92.99478149414062
+            ],
+            [
+              -1.0,
+              6.123233995736766e-17,
+              0.0,
+              308.7154541015625
+            ],
+            [
+              0.0,
+              -0.0,
+              1.0,
+              12.002955436706543
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ],
+          "camera_transform": {
+            "location": {
+              "x": -92.99478149414062,
+              "y": 308.7154541015625,
+              "z": 12.002955436706543
+            },
+            "rotation": {
+              "pitch": 0.0,
+              "yaw": -90.0,
+              "roll": 0.0
+            }
+          },
+          "commanded_action": {
+            "test_id": "H1",
+            "capture_role": "FORMAL",
+            "formal_index": 1
+          },
+          "executed_delta_pose": [
+            [
+              1.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              1.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ],
+          "sensor_config": {
+            "width": 640,
+            "height": 480,
+            "horizontal_fov_deg": 90.0,
+            "fixed_delta_seconds": 0.05,
+            "blueprints": {
+              "rgb": "sensor.camera.rgb"
+            },
+            "raw_buffer_ownership": "bytes copied inside callback",
+            "raw_channel_order": "BGRA from CARLA; RGB PNG decoded from saved bytes"
+          },
+          "files": {
+            "rgb_bgra": {
+              "path": "results/cap0/raw/H1/h1_01_frame_3797_rgb.bgra.bin",
+              "sha256": "9cc3019f493cfd727c7d9f595aa59a015c6bc7f9766c5570f0a4e19a4c2e3c41",
+              "size_bytes": 1228800
+            },
+            "rgb": {
+              "path": "results/cap0/raw/H1/h1_01_frame_3797_rgb.png",
+              "sha256": "073b8199c25b6458d6cc77fc98b29b1d015a4247c559f60734ddb0e9ae30e0f4",
+              "size_bytes": 581707
+            }
+          },
+          "test_id": "H1",
+          "pose_name": "OLD",
+          "formal_index": 1,
+          "metadata_path": "results/cap0/raw/H1/h1_01_frame_3797.json"
+        },
+        {
+          "frame_id": 3798,
+          "timestamp": 73.63125020412554,
+          "sensor_frames": {
+            "rgb": 3798
+          },
+          "sensor_timestamps": {
+            "rgb": 73.63125020412554
+          },
+          "raw_byte_lengths": {
+            "rgb": 1228800
+          },
+          "K": [
+            [
+              320.00000000000006,
+              0.0,
+              319.5
+            ],
+            [
+              0.0,
+              320.00000000000006,
+              239.5
+            ],
+            [
+              0.0,
+              0.0,
+              1.0
+            ]
+          ],
+          "T_world_camera": [
+            [
+              6.123233995736766e-17,
+              1.0,
+              0.0,
+              -92.99478149414062
+            ],
+            [
+              -1.0,
+              6.123233995736766e-17,
+              0.0,
+              308.7154541015625
+            ],
+            [
+              0.0,
+              -0.0,
+              1.0,
+              12.002955436706543
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ],
+          "camera_transform": {
+            "location": {
+              "x": -92.99478149414062,
+              "y": 308.7154541015625,
+              "z": 12.002955436706543
+            },
+            "rotation": {
+              "pitch": 0.0,
+              "yaw": -90.0,
+              "roll": 0.0
+            }
+          },
+          "commanded_action": {
+            "test_id": "H1",
+            "capture_role": "FORMAL",
+            "formal_index": 2
+          },
+          "executed_delta_pose": [
+            [
+              1.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              1.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ],
+          "sensor_config": {
+            "width": 640,
+            "height": 480,
+            "horizontal_fov_deg": 90.0,
+            "fixed_delta_seconds": 0.05,
+            "blueprints": {
+              "rgb": "sensor.camera.rgb"
+            },
+            "raw_buffer_ownership": "bytes copied inside callback",
+            "raw_channel_order": "BGRA from CARLA; RGB PNG decoded from saved bytes"
+          },
+          "files": {
+            "rgb_bgra": {
+              "path": "results/cap0/raw/H1/h1_02_frame_3798_rgb.bgra.bin",
+              "sha256": "ee087c2e9d8a7b174992d8507be0b057627752af0649a17e39450e02ca15bb1f",
+              "size_bytes": 1228800
+            },
+            "rgb": {
+              "path": "results/cap0/raw/H1/h1_02_frame_3798_rgb.png",
+              "sha256": "d1687055b11eaca9934fdddccdd2b1de75d5d99d9b7beeee5ffa3e4b3b5e93ae",
+              "size_bytes": 585088
+            }
+          },
+          "test_id": "H1",
+          "pose_name": "OLD",
+          "formal_index": 2,
+          "metadata_path": "results/cap0/raw/H1/h1_02_frame_3798.json"
+        }
+      ],
+      "warmup": {
+        "status": "PASS",
+        "discarded_frames": 5,
+        "consecutive_complete": 5
+      },
+      "rgb_integrity": {
+        "status": "PASS",
+        "entropy_bits": [
+          7.685447711115799,
+          7.68397564777278,
+          7.682212986837319
+        ],
+        "unique_colors": [
+          62242,
+          62023,
+          62841
+        ],
+        "consecutive_ssim": [
+          0.9962966289655406,
+          0.9965280531523506
+        ],
+        "historical_ssim": 0.5330143103758483,
+        "tile_repetition_diagnostic": [
+          {
+            "pair_count": 110,
+            "max_similarity": 0.6328628543154498,
+            "fraction_above_0_98": 0.0
+          },
+          {
+            "pair_count": 110,
+            "max_similarity": 0.6274017853641545,
+            "fraction_above_0_98": 0.0
+          },
+          {
+            "pair_count": 110,
+            "max_similarity": 0.6221546695735486,
+            "fraction_above_0_98": 0.0
+          }
+        ],
+        "thresholds": {
+          "min_entropy_bits": 3.5,
+          "min_unique_colors": 256,
+          "min_consecutive_ssim": 0.9,
+          "min_historical_ssim": 0.35
+        }
+      },
+      "raw_png_exact": true,
+      "hashes_valid": true,
+      "pairing_valid": true,
+      "duration_s": 0.930506336999315
+    },
+    "H2": {
+      "test_id": "H2",
+      "sensor_types": [
+        "rgb"
+      ],
+      "pose_name": "NEW",
+      "capture_status": "PASS",
+      "frames": [
+        {
+          "frame_id": 3810,
+          "timestamp": 74.14653432562773,
+          "sensor_frames": {
+            "rgb": 3810
+          },
+          "sensor_timestamps": {
+            "rgb": 74.14653432562773
+          },
+          "raw_byte_lengths": {
+            "rgb": 1228800
+          },
+          "K": [
+            [
+              320.00000000000006,
+              0.0,
+              319.5
+            ],
+            [
+              0.0,
+              320.00000000000006,
+              239.5
+            ],
+            [
+              0.0,
+              0.0,
+              1.0
+            ]
+          ],
+          "T_world_camera": [
+            [
+              6.123233995736766e-17,
+              1.0,
+              0.0,
+              -92.99478149414062
+            ],
+            [
+              -1.0,
+              6.123233995736766e-17,
+              0.0,
+              288.3297424316406
+            ],
+            [
+              0.0,
+              -0.0,
+              1.0,
+              12.002955436706543
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ],
+          "camera_transform": {
+            "location": {
+              "x": -92.99478149414062,
+              "y": 288.3297424316406,
+              "z": 12.002955436706543
+            },
+            "rotation": {
+              "pitch": 0.0,
+              "yaw": -90.0,
+              "roll": 0.0
+            }
+          },
+          "commanded_action": {
+            "test_id": "H2",
+            "capture_role": "FORMAL",
+            "formal_index": 0
+          },
+          "executed_delta_pose": [
+            [
+              1.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              1.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ],
+          "sensor_config": {
+            "width": 640,
+            "height": 480,
+            "horizontal_fov_deg": 90.0,
+            "fixed_delta_seconds": 0.05,
+            "blueprints": {
+              "rgb": "sensor.camera.rgb"
+            },
+            "raw_buffer_ownership": "bytes copied inside callback",
+            "raw_channel_order": "BGRA from CARLA; RGB PNG decoded from saved bytes"
+          },
+          "files": {
+            "rgb_bgra": {
+              "path": "results/cap0/raw/H2/h2_00_frame_3810_rgb.bgra.bin",
+              "sha256": "ec834ea707f67476aa495280bba792b317c06e1766c3d4a5bc13f5ae968bc934",
+              "size_bytes": 1228800
+            },
+            "rgb": {
+              "path": "results/cap0/raw/H2/h2_00_frame_3810_rgb.png",
+              "sha256": "6f2f9c5bbfe3ae2ba0400b77d633b88845447a694828ec7a13e6fe730e71bee7",
+              "size_bytes": 507914
+            }
+          },
+          "test_id": "H2",
+          "pose_name": "NEW",
+          "formal_index": 0,
+          "metadata_path": "results/cap0/raw/H2/h2_00_frame_3810.json"
+        },
+        {
+          "frame_id": 3811,
+          "timestamp": 74.19653432637278,
+          "sensor_frames": {
+            "rgb": 3811
+          },
+          "sensor_timestamps": {
+            "rgb": 74.19653432637278
+          },
+          "raw_byte_lengths": {
+            "rgb": 1228800
+          },
+          "K": [
+            [
+              320.00000000000006,
+              0.0,
+              319.5
+            ],
+            [
+              0.0,
+              320.00000000000006,
+              239.5
+            ],
+            [
+              0.0,
+              0.0,
+              1.0
+            ]
+          ],
+          "T_world_camera": [
+            [
+              6.123233995736766e-17,
+              1.0,
+              0.0,
+              -92.99478149414062
+            ],
+            [
+              -1.0,
+              6.123233995736766e-17,
+              0.0,
+              288.3297424316406
+            ],
+            [
+              0.0,
+              -0.0,
+              1.0,
+              12.002955436706543
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ],
+          "camera_transform": {
+            "location": {
+              "x": -92.99478149414062,
+              "y": 288.3297424316406,
+              "z": 12.002955436706543
+            },
+            "rotation": {
+              "pitch": 0.0,
+              "yaw": -90.0,
+              "roll": 0.0
+            }
+          },
+          "commanded_action": {
+            "test_id": "H2",
+            "capture_role": "FORMAL",
+            "formal_index": 1
+          },
+          "executed_delta_pose": [
+            [
+              1.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              1.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ],
+          "sensor_config": {
+            "width": 640,
+            "height": 480,
+            "horizontal_fov_deg": 90.0,
+            "fixed_delta_seconds": 0.05,
+            "blueprints": {
+              "rgb": "sensor.camera.rgb"
+            },
+            "raw_buffer_ownership": "bytes copied inside callback",
+            "raw_channel_order": "BGRA from CARLA; RGB PNG decoded from saved bytes"
+          },
+          "files": {
+            "rgb_bgra": {
+              "path": "results/cap0/raw/H2/h2_01_frame_3811_rgb.bgra.bin",
+              "sha256": "0ece70fabf2993518e3c3bac6ff714ad032c482f74b66d122ae5790c3507cdbd",
+              "size_bytes": 1228800
+            },
+            "rgb": {
+              "path": "results/cap0/raw/H2/h2_01_frame_3811_rgb.png",
+              "sha256": "9908ba3f588b73e74cf344a6c791ed23bd6912c57d2a34329425073f6e3efc0e",
+              "size_bytes": 505879
+            }
+          },
+          "test_id": "H2",
+          "pose_name": "NEW",
+          "formal_index": 1,
+          "metadata_path": "results/cap0/raw/H2/h2_01_frame_3811.json"
+        },
+        {
+          "frame_id": 3812,
+          "timestamp": 74.24653432711784,
+          "sensor_frames": {
+            "rgb": 3812
+          },
+          "sensor_timestamps": {
+            "rgb": 74.24653432711784
+          },
+          "raw_byte_lengths": {
+            "rgb": 1228800
+          },
+          "K": [
+            [
+              320.00000000000006,
+              0.0,
+              319.5
+            ],
+            [
+              0.0,
+              320.00000000000006,
+              239.5
+            ],
+            [
+              0.0,
+              0.0,
+              1.0
+            ]
+          ],
+          "T_world_camera": [
+            [
+              6.123233995736766e-17,
+              1.0,
+              0.0,
+              -92.99478149414062
+            ],
+            [
+              -1.0,
+              6.123233995736766e-17,
+              0.0,
+              288.3297424316406
+            ],
+            [
+              0.0,
+              -0.0,
+              1.0,
+              12.002955436706543
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ],
+          "camera_transform": {
+            "location": {
+              "x": -92.99478149414062,
+              "y": 288.3297424316406,
+              "z": 12.002955436706543
+            },
+            "rotation": {
+              "pitch": 0.0,
+              "yaw": -90.0,
+              "roll": 0.0
+            }
+          },
+          "commanded_action": {
+            "test_id": "H2",
+            "capture_role": "FORMAL",
+            "formal_index": 2
+          },
+          "executed_delta_pose": [
+            [
+              1.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              1.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ],
+          "sensor_config": {
+            "width": 640,
+            "height": 480,
+            "horizontal_fov_deg": 90.0,
+            "fixed_delta_seconds": 0.05,
+            "blueprints": {
+              "rgb": "sensor.camera.rgb"
+            },
+            "raw_buffer_ownership": "bytes copied inside callback",
+            "raw_channel_order": "BGRA from CARLA; RGB PNG decoded from saved bytes"
+          },
+          "files": {
+            "rgb_bgra": {
+              "path": "results/cap0/raw/H2/h2_02_frame_3812_rgb.bgra.bin",
+              "sha256": "9a11aef851f769a4dd0ba1829aab1ba94bb2923b3e7675cdd3d42867186e4c0f",
+              "size_bytes": 1228800
+            },
+            "rgb": {
+              "path": "results/cap0/raw/H2/h2_02_frame_3812_rgb.png",
+              "sha256": "05022239524b3f05bd7cee49f55ad5038ec16fcc048928f07a2d90f27a73b40a",
+              "size_bytes": 509510
+            }
+          },
+          "test_id": "H2",
+          "pose_name": "NEW",
+          "formal_index": 2,
+          "metadata_path": "results/cap0/raw/H2/h2_02_frame_3812.json"
+        }
+      ],
+      "warmup": {
+        "status": "PASS",
+        "discarded_frames": 5,
+        "consecutive_complete": 5
+      },
+      "rgb_integrity": {
+        "status": "PASS",
+        "entropy_bits": [
+          7.464537352210382,
+          7.468887302768456,
+          7.4711122860143515
+        ],
+        "unique_colors": [
+          65663,
+          66247,
+          67193
+        ],
+        "consecutive_ssim": [
+          0.9985728000691733,
+          0.9990442741792227
+        ],
+        "historical_ssim": null,
+        "tile_repetition_diagnostic": [
+          {
+            "pair_count": 110,
+            "max_similarity": 0.9189562703108636,
+            "fraction_above_0_98": 0.0
+          },
+          {
+            "pair_count": 110,
+            "max_similarity": 0.9146780150668953,
+            "fraction_above_0_98": 0.0
+          },
+          {
+            "pair_count": 110,
+            "max_similarity": 0.9125537013228766,
+            "fraction_above_0_98": 0.0
+          }
+        ],
+        "thresholds": {
+          "min_entropy_bits": 3.5,
+          "min_unique_colors": 256,
+          "min_consecutive_ssim": 0.9,
+          "min_historical_ssim": 0.35
+        }
+      },
+      "raw_png_exact": true,
+      "hashes_valid": true,
+      "pairing_valid": true,
+      "duration_s": 0.7568456940007309
+    },
+    "H3": {
+      "test_id": "H3",
+      "sensor_types": [
+        "rgb",
+        "depth",
+        "semantic",
+        "instance"
+      ],
+      "pose_name": "OLD",
+      "capture_status": "PASS",
+      "frames": [
+        {
+          "frame_id": 3824,
+          "timestamp": 74.75915236010042,
+          "sensor_frames": {
+            "rgb": 3824,
+            "depth": 3824,
+            "semantic": 3824,
+            "instance": 3824
+          },
+          "sensor_timestamps": {
+            "rgb": 74.75915236010042,
+            "depth": 74.75915236010042,
+            "semantic": 74.75915236010042,
+            "instance": 74.75915236010042
+          },
+          "raw_byte_lengths": {
+            "rgb": 1228800,
+            "depth": 1228800,
+            "semantic": 1228800,
+            "instance": 1228800
+          },
+          "K": [
+            [
+              320.00000000000006,
+              0.0,
+              319.5
+            ],
+            [
+              0.0,
+              320.00000000000006,
+              239.5
+            ],
+            [
+              0.0,
+              0.0,
+              1.0
+            ]
+          ],
+          "T_world_camera": [
+            [
+              6.123233995736766e-17,
+              1.0,
+              0.0,
+              -92.99478149414062
+            ],
+            [
+              -1.0,
+              6.123233995736766e-17,
+              0.0,
+              308.7154541015625
+            ],
+            [
+              0.0,
+              -0.0,
+              1.0,
+              12.002955436706543
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ],
+          "camera_transform": {
+            "location": {
+              "x": -92.99478149414062,
+              "y": 308.7154541015625,
+              "z": 12.002955436706543
+            },
+            "rotation": {
+              "pitch": 0.0,
+              "yaw": -90.0,
+              "roll": 0.0
+            }
+          },
+          "commanded_action": {
+            "test_id": "H3",
+            "capture_role": "FORMAL",
+            "formal_index": 0
+          },
+          "executed_delta_pose": [
+            [
+              1.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              1.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ],
+          "sensor_config": {
+            "width": 640,
+            "height": 480,
+            "horizontal_fov_deg": 90.0,
+            "fixed_delta_seconds": 0.05,
+            "blueprints": {
+              "rgb": "sensor.camera.rgb",
+              "depth": "sensor.camera.depth",
+              "semantic": "sensor.camera.semantic_segmentation",
+              "instance": "sensor.camera.instance_segmentation"
+            },
+            "raw_buffer_ownership": "bytes copied inside callback",
+            "raw_channel_order": "BGRA from CARLA; RGB PNG decoded from saved bytes"
+          },
+          "files": {
+            "rgb_bgra": {
+              "path": "results/cap0/raw/H3/h3_00_frame_3824_rgb.bgra.bin",
+              "sha256": "04c9c9802af331f10557f08b535bbfe14d7f6f4d41dd7fd00955dab8fca9146d",
+              "size_bytes": 1228800
+            },
+            "rgb": {
+              "path": "results/cap0/raw/H3/h3_00_frame_3824_rgb.png",
+              "sha256": "7487d1869417a30f094841e56c8a3ae31a38b17c00b27f95ebbb9cff7c0d72b3",
+              "size_bytes": 575708
+            },
+            "depth_raw": {
+              "path": "results/cap0/raw/H3/h3_00_frame_3824_depth.raw.bin",
+              "sha256": "4279c6a220e5265472e3825cf2b33ab20c943583ef7c413057631230a5d26063",
+              "size_bytes": 1228800
+            },
+            "depth_m": {
+              "path": "results/cap0/raw/H3/h3_00_frame_3824_depth_m.npy",
+              "sha256": "a12f69b8bc043590bff9f888780e7e1ed4913c68231e8c76caf4e32a8a0db0dc",
+              "size_bytes": 1228928
+            },
+            "semantic": {
+              "path": "results/cap0/raw/H3/h3_00_frame_3824_semantic_raw.png",
+              "sha256": "16e8d2437ba2d38e9613ac0196ca53e8a70677d71b8cd97e9a7249c292e58da5",
+              "size_bytes": 2994
+            },
+            "instance": {
+              "path": "results/cap0/raw/H3/h3_00_frame_3824_instance_raw.png",
+              "sha256": "ef1108ab5981810e711bd9a6701e08b4e7d5203df2b057b91d04ab6716e6f824",
+              "size_bytes": 3682
+            }
+          },
+          "test_id": "H3",
+          "pose_name": "OLD",
+          "formal_index": 0,
+          "metadata_path": "results/cap0/raw/H3/h3_00_frame_3824.json"
+        },
+        {
+          "frame_id": 3825,
+          "timestamp": 74.80915236084547,
+          "sensor_frames": {
+            "rgb": 3825,
+            "depth": 3825,
+            "semantic": 3825,
+            "instance": 3825
+          },
+          "sensor_timestamps": {
+            "rgb": 74.80915236084547,
+            "depth": 74.80915236084547,
+            "semantic": 74.80915236084547,
+            "instance": 74.80915236084547
+          },
+          "raw_byte_lengths": {
+            "rgb": 1228800,
+            "depth": 1228800,
+            "semantic": 1228800,
+            "instance": 1228800
+          },
+          "K": [
+            [
+              320.00000000000006,
+              0.0,
+              319.5
+            ],
+            [
+              0.0,
+              320.00000000000006,
+              239.5
+            ],
+            [
+              0.0,
+              0.0,
+              1.0
+            ]
+          ],
+          "T_world_camera": [
+            [
+              6.123233995736766e-17,
+              1.0,
+              0.0,
+              -92.99478149414062
+            ],
+            [
+              -1.0,
+              6.123233995736766e-17,
+              0.0,
+              308.7154541015625
+            ],
+            [
+              0.0,
+              -0.0,
+              1.0,
+              12.002955436706543
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ],
+          "camera_transform": {
+            "location": {
+              "x": -92.99478149414062,
+              "y": 308.7154541015625,
+              "z": 12.002955436706543
+            },
+            "rotation": {
+              "pitch": 0.0,
+              "yaw": -90.0,
+              "roll": 0.0
+            }
+          },
+          "commanded_action": {
+            "test_id": "H3",
+            "capture_role": "FORMAL",
+            "formal_index": 1
+          },
+          "executed_delta_pose": [
+            [
+              1.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              1.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ],
+          "sensor_config": {
+            "width": 640,
+            "height": 480,
+            "horizontal_fov_deg": 90.0,
+            "fixed_delta_seconds": 0.05,
+            "blueprints": {
+              "rgb": "sensor.camera.rgb",
+              "depth": "sensor.camera.depth",
+              "semantic": "sensor.camera.semantic_segmentation",
+              "instance": "sensor.camera.instance_segmentation"
+            },
+            "raw_buffer_ownership": "bytes copied inside callback",
+            "raw_channel_order": "BGRA from CARLA; RGB PNG decoded from saved bytes"
+          },
+          "files": {
+            "rgb_bgra": {
+              "path": "results/cap0/raw/H3/h3_01_frame_3825_rgb.bgra.bin",
+              "sha256": "ea13de14cf075d93b0ac1a2da1d11a33cb07ed6ed0bb7b5c9a64cf092f83c236",
+              "size_bytes": 1228800
+            },
+            "rgb": {
+              "path": "results/cap0/raw/H3/h3_01_frame_3825_rgb.png",
+              "sha256": "8cb3cf196056aac7be8d3df9ff373861829015290921eb1633328b3fc372692d",
+              "size_bytes": 574590
+            },
+            "depth_raw": {
+              "path": "results/cap0/raw/H3/h3_01_frame_3825_depth.raw.bin",
+              "sha256": "4279c6a220e5265472e3825cf2b33ab20c943583ef7c413057631230a5d26063",
+              "size_bytes": 1228800
+            },
+            "depth_m": {
+              "path": "results/cap0/raw/H3/h3_01_frame_3825_depth_m.npy",
+              "sha256": "a12f69b8bc043590bff9f888780e7e1ed4913c68231e8c76caf4e32a8a0db0dc",
+              "size_bytes": 1228928
+            },
+            "semantic": {
+              "path": "results/cap0/raw/H3/h3_01_frame_3825_semantic_raw.png",
+              "sha256": "16e8d2437ba2d38e9613ac0196ca53e8a70677d71b8cd97e9a7249c292e58da5",
+              "size_bytes": 2994
+            },
+            "instance": {
+              "path": "results/cap0/raw/H3/h3_01_frame_3825_instance_raw.png",
+              "sha256": "ef1108ab5981810e711bd9a6701e08b4e7d5203df2b057b91d04ab6716e6f824",
+              "size_bytes": 3682
+            }
+          },
+          "test_id": "H3",
+          "pose_name": "OLD",
+          "formal_index": 1,
+          "metadata_path": "results/cap0/raw/H3/h3_01_frame_3825.json"
+        },
+        {
+          "frame_id": 3826,
+          "timestamp": 74.85915236159053,
+          "sensor_frames": {
+            "rgb": 3826,
+            "depth": 3826,
+            "semantic": 3826,
+            "instance": 3826
+          },
+          "sensor_timestamps": {
+            "rgb": 74.85915236159053,
+            "depth": 74.85915236159053,
+            "semantic": 74.85915236159053,
+            "instance": 74.85915236159053
+          },
+          "raw_byte_lengths": {
+            "rgb": 1228800,
+            "depth": 1228800,
+            "semantic": 1228800,
+            "instance": 1228800
+          },
+          "K": [
+            [
+              320.00000000000006,
+              0.0,
+              319.5
+            ],
+            [
+              0.0,
+              320.00000000000006,
+              239.5
+            ],
+            [
+              0.0,
+              0.0,
+              1.0
+            ]
+          ],
+          "T_world_camera": [
+            [
+              6.123233995736766e-17,
+              1.0,
+              0.0,
+              -92.99478149414062
+            ],
+            [
+              -1.0,
+              6.123233995736766e-17,
+              0.0,
+              308.7154541015625
+            ],
+            [
+              0.0,
+              -0.0,
+              1.0,
+              12.002955436706543
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ],
+          "camera_transform": {
+            "location": {
+              "x": -92.99478149414062,
+              "y": 308.7154541015625,
+              "z": 12.002955436706543
+            },
+            "rotation": {
+              "pitch": 0.0,
+              "yaw": -90.0,
+              "roll": 0.0
+            }
+          },
+          "commanded_action": {
+            "test_id": "H3",
+            "capture_role": "FORMAL",
+            "formal_index": 2
+          },
+          "executed_delta_pose": [
+            [
+              1.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              1.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ],
+          "sensor_config": {
+            "width": 640,
+            "height": 480,
+            "horizontal_fov_deg": 90.0,
+            "fixed_delta_seconds": 0.05,
+            "blueprints": {
+              "rgb": "sensor.camera.rgb",
+              "depth": "sensor.camera.depth",
+              "semantic": "sensor.camera.semantic_segmentation",
+              "instance": "sensor.camera.instance_segmentation"
+            },
+            "raw_buffer_ownership": "bytes copied inside callback",
+            "raw_channel_order": "BGRA from CARLA; RGB PNG decoded from saved bytes"
+          },
+          "files": {
+            "rgb_bgra": {
+              "path": "results/cap0/raw/H3/h3_02_frame_3826_rgb.bgra.bin",
+              "sha256": "98d69c2f0130e281912b17411a566f0923e5a72a558a0ed6019c91bee5d5326d",
+              "size_bytes": 1228800
+            },
+            "rgb": {
+              "path": "results/cap0/raw/H3/h3_02_frame_3826_rgb.png",
+              "sha256": "cf3c9c0c1b1a4640308c7ecc140b613f3b804a1e43bdbb9f2939ac3b4fcf1627",
+              "size_bytes": 579295
+            },
+            "depth_raw": {
+              "path": "results/cap0/raw/H3/h3_02_frame_3826_depth.raw.bin",
+              "sha256": "4279c6a220e5265472e3825cf2b33ab20c943583ef7c413057631230a5d26063",
+              "size_bytes": 1228800
+            },
+            "depth_m": {
+              "path": "results/cap0/raw/H3/h3_02_frame_3826_depth_m.npy",
+              "sha256": "a12f69b8bc043590bff9f888780e7e1ed4913c68231e8c76caf4e32a8a0db0dc",
+              "size_bytes": 1228928
+            },
+            "semantic": {
+              "path": "results/cap0/raw/H3/h3_02_frame_3826_semantic_raw.png",
+              "sha256": "16e8d2437ba2d38e9613ac0196ca53e8a70677d71b8cd97e9a7249c292e58da5",
+              "size_bytes": 2994
+            },
+            "instance": {
+              "path": "results/cap0/raw/H3/h3_02_frame_3826_instance_raw.png",
+              "sha256": "ef1108ab5981810e711bd9a6701e08b4e7d5203df2b057b91d04ab6716e6f824",
+              "size_bytes": 3682
+            }
+          },
+          "test_id": "H3",
+          "pose_name": "OLD",
+          "formal_index": 2,
+          "metadata_path": "results/cap0/raw/H3/h3_02_frame_3826.json"
+        }
+      ],
+      "warmup": {
+        "status": "PASS",
+        "discarded_frames": 5,
+        "consecutive_complete": 5
+      },
+      "rgb_integrity": {
+        "status": "PASS",
+        "entropy_bits": [
+          7.712577770502229,
+          7.707779851510172,
+          7.705034462346241
+        ],
+        "unique_colors": [
+          60943,
+          60908,
+          61145
+        ],
+        "consecutive_ssim": [
+          0.9979223077690714,
+          0.9983513372589456
+        ],
+        "historical_ssim": 0.558304511789913,
+        "tile_repetition_diagnostic": [
+          {
+            "pair_count": 110,
+            "max_similarity": 0.6358139128318252,
+            "fraction_above_0_98": 0.0
+          },
+          {
+            "pair_count": 110,
+            "max_similarity": 0.6297661456785144,
+            "fraction_above_0_98": 0.0
+          },
+          {
+            "pair_count": 110,
+            "max_similarity": 0.6238520029126496,
+            "fraction_above_0_98": 0.0
+          }
+        ],
+        "thresholds": {
+          "min_entropy_bits": 3.5,
+          "min_unique_colors": 256,
+          "min_consecutive_ssim": 0.9,
+          "min_historical_ssim": 0.35
+        }
+      },
+      "raw_png_exact": true,
+      "hashes_valid": true,
+      "pairing_valid": true,
+      "duration_s": 1.3973594330000196
+    },
+    "H4": {
+      "test_id": "H4",
+      "sensor_types": [
+        "rgb",
+        "depth",
+        "semantic",
+        "instance"
+      ],
+      "pose_name": "NEW",
+      "capture_status": "PASS",
+      "frames": [
+        {
+          "frame_id": 3838,
+          "timestamp": 75.37301718357776,
+          "sensor_frames": {
+            "rgb": 3838,
+            "depth": 3838,
+            "semantic": 3838,
+            "instance": 3838
+          },
+          "sensor_timestamps": {
+            "rgb": 75.37301718357776,
+            "depth": 75.37301718357776,
+            "semantic": 75.37301718357776,
+            "instance": 75.37301718357776
+          },
+          "raw_byte_lengths": {
+            "rgb": 1228800,
+            "depth": 1228800,
+            "semantic": 1228800,
+            "instance": 1228800
+          },
+          "K": [
+            [
+              320.00000000000006,
+              0.0,
+              319.5
+            ],
+            [
+              0.0,
+              320.00000000000006,
+              239.5
+            ],
+            [
+              0.0,
+              0.0,
+              1.0
+            ]
+          ],
+          "T_world_camera": [
+            [
+              6.123233995736766e-17,
+              1.0,
+              0.0,
+              -92.99478149414062
+            ],
+            [
+              -1.0,
+              6.123233995736766e-17,
+              0.0,
+              288.3297424316406
+            ],
+            [
+              0.0,
+              -0.0,
+              1.0,
+              12.002955436706543
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ],
+          "camera_transform": {
+            "location": {
+              "x": -92.99478149414062,
+              "y": 288.3297424316406,
+              "z": 12.002955436706543
+            },
+            "rotation": {
+              "pitch": 0.0,
+              "yaw": -90.0,
+              "roll": 0.0
+            }
+          },
+          "commanded_action": {
+            "test_id": "H4",
+            "capture_role": "FORMAL",
+            "formal_index": 0
+          },
+          "executed_delta_pose": [
+            [
+              1.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              1.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ],
+          "sensor_config": {
+            "width": 640,
+            "height": 480,
+            "horizontal_fov_deg": 90.0,
+            "fixed_delta_seconds": 0.05,
+            "blueprints": {
+              "rgb": "sensor.camera.rgb",
+              "depth": "sensor.camera.depth",
+              "semantic": "sensor.camera.semantic_segmentation",
+              "instance": "sensor.camera.instance_segmentation"
+            },
+            "raw_buffer_ownership": "bytes copied inside callback",
+            "raw_channel_order": "BGRA from CARLA; RGB PNG decoded from saved bytes"
+          },
+          "files": {
+            "rgb_bgra": {
+              "path": "results/cap0/raw/H4/h4_00_frame_3838_rgb.bgra.bin",
+              "sha256": "d9363d2519abdf2f84f483b5e372b23993a2830e573ffd2f0c821f2011e4f0d1",
+              "size_bytes": 1228800
+            },
+            "rgb": {
+              "path": "results/cap0/raw/H4/h4_00_frame_3838_rgb.png",
+              "sha256": "477000e9eb0a4ffba868667815aea104f64e3c7080ee400293d8059ba8146c49",
+              "size_bytes": 506669
+            },
+            "depth_raw": {
+              "path": "results/cap0/raw/H4/h4_00_frame_3838_depth.raw.bin",
+              "sha256": "fe1ae967c9a53fbf52aa65637f96dce5ac44110c554d5de5ce0f0ee1f663c23a",
+              "size_bytes": 1228800
+            },
+            "depth_m": {
+              "path": "results/cap0/raw/H4/h4_00_frame_3838_depth_m.npy",
+              "sha256": "45d679cb91ef8fed1d19c715168d805a01f5ae1a6ae8a612f3cf5b112f6def40",
+              "size_bytes": 1228928
+            },
+            "semantic": {
+              "path": "results/cap0/raw/H4/h4_00_frame_3838_semantic_raw.png",
+              "sha256": "780c35610badfed9d78868c3b84eeb788591337169345f74bd3306010aadedb6",
+              "size_bytes": 1954
+            },
+            "instance": {
+              "path": "results/cap0/raw/H4/h4_00_frame_3838_instance_raw.png",
+              "sha256": "6ab3dea9e0f4c554d404922c3fe7eb86083713a1ccc90fdcfbbef3034b18ece5",
+              "size_bytes": 2019
+            }
+          },
+          "test_id": "H4",
+          "pose_name": "NEW",
+          "formal_index": 0,
+          "metadata_path": "results/cap0/raw/H4/h4_00_frame_3838.json"
+        },
+        {
+          "frame_id": 3839,
+          "timestamp": 75.42301718432282,
+          "sensor_frames": {
+            "rgb": 3839,
+            "depth": 3839,
+            "semantic": 3839,
+            "instance": 3839
+          },
+          "sensor_timestamps": {
+            "rgb": 75.42301718432282,
+            "depth": 75.42301718432282,
+            "semantic": 75.42301718432282,
+            "instance": 75.42301718432282
+          },
+          "raw_byte_lengths": {
+            "rgb": 1228800,
+            "depth": 1228800,
+            "semantic": 1228800,
+            "instance": 1228800
+          },
+          "K": [
+            [
+              320.00000000000006,
+              0.0,
+              319.5
+            ],
+            [
+              0.0,
+              320.00000000000006,
+              239.5
+            ],
+            [
+              0.0,
+              0.0,
+              1.0
+            ]
+          ],
+          "T_world_camera": [
+            [
+              6.123233995736766e-17,
+              1.0,
+              0.0,
+              -92.99478149414062
+            ],
+            [
+              -1.0,
+              6.123233995736766e-17,
+              0.0,
+              288.3297424316406
+            ],
+            [
+              0.0,
+              -0.0,
+              1.0,
+              12.002955436706543
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ],
+          "camera_transform": {
+            "location": {
+              "x": -92.99478149414062,
+              "y": 288.3297424316406,
+              "z": 12.002955436706543
+            },
+            "rotation": {
+              "pitch": 0.0,
+              "yaw": -90.0,
+              "roll": 0.0
+            }
+          },
+          "commanded_action": {
+            "test_id": "H4",
+            "capture_role": "FORMAL",
+            "formal_index": 1
+          },
+          "executed_delta_pose": [
+            [
+              1.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              1.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ],
+          "sensor_config": {
+            "width": 640,
+            "height": 480,
+            "horizontal_fov_deg": 90.0,
+            "fixed_delta_seconds": 0.05,
+            "blueprints": {
+              "rgb": "sensor.camera.rgb",
+              "depth": "sensor.camera.depth",
+              "semantic": "sensor.camera.semantic_segmentation",
+              "instance": "sensor.camera.instance_segmentation"
+            },
+            "raw_buffer_ownership": "bytes copied inside callback",
+            "raw_channel_order": "BGRA from CARLA; RGB PNG decoded from saved bytes"
+          },
+          "files": {
+            "rgb_bgra": {
+              "path": "results/cap0/raw/H4/h4_01_frame_3839_rgb.bgra.bin",
+              "sha256": "04e2c8d3f86da156e14bd62244cc0780a8091ba50061a5a8493eb3eecc921487",
+              "size_bytes": 1228800
+            },
+            "rgb": {
+              "path": "results/cap0/raw/H4/h4_01_frame_3839_rgb.png",
+              "sha256": "9e12eb661333271024b757cd1a6caaf169537afa3a4fd6f56325c990ab32a942",
+              "size_bytes": 504677
+            },
+            "depth_raw": {
+              "path": "results/cap0/raw/H4/h4_01_frame_3839_depth.raw.bin",
+              "sha256": "fe1ae967c9a53fbf52aa65637f96dce5ac44110c554d5de5ce0f0ee1f663c23a",
+              "size_bytes": 1228800
+            },
+            "depth_m": {
+              "path": "results/cap0/raw/H4/h4_01_frame_3839_depth_m.npy",
+              "sha256": "45d679cb91ef8fed1d19c715168d805a01f5ae1a6ae8a612f3cf5b112f6def40",
+              "size_bytes": 1228928
+            },
+            "semantic": {
+              "path": "results/cap0/raw/H4/h4_01_frame_3839_semantic_raw.png",
+              "sha256": "780c35610badfed9d78868c3b84eeb788591337169345f74bd3306010aadedb6",
+              "size_bytes": 1954
+            },
+            "instance": {
+              "path": "results/cap0/raw/H4/h4_01_frame_3839_instance_raw.png",
+              "sha256": "6ab3dea9e0f4c554d404922c3fe7eb86083713a1ccc90fdcfbbef3034b18ece5",
+              "size_bytes": 2019
+            }
+          },
+          "test_id": "H4",
+          "pose_name": "NEW",
+          "formal_index": 1,
+          "metadata_path": "results/cap0/raw/H4/h4_01_frame_3839.json"
+        },
+        {
+          "frame_id": 3840,
+          "timestamp": 75.47301718506787,
+          "sensor_frames": {
+            "rgb": 3840,
+            "depth": 3840,
+            "semantic": 3840,
+            "instance": 3840
+          },
+          "sensor_timestamps": {
+            "rgb": 75.47301718506787,
+            "depth": 75.47301718506787,
+            "semantic": 75.47301718506787,
+            "instance": 75.47301718506787
+          },
+          "raw_byte_lengths": {
+            "rgb": 1228800,
+            "depth": 1228800,
+            "semantic": 1228800,
+            "instance": 1228800
+          },
+          "K": [
+            [
+              320.00000000000006,
+              0.0,
+              319.5
+            ],
+            [
+              0.0,
+              320.00000000000006,
+              239.5
+            ],
+            [
+              0.0,
+              0.0,
+              1.0
+            ]
+          ],
+          "T_world_camera": [
+            [
+              6.123233995736766e-17,
+              1.0,
+              0.0,
+              -92.99478149414062
+            ],
+            [
+              -1.0,
+              6.123233995736766e-17,
+              0.0,
+              288.3297424316406
+            ],
+            [
+              0.0,
+              -0.0,
+              1.0,
+              12.002955436706543
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ],
+          "camera_transform": {
+            "location": {
+              "x": -92.99478149414062,
+              "y": 288.3297424316406,
+              "z": 12.002955436706543
+            },
+            "rotation": {
+              "pitch": 0.0,
+              "yaw": -90.0,
+              "roll": 0.0
+            }
+          },
+          "commanded_action": {
+            "test_id": "H4",
+            "capture_role": "FORMAL",
+            "formal_index": 2
+          },
+          "executed_delta_pose": [
+            [
+              1.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              1.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ],
+          "sensor_config": {
+            "width": 640,
+            "height": 480,
+            "horizontal_fov_deg": 90.0,
+            "fixed_delta_seconds": 0.05,
+            "blueprints": {
+              "rgb": "sensor.camera.rgb",
+              "depth": "sensor.camera.depth",
+              "semantic": "sensor.camera.semantic_segmentation",
+              "instance": "sensor.camera.instance_segmentation"
+            },
+            "raw_buffer_ownership": "bytes copied inside callback",
+            "raw_channel_order": "BGRA from CARLA; RGB PNG decoded from saved bytes"
+          },
+          "files": {
+            "rgb_bgra": {
+              "path": "results/cap0/raw/H4/h4_02_frame_3840_rgb.bgra.bin",
+              "sha256": "552a447bd894403acadb2dfd07206bc8e39eebef7d731da466e0711ca453a326",
+              "size_bytes": 1228800
+            },
+            "rgb": {
+              "path": "results/cap0/raw/H4/h4_02_frame_3840_rgb.png",
+              "sha256": "57bd4129718b574a809ebbdc4fc800c0985e45e8f0efeabd7eeeb9d3fbc94716",
+              "size_bytes": 508627
+            },
+            "depth_raw": {
+              "path": "results/cap0/raw/H4/h4_02_frame_3840_depth.raw.bin",
+              "sha256": "fe1ae967c9a53fbf52aa65637f96dce5ac44110c554d5de5ce0f0ee1f663c23a",
+              "size_bytes": 1228800
+            },
+            "depth_m": {
+              "path": "results/cap0/raw/H4/h4_02_frame_3840_depth_m.npy",
+              "sha256": "45d679cb91ef8fed1d19c715168d805a01f5ae1a6ae8a612f3cf5b112f6def40",
+              "size_bytes": 1228928
+            },
+            "semantic": {
+              "path": "results/cap0/raw/H4/h4_02_frame_3840_semantic_raw.png",
+              "sha256": "780c35610badfed9d78868c3b84eeb788591337169345f74bd3306010aadedb6",
+              "size_bytes": 1954
+            },
+            "instance": {
+              "path": "results/cap0/raw/H4/h4_02_frame_3840_instance_raw.png",
+              "sha256": "6ab3dea9e0f4c554d404922c3fe7eb86083713a1ccc90fdcfbbef3034b18ece5",
+              "size_bytes": 2019
+            }
+          },
+          "test_id": "H4",
+          "pose_name": "NEW",
+          "formal_index": 2,
+          "metadata_path": "results/cap0/raw/H4/h4_02_frame_3840.json"
+        }
+      ],
+      "warmup": {
+        "status": "PASS",
+        "discarded_frames": 5,
+        "consecutive_complete": 5
+      },
+      "rgb_integrity": {
+        "status": "PASS",
+        "entropy_bits": [
+          7.460133711147231,
+          7.464493251801571,
+          7.46913901432023
+        ],
+        "unique_colors": [
+          65595,
+          66026,
+          66933
+        ],
+        "consecutive_ssim": [
+          0.9983396399632054,
+          0.99892723607971
+        ],
+        "historical_ssim": null,
+        "tile_repetition_diagnostic": [
+          {
+            "pair_count": 110,
+            "max_similarity": 0.9228506019160432,
+            "fraction_above_0_98": 0.0
+          },
+          {
+            "pair_count": 110,
+            "max_similarity": 0.9185443936764375,
+            "fraction_above_0_98": 0.0
+          },
+          {
+            "pair_count": 110,
+            "max_similarity": 0.9164554196964907,
+            "fraction_above_0_98": 0.0
+          }
+        ],
+        "thresholds": {
+          "min_entropy_bits": 3.5,
+          "min_unique_colors": 256,
+          "min_consecutive_ssim": 0.9,
+          "min_historical_ssim": 0.35
+        }
+      },
+      "raw_png_exact": true,
+      "hashes_valid": true,
+      "pairing_valid": true,
+      "duration_s": 1.3797068370004126
+    },
+    "H5": {
+      "test_id": "H5",
+      "sensor_types": [
+        "rgb",
+        "depth",
+        "semantic",
+        "instance"
+      ],
+      "pose_name": "OLD_PLUS_0.5M",
+      "capture_status": "PASS",
+      "frames": [
+        {
+          "frame_id": 3855,
+          "timestamp": 76.1373771555518,
+          "sensor_frames": {
+            "rgb": 3855,
+            "depth": 3855,
+            "semantic": 3855,
+            "instance": 3855
+          },
+          "sensor_timestamps": {
+            "rgb": 76.1373771555518,
+            "depth": 76.1373771555518,
+            "semantic": 76.1373771555518,
+            "instance": 76.1373771555518
+          },
+          "raw_byte_lengths": {
+            "rgb": 1228800,
+            "depth": 1228800,
+            "semantic": 1228800,
+            "instance": 1228800
+          },
+          "K": [
+            [
+              320.00000000000006,
+              0.0,
+              319.5
+            ],
+            [
+              0.0,
+              320.00000000000006,
+              239.5
+            ],
+            [
+              0.0,
+              0.0,
+              1.0
+            ]
+          ],
+          "T_world_camera": [
+            [
+              6.123233995736766e-17,
+              1.0,
+              0.0,
+              -92.49478149414062
+            ],
+            [
+              -1.0,
+              6.123233995736766e-17,
+              0.0,
+              308.7154541015625
+            ],
+            [
+              0.0,
+              -0.0,
+              1.0,
+              12.002955436706543
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ],
+          "camera_transform": {
+            "location": {
+              "x": -92.49478149414062,
+              "y": 308.7154541015625,
+              "z": 12.002955436706543
+            },
+            "rotation": {
+              "pitch": 0.0,
+              "yaw": -90.0,
+              "roll": 0.0
+            }
+          },
+          "commanded_action": {
+            "test_id": "H5",
+            "capture_role": "FORMAL",
+            "formal_index": 0
+          },
+          "executed_delta_pose": [
+            [
+              1.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              1.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ],
+          "sensor_config": {
+            "width": 640,
+            "height": 480,
+            "horizontal_fov_deg": 90.0,
+            "fixed_delta_seconds": 0.05,
+            "blueprints": {
+              "rgb": "sensor.camera.rgb",
+              "depth": "sensor.camera.depth",
+              "semantic": "sensor.camera.semantic_segmentation",
+              "instance": "sensor.camera.instance_segmentation"
+            },
+            "raw_buffer_ownership": "bytes copied inside callback",
+            "raw_channel_order": "BGRA from CARLA; RGB PNG decoded from saved bytes"
+          },
+          "files": {
+            "rgb_bgra": {
+              "path": "results/cap0/raw/H5/h5_00_frame_3855_rgb.bgra.bin",
+              "sha256": "f6cf3b868396aa17487c4aec070a06307a8be5759385f029f146deda6412daa0",
+              "size_bytes": 1228800
+            },
+            "rgb": {
+              "path": "results/cap0/raw/H5/h5_00_frame_3855_rgb.png",
+              "sha256": "bd3e8c502b68a986e769d35f75b68d953db34fabaddeb63a1adde26325ffd30e",
+              "size_bytes": 582667
+            },
+            "depth_raw": {
+              "path": "results/cap0/raw/H5/h5_00_frame_3855_depth.raw.bin",
+              "sha256": "6b1175b2440ede3fd68787a68a2b908b31bb33f999f9eada8e6f4ea5cc7f7b67",
+              "size_bytes": 1228800
+            },
+            "depth_m": {
+              "path": "results/cap0/raw/H5/h5_00_frame_3855_depth_m.npy",
+              "sha256": "c4b2e194b14a3da199f79fda6bd23d95fab17b63f37b139467c0dcda8a0823c8",
+              "size_bytes": 1228928
+            },
+            "semantic": {
+              "path": "results/cap0/raw/H5/h5_00_frame_3855_semantic_raw.png",
+              "sha256": "c0d127c270e9c384e633ddce1150bd7b08f0e2cda07dfa0d3d51223a8f0461c8",
+              "size_bytes": 2938
+            },
+            "instance": {
+              "path": "results/cap0/raw/H5/h5_00_frame_3855_instance_raw.png",
+              "sha256": "c152631bffee603e08ca7b535ef0c460fba6ea2eac5bd58c9938c23a01394591",
+              "size_bytes": 3665
+            }
+          },
+          "test_id": "H5",
+          "pose_name": "OLD_PLUS_0.5M",
+          "formal_index": 0,
+          "metadata_path": "results/cap0/raw/H5/h5_00_frame_3855.json"
+        },
+        {
+          "frame_id": 3856,
+          "timestamp": 76.18737715629686,
+          "sensor_frames": {
+            "rgb": 3856,
+            "depth": 3856,
+            "semantic": 3856,
+            "instance": 3856
+          },
+          "sensor_timestamps": {
+            "rgb": 76.18737715629686,
+            "depth": 76.18737715629686,
+            "semantic": 76.18737715629686,
+            "instance": 76.18737715629686
+          },
+          "raw_byte_lengths": {
+            "rgb": 1228800,
+            "depth": 1228800,
+            "semantic": 1228800,
+            "instance": 1228800
+          },
+          "K": [
+            [
+              320.00000000000006,
+              0.0,
+              319.5
+            ],
+            [
+              0.0,
+              320.00000000000006,
+              239.5
+            ],
+            [
+              0.0,
+              0.0,
+              1.0
+            ]
+          ],
+          "T_world_camera": [
+            [
+              6.123233995736766e-17,
+              1.0,
+              0.0,
+              -92.49478149414062
+            ],
+            [
+              -1.0,
+              6.123233995736766e-17,
+              0.0,
+              308.7154541015625
+            ],
+            [
+              0.0,
+              -0.0,
+              1.0,
+              12.002955436706543
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ],
+          "camera_transform": {
+            "location": {
+              "x": -92.49478149414062,
+              "y": 308.7154541015625,
+              "z": 12.002955436706543
+            },
+            "rotation": {
+              "pitch": 0.0,
+              "yaw": -90.0,
+              "roll": 0.0
+            }
+          },
+          "commanded_action": {
+            "test_id": "H5",
+            "capture_role": "FORMAL",
+            "formal_index": 1
+          },
+          "executed_delta_pose": [
+            [
+              1.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              1.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ],
+          "sensor_config": {
+            "width": 640,
+            "height": 480,
+            "horizontal_fov_deg": 90.0,
+            "fixed_delta_seconds": 0.05,
+            "blueprints": {
+              "rgb": "sensor.camera.rgb",
+              "depth": "sensor.camera.depth",
+              "semantic": "sensor.camera.semantic_segmentation",
+              "instance": "sensor.camera.instance_segmentation"
+            },
+            "raw_buffer_ownership": "bytes copied inside callback",
+            "raw_channel_order": "BGRA from CARLA; RGB PNG decoded from saved bytes"
+          },
+          "files": {
+            "rgb_bgra": {
+              "path": "results/cap0/raw/H5/h5_01_frame_3856_rgb.bgra.bin",
+              "sha256": "6f291cd786dd5c43bd81e9daeb1da334f0fd086efb947e872c9e512940156c80",
+              "size_bytes": 1228800
+            },
+            "rgb": {
+              "path": "results/cap0/raw/H5/h5_01_frame_3856_rgb.png",
+              "sha256": "acb6b535c3916b849bceed7ba580a1a57bb4d70d78c7331908b55ad0be391dd2",
+              "size_bytes": 590192
+            },
+            "depth_raw": {
+              "path": "results/cap0/raw/H5/h5_01_frame_3856_depth.raw.bin",
+              "sha256": "6b1175b2440ede3fd68787a68a2b908b31bb33f999f9eada8e6f4ea5cc7f7b67",
+              "size_bytes": 1228800
+            },
+            "depth_m": {
+              "path": "results/cap0/raw/H5/h5_01_frame_3856_depth_m.npy",
+              "sha256": "c4b2e194b14a3da199f79fda6bd23d95fab17b63f37b139467c0dcda8a0823c8",
+              "size_bytes": 1228928
+            },
+            "semantic": {
+              "path": "results/cap0/raw/H5/h5_01_frame_3856_semantic_raw.png",
+              "sha256": "c0d127c270e9c384e633ddce1150bd7b08f0e2cda07dfa0d3d51223a8f0461c8",
+              "size_bytes": 2938
+            },
+            "instance": {
+              "path": "results/cap0/raw/H5/h5_01_frame_3856_instance_raw.png",
+              "sha256": "c152631bffee603e08ca7b535ef0c460fba6ea2eac5bd58c9938c23a01394591",
+              "size_bytes": 3665
+            }
+          },
+          "test_id": "H5",
+          "pose_name": "OLD_PLUS_0.5M",
+          "formal_index": 1,
+          "metadata_path": "results/cap0/raw/H5/h5_01_frame_3856.json"
+        },
+        {
+          "frame_id": 3857,
+          "timestamp": 76.23737715704192,
+          "sensor_frames": {
+            "rgb": 3857,
+            "depth": 3857,
+            "semantic": 3857,
+            "instance": 3857
+          },
+          "sensor_timestamps": {
+            "rgb": 76.23737715704192,
+            "depth": 76.23737715704192,
+            "semantic": 76.23737715704192,
+            "instance": 76.23737715704192
+          },
+          "raw_byte_lengths": {
+            "rgb": 1228800,
+            "depth": 1228800,
+            "semantic": 1228800,
+            "instance": 1228800
+          },
+          "K": [
+            [
+              320.00000000000006,
+              0.0,
+              319.5
+            ],
+            [
+              0.0,
+              320.00000000000006,
+              239.5
+            ],
+            [
+              0.0,
+              0.0,
+              1.0
+            ]
+          ],
+          "T_world_camera": [
+            [
+              6.123233995736766e-17,
+              1.0,
+              0.0,
+              -92.49478149414062
+            ],
+            [
+              -1.0,
+              6.123233995736766e-17,
+              0.0,
+              308.7154541015625
+            ],
+            [
+              0.0,
+              -0.0,
+              1.0,
+              12.002955436706543
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ],
+          "camera_transform": {
+            "location": {
+              "x": -92.49478149414062,
+              "y": 308.7154541015625,
+              "z": 12.002955436706543
+            },
+            "rotation": {
+              "pitch": 0.0,
+              "yaw": -90.0,
+              "roll": 0.0
+            }
+          },
+          "commanded_action": {
+            "test_id": "H5",
+            "capture_role": "FORMAL",
+            "formal_index": 2
+          },
+          "executed_delta_pose": [
+            [
+              1.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              1.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ],
+          "sensor_config": {
+            "width": 640,
+            "height": 480,
+            "horizontal_fov_deg": 90.0,
+            "fixed_delta_seconds": 0.05,
+            "blueprints": {
+              "rgb": "sensor.camera.rgb",
+              "depth": "sensor.camera.depth",
+              "semantic": "sensor.camera.semantic_segmentation",
+              "instance": "sensor.camera.instance_segmentation"
+            },
+            "raw_buffer_ownership": "bytes copied inside callback",
+            "raw_channel_order": "BGRA from CARLA; RGB PNG decoded from saved bytes"
+          },
+          "files": {
+            "rgb_bgra": {
+              "path": "results/cap0/raw/H5/h5_02_frame_3857_rgb.bgra.bin",
+              "sha256": "74054c9f07d489d4af4209c00320ab2950ecd0b29e72c91ff5ed3a22376af5c3",
+              "size_bytes": 1228800
+            },
+            "rgb": {
+              "path": "results/cap0/raw/H5/h5_02_frame_3857_rgb.png",
+              "sha256": "d13dd87cf783d24107ba0a55ceb95292b4be5ac1b26188d66995db79729b26bf",
+              "size_bytes": 591387
+            },
+            "depth_raw": {
+              "path": "results/cap0/raw/H5/h5_02_frame_3857_depth.raw.bin",
+              "sha256": "6b1175b2440ede3fd68787a68a2b908b31bb33f999f9eada8e6f4ea5cc7f7b67",
+              "size_bytes": 1228800
+            },
+            "depth_m": {
+              "path": "results/cap0/raw/H5/h5_02_frame_3857_depth_m.npy",
+              "sha256": "c4b2e194b14a3da199f79fda6bd23d95fab17b63f37b139467c0dcda8a0823c8",
+              "size_bytes": 1228928
+            },
+            "semantic": {
+              "path": "results/cap0/raw/H5/h5_02_frame_3857_semantic_raw.png",
+              "sha256": "c0d127c270e9c384e633ddce1150bd7b08f0e2cda07dfa0d3d51223a8f0461c8",
+              "size_bytes": 2938
+            },
+            "instance": {
+              "path": "results/cap0/raw/H5/h5_02_frame_3857_instance_raw.png",
+              "sha256": "c152631bffee603e08ca7b535ef0c460fba6ea2eac5bd58c9938c23a01394591",
+              "size_bytes": 3665
+            }
+          },
+          "test_id": "H5",
+          "pose_name": "OLD_PLUS_0.5M",
+          "formal_index": 2,
+          "metadata_path": "results/cap0/raw/H5/h5_02_frame_3857.json"
+        }
+      ],
+      "warmup": {
+        "status": "PASS",
+        "discarded_frames": 5,
+        "consecutive_complete": 5
+      },
+      "settle": {
+        "status": "PASS",
+        "discarded_frames": [
+          3852,
+          3853,
+          3854
+        ]
+      },
+      "rgb_integrity": {
+        "status": "PASS",
+        "entropy_bits": [
+          7.680634907040881,
+          7.676282309081328,
+          7.684467724196066
+        ],
+        "unique_colors": [
+          61652,
+          62676,
+          63513
+        ],
+        "consecutive_ssim": [
+          0.9934114120391458,
+          0.9952094691410746
+        ],
+        "historical_ssim": null,
+        "tile_repetition_diagnostic": [
+          {
+            "pair_count": 110,
+            "max_similarity": 0.6099930928784437,
+            "fraction_above_0_98": 0.0
+          },
+          {
+            "pair_count": 110,
+            "max_similarity": 0.6028600206417941,
+            "fraction_above_0_98": 0.0
+          },
+          {
+            "pair_count": 110,
+            "max_similarity": 0.5981696602081314,
+            "fraction_above_0_98": 0.0
+          }
+        ],
+        "thresholds": {
+          "min_entropy_bits": 3.5,
+          "min_unique_colors": 256,
+          "min_consecutive_ssim": 0.9,
+          "min_historical_ssim": 0.35
+        }
+      },
+      "raw_png_exact": true,
+      "hashes_valid": true,
+      "pairing_valid": true,
+      "duration_s": 1.5586025659995357
+    }
+  },
+  "saved_frame_count": 15
+}
