@@ -73,6 +73,12 @@ def main(argv=None):
     act0r2_path = Path("results/act0r2/validation.json")
     act0r2_manifest_path = Path("results/act0r2/capture_manifest.json")
     act0r2_frames_path = Path("results/act0r2/frame_metrics.csv")
+    cf0_path = Path("results/cf0/validation.json")
+    cf0_manifest_path = Path("results/cf0/capture_manifest.json")
+    cf0_frame_path = Path("results/cf0/frame_manifest.csv")
+    cf0_branch_path = Path("results/cf0/branch_summary.csv")
+    cf0_fold_path = Path("results/cf0/fold_assignments.csv")
+    cf0_action_path = Path("results/cf0/action_selection.csv")
     r1 = json.loads(r1_path.read_text()) if r1_path.exists() else {}
     mask1 = json.loads(mask1_path.read_text()) if mask1_path.exists() else {}
     mask1_r1 = json.loads(mask1_r1_path.read_text()) if mask1_r1_path.exists() else {}
@@ -97,6 +103,8 @@ def main(argv=None):
     act0r1_offline = json.loads(act0r1_offline_path.read_text()) if act0r1_offline_path.exists() else {}
     act0r2 = json.loads(act0r2_path.read_text()) if act0r2_path.exists() else {}
     act0r2_manifest = json.loads(act0r2_manifest_path.read_text()) if act0r2_manifest_path.exists() else {}
+    cf0 = json.loads(cf0_path.read_text()) if cf0_path.exists() else {}
+    cf0_manifest = json.loads(cf0_manifest_path.read_text()) if cf0_manifest_path.exists() else {}
     act0s_matrix_count = 0
     if act0s_matrix_path.exists():
         with act0s_matrix_path.open(newline="") as handle:
@@ -108,6 +116,7 @@ def main(argv=None):
     act0r1_gates = act0r1.get("gates", {})
     act0r1_offline_gates = act0r1_offline.get("gates", {})
     act0r2_gates = act0r2.get("gates", {})
+    cf0_gates = cf0.get("gates", {})
     act0r1_offline_frame_count = 0
     if act0r1_offline_frames_path.exists():
         with act0r1_offline_frames_path.open(newline="") as handle:
@@ -119,6 +128,13 @@ def main(argv=None):
     act0r1_offline_assets = sorted(
         Path("docs/assets/act0r1").glob("offline_*.jpg"))
     act0r2_assets = sorted(Path("docs/assets/act0r2").glob("*.jpg"))
+    cf0_assets = sorted(Path("docs/assets/cf0").glob("*.jpg"))
+    cf0_csv_counts = {}
+    for name, path in (("frames", cf0_frame_path), ("branches", cf0_branch_path),
+                       ("folds", cf0_fold_path), ("actions", cf0_action_path)):
+        if path.exists():
+            with path.open(newline="") as handle:
+                cf0_csv_counts[name] = sum(1 for _row in csv.DictReader(handle))
     act0r2_frame_count = 0
     if act0r2_frames_path.exists():
         with act0r2_frames_path.open(newline="") as handle:
@@ -499,11 +515,99 @@ def main(argv=None):
                                         "status") == "NOT_EVALUATED",
         "act0r2_public_assets": len(act0r2_assets) == 6 and
                                 all(path.stat().st_size < 2_000_000 for path in act0r2_assets),
+        "cf0_required_compact_files": all(path.exists() for path in (
+                                        cf0_path, cf0_manifest_path, cf0_frame_path,
+                                        cf0_branch_path, cf0_fold_path, cf0_action_path,
+                                        Path("configs/experiments/cf0.yaml"),
+                                        Path("docs/CF0_OBSERVABILITY_AUDIT.md"))) and
+                                      cf0.get("schema") == "cf0.validation.v1" and
+                                      cf0_manifest.get("schema") == "cf0.capture_manifest.v1",
+        "cf0_capture_and_raw_audit": cf0.get("capture", {}).get("quartet_count") == 340 and
+                                      cf0.get("capture", {}).get("shared_start_count") == 20 and
+                                      cf0.get("capture", {}).get("branch_count") == 40 and
+                                      cf0_manifest.get("saved_frame_count") == 340 and
+                                      len(cf0_manifest.get("starts", [])) == 20 and
+                                      len(cf0_manifest.get("frames", [])) == 340 and
+                                      cf0.get("raw", {}).get("uploaded") is False and
+                                      cf0.get("raw", {}).get("hash_audit", {}).get(
+                                          "status") == "PASS" and
+                                      cf0.get("raw", {}).get("hash_audit", {}).get(
+                                          "checked_file_count") == 2040,
+        "cf0_csv_consistency": cf0_csv_counts == {"frames": 360, "branches": 40,
+                                                   "folds": 5, "actions": 80},
+        "cf0_event_definition": cf0.get("event_definition") == {
+                                      "minimum_span_over_target_bbox": 0.8,
+                                      "minimum_boundary_penetration_px": 16.0,
+                                      "minimum_target_side_fraction": 0.8,
+                                      "minimum_external_side_fraction": 0.8},
+        "cf0_pairing_start_and_coverage": all(cf0_gates.get(name, {}).get(
+                                                "status") == "PASS" for name in (
+                                                "COUNTERFACTUAL_PAIRING",
+                                                "START_BOUNDARY_ABSENT",
+                                                "ROBUST_EVENT_COVERAGE")) and
+                                          cf0_gates.get("ROBUST_EVENT_COVERAGE", {}).get(
+                                              "positive_branches") == 13 and
+                                          cf0_gates.get("ROBUST_EVENT_COVERAGE", {}).get(
+                                              "negative_branches") == 27,
+        "cf0_group_split_and_train_only_processing": cf0_gates.get(
+                                                "SPLIT_LEAKAGE_AUDIT", {}).get(
+                                                "status") == "PASS" and
+                                          cf0_gates.get("SPLIT_LEAKAGE_AUDIT", {}).get(
+                                              "left_right_same_fold") is True and
+                                          cf0_gates.get("SPLIT_LEAKAGE_AUDIT", {}).get(
+                                              "forbidden_features_present") == [] and
+                                          all(row.get("preprocessing", {}).get(
+                                              "classification", row.get(
+                                              "preprocessing", {})).get(
+                                              "preprocessing_fit_scope") ==
+                                              "training_fold_only"
+                                              for row in cf0.get("evaluation", {}).get(
+                                                  "baselines", {}).get("B3", {}).get(
+                                                  "folds", [])),
+        "cf0_preregistered_signal_failure": cf0_gates.get(
+                                                "VISUAL_INCREMENTAL_VALUE", {}).get(
+                                                "status") == "FAIL" and
+                                           cf0_gates.get(
+                                                "ACTION_SELECTION_SIGNAL", {}).get(
+                                                "status") == "FAIL" and
+                                           cf0_gates.get("SINGLE_SURFACE_SIGNAL", {}).get(
+                                                "status") == "FAIL" and
+                                           cf0_gates.get(
+                                                "READY_FOR_MULTI_SURFACE_CAPTURE", {}).get(
+                                                "status") == "FAIL",
+        "cf0_terminal_scope": cf0_gates.get("CROSS_SURFACE_GENERALIZATION", {}).get(
+                                                "status") == "NOT_EVALUATED" and
+                               cf0_gates.get("READY_FOR_JEPA", {}).get(
+                                                "status") == "NOT_EVALUATED" and
+                               cf0.get("constraints", {}).get("rollout") is False and
+                               cf0.get("constraints", {}).get("jepa_training") is False and
+                               cf0.get("constraints", {}).get(
+                                   "other_facades_captured") is False,
+        "cf0_bootstrap_and_public_assets": all(
+                               row.get("bootstrap_95_ci", {}).get(
+                                   "balanced_accuracy", {}).get(
+                                   "bootstrap_samples") == 1000
+                               for row in cf0.get("evaluation", {}).get(
+                                   "baselines", {}).values()) and
+                               all(row.get("bootstrap_95_ci", {}).get(
+                                   "accuracy", {}).get("bootstrap_samples") == 1000
+                               for row in cf0.get("evaluation", {}).get(
+                                   "action_selection", {}).values()) and
+                               len(cf0_assets) == 4 and
+                               all(path.stat().st_size < 2_000_000 for path in cf0_assets),
+        "cf0_resource_limits": cf0.get("resources", {}).get(
+                                    "configured_python_address_space_limit_bytes") == 4294967296 and
+                               cf0.get("resources", {}).get(
+                                    "actual_python_address_space_limit_bytes") == 4294967296 and
+                               cf0.get("resources", {}).get(
+                                    "configured_carla_address_space_limit_bytes") == 34359738368 and
+                               cf0.get("resources", {}).get("numeric_threads") == 1 and
+                               cf0.get("resources", {}).get("rss_watchdog_exceeded") is False,
         "cap0_checkpoint_unchanged": hashlib.sha256(
                                       act0r_search_path.read_bytes()).hexdigest() ==
                                       "a56310883bb15513ea25c97c919d7faf14edb217b1a05fb0c4e12b060c664f73",
     }
-    result = {"schema": "boundary_sweep.static_validation.v9", "checks": checks, "missing": missing, "private_path_files": forbidden,
+    result = {"schema": "boundary_sweep.static_validation.v10", "checks": checks, "missing": missing, "private_path_files": forbidden,
               "geometry_reference_count": reference.get("geometry_reference_count"), "depth_metric": depth_result,
               "surface_stats_consistent": surface_checks, "gates": gates,
               "mask1r1_gates": mask1_r1.get("gates", {}), "obs0_gates": obs0.get("gates", {}),
@@ -511,7 +615,7 @@ def main(argv=None):
               "act0s_gates": act0s_gates, "act0r_gates": act0r_gates,
               "cap0_gates": cap0_gates, "act0r1_gates": act0r1_gates,
               "act0r1_offline_gates": act0r1_offline_gates,
-              "act0r2_gates": act0r2_gates}
+              "act0r2_gates": act0r2_gates, "cf0_gates": cf0_gates}
     print(json.dumps(result, indent=2))
     return 0 if all(checks.values()) else 1
 

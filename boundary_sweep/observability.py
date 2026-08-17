@@ -8,7 +8,7 @@ from __future__ import annotations
 
 import math
 import warnings
-from typing import Iterable, Sequence
+from typing import Iterable, Mapping, Sequence
 
 import cv2
 import numpy as np
@@ -349,3 +349,124 @@ def similarity_metrics(left: np.ndarray, right: np.ndarray) -> dict:
     return {"raw_ssim": raw_ssim(left, right), "phase_aligned_ssim": phase_score,
             "phase_shift_px": shift, "hog_cosine": cosine,
             "color_histogram_distance": hist_distance}
+
+
+def grouped_kfold(groups: Sequence[object], n_splits: int = 5,
+                  seed: int = 0) -> list[dict]:
+    """Create deterministic group-exclusive folds.
+
+    Every occurrence of a group is assigned to one test fold.  This is used
+    by CF-0 to keep the LEFT and RIGHT branches from a shared start together.
+    """
+    unique = list(dict.fromkeys(groups))
+    if n_splits < 2 or len(unique) < n_splits:
+        raise ValueError("n_splits must be between 2 and the unique group count")
+    shuffled = unique.copy()
+    np.random.default_rng(int(seed)).shuffle(shuffled)
+    fold_groups = [set(shuffled[index::n_splits]) for index in range(n_splits)]
+    rows = []
+    values = list(groups)
+    for index, held_out in enumerate(fold_groups):
+        test = [i for i, group in enumerate(values) if group in held_out]
+        train = [i for i, group in enumerate(values) if group not in held_out]
+        rows.append({"fold": index, "train_indices": train, "test_indices": test,
+                     "train_groups": sorted(set(values[i] for i in train)),
+                     "test_groups": sorted(held_out)})
+    return rows
+
+
+def binary_metrics(target: Sequence[int], probability: Sequence[float],
+                   threshold: float = 0.5) -> dict:
+    """Balanced accuracy, rank AUROC and Brier score without sklearn."""
+    actual = np.asarray(target, dtype=int)
+    score = np.clip(np.asarray(probability, dtype=float), 0.0, 1.0)
+    if len(actual) != len(score) or len(actual) == 0:
+        raise ValueError("target and probability must have equal non-zero length")
+    predicted = score >= float(threshold)
+    positive = actual == 1
+    negative = ~positive
+    tpr = float(np.mean(predicted[positive])) if positive.any() else None
+    tnr = float(np.mean(~predicted[negative])) if negative.any() else None
+    balanced = float((tpr + tnr) / 2.0) if tpr is not None and tnr is not None else None
+    if positive.any() and negative.any():
+        order = np.argsort(score, kind="mergesort")
+        ranks = np.empty(len(score), dtype=float)
+        sorted_scores = score[order]
+        cursor = 0
+        while cursor < len(score):
+            end = cursor + 1
+            while end < len(score) and sorted_scores[end] == sorted_scores[cursor]:
+                end += 1
+            ranks[order[cursor:end]] = (cursor + 1 + end) / 2.0
+            cursor = end
+        auc = float((ranks[positive].sum() - positive.sum() *
+                     (positive.sum() + 1) / 2.0) /
+                    (positive.sum() * negative.sum()))
+    else:
+        auc = None
+    return {"sample_count": int(len(actual)), "positive_count": int(positive.sum()),
+            "negative_count": int(negative.sum()), "balanced_accuracy": balanced,
+            "AUROC": auc, "Brier": float(np.mean((score - actual) ** 2)),
+            "threshold": float(threshold)}
+
+
+def train_only_pca_ridge(train_x: np.ndarray, train_y: np.ndarray,
+                         test_x: np.ndarray, alpha: float = 1.0,
+                         max_components: int = 16) -> tuple[np.ndarray, dict]:
+    """Train-only standardization/PCA followed by the existing ridge probe."""
+    x = np.asarray(train_x, dtype=float)
+    z = np.asarray(test_x, dtype=float)
+    if x.ndim != 2 or z.ndim != 2 or x.shape[1] != z.shape[1]:
+        raise ValueError("train_x and test_x must be 2-D with equal feature counts")
+    mean = x.mean(axis=0)
+    scale = x.std(axis=0)
+    scale[scale < 1e-8] = 1.0
+    standardized = (x - mean) / scale
+    test_standardized = (z - mean) / scale
+    component_count = min(int(max_components), max(1, len(x) - 1), x.shape[1])
+    _u, _s, vt = np.linalg.svd(standardized, full_matrices=False)
+    components = vt[:component_count]
+    train_projected = standardized @ components.T
+    test_projected = test_standardized @ components.T
+    prediction = ridge_fit_predict(train_projected, train_y, test_projected, alpha=alpha)
+    return prediction, {
+        "preprocessing_fit_scope": "training_fold_only",
+        "input_dimension": int(x.shape[1]),
+        "pca_components": int(component_count),
+        "ridge_alpha": float(alpha),
+        "linear_system_dimension": int(min(len(x), component_count)),
+    }
+
+
+def model_visible_termination(frame_metric: Mapping, image_width: int,
+                              thresholds: Mapping) -> dict:
+    """Apply the preregistered CF-0 robust event definition to pixel evidence."""
+    contour_x = frame_metric.get("contour_median_x_px")
+    direction = str(frame_metric.get("direction", ""))
+    if contour_x is None or direction not in {"LEFT", "RIGHT"}:
+        penetration = None
+    elif direction == "LEFT":
+        penetration = float(contour_x)
+    else:
+        penetration = float(image_width - 1 - float(contour_x))
+    classification = frame_metric.get("boundary_classification", {})
+    physical = classification.get("boundary_type") == "PHYSICAL_TERMINATION"
+    span_ok = float(frame_metric.get("span_over_target_bbox_height", 0.0)) >= float(
+        thresholds["minimum_span_over_target_bbox"])
+    penetration_ok = penetration is not None and penetration >= float(
+        thresholds["minimum_boundary_penetration_px"])
+    target_ok = float(frame_metric.get("target_side_fraction", 0.0)) >= float(
+        thresholds["minimum_target_side_fraction"])
+    external_ok = float(frame_metric.get("external_side_fraction", 0.0)) >= float(
+        thresholds["minimum_external_side_fraction"])
+    visible = bool(physical and span_ok and penetration_ok and target_ok and external_ok)
+    return {
+        "FIRST_PHYSICAL_TERMINATION": bool(physical),
+        "MODEL_VISIBLE_TERMINATION": visible,
+        "boundary_penetration_px": penetration,
+        "conditions": {"physical_termination": bool(physical),
+                       "span_over_target_bbox": bool(span_ok),
+                       "boundary_penetration": bool(penetration_ok),
+                       "target_side_fraction": bool(target_ok),
+                       "external_side_fraction": bool(external_ok)},
+    }

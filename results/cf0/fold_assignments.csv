@@ -1,0 +1,6 @@
+fold,train_start_ids,test_start_ids
+0,start_00;start_01;start_03;start_05;start_06;start_07;start_08;start_09;start_10;start_11;start_12;start_14;start_15;start_16;start_17;start_18,start_02;start_04;start_13;start_19
+1,start_01;start_02;start_03;start_04;start_05;start_06;start_07;start_08;start_09;start_10;start_11;start_13;start_14;start_15;start_17;start_19,start_00;start_12;start_16;start_18
+2,start_00;start_02;start_03;start_04;start_06;start_07;start_09;start_10;start_11;start_12;start_13;start_14;start_16;start_17;start_18;start_19,start_01;start_05;start_08;start_15
+3,start_00;start_01;start_02;start_04;start_05;start_07;start_08;start_09;start_11;start_12;start_13;start_15;start_16;start_17;start_18;start_19,start_03;start_06;start_10;start_14
+4,start_00;start_01;start_02;start_03;start_04;start_05;start_06;start_08;start_10;start_12;start_13;start_14;start_15;start_16;start_18;start_19,start_07;start_09;start_11;start_17

@@ -379,3 +379,52 @@ Raw RGB, z-depth and segmentation payloads remain server-local and ignored by
 Git. See [`docs/ACT0R2_VISUAL_AUDIT.md`](docs/ACT0R2_VISUAL_AUDIT.md) for the
 public compressed evidence. No other candidate, rollout, model download or
 JEPA training was run.
+
+## CF-0 single-facade counterfactual observability kill test
+
+CF-0 reuses candidate 1 and the ACT-0R2 checkpoint. Seed `20260817` produced
+20 accepted shared starts: eight LEFT-biased, four near-center and eight
+RIGHT-biased. Each shared start has an independently captured LEFT and RIGHT
+branch at 0.5 m increments through 4.0 m. All 340 RGB/depth/semantic/instance
+quartets pair exactly and all 2,040 sensor payload hashes pass. Both valid
+physical boundaries are absent in every shared-start image.
+
+Pixel/geometric GT finds 13 branches with a preregistered
+`MODEL_VISIBLE_TERMINATION` and 27 right-censored branches. Five-fold splits
+use `start_id`, keeping both counterfactual branches together. PCA and linear
+probes are fitted only on training folds. Absolute coordinates, planned start
+offset, frame ID, planned role and world-boundary coordinates are excluded
+from every model feature.
+
+```text
+                              B0       B1       B2       B3
+rolling balanced accuracy   0.5000   0.5000   0.5557   0.5196
+rolling TTE MAE (m)         0.7946   0.4525   0.2775   0.2906
+same-start action accuracy  0.5000   0.3077   0.5385   0.3077
+same-start regret (m)       0.7308   0.8846   0.6923   0.9615
+```
+
+B3 improves MAE over B1 by only `0.1619 m` (required `0.25 m`) and balanced
+accuracy by `0.0196` (required `0.10`). Its non-tie same-start action accuracy
+is `0.3077`, identical to B1 and below the required `0.65`. At a shared start,
+B3 has no valid earlier branch frame; its history-valid mask is false. Rolling
+B3 metrics use only frames strictly before the robust event, while the action
+comparison uses shared-start predictions only.
+
+```text
+COUNTERFACTUAL_PAIRING: PASS
+START_BOUNDARY_ABSENT: PASS
+ROBUST_EVENT_COVERAGE: PASS
+SPLIT_LEAKAGE_AUDIT: PASS
+VISUAL_INCREMENTAL_VALUE: FAIL
+ACTION_SELECTION_SIGNAL: FAIL
+SINGLE_SURFACE_SIGNAL: FAIL
+CROSS_SURFACE_GENERALIZATION: NOT_EVALUATED
+READY_FOR_MULTI_SURFACE_CAPTURE: FAIL
+READY_FOR_JEPA: NOT_EVALUATED
+```
+
+The preregistered kill test therefore stops at one facade: current evidence
+does not justify multi-surface capture or a JEPA experiment. Raw CF-0 payloads
+remain as one server-local, Git-ignored canonical copy. See
+[`docs/CF0_OBSERVABILITY_AUDIT.md`](docs/CF0_OBSERVABILITY_AUDIT.md).

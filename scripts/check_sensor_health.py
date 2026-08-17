@@ -40,7 +40,12 @@ from boundary_sweep.cap0 import (HEALTH_GATES, classify_root_cause,
                                  should_run_act0r1, verify_search_plan)
 from boundary_sweep.carla_utils import (discover_carla_root, import_carla,
                                         transform_from_matrix)
-from boundary_sweep.segmentation import (BUILDING_TAG, decode_instance_channels)
+from boundary_sweep.observability import (binary_metrics, fixed_length_descriptor,
+                                          grouped_kfold, model_visible_termination,
+                                          regression_metrics, rgb_descriptor,
+                                          train_only_pca_ridge)
+from boundary_sweep.segmentation import (BUILDING_TAG, bgra_array,
+                                         decode_instance_channels, rgb_from_bgra)
 from boundary_sweep.sensors import (ConsecutiveIncompleteFramesError,
                                     SensorFrameError, SynchronousRGBDSeg)
 
@@ -608,6 +613,7 @@ def _act0r2_frame_metric(entry, direction, action_axis, act0r_config):
     mask = (semantic == BUILDING_TAG) & (instance == target_id)
     span = contour_span_metrics(mask, direction)
     contour = span.pop("contour")
+    _contour_y, contour_x = np.where(contour)
     boundary = classify_boundary_pixels(
         mask, contour, depth, semantic, instance, target_id, direction,
         act0r_config["boundary_classification"])
@@ -618,7 +624,7 @@ def _act0r2_frame_metric(entry, direction, action_axis, act0r_config):
     count = int(mask.sum())
     return {
         "frame_id": int(entry["frame_id"]),
-        "capture_role": entry["capture_role"],
+        "capture_role": entry.get("capture_role", "PIXEL_FRAME"),
         "role_used_as_scientific_label": False,
         "target_pixel_count": count,
         "target_coverage": float(mask.mean()),
@@ -626,6 +632,8 @@ def _act0r2_frame_metric(entry, direction, action_axis, act0r_config):
         "target_instance_camera_building_fraction": (
             float(np.mean(instance_semantic[instance == target_id] == BUILDING_TAG))
             if np.any(instance == target_id) else 0.0),
+        "direction": direction,
+        "contour_median_x_px": float(np.median(contour_x)) if len(contour_x) else None,
         **span,
         "boundary_classification": boundary,
         "tier_m_frame": metric,
@@ -1126,6 +1134,789 @@ def act0r2(args, config, act0r_config, carla, client):
     return postprocess_act0r2(args, config, act0r_config)
 
 
+def _cf0_offset_pose(center_matrix, action_axis, signed_offset_m):
+    matrix = np.asarray(center_matrix, dtype=float).copy()
+    axis = np.asarray(action_axis, dtype=float)
+    axis /= max(float(np.linalg.norm(axis)), 1e-12)
+    matrix[:3, 3] += axis * float(signed_offset_m)
+    return matrix
+
+
+def _cf0_sample_metric(sample, direction, target_id, action_axis, act0r_config):
+    depth = np.asarray(sample["depth_m"], dtype=np.float32)
+    semantic_rgb = rgb_from_bgra(bgra_array(sample["data"]["semantic"]))
+    instance_rgb = rgb_from_bgra(bgra_array(sample["data"]["instance"]))
+    semantic = decode_instance_channels(semantic_rgb)["semantic_tag"]
+    decoded = decode_instance_channels(instance_rgb)
+    instance = decoded["instance_id_16bit"]
+    mask = (semantic == BUILDING_TAG) & (instance == int(target_id))
+    span = contour_span_metrics(mask, direction)
+    contour = span.pop("contour")
+    _ys, xs = np.where(contour)
+    boundary = classify_boundary_pixels(
+        mask, contour, depth, semantic, instance, int(target_id), direction,
+        act0r_config["boundary_classification"])
+    metric = contour_action_axis_coordinate(
+        contour, depth, np.asarray(sample["K"], dtype=float),
+        np.asarray(sample["T_world_camera"], dtype=float), action_axis)
+    return {"frame_id": int(sample["frame_id"]), "direction": direction,
+            "target_pixel_count": int(mask.sum()), "target_coverage": float(mask.mean()),
+            "mask_bbox": _mask_bbox(mask),
+            "contour_median_x_px": float(np.median(xs)) if len(xs) else None,
+            **span, "boundary_classification": boundary, "tier_m_frame": metric}
+
+
+def _save_cf0_frame(rig, sample, raw_root, stem, plan, start_id, start_bin,
+                    start_offset_m, direction, step_index, distance_m,
+                    shared_start_frame_id):
+    metadata = rig.save(sample, raw_root, stem)
+    metadata.update({
+        "sequence_id": f"cf0_{start_id}_{direction.lower()}",
+        "start_id": start_id,
+        "start_bin": start_bin,
+        "candidate_index": 1,
+        "bbox_id": int(plan["bbox_id"]),
+        "target_instance_id": int(plan["target_instance_id"]),
+        "direction": direction,
+        "step_index": int(step_index),
+        "relative_distance_m": float(distance_m),
+        "shared_start_frame_id": int(shared_start_frame_id),
+        "planned_start_offset_m": float(start_offset_m),
+        "role_used_as_scientific_label": False,
+        "metadata_path": str(raw_root / f"{stem}.json"),
+    })
+    (raw_root / f"{stem}.json").write_text(json.dumps(metadata, indent=2) + "\n")
+    return metadata
+
+
+def capture_cf0(args, config, act0r_config, cf0_config, carla, client):
+    checkpoint_path = PROJECT_ROOT / cf0_config["checkpoint_path"]
+    if verify_search_plan(checkpoint_path, cf0_config["checkpoint_sha256"])["status"] != "PASS":
+        raise RuntimeError("CF-0 search checkpoint changed")
+    checkpoint = json.loads(checkpoint_path.read_text())
+    plan = next(row for row in checkpoint["plans"]
+                if int(row["candidate_index"]) == int(cf0_config["candidate_index"]))
+    if (int(plan["bbox_id"]) != int(cf0_config["bbox_id"]) or
+            int(plan["target_instance_id"]) != int(cf0_config["target_instance_id"])):
+        raise RuntimeError("CF-0 checkpoint candidate identity changed")
+    result_root, raw_root = Path(args.cf0_result_root), Path(args.cf0_raw_root)
+    result_root.mkdir(parents=True, exist_ok=True)
+    if raw_root.exists() and any(raw_root.rglob("*")):
+        raise RuntimeError("CF-0 raw output is non-empty")
+    raw_root.mkdir(parents=True, exist_ok=True)
+    trace = TraceWriter(raw_root / "timing_trace.jsonl",
+                        config["resources"]["python_rss_watchdog_bytes"], args.carla_pid)
+    world = client.get_world()
+    if act0r_config["map"] not in world.get_map().name:
+        raise RuntimeError(f"CF-0 requires {act0r_config['map']}, got {world.get_map().name}")
+    center = np.asarray(plan["locator_center_pose"], dtype=float)
+    axis = np.asarray(plan["camera_motion_axis"], dtype=float)
+    axis /= max(float(np.linalg.norm(axis)), 1e-12)
+    sensor = config["sensor"]
+    rig = SynchronousRGBDSeg(
+        world, carla, transform_from_matrix(carla, center), sensor["width"],
+        sensor["height"], sensor["horizontal_fov_deg"], sensor["fixed_delta_seconds"],
+        trace_hook=trace)
+    rng = np.random.default_rng(int(cf0_config["seed"]))
+    frames, starts, rejected = [], [], []
+    maximum = int(cf0_config["actions"]["maximum_saved_quartets"])
+    try:
+        warmup = rig.warmup(config["warmup"]["minimum_discarded_ticks"],
+                            config["warmup"]["required_consecutive_complete"],
+                            config["warmup"]["maximum_ticks"])
+        accepted_index = 0
+        for bin_config in cf0_config["start_sampling"]["bins"]:
+            accepted_in_bin = 0
+            attempts = 0
+            while accepted_in_bin < int(bin_config["count"]):
+                attempts += 1
+                if attempts > int(cf0_config["start_sampling"]["maximum_attempts_per_bin"]):
+                    raise RuntimeError(f"CF-0 exhausted start attempts for {bin_config['name']}")
+                offset = float(rng.uniform(float(bin_config["minimum_m"]),
+                                           float(bin_config["maximum_m"])))
+                commanded = _cf0_offset_pose(center, axis, offset)
+                rig.set_transform(transform_from_matrix(carla, commanded))
+                settle = rig.settle(config["teleport"]["settle_ticks"])
+                sample = _attempt_capture(rig, {
+                    "experiment": "CF-0", "start_bin": bin_config["name"],
+                    "planned_start_offset_m": offset,
+                    "role_used_as_scientific_label": False}, trace)
+                metrics = {direction: _cf0_sample_metric(
+                    sample, direction, plan["target_instance_id"], axis, act0r_config)
+                           for direction in ("LEFT", "RIGHT")}
+                absent = {direction: not _act0r2_center_boundary_present(
+                    metrics[direction], act0r_config) for direction in ("LEFT", "RIGHT")}
+                if not all(absent.values()):
+                    rejected.append({"start_bin": bin_config["name"],
+                                     "planned_start_offset_m": offset,
+                                     "frame_id": int(sample["frame_id"]),
+                                     "left_absent": absent["LEFT"],
+                                     "right_absent": absent["RIGHT"]})
+                    continue
+                start_id = f"start_{accepted_index:02d}"
+                enforce_saved_frame_limit(len(frames) + 1, maximum)
+                start_meta = _save_cf0_frame(
+                    rig, sample, raw_root, f"{start_id}_shared", plan, start_id,
+                    bin_config["name"], offset, "SHARED_START", 0, 0.0,
+                    sample["frame_id"])
+                start_meta["start_boundary_metrics"] = metrics
+                (raw_root / f"{start_id}_shared.json").write_text(
+                    json.dumps(start_meta, indent=2) + "\n")
+                frames.append(start_meta)
+                start_record = {"start_id": start_id, "start_bin": bin_config["name"],
+                                "planned_start_offset_m": offset,
+                                "shared_start_frame_id": int(sample["frame_id"]),
+                                "left_boundary_absent": True,
+                                "right_boundary_absent": True,
+                                "branch_frame_ids": {}}
+                for direction in cf0_config["actions"]["directions"]:
+                    sign = -1.0 if direction == "LEFT" else 1.0
+                    branch_ids = []
+                    for step in range(1, int(cf0_config["actions"]["steps_per_branch"]) + 1):
+                        enforce_saved_frame_limit(len(frames) + 1, maximum)
+                        distance = float(step * cf0_config["actions"]["step_m"])
+                        branch_offset = offset + sign * distance
+                        branch_pose = _cf0_offset_pose(center, axis, branch_offset)
+                        rig.set_transform(transform_from_matrix(carla, branch_pose))
+                        branch_settle = rig.settle(config["teleport"]["settle_ticks"])
+                        branch_sample = _attempt_capture(rig, {
+                            "experiment": "CF-0", "start_id": start_id,
+                            "direction": direction, "step_index": step,
+                            "relative_odometry_m": distance,
+                            "role_used_as_scientific_label": False}, trace)
+                        stem = f"{start_id}_{direction.lower()}_{step:02d}"
+                        metadata = _save_cf0_frame(
+                            rig, branch_sample, raw_root, stem, plan, start_id,
+                            bin_config["name"], offset, direction, step, distance,
+                            sample["frame_id"])
+                        metadata["settle"] = branch_settle
+                        (raw_root / f"{stem}.json").write_text(
+                            json.dumps(metadata, indent=2) + "\n")
+                        frames.append(metadata)
+                        branch_ids.append(int(branch_sample["frame_id"]))
+                    start_record["branch_frame_ids"][direction] = branch_ids
+                starts.append(start_record)
+                accepted_index += 1
+                accepted_in_bin += 1
+                print(json.dumps({"phase": "CF0_START_COMPLETE", "start_id": start_id,
+                                  "bin": bin_config["name"], "offset_m": offset,
+                                  "saved_count": len(frames)}), flush=True)
+        trace.assert_rss()
+    finally:
+        rig.close()
+    resources = trace.summary()
+    resources.pop("gpu_processes_at_end", None)
+    manifest = {
+        "schema": "cf0.capture_manifest.v1", "status": "CAPTURE_COMPLETE",
+        "candidate_index": int(plan["candidate_index"]), "bbox_id": int(plan["bbox_id"]),
+        "target_instance_id": int(plan["target_instance_id"]),
+        "checkpoint_path": cf0_config["checkpoint_path"],
+        "checkpoint_sha256": cf0_config["checkpoint_sha256"],
+        "seed": int(cf0_config["seed"]), "warmup": warmup,
+        "checkpoint_plan": {"locator_center_pose": plan["locator_center_pose"],
+                            "camera_motion_axis": plan["camera_motion_axis"]},
+        "starts": starts, "rejected_start_attempts": rejected, "frames": frames,
+        "saved_frame_count": len(frames), "maximum_saved_frames": maximum,
+        "resources": {**resources,
+                      "configured_python_address_space_limit_bytes": int(
+                          cf0_config["resources"]["python_address_space_limit_bytes"]),
+                      "actual_python_address_space_limit_bytes": int(args.actual_as_limit),
+                      "configured_carla_address_space_limit_bytes": int(
+                          cf0_config["resources"]["carla_address_space_limit_bytes"]),
+                      "numeric_threads": int(cf0_config["resources"]["numeric_threads"]),
+                      "python_cpu_set": str(cf0_config["resources"]["python_cpu_set"]),
+                      "carla_cpu_set": str(cf0_config["resources"]["carla_cpu_set"])},
+        "constraints": {**cf0_config["constraints"], "other_candidates_captured": False,
+                        "raw_uploaded": False},
+    }
+    (result_root / "capture_manifest.json").write_text(json.dumps(manifest, indent=2) + "\n")
+    return postprocess_cf0(args, config, act0r_config, cf0_config)
+
+
+def _cf0_features(records, baseline):
+    action = np.asarray([[-1.0, 1.0] if row["direction"] == "LEFT" else [1.0, 0.0]
+                         for row in records], dtype=float)
+    odometry = np.asarray([[row["relative_distance_m"], row["relative_delta_m"]]
+                           for row in records], dtype=float)
+    current = np.asarray([row["descriptor"] for row in records], dtype=float)
+    previous = np.asarray([row["previous_descriptor"] for row in records], dtype=float)
+    history = np.asarray([[float(row["history_valid"])] for row in records], dtype=float)
+    if baseline == "B1":
+        return np.column_stack([action, odometry])
+    if baseline == "B2":
+        return np.column_stack([action, current])
+    if baseline == "B3":
+        return np.column_stack([action, odometry, current, previous, history])
+    if baseline == "B0":
+        return np.zeros((len(records), 1), dtype=float)
+    raise ValueError(f"unknown CF-0 baseline {baseline}")
+
+
+def _cf0_cluster_ci(records, values, metric, samples, seed):
+    groups = sorted({row["start_id"] for row in records})
+    by_group = {group: [index for index, row in enumerate(records)
+                        if row["start_id"] == group] for group in groups}
+    rng = np.random.default_rng(int(seed))
+    estimates = []
+    for _index in range(int(samples)):
+        selected = rng.choice(groups, size=len(groups), replace=True)
+        indices = [index for group in selected for index in by_group[group]]
+        estimate = metric(indices)
+        if estimate is not None and np.isfinite(estimate):
+            estimates.append(float(estimate))
+    if not estimates:
+        return {"lower": None, "upper": None, "bootstrap_samples": 0,
+                "cluster_unit": "start_id"}
+    return {"lower": float(np.percentile(estimates, 2.5)),
+            "upper": float(np.percentile(estimates, 97.5)),
+            "bootstrap_samples": len(estimates), "cluster_unit": "start_id"}
+
+
+def _cf0_evaluate(records, branch_summaries, cf0_config):
+    folds = grouped_kfold([row["start_id"] for row in records],
+                          int(cf0_config["evaluation"]["group_folds"]),
+                          int(cf0_config["seed"]))
+    target = np.asarray([int(row["robust_event_within_4m"]) for row in records])
+    observed = np.asarray([bool(row["event_observed"]) for row in records])
+    remaining = np.asarray([row["target_remaining_m"] if row["target_remaining_m"] is not None
+                            else np.nan for row in records], dtype=float)
+    baselines = {}
+    prediction_store = {}
+    for baseline in ("B0", "B1", "B2", "B3"):
+        features = _cf0_features(records, baseline)
+        probability = np.full(len(records), np.nan, dtype=float)
+        time_prediction = np.full(len(records), np.nan, dtype=float)
+        fold_audits = []
+        for fold in folds:
+            train = np.asarray(fold["train_indices"], dtype=int)
+            test = np.asarray(fold["test_indices"], dtype=int)
+            if baseline == "B0":
+                probability[test] = float(target[train].mean())
+                regression_train = train[observed[train]]
+                constant = float(np.mean(remaining[regression_train]))
+                time_prediction[test] = constant
+                audit = {"preprocessing_fit_scope": "training_fold_only",
+                         "input_dimension": 0, "pca_components": 0,
+                         "ridge_alpha": None, "linear_system_dimension": 1}
+            else:
+                raw_probability, class_audit = train_only_pca_ridge(
+                    features[train], target[train], features[test],
+                    alpha=float(cf0_config["evaluation"]["ridge_alpha"]),
+                    max_components=int(cf0_config["evaluation"]["pca_components"]))
+                probability[test] = np.clip(raw_probability, 0.0, 1.0)
+                regression_train = train[observed[train]]
+                raw_time, regression_audit = train_only_pca_ridge(
+                    features[regression_train], remaining[regression_train], features[test],
+                    alpha=float(cf0_config["evaluation"]["ridge_alpha"]),
+                    max_components=int(cf0_config["evaluation"]["pca_components"]))
+                time_prediction[test] = np.clip(
+                    raw_time, 0.0, float(cf0_config["actions"]["maximum_distance_m"]) +
+                    float(cf0_config["actions"]["step_m"]))
+                audit = {"classification": class_audit, "time_to_event": regression_audit}
+            fold_audits.append({"fold": int(fold["fold"]),
+                                "train_start_ids": fold["train_groups"],
+                                "test_start_ids": fold["test_groups"],
+                                "preprocessing": audit})
+        rolling_binary = binary_metrics(target, probability)
+        rolling_time = regression_metrics(remaining[observed], time_prediction[observed])
+        start_indices = np.asarray([index for index, row in enumerate(records)
+                                    if int(row["step_index"]) == 0], dtype=int)
+        start_binary = binary_metrics(target[start_indices], probability[start_indices])
+        start_observed = start_indices[observed[start_indices]]
+        start_time = regression_metrics(remaining[start_observed],
+                                        time_prediction[start_observed])
+        censored = ~observed
+        baselines[baseline] = {
+            "input_definition": {
+                "B0": "training-fold constant prior and mean time-to-event",
+                "B1": "action plus relative odometry only",
+                "B2": "current RGB descriptor plus action",
+                "B3": "current/previous RGB descriptors plus relative odometry and action",
+            }[baseline],
+            "rolling_pre_event": {"event_classification": rolling_binary,
+                                  "time_to_event_uncensored": rolling_time,
+                                  "censored": {"sample_count": int(censored.sum()),
+                                               "mean_predicted_event_probability": float(
+                                                   probability[censored].mean())}},
+            "shared_start_only": {"event_classification": start_binary,
+                                  "time_to_event_uncensored": start_time},
+            "folds": fold_audits,
+        }
+        prediction_store[baseline] = {"probability": probability,
+                                      "time_to_event": time_prediction}
+    start_lookup = {(row["start_id"], row["direction"]): index
+                    for index, row in enumerate(records) if int(row["step_index"]) == 0}
+    branch_lookup = {(row["start_id"], row["direction"]): row for row in branch_summaries}
+    action_rows = []
+    action_metrics = {}
+    for baseline, predictions in prediction_store.items():
+        rows = []
+        for start_id in sorted({row["start_id"] for row in branch_summaries}):
+            indices = {direction: start_lookup[(start_id, direction)]
+                       for direction in ("LEFT", "RIGHT")}
+            actual = {direction: (float(branch_lookup[(start_id, direction)][
+                "first_model_visible_distance_m"])
+                if branch_lookup[(start_id, direction)]["first_model_visible_distance_m"] is not None
+                else float(cf0_config["actions"]["maximum_distance_m"]) +
+                float(cf0_config["actions"]["step_m"])) for direction in ("LEFT", "RIGHT")}
+            actual_tie = abs(actual["LEFT"] - actual["RIGHT"]) < 1e-9
+            probability = {direction: float(predictions["probability"][indices[direction]])
+                           for direction in ("LEFT", "RIGHT")}
+            predicted_time = {direction: float(predictions["time_to_event"][indices[direction]])
+                              for direction in ("LEFT", "RIGHT")}
+            if abs(probability["LEFT"] - probability["RIGHT"]) > 1e-9:
+                choice = max(probability, key=probability.get)
+            elif abs(predicted_time["LEFT"] - predicted_time["RIGHT"]) > 1e-9:
+                choice = min(predicted_time, key=predicted_time.get)
+            else:
+                choice = "TIE"
+            if actual_tie:
+                accuracy = None
+                regret = 0.0
+            else:
+                preferred = min(actual, key=actual.get)
+                accuracy = 0.5 if choice == "TIE" else float(choice == preferred)
+                chosen_cost = ((actual["LEFT"] + actual["RIGHT"]) / 2.0
+                               if choice == "TIE" else actual[choice])
+                regret = float(chosen_cost - actual[preferred])
+            row = {"baseline": baseline, "start_id": start_id,
+                   "actual_left_distance_m": actual["LEFT"],
+                   "actual_right_distance_m": actual["RIGHT"],
+                   "actual_tie": actual_tie, "predicted_choice": choice,
+                   "predicted_left_probability": probability["LEFT"],
+                   "predicted_right_probability": probability["RIGHT"],
+                   "predicted_left_time_m": predicted_time["LEFT"],
+                   "predicted_right_time_m": predicted_time["RIGHT"],
+                   "accuracy_credit": accuracy, "regret_m": regret}
+            rows.append(row); action_rows.append(row)
+        non_ties = [row for row in rows if not row["actual_tie"]]
+        action_metrics[baseline] = {
+            "non_tie_start_count": len(non_ties),
+            "accuracy": float(np.mean([row["accuracy_credit"] for row in non_ties]))
+                        if non_ties else None,
+            "mean_regret_m": float(np.mean([row["regret_m"] for row in non_ties]))
+                             if non_ties else None,
+            "prediction_tie_count": sum(row["predicted_choice"] == "TIE" for row in non_ties),
+        }
+        rng = np.random.default_rng(int(cf0_config["seed"]) + 31)
+        accuracy_samples, regret_samples = [], []
+        for _index in range(int(cf0_config["evaluation"]["bootstrap_samples"])):
+            sampled = rng.choice(rows, size=len(rows), replace=True)
+            eligible = [row for row in sampled if not row["actual_tie"]]
+            if eligible:
+                accuracy_samples.append(float(np.mean(
+                    [row["accuracy_credit"] for row in eligible])))
+                regret_samples.append(float(np.mean([row["regret_m"] for row in eligible])))
+        action_metrics[baseline]["bootstrap_95_ci"] = {
+            "accuracy": {"lower": float(np.percentile(accuracy_samples, 2.5)),
+                         "upper": float(np.percentile(accuracy_samples, 97.5)),
+                         "bootstrap_samples": len(accuracy_samples),
+                         "cluster_unit": "start_id"},
+            "mean_regret_m": {"lower": float(np.percentile(regret_samples, 2.5)),
+                              "upper": float(np.percentile(regret_samples, 97.5)),
+                              "bootstrap_samples": len(regret_samples),
+                              "cluster_unit": "start_id"},
+        }
+    bootstrap_count = int(cf0_config["evaluation"]["bootstrap_samples"])
+    for baseline in baselines:
+        probability = prediction_store[baseline]["probability"]
+        time_prediction = prediction_store[baseline]["time_to_event"]
+        baselines[baseline]["bootstrap_95_ci"] = {
+            "balanced_accuracy": _cf0_cluster_ci(
+                records, probability,
+                lambda index: binary_metrics(target[index], probability[index])[
+                    "balanced_accuracy"], bootstrap_count,
+                int(cf0_config["seed"]) + 11),
+            "time_to_event_MAE_m": _cf0_cluster_ci(
+                records, time_prediction,
+                lambda index: float(np.mean(np.abs(time_prediction[
+                    [i for i in index if observed[i]]] - remaining[
+                    [i for i in index if observed[i]]]))) if any(observed[i] for i in index)
+                else None, bootstrap_count, int(cf0_config["seed"]) + 17),
+        }
+    b1, b2, b3 = baselines["B1"], baselines["B2"], baselines["B3"]
+    comparisons = {
+        "B3_minus_B1": {
+            "MAE_improvement_m": float(b1["rolling_pre_event"][
+                "time_to_event_uncensored"]["MAE_m"] - b3["rolling_pre_event"][
+                "time_to_event_uncensored"]["MAE_m"]),
+            "balanced_accuracy_improvement": float(b3["rolling_pre_event"][
+                "event_classification"]["balanced_accuracy"] - b1["rolling_pre_event"][
+                "event_classification"]["balanced_accuracy"]),
+        },
+        "B3_minus_B2": {
+            "MAE_improvement_m": float(b2["rolling_pre_event"][
+                "time_to_event_uncensored"]["MAE_m"] - b3["rolling_pre_event"][
+                "time_to_event_uncensored"]["MAE_m"]),
+            "balanced_accuracy_improvement": float(b3["rolling_pre_event"][
+                "event_classification"]["balanced_accuracy"] - b2["rolling_pre_event"][
+                "event_classification"]["balanced_accuracy"]),
+        },
+        "action_selection_B3_minus_B1_accuracy": float(
+            action_metrics["B3"]["accuracy"] - action_metrics["B1"]["accuracy"]),
+    }
+    b1_probability = prediction_store["B1"]["probability"]
+    b3_probability = prediction_store["B3"]["probability"]
+    b1_time = prediction_store["B1"]["time_to_event"]
+    b3_time = prediction_store["B3"]["time_to_event"]
+    comparisons["B3_minus_B1"]["bootstrap_95_ci"] = {
+        "MAE_improvement_m": _cf0_cluster_ci(
+            records, b3_time,
+            lambda index: (float(np.mean(np.abs(b1_time[
+                [i for i in index if observed[i]]] - remaining[
+                [i for i in index if observed[i]]]))) -
+                float(np.mean(np.abs(b3_time[
+                [i for i in index if observed[i]]] - remaining[
+                [i for i in index if observed[i]]]))))
+            if any(observed[i] for i in index) else None,
+            bootstrap_count, int(cf0_config["seed"]) + 41),
+        "balanced_accuracy_improvement": _cf0_cluster_ci(
+            records, b3_probability,
+            lambda index: (binary_metrics(target[index], b3_probability[index])[
+                "balanced_accuracy"] - binary_metrics(target[index], b1_probability[index])[
+                "balanced_accuracy"])
+            if len(set(target[index].tolist())) == 2 else None,
+            bootstrap_count, int(cf0_config["seed"]) + 43),
+    }
+    paired_action = {baseline: {row["start_id"]: row for row in action_rows
+                                if row["baseline"] == baseline}
+                     for baseline in ("B1", "B3")}
+    start_ids = sorted(paired_action["B1"])
+    rng = np.random.default_rng(int(cf0_config["seed"]) + 47)
+    action_differences = []
+    for _index in range(bootstrap_count):
+        selected = rng.choice(start_ids, size=len(start_ids), replace=True)
+        eligible = [start_id for start_id in selected
+                    if not paired_action["B1"][start_id]["actual_tie"]]
+        if eligible:
+            action_differences.append(float(np.mean([
+                paired_action["B3"][start_id]["accuracy_credit"] -
+                paired_action["B1"][start_id]["accuracy_credit"]
+                for start_id in eligible])))
+    comparisons["action_selection_B3_minus_B1_accuracy_bootstrap_95_ci"] = {
+        "lower": float(np.percentile(action_differences, 2.5)),
+        "upper": float(np.percentile(action_differences, 97.5)),
+        "bootstrap_samples": len(action_differences), "cluster_unit": "start_id"}
+    fold_rows = [{"fold": fold["fold"], "train_start_ids": ";".join(fold["train_groups"]),
+                  "test_start_ids": ";".join(fold["test_groups"])} for fold in folds]
+    return {"baselines": baselines, "comparisons": comparisons,
+            "action_selection": action_metrics, "action_rows": action_rows,
+            "fold_rows": fold_rows, "prediction_store": prediction_store}
+
+
+def _cf0_write_csv(path, rows):
+    path.parent.mkdir(parents=True, exist_ok=True)
+    fields = list(rows[0]) if rows else []
+    with path.open("w", newline="") as handle:
+        writer = csv.DictWriter(handle, fieldnames=fields, lineterminator="\n")
+        if fields:
+            writer.writeheader(); writer.writerows(rows)
+
+
+def _cf0_assets(manifest, branch_summaries, evaluation, assets_root):
+    assets_root.mkdir(parents=True, exist_ok=True)
+    frame_by_id = {int(row["frame_id"]): row for row in manifest["frames"]}
+    branches = {(row["start_id"], row["direction"]): row for row in branch_summaries}
+    starts = manifest["starts"]
+    canvas = Image.new("RGB", (1280, 1000), (18, 18, 18)); draw = ImageDraw.Draw(canvas)
+    for index, start in enumerate(starts):
+        row, column = divmod(index, 4); x, y = column * 320, row * 200
+        entry = frame_by_id[int(start["shared_start_frame_id"])]
+        image = Image.open(PROJECT_ROOT / entry["files"]["rgb"]["path"]).convert("RGB")
+        image = image.resize((320, 150)); canvas.paste(image, (x, y + 24))
+        left = branches[(start["start_id"], "LEFT")]["first_model_visible_distance_m"]
+        right = branches[(start["start_id"], "RIGHT")]["first_model_visible_distance_m"]
+        draw.text((x + 6, y + 4), f"{start['start_id']} offset={start['planned_start_offset_m']:.3f}m",
+                  fill=(255, 230, 70))
+        draw.text((x + 6, y + 177), f"LEFT={left}m RIGHT={right}m",
+                  fill=(240, 240, 240))
+    canvas.save(assets_root / "start_branch_pairs.jpg", quality=82, optimize=True,
+                progressive=True)
+    timeline = Image.new("RGB", (1400, 920), "white"); draw = ImageDraw.Draw(timeline)
+    draw.text((20, 12), "CF-0 robust event timeline (pixel/geometric GT)", fill=(0, 0, 0))
+    for step in range(9):
+        x = 160 + int(1160 * step / 8)
+        draw.text((x - 10, 32), f"{step * 0.5:.1f}", fill=(70, 70, 70))
+    for index, start in enumerate(starts):
+        y = 55 + index * 42
+        draw.text((15, y - 8), start["start_id"], fill=(0, 0, 0))
+        draw.line((160, y, 1320, y), fill=(180, 180, 180), width=2)
+        for step in range(9):
+            x = 160 + int(1160 * step / 8)
+            draw.line((x, y - 5, x, y + 5), fill=(150, 150, 150), width=1)
+        for direction, color, dy in (("LEFT", (30, 120, 220), -7),
+                                     ("RIGHT", (220, 80, 40), 7)):
+            distance = branches[(start["start_id"], direction)][
+                "first_model_visible_distance_m"]
+            if distance is not None:
+                x = 160 + int(1160 * float(distance) / 4.0)
+                draw.ellipse((x - 6, y + dy - 6, x + 6, y + dy + 6), fill=color)
+    draw.text((1100, 12), "blue=LEFT red=RIGHT", fill=(0, 0, 0))
+    timeline.save(assets_root / "event_timelines.jpg", quality=86, optimize=True,
+                  progressive=True)
+    chart = Image.new("RGB", (1200, 720), "white"); draw = ImageDraw.Draw(chart)
+    draw.text((24, 18), "CF-0 grouped 5-fold held-out metrics", fill=(0, 0, 0))
+    names = ["B0", "B1", "B2", "B3"]
+    colors = [(120, 120, 120), (70, 120, 210), (50, 170, 100), (220, 90, 50)]
+    for panel, (metric_name, getter, maximum) in enumerate((
+            ("rolling balanced accuracy", lambda row: row["rolling_pre_event"][
+                "event_classification"]["balanced_accuracy"], 1.0),
+            ("uncensored time-to-event MAE (m)", lambda row: row["rolling_pre_event"][
+                "time_to_event_uncensored"]["MAE_m"], 4.0),
+            ("same-start action accuracy", lambda row: evaluation["action_selection"][
+                row]["accuracy"], 1.0))):
+        base_y = 85 + panel * 205
+        draw.text((25, base_y), metric_name, fill=(0, 0, 0))
+        for index, (name, color) in enumerate(zip(names, colors)):
+            value = getter(evaluation["baselines"][name]) if panel < 2 else getter(name)
+            width = int(850 * float(value) / maximum) if value is not None else 0
+            y = base_y + 35 + index * 38
+            draw.rectangle((130, y, 130 + width, y + 24), fill=color)
+            draw.text((25, y + 4), name, fill=(0, 0, 0))
+            draw.text((995, y + 4), f"{value:.4f}" if value is not None else "NA",
+                      fill=(0, 0, 0))
+    chart.save(assets_root / "baseline_metrics.jpg", quality=88, optimize=True,
+               progressive=True)
+    selected = [starts[0], starts[len(starts) // 2], starts[-1]]
+    comparison = Image.new("RGB", (960, 810), (18, 18, 18)); draw = ImageDraw.Draw(comparison)
+    for row, start in enumerate(selected):
+        entries = [frame_by_id[int(start["shared_start_frame_id"])]]
+        for direction in ("LEFT", "RIGHT"):
+            branch = branches[(start["start_id"], direction)]
+            frame_id = (branch["first_model_visible_frame_id"] or
+                        start["branch_frame_ids"][direction][-1])
+            entries.append(frame_by_id[int(frame_id)])
+        for column, (entry, label) in enumerate(zip(entries, ("SHARED START", "LEFT", "RIGHT"))):
+            image = Image.open(PROJECT_ROOT / entry["files"]["rgb"]["path"]).convert("RGB")
+            image = image.resize((320, 240)); comparison.paste(image, (column * 320, row * 270 + 28))
+            draw.text((column * 320 + 6, row * 270 + 6),
+                      f"{start['start_id']} {label} frame={entry['frame_id']}",
+                      fill=(255, 230, 70))
+    comparison.save(assets_root / "representative_counterfactuals.jpg", quality=82,
+                    optimize=True, progressive=True)
+
+
+def _cf0_docs(validation, output):
+    lines = ["# CF-0 Single-Facade Counterfactual Observability Kill Test", "",
+             "CF-0 uses candidate 1 only. It is a small PCA/linear-probe kill test,",
+             "not a JEPA experiment. Raw RGB/depth/semantic/instance data remain",
+             "server-local and are not tracked by Git.", "", "## Method", "",
+             "Twenty deterministic shared starts are split into five folds by start ID;",
+             "LEFT and RIGHT branches from the same start always remain in the same fold.",
+             "All image preprocessing, PCA and linear fitting are fitted on training folds.",
+             "Rolling probe rows stop before MODEL_VISIBLE_TERMINATION. Action selection",
+             "uses only the shared-start predictions. Absolute coordinates, planned start",
+             "offsets, frame IDs, role names and world boundary coordinates are GT/provenance",
+             "only and never enter model features.", "", "## Gates", "",
+             "| Gate | Status |", "| --- | --- |"]
+    for name, gate in validation["gates"].items():
+        lines.append(f"| {name} | {gate.get('status')} |")
+    lines.extend(["", "## Baselines", "",
+                  "| Baseline | Balanced accuracy | AUROC | Brier | TTE MAE (m) | Action accuracy | Regret (m) |",
+                  "| --- | ---: | ---: | ---: | ---: | ---: | ---: |"])
+    for name, row in validation["evaluation"]["baselines"].items():
+        binary = row["rolling_pre_event"]["event_classification"]
+        time_metric = row["rolling_pre_event"]["time_to_event_uncensored"]
+        action = validation["evaluation"]["action_selection"][name]
+        lines.append(f"| {name} | {binary['balanced_accuracy']:.4f} | "
+                     f"{binary['AUROC']:.4f} | {binary['Brier']:.4f} | "
+                     f"{time_metric['MAE_m']:.4f} | {action['accuracy']:.4f} | "
+                     f"{action['mean_regret_m']:.4f} |")
+    comparisons = validation["evaluation"]["comparisons"]
+    lines.extend(["", "## Incremental Value", "",
+                  f"B3 versus B1 MAE improvement: `{comparisons['B3_minus_B1']['MAE_improvement_m']:.6f} m`.",
+                  f"B3 versus B1 balanced-accuracy improvement: `{comparisons['B3_minus_B1']['balanced_accuracy_improvement']:.6f}`.",
+                  f"B3 versus B2 MAE improvement: `{comparisons['B3_minus_B2']['MAE_improvement_m']:.6f} m`.",
+                  f"B3 versus B1 action-accuracy improvement: `{comparisons['action_selection_B3_minus_B1_accuracy']:.6f}`.",
+                  "", "## Public Evidence", "",
+                  "![Shared starts and bilateral outcomes](assets/cf0/start_branch_pairs.jpg)", "",
+                  "![Pixel-derived event timelines](assets/cf0/event_timelines.jpg)", "",
+                  "![Held-out baseline metrics](assets/cf0/baseline_metrics.jpg)", "",
+                  "![Representative counterfactual branches](assets/cf0/representative_counterfactuals.jpg)", "",
+                  "## Scope", "",
+                  "`CROSS_SURFACE_GENERALIZATION` and `READY_FOR_JEPA` remain `NOT_EVALUATED`.",
+                  "No rollout, other-facade capture, model download or JEPA training ran.", ""])
+    output.write_text("\n".join(lines))
+
+
+def postprocess_cf0(args, config, act0r_config, cf0_config):
+    result_root = Path(args.cf0_result_root)
+    raw_root = Path(args.cf0_raw_root)
+    manifest = json.loads((result_root / "capture_manifest.json").read_text())
+    frames = manifest["frames"]
+    hash_audit = verify_manifest_hashes(frames, PROJECT_ROOT)
+    pairing = all(_act0r2_pairing(row) for row in frames)
+    descriptors, frame_by_id = {}, {int(row["frame_id"]): row for row in frames}
+    for index, entry in enumerate(frames):
+        rgb = np.asarray(Image.open(PROJECT_ROOT / entry["files"]["rgb"]["path"]).convert("RGB"))
+        descriptors[int(entry["frame_id"])] = fixed_length_descriptor(
+            rgb_descriptor(rgb), int(cf0_config["evaluation"]["descriptor_length"])).tolist()
+        if index % 40 == 0:
+            print(json.dumps({"phase": "CF0_OFFLINE_DESCRIPTOR", "completed": index + 1,
+                              "total": len(frames)}), flush=True)
+    frame_rows, branch_summaries, model_records = [], [], []
+    for start in manifest["starts"]:
+        shared = frame_by_id[int(start["shared_start_frame_id"])]
+        for direction in ("LEFT", "RIGHT"):
+            entries = [shared] + [frame_by_id[int(frame_id)]
+                                  for frame_id in start["branch_frame_ids"][direction]]
+            metrics = []
+            for step_index, entry in enumerate(entries):
+                metric = _act0r2_frame_metric(entry, direction,
+                                              manifest["checkpoint_plan"][
+                                                  "camera_motion_axis"],
+                                              act0r_config)
+                metric["direction"] = direction
+                robust = model_visible_termination(
+                    metric, int(config["sensor"]["width"]), cf0_config["event"])
+                metric["event"] = robust
+                metric["step_index"] = step_index
+                metric["relative_distance_m"] = float(step_index * cf0_config["actions"]["step_m"])
+                metrics.append(metric)
+                frame_rows.append({
+                    "start_id": start["start_id"], "direction": direction,
+                    "step_index": step_index, "relative_distance_m": metric["relative_distance_m"],
+                    "frame_id": int(entry["frame_id"]),
+                    "target_coverage": metric["target_coverage"],
+                    "contour_span_over_target_bbox": metric["span_over_target_bbox_height"],
+                    "contour_median_x_px": metric["contour_median_x_px"],
+                    "boundary_type": metric["boundary_classification"]["boundary_type"],
+                    "boundary_penetration_px": robust["boundary_penetration_px"],
+                    "first_physical_termination": robust["FIRST_PHYSICAL_TERMINATION"],
+                    "model_visible_termination": robust["MODEL_VISIBLE_TERMINATION"],
+                    "target_side_fraction": metric["target_side_fraction"],
+                    "external_side_fraction": metric["external_side_fraction"],
+                })
+            physical = next((row for row in metrics if row["event"][
+                "FIRST_PHYSICAL_TERMINATION"]), None)
+            visible = next((row for row in metrics if row["event"][
+                "MODEL_VISIBLE_TERMINATION"]), None)
+            summary = {
+                "start_id": start["start_id"], "start_bin": start["start_bin"],
+                "direction": direction,
+                "first_physical_step": physical["step_index"] if physical else None,
+                "first_physical_distance_m": physical["relative_distance_m"] if physical else None,
+                "first_physical_frame_id": physical["frame_id"] if physical else None,
+                "first_model_visible_step": visible["step_index"] if visible else None,
+                "first_model_visible_distance_m": visible["relative_distance_m"] if visible else None,
+                "first_model_visible_frame_id": visible["frame_id"] if visible else None,
+                "robust_event_within_4m": visible is not None,
+                "maximum_distance_m": float(cf0_config["actions"]["maximum_distance_m"]),
+            }
+            branch_summaries.append(summary)
+            previous = descriptors[int(entries[0]["frame_id"])]
+            for metric, entry in zip(metrics, entries):
+                if visible is not None and metric["step_index"] >= visible["step_index"]:
+                    break
+                current = descriptors[int(entry["frame_id"])]
+                model_records.append({
+                    "start_id": start["start_id"], "direction": direction,
+                    "step_index": int(metric["step_index"]),
+                    "relative_distance_m": float(metric["relative_distance_m"]),
+                    "relative_delta_m": (0.0 if metric["step_index"] == 0 else
+                                         float(cf0_config["actions"]["step_m"])),
+                    "descriptor": current, "previous_descriptor": previous,
+                    "history_valid": metric["step_index"] > 0,
+                    "robust_event_within_4m": visible is not None,
+                    "event_observed": visible is not None,
+                    "target_remaining_m": (float(visible["relative_distance_m"] -
+                                                 metric["relative_distance_m"])
+                                           if visible is not None else None),
+                    "frame_id": int(entry["frame_id"]),
+                })
+                previous = current
+    evaluation = _cf0_evaluate(model_records, branch_summaries, cf0_config)
+    _cf0_write_csv(result_root / "frame_manifest.csv", frame_rows)
+    _cf0_write_csv(result_root / "branch_summary.csv", branch_summaries)
+    _cf0_write_csv(result_root / "fold_assignments.csv", evaluation.pop("fold_rows"))
+    _cf0_write_csv(result_root / "action_selection.csv", evaluation.pop("action_rows"))
+    evaluation.pop("prediction_store")
+    positive = sum(row["robust_event_within_4m"] for row in branch_summaries)
+    negative = len(branch_summaries) - positive
+    comparisons = evaluation["comparisons"]
+    visual_pass = (comparisons["B3_minus_B1"]["MAE_improvement_m"] >=
+                   float(cf0_config["evaluation"]["visual_incremental_mae_m"]) or
+                   comparisons["B3_minus_B1"]["balanced_accuracy_improvement"] >=
+                   float(cf0_config["evaluation"]["visual_incremental_balanced_accuracy"]))
+    action_b3 = evaluation["action_selection"]["B3"]
+    action_increment = comparisons["action_selection_B3_minus_B1_accuracy"]
+    action_pass = (action_b3["accuracy"] is not None and
+                   action_b3["accuracy"] >= float(cf0_config["evaluation"][
+                       "action_selection_minimum_accuracy"]) and
+                   action_increment >= float(cf0_config["evaluation"][
+                       "action_selection_minimum_improvement"]))
+    raw_files = [path for path in raw_root.rglob("*") if path.is_file()]
+    raw_size = sum(path.stat().st_size for path in raw_files)
+    starts_absent = all(row["left_boundary_absent"] and row["right_boundary_absent"]
+                        for row in manifest["starts"])
+    split_pass = all(set(fold["train_start_ids"]).isdisjoint(fold["test_start_ids"])
+                     for fold in evaluation["baselines"]["B3"]["folds"])
+    gates = {
+        "COUNTERFACTUAL_PAIRING": {"status": "PASS" if pairing and hash_audit["status"] == "PASS" and len(frames) == 340 else "FAIL",
+                                   "quartets": len(frames), "hash_audit": hash_audit},
+        "START_BOUNDARY_ABSENT": {"status": "PASS" if starts_absent and len(manifest["starts"]) == 20 else "FAIL",
+                                  "accepted_starts": len(manifest["starts"]),
+                                  "rejected_attempts": len(manifest["rejected_start_attempts"])},
+        "ROBUST_EVENT_COVERAGE": {"status": "PASS" if positive >= int(cf0_config["evaluation"]["robust_event_minimum_positive_branches"]) and negative >= int(cf0_config["evaluation"]["robust_event_minimum_negative_branches"]) else "FAIL",
+                                  "positive_branches": positive, "negative_branches": negative,
+                                  "total_branches": len(branch_summaries)},
+        "SPLIT_LEAKAGE_AUDIT": {"status": "PASS" if split_pass else "FAIL",
+                                "group_unit": "start_id", "folds": 5,
+                                "left_right_same_fold": split_pass,
+                                "feature_preprocessing": "training_fold_only",
+                                "fixed_step_schedule": "represented only by permitted relative odometry in B1/B3",
+                                "direction_feature": "permitted LEFT/RIGHT action only",
+                                "planned_start_offset_feature": False,
+                                "forbidden_model_features": ["absolute_coordinates", "planned_start_offset", "frame_id", "planned_role", "world_boundary_coordinates"],
+                                "forbidden_features_present": []},
+        "VISUAL_INCREMENTAL_VALUE": {"status": "PASS" if visual_pass else "FAIL",
+                                     **comparisons["B3_minus_B1"],
+                                     "required_MAE_improvement_m": float(cf0_config["evaluation"]["visual_incremental_mae_m"]),
+                                     "required_balanced_accuracy_improvement": float(cf0_config["evaluation"]["visual_incremental_balanced_accuracy"])},
+        "ACTION_SELECTION_SIGNAL": {"status": "PASS" if action_pass else "FAIL",
+                                    "B3_non_tie_accuracy": action_b3["accuracy"],
+                                    "B1_non_tie_accuracy": evaluation["action_selection"]["B1"]["accuracy"],
+                                    "accuracy_improvement": action_increment,
+                                    "minimum_B3_accuracy": float(cf0_config["evaluation"]["action_selection_minimum_accuracy"]),
+                                    "minimum_improvement": float(cf0_config["evaluation"]["action_selection_minimum_improvement"])},
+        "SINGLE_SURFACE_SIGNAL": {"status": "PASS" if visual_pass and action_pass else "FAIL"},
+        "CROSS_SURFACE_GENERALIZATION": {"status": "NOT_EVALUATED"},
+        "READY_FOR_MULTI_SURFACE_CAPTURE": {"status": "CONDITIONAL_PASS" if visual_pass and action_pass else "FAIL"},
+        "READY_FOR_JEPA": {"status": "NOT_EVALUATED"},
+    }
+    validation = {
+        "schema": "cf0.validation.v1", "experiment": "CF-0",
+        "candidate_index": 1, "bbox_id": int(cf0_config["bbox_id"]),
+        "target_instance_id": int(cf0_config["target_instance_id"]),
+        "seed": int(cf0_config["seed"]),
+        "capture": {"shared_start_count": len(manifest["starts"]),
+                    "branch_count": len(branch_summaries), "quartet_count": len(frames),
+                    "maximum_quartets": int(cf0_config["actions"]["maximum_saved_quartets"]),
+                    "step_m": float(cf0_config["actions"]["step_m"]),
+                    "maximum_distance_m": float(cf0_config["actions"]["maximum_distance_m"])},
+        "raw": {"path": args.cf0_raw_root, "file_count": len(raw_files),
+                "size_bytes": raw_size, "uploaded": False,
+                "hash_audit": hash_audit},
+        "event_definition": cf0_config["event"],
+        "branch_summaries": branch_summaries,
+        "evaluation": evaluation, "gates": gates,
+        "resources": manifest["resources"],
+        "constraints": {**cf0_config["constraints"], "other_facades_captured": False,
+                        "raw_uploaded": False},
+    }
+    (result_root / "validation.json").write_text(json.dumps(validation, indent=2) + "\n")
+    assets = Path(args.cf0_assets_root)
+    _cf0_assets(manifest, branch_summaries, evaluation, assets)
+    _cf0_docs(validation, PROJECT_ROOT / "docs/CF0_OBSERVABILITY_AUDIT.md")
+    print(json.dumps({"gates": {name: row["status"] for name, row in gates.items()},
+                      "comparisons": comparisons,
+                      "action_selection": evaluation["action_selection"],
+                      "raw_size_bytes": raw_size}, indent=2))
+    return 0 if all(gates[name]["status"] == "PASS" for name in (
+        "COUNTERFACTUAL_PAIRING", "START_BOUNDARY_ABSENT", "ROBUST_EVENT_COVERAGE",
+        "SPLIT_LEAKAGE_AUDIT")) else 2
+
+
 def postprocess(args, config):
     """Recompute compact gates and figures from persisted bytes without CARLA."""
     cap0_path = Path(args.result_root) / "validation.json"
@@ -1179,9 +1970,11 @@ def postprocess(args, config):
 def main(argv=None):
     parser = argparse.ArgumentParser()
     parser.add_argument("mode", choices=("diagnose", "as2-probe", "act0r1", "act0r2",
-                                         "act0r2-postprocess", "postprocess"))
+                                         "act0r2-postprocess", "cf0", "cf0-postprocess",
+                                         "postprocess"))
     parser.add_argument("--config", default="configs/experiments/cap0.yaml")
     parser.add_argument("--act0r-config", default="configs/experiments/act0r.yaml")
+    parser.add_argument("--cf0-config", default="configs/experiments/cf0.yaml")
     parser.add_argument("--carla-root")
     parser.add_argument("--host")
     parser.add_argument("--port", type=int)
@@ -1196,13 +1989,19 @@ def main(argv=None):
     parser.add_argument("--act0r2-result-root", default="results/act0r2")
     parser.add_argument("--act0r2-raw-root", default="results/act0r2/raw")
     parser.add_argument("--act0r2-assets-root", default="docs/assets/act0r2")
+    parser.add_argument("--cf0-result-root", default="results/cf0")
+    parser.add_argument("--cf0-raw-root", default="results/cf0/raw")
+    parser.add_argument("--cf0-assets-root", default="docs/assets/cf0")
     args = parser.parse_args(argv)
     config = yaml.safe_load((PROJECT_ROOT / args.config).read_text())
     act0r_config = yaml.safe_load((PROJECT_ROOT / args.act0r_config).read_text())
+    cf0_config = yaml.safe_load((PROJECT_ROOT / args.cf0_config).read_text())
     if args.mode == "postprocess":
         return postprocess(args, config)
     if args.mode == "act0r2-postprocess":
         return postprocess_act0r2(args, config, act0r_config)
+    if args.mode == "cf0-postprocess":
+        return postprocess_cf0(args, config, act0r_config, cf0_config)
     root = discover_carla_root(args.carla_root)
     carla = import_carla(str(root))
     client = carla.Client(args.host or config["server"]["host"],
@@ -1214,6 +2013,8 @@ def main(argv=None):
         return as2_probe(args, config, carla, client)
     if args.mode == "act0r2":
         return act0r2(args, config, act0r_config, carla, client)
+    if args.mode == "cf0":
+        return capture_cf0(args, config, act0r_config, cf0_config, carla, client)
     return act0r1(args, config, carla, client)
 
 

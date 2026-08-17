@@ -1,0 +1,52 @@
+schema: cf0.config.v1
+experiment: CF-0 single-surface counterfactual action observability kill test
+seed: 20260817
+candidate_index: 1
+bbox_id: 48389
+target_instance_id: 39220
+checkpoint_path: results/act0r/search_plan_checkpoint.json
+checkpoint_sha256: a56310883bb15513ea25c97c919d7faf14edb217b1a05fb0c4e12b060c664f73
+start_sampling:
+  bins:
+    - {name: LEFT_BIASED, count: 8, minimum_m: -3.0, maximum_m: -1.25}
+    - {name: NEAR_CENTER, count: 4, minimum_m: -0.5, maximum_m: 0.5}
+    - {name: RIGHT_BIASED, count: 8, minimum_m: 1.25, maximum_m: 3.0}
+  maximum_attempts_per_bin: 32
+actions:
+  directions: [LEFT, RIGHT]
+  step_m: 0.5
+  maximum_distance_m: 4.0
+  steps_per_branch: 8
+  maximum_saved_quartets: 340
+event:
+  minimum_span_over_target_bbox: 0.80
+  minimum_boundary_penetration_px: 16.0
+  minimum_target_side_fraction: 0.80
+  minimum_external_side_fraction: 0.80
+evaluation:
+  group_folds: 5
+  descriptor_length: 64
+  pca_components: 16
+  ridge_alpha: 1.0
+  bootstrap_samples: 1000
+  robust_event_minimum_positive_branches: 8
+  robust_event_minimum_negative_branches: 8
+  visual_incremental_mae_m: 0.25
+  visual_incremental_balanced_accuracy: 0.10
+  action_selection_minimum_accuracy: 0.65
+  action_selection_minimum_improvement: 0.10
+resources:
+  python_address_space_limit_bytes: 4294967296
+  carla_address_space_limit_bytes: 34359738368
+  numeric_threads: 1
+  python_cpu_set: "15"
+  carla_cpu_set: "16-23"
+constraints:
+  absolute_coordinates_are_model_features: false
+  start_offsets_are_model_features: false
+  frame_ids_are_model_features: false
+  planned_roles_are_model_features: false
+  world_boundary_coordinates_are_model_features: false
+  model_downloads: false
+  rollout: false
+  jepa_training: false
