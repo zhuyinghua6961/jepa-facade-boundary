@@ -1,0 +1,9 @@
+candidate_index,direction,locator_event_displacement_m,automatic_boundary_type,operator_boundary_type,operator_accept,operator_notes
+1,LEFT,4.0625,UNRESOLVED,,,
+1,RIGHT,4.0625,UNRESOLVED,,,
+7,LEFT,1.4375,UNRESOLVED,,,
+7,RIGHT,1.4375,UNRESOLVED,,,
+10,LEFT,2.4375,UNRESOLVED,,,
+10,RIGHT,2.4375,UNRESOLVED,,,
+19,LEFT,0.0625,UNRESOLVED,,,
+19,RIGHT,0.0625,UNRESOLVED,,,

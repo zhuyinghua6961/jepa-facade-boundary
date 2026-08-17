@@ -1,0 +1,491 @@
+{
+  "schema": "act0r.search_plan_checkpoint.v1",
+  "complete": true,
+  "candidate_count": 4,
+  "plans": [
+    {
+      "candidate_index": 1,
+      "bbox_id": 48389,
+      "target_instance_id": 39220,
+      "center_distance_m": 18.0,
+      "locator_center_pose": [
+        [
+          6.123233995736766e-17,
+          1.0,
+          0.0,
+          -92.99478912353516
+        ],
+        [
+          -1.0,
+          6.123233995736766e-17,
+          0.0,
+          288.3297424316406
+        ],
+        [
+          0.0,
+          -0.0,
+          1.0,
+          12.002955436706543
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "camera_motion_axis": [
+        1.0,
+        0.0,
+        0.0
+      ],
+      "searches": {
+        "LEFT": {
+          "status": "PASS",
+          "capture_count": 9,
+          "coarse_bracket_m": [
+            3.0,
+            4.0625
+          ],
+          "final_inside_m": 4.0,
+          "first_legal_event_m": 4.0625,
+          "binary_iterations": 4,
+          "saved_roles": [
+            {
+              "role": "INSIDE",
+              "displacement_m": 3.0
+            },
+            {
+              "role": "PRE_EDGE",
+              "displacement_m": 4.0
+            },
+            {
+              "role": "STRADDLE",
+              "displacement_m": 4.0625
+            },
+            {
+              "role": "STRADDLE_REPEAT_1",
+              "displacement_m": 4.0625
+            },
+            {
+              "role": "STRADDLE_REPEAT_2",
+              "displacement_m": 4.0625
+            },
+            {
+              "role": "STRADDLE_REPEAT_3",
+              "displacement_m": 4.0625
+            },
+            {
+              "role": "POST_EDGE",
+              "displacement_m": 5.0625
+            }
+          ]
+        },
+        "RIGHT": {
+          "status": "PASS",
+          "capture_count": 9,
+          "coarse_bracket_m": [
+            3.0,
+            4.0625
+          ],
+          "final_inside_m": 4.0,
+          "first_legal_event_m": 4.0625,
+          "binary_iterations": 4,
+          "saved_roles": [
+            {
+              "role": "INSIDE",
+              "displacement_m": 3.0
+            },
+            {
+              "role": "PRE_EDGE",
+              "displacement_m": 4.0
+            },
+            {
+              "role": "STRADDLE",
+              "displacement_m": 4.0625
+            },
+            {
+              "role": "STRADDLE_REPEAT_1",
+              "displacement_m": 4.0625
+            },
+            {
+              "role": "STRADDLE_REPEAT_2",
+              "displacement_m": 4.0625
+            },
+            {
+              "role": "STRADDLE_REPEAT_3",
+              "displacement_m": 4.0625
+            },
+            {
+              "role": "POST_EDGE",
+              "displacement_m": 5.0625
+            }
+          ]
+        }
+      }
+    },
+    {
+      "candidate_index": 7,
+      "bbox_id": 48399,
+      "target_instance_id": 39225,
+      "center_distance_m": 17.81907096862793,
+      "locator_center_pose": [
+        [
+          1.0,
+          -1.2246467691574846e-16,
+          0.0,
+          -11.270666122436523
+        ],
+        [
+          1.2246467691574846e-16,
+          1.0,
+          -0.0,
+          256.4228210449219
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          10.276723861694336
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "camera_motion_axis": [
+        -1.2246467991473532e-16,
+        1.0,
+        0.0
+      ],
+      "searches": {
+        "LEFT": {
+          "status": "PASS",
+          "capture_count": 6,
+          "coarse_bracket_m": [
+            0.375,
+            1.4375
+          ],
+          "final_inside_m": 1.375,
+          "first_legal_event_m": 1.4375,
+          "binary_iterations": 4,
+          "saved_roles": [
+            {
+              "role": "INSIDE",
+              "displacement_m": 0.375
+            },
+            {
+              "role": "PRE_EDGE",
+              "displacement_m": 1.375
+            },
+            {
+              "role": "STRADDLE",
+              "displacement_m": 1.4375
+            },
+            {
+              "role": "STRADDLE_REPEAT_1",
+              "displacement_m": 1.4375
+            },
+            {
+              "role": "STRADDLE_REPEAT_2",
+              "displacement_m": 1.4375
+            },
+            {
+              "role": "STRADDLE_REPEAT_3",
+              "displacement_m": 1.4375
+            },
+            {
+              "role": "POST_EDGE",
+              "displacement_m": 2.4375
+            }
+          ]
+        },
+        "RIGHT": {
+          "status": "PASS",
+          "capture_count": 6,
+          "coarse_bracket_m": [
+            0.375,
+            1.4375
+          ],
+          "final_inside_m": 1.375,
+          "first_legal_event_m": 1.4375,
+          "binary_iterations": 4,
+          "saved_roles": [
+            {
+              "role": "INSIDE",
+              "displacement_m": 0.375
+            },
+            {
+              "role": "PRE_EDGE",
+              "displacement_m": 1.375
+            },
+            {
+              "role": "STRADDLE",
+              "displacement_m": 1.4375
+            },
+            {
+              "role": "STRADDLE_REPEAT_1",
+              "displacement_m": 1.4375
+            },
+            {
+              "role": "STRADDLE_REPEAT_2",
+              "displacement_m": 1.4375
+            },
+            {
+              "role": "STRADDLE_REPEAT_3",
+              "displacement_m": 1.4375
+            },
+            {
+              "role": "POST_EDGE",
+              "displacement_m": 2.4375
+            }
+          ]
+        }
+      }
+    },
+    {
+      "candidate_index": 10,
+      "bbox_id": 48418,
+      "target_instance_id": 39249,
+      "center_distance_m": 11.955664329528808,
+      "locator_center_pose": [
+        [
+          -1.0,
+          -1.2246467991473532e-16,
+          0.0,
+          238.04405212402344
+        ],
+        [
+          1.2246467991473532e-16,
+          -1.0,
+          0.0,
+          152.677490234375
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          14.006122589111328
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "camera_motion_axis": [
+        0.0,
+        -1.0,
+        0.0
+      ],
+      "searches": {
+        "LEFT": {
+          "status": "PASS",
+          "capture_count": 7,
+          "coarse_bracket_m": [
+            1.375,
+            2.4375
+          ],
+          "final_inside_m": 2.375,
+          "first_legal_event_m": 2.4375,
+          "binary_iterations": 4,
+          "saved_roles": [
+            {
+              "role": "INSIDE",
+              "displacement_m": 1.375
+            },
+            {
+              "role": "PRE_EDGE",
+              "displacement_m": 2.375
+            },
+            {
+              "role": "STRADDLE",
+              "displacement_m": 2.4375
+            },
+            {
+              "role": "STRADDLE_REPEAT_1",
+              "displacement_m": 2.4375
+            },
+            {
+              "role": "STRADDLE_REPEAT_2",
+              "displacement_m": 2.4375
+            },
+            {
+              "role": "STRADDLE_REPEAT_3",
+              "displacement_m": 2.4375
+            },
+            {
+              "role": "POST_EDGE",
+              "displacement_m": 3.4375
+            }
+          ]
+        },
+        "RIGHT": {
+          "status": "PASS",
+          "capture_count": 7,
+          "coarse_bracket_m": [
+            1.375,
+            2.4375
+          ],
+          "final_inside_m": 2.375,
+          "first_legal_event_m": 2.4375,
+          "binary_iterations": 4,
+          "saved_roles": [
+            {
+              "role": "INSIDE",
+              "displacement_m": 1.375
+            },
+            {
+              "role": "PRE_EDGE",
+              "displacement_m": 2.375
+            },
+            {
+              "role": "STRADDLE",
+              "displacement_m": 2.4375
+            },
+            {
+              "role": "STRADDLE_REPEAT_1",
+              "displacement_m": 2.4375
+            },
+            {
+              "role": "STRADDLE_REPEAT_2",
+              "displacement_m": 2.4375
+            },
+            {
+              "role": "STRADDLE_REPEAT_3",
+              "displacement_m": 2.4375
+            },
+            {
+              "role": "POST_EDGE",
+              "displacement_m": 3.4375
+            }
+          ]
+        }
+      }
+    },
+    {
+      "candidate_index": 19,
+      "bbox_id": 48395,
+      "target_instance_id": 39223,
+      "center_distance_m": 7.13862247467041,
+      "locator_center_pose": [
+        [
+          6.123233995736766e-17,
+          -1.0,
+          0.0,
+          -14.278355598449707
+        ],
+        [
+          1.0,
+          6.123233995736766e-17,
+          -0.0,
+          218.61431884765625
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          10.268207550048828
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "camera_motion_axis": [
+        -1.0,
+        -6.123233995736766e-17,
+        0.0
+      ],
+      "searches": {
+        "LEFT": {
+          "status": "PASS",
+          "capture_count": 5,
+          "coarse_bracket_m": [
+            0.0,
+            0.0625
+          ],
+          "final_inside_m": 0.0,
+          "first_legal_event_m": 0.0625,
+          "binary_iterations": 4,
+          "saved_roles": [
+            {
+              "role": "INSIDE",
+              "displacement_m": 0.0
+            },
+            {
+              "role": "PRE_EDGE",
+              "displacement_m": 0.0
+            },
+            {
+              "role": "STRADDLE",
+              "displacement_m": 0.0625
+            },
+            {
+              "role": "STRADDLE_REPEAT_1",
+              "displacement_m": 0.0625
+            },
+            {
+              "role": "STRADDLE_REPEAT_2",
+              "displacement_m": 0.0625
+            },
+            {
+              "role": "STRADDLE_REPEAT_3",
+              "displacement_m": 0.0625
+            },
+            {
+              "role": "POST_EDGE",
+              "displacement_m": 1.0625
+            }
+          ]
+        },
+        "RIGHT": {
+          "status": "PASS",
+          "capture_count": 5,
+          "coarse_bracket_m": [
+            0.0,
+            0.0625
+          ],
+          "final_inside_m": 0.0,
+          "first_legal_event_m": 0.0625,
+          "binary_iterations": 4,
+          "saved_roles": [
+            {
+              "role": "INSIDE",
+              "displacement_m": 0.0
+            },
+            {
+              "role": "PRE_EDGE",
+              "displacement_m": 0.0
+            },
+            {
+              "role": "STRADDLE",
+              "displacement_m": 0.0625
+            },
+            {
+              "role": "STRADDLE_REPEAT_1",
+              "displacement_m": 0.0625
+            },
+            {
+              "role": "STRADDLE_REPEAT_2",
+              "displacement_m": 0.0625
+            },
+            {
+              "role": "STRADDLE_REPEAT_3",
+              "displacement_m": 0.0625
+            },
+            {
+              "role": "POST_EDGE",
+              "displacement_m": 1.0625
+            }
+          ]
+        }
+      }
+    }
+  ]
+}

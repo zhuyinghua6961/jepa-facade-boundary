@@ -202,3 +202,45 @@ Six compact-evidence classifications pass Tier V, but that does not authorize
 a rollout. The next permissible step is a small adaptive rescout that retains
 the missing boundary-side pixels and plane-free Tier M inputs. See
 [`docs/ACT0_SCREENING_AUDIT.md`](docs/ACT0_SCREENING_AUDIT.md).
+
+## ACT-0R adaptive boundary rescout
+
+ACT-0R was restricted to candidates 1, 7, 10 and 19. A bounded, instance-only
+locator completed LEFT and RIGHT searches for all four candidates and saved a
+pixel-derived search-plan checkpoint. The subsequent canonical
+RGB/depth/semantic/instance capture did not complete its first side frame
+within the 1200-second client limit. Only one candidate 1 CENTER quartet was
+persisted. Its four sensor frame IDs and timestamps match and its five raw
+files pass SHA-256 verification. The RGB itself visibly contains severe
+repeated triangular geometry/tiling artifacts, so it is capture-failure
+evidence rather than usable facade imagery. One corrupted CENTER frame cannot
+establish target instance stability, a physical termination, Tier V, official
+Tier M, or same-pose repeatability.
+
+The locator events are acquisition positions only. They are not relabeled as
+physical boundaries, and ACT-0S classifications are not reused as ACT-0R
+outcomes. Historical three-view scout images are included in the public audit
+only as candidate context and are visibly marked as non-ACT-0R evidence.
+
+```text
+SENSOR_QUADRUPLET_PAIRING: FAIL (1/60 available; the available quartet is paired)
+RAW_PIXEL_EVIDENCE_AVAILABLE: FAIL (1/60)
+CONFIG_OUTCOME_OVERRIDE_ABSENT: PASS
+TARGET_INSTANCE_STABILITY: FAIL
+BILATERAL_BOUNDARY_OBSERVED: FAIL
+BOUNDARY_TYPE_RESOLVED: FAIL
+PHYSICAL_TERMINATION_COUNT: FAIL (0 eligible sides)
+TIER_V_RECOMPUTED_FROM_PIXELS: FAIL (0/8 sides evaluated)
+OFFICIAL_TIER_M: FAIL (0/8 sides evaluated)
+SAME_POSE_CONFIRMATION: FAIL
+PUBLIC_VISUAL_EVIDENCE: FAIL
+OPERATOR_VISUAL_REVIEW: PENDING
+READY_FOR_COUNTERFACTUAL_ROLLOUT: FAIL (0/4 eligible surfaces)
+READY_FOR_DATASET_EXPANSION: NOT_EVALUATED
+READY_FOR_JEPA: NOT_EVALUATED
+```
+
+The detailed failure evidence is in
+[`docs/ACT0R_VISUAL_AUDIT.md`](docs/ACT0R_VISUAL_AUDIT.md). Raw ACT-0R arrays
+remain server-local and are not tracked by Git. No rollout, dataset expansion,
+model download, or JEPA training was run.

@@ -277,3 +277,61 @@ class SynchronousRGBDSeg:
 
     def __exit__(self, exc_type, exc, tb):
         self.close()
+
+
+class SynchronousInstanceSeg:
+    """Single synchronous instance camera for bounded acquisition-time search.
+
+    CARLA's instance image also carries the semantic tag in its red channel, so
+    ACT-0R edge localization does not need to render RGB, depth, or a separate
+    semantic camera. This class is deliberately capture-only: canonical saved
+    evidence still comes from :class:`SynchronousRGBDSeg`.
+    """
+
+    def __init__(self, world, carla, transform, width=640, height=480, fov=90.0,
+                 fixed_delta_seconds=0.05, sensor_tick=0.0):
+        self.world, self.carla = world, carla
+        self.width, self.height, self.fov = int(width), int(height), float(fov)
+        self.K = intrinsics_from_fov(self.width, self.height, self.fov)
+        self._old_settings = world.get_settings()
+        settings = world.get_settings()
+        settings.synchronous_mode = True
+        settings.fixed_delta_seconds = float(fixed_delta_seconds)
+        world.apply_settings(settings)
+        blueprint = world.get_blueprint_library().find("sensor.camera.instance_segmentation")
+        for key, value in (("image_size_x", self.width), ("image_size_y", self.height),
+                           ("fov", self.fov), ("sensor_tick", sensor_tick)):
+            blueprint.set_attribute(key, str(value))
+        self._queue, self._pending = queue.Queue(), {}
+        self.sensor = world.spawn_actor(blueprint, transform)
+        self.sensor.listen(self._queue.put)
+
+    def capture(self, commanded_action=None, timeout=10.0):
+        frame_id = int(self.world.tick())
+        data = SynchronousRGBDSeg._get(self._queue, self._pending, frame_id, timeout)
+        transform = data.transform
+        return {"frame_id": frame_id, "timestamp": float(data.timestamp),
+                "data": {"instance": data}, "K": self.K.copy(),
+                "T_world_camera": transform_matrix(transform),
+                "camera_transform": transform,
+                "commanded_action": commanded_action or {}}
+
+    def set_transform(self, transform):
+        self.sensor.set_transform(transform)
+
+    def close(self):
+        try:
+            self.sensor.stop()
+        except Exception:
+            pass
+        try:
+            self.sensor.destroy()
+        except Exception:
+            pass
+        self.world.apply_settings(self._old_settings)
+
+    def __enter__(self):
+        return self
+
+    def __exit__(self, exc_type, exc, tb):
+        self.close()

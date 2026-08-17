@@ -1,0 +1,53 @@
+schema: act0r.config.v1
+map: Town10HD_Opt
+candidate_indices: [1, 7, 10, 19]
+server:
+  host: localhost
+  port: 2100
+sensor:
+  width: 640
+  height: 480
+  horizontal_fov_deg: 90.0
+  fixed_delta_seconds: 0.05
+search:
+  center_distance_width_fraction: 0.38
+  min_center_distance_m: 7.0
+  max_center_distance_m: 18.0
+  coarse_step_m: 1.0
+  max_coarse_steps: 16
+  binary_tolerance_m: 0.10
+  max_binary_steps: 5
+  post_edge_step_m: 1.0
+  inside_margin_m: 1.0
+  search_min_span_over_target_bbox: 0.60
+  max_saved_frames: 60
+  frozen_repeat_count: 3
+contour:
+  tier_v_min_span_over_target_bbox: 0.80
+  span_sensitivity_thresholds: [0.60, 0.70, 0.80, 0.90]
+  min_target_side_fraction: 0.80
+  min_external_side_fraction: 0.80
+boundary_classification:
+  side_probe_offset_px: 3
+  building_semantic_tag: 3
+  min_bilateral_samples: 32
+  min_depth_pairs: 24
+  depth_margin_m: 0.30
+  same_depth_tolerance_m: 0.20
+  occlusion_closer_fraction: 0.60
+  termination_max_closer_fraction: 0.20
+  semantic_majority_fraction: 0.70
+  same_depth_majority_fraction: 0.70
+tier_m:
+  gate_spread_m: 0.25
+  sensitivity_thresholds_m: [0.05, 0.10, 0.25, 1.00]
+repeatability:
+  max_position_error_m: 0.01
+  max_rotation_error_deg: 0.05
+runtime_safety:
+  configured_python_address_space_limit_bytes: 4294967296
+  actual_outer_python_address_space_limit_bytes: 2147483648
+  carla_address_space_limit_bytes: 17179869184
+  numeric_threads: 1
+  carla_cpu_set: 20-27
+  carla_nice: 15

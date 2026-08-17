@@ -57,6 +57,10 @@ def main(argv=None):
     act0s_path = Path("results/act0/screening_audit_v2.json")
     act0s_matrix_path = Path("results/act0/candidate_gate_matrix_v2.csv")
     act0s_coverage_path = Path("results/act0/scout_coverage_audit.json")
+    act0r_validation_path = Path("results/act0r/validation.json")
+    act0r_search_path = Path("results/act0r/search_plan_checkpoint.json")
+    act0r_frame_manifest_path = Path("results/act0r/frame_manifest.csv")
+    act0r_operator_path = Path("results/act0r/operator_review_template.csv")
     r1 = json.loads(r1_path.read_text()) if r1_path.exists() else {}
     mask1 = json.loads(mask1_path.read_text()) if mask1_path.exists() else {}
     mask1_r1 = json.loads(mask1_r1_path.read_text()) if mask1_r1_path.exists() else {}
@@ -72,12 +76,24 @@ def main(argv=None):
     act0_manifest = json.loads(act0_manifest_path.read_text()) if act0_manifest_path.exists() else {}
     act0s = json.loads(act0s_path.read_text()) if act0s_path.exists() else {}
     act0s_coverage = json.loads(act0s_coverage_path.read_text()) if act0s_coverage_path.exists() else {}
+    act0r = json.loads(act0r_validation_path.read_text()) if act0r_validation_path.exists() else {}
+    act0r_search = json.loads(act0r_search_path.read_text()) if act0r_search_path.exists() else {}
     act0s_matrix_count = 0
     if act0s_matrix_path.exists():
         with act0s_matrix_path.open(newline="") as handle:
             act0s_matrix_count = sum(1 for _row in csv.DictReader(handle))
     act0s_assets = sorted(Path("docs/assets/act0_screening").glob("candidate_*_screening.jpg"))
     act0s_gates = act0s.get("gates", {})
+    act0r_gates = act0r.get("gates", {})
+    act0r_frame_count = 0
+    if act0r_frame_manifest_path.exists():
+        with act0r_frame_manifest_path.open(newline="") as handle:
+            act0r_frame_count = sum(1 for _row in csv.DictReader(handle))
+    act0r_operator_count = 0
+    if act0r_operator_path.exists():
+        with act0r_operator_path.open(newline="") as handle:
+            act0r_operator_count = sum(1 for _row in csv.DictReader(handle))
+    act0r_assets = sorted(Path("docs/assets/act0r").glob("*.jpg"))
     obs0r1_frame_count = 0
     if obs0r1_frames_path.exists():
         with obs0r1_frames_path.open(newline="") as handle:
@@ -177,13 +193,50 @@ def main(argv=None):
                                 act0s_gates.get("READY_FOR_DATASET_EXPANSION", {}).get("status") == "NOT_EVALUATED" and
                                 act0s_gates.get("READY_FOR_JEPA", {}).get("status") == "NOT_EVALUATED" and
                                 act0s_gates.get("OPERATOR_VISUAL_REVIEW", {}).get("status") == "PENDING",
+        "act0r_required_compact_files": all(path.exists() for path in
+                                              (act0r_validation_path, act0r_search_path,
+                                               act0r_frame_manifest_path, act0r_operator_path,
+                                               Path("docs/ACT0R_VISUAL_AUDIT.md"),
+                                               Path("configs/experiments/act0r.yaml"))),
+        "act0r_incomplete_capture_disclosed": act0r.get("schema") == "act0r.validation.v1" and
+                                                act0r.get("run_status") == "INCOMPLETE_CAPTURE" and
+                                                act0r.get("saved_frame_count") == 1 and
+                                                act0r.get("failure", {}).get("search_plan_complete") is True,
+        "act0r_search_plan_complete": act0r_search.get("schema") == "act0r.search_plan_checkpoint.v1" and
+                                       act0r_search.get("complete") is True and
+                                       act0r_search.get("candidate_count") == 4 and
+                                       [row.get("candidate_index") for row in act0r_search.get("plans", [])] == [1, 7, 10, 19] and
+                                       all(set(row.get("searches", {})) == {"LEFT", "RIGHT"}
+                                           for row in act0r_search.get("plans", [])),
+        "act0r_raw_gate_fails_closed": act0r_gates.get("SENSOR_QUADRUPLET_PAIRING", {}).get("status") == "FAIL" and
+                                       act0r_gates.get("SENSOR_QUADRUPLET_PAIRING", {}).get("available_pairing_valid") is True and
+                                       act0r_gates.get("SENSOR_QUADRUPLET_PAIRING", {}).get("available_rgb_visual_integrity") == "FAIL" and
+                                       act0r_gates.get("RAW_PIXEL_EVIDENCE_AVAILABLE", {}).get("status") == "FAIL" and
+                                       act0r_gates.get("RAW_PIXEL_EVIDENCE_AVAILABLE", {}).get("available_frames") == 1 and
+                                       act0r_gates.get("RAW_PIXEL_EVIDENCE_AVAILABLE", {}).get("expected_frames") == 60,
+        "act0r_no_outcome_override": act0r_gates.get("CONFIG_OUTCOME_OVERRIDE_ABSENT", {}).get("status") == "PASS" and
+                                     act0r_gates.get("TIER_V_RECOMPUTED_FROM_PIXELS", {}).get("uses_act0s_outcomes") is False,
+        "act0r_no_false_tier_claim": act0r_gates.get("TIER_V_RECOMPUTED_FROM_PIXELS", {}).get("status") == "FAIL" and
+                                    act0r_gates.get("TIER_V_RECOMPUTED_FROM_PIXELS", {}).get("recomputed_sides") == 0 and
+                                    act0r_gates.get("OFFICIAL_TIER_M", {}).get("status") == "FAIL" and
+                                    act0r_gates.get("OFFICIAL_TIER_M", {}).get("uses_plane") is False and
+                                    act0r_gates.get("OFFICIAL_TIER_M", {}).get("uses_bbox") is False,
+        "act0r_terminal_gates": act0r_gates.get("READY_FOR_COUNTERFACTUAL_ROLLOUT", {}).get("status") == "FAIL" and
+                                act0r_gates.get("READY_FOR_DATASET_EXPANSION", {}).get("status") == "NOT_EVALUATED" and
+                                act0r_gates.get("READY_FOR_JEPA", {}).get("status") == "NOT_EVALUATED" and
+                                act0r_gates.get("OPERATOR_VISUAL_REVIEW", {}).get("status") == "PENDING",
+        "act0r_compact_manifests": act0r_frame_count == 1 and act0r_operator_count == 8,
+        "act0r_public_failure_assets": len(act0r_assets) == 7 and
+                                        act0r_gates.get("PUBLIC_VISUAL_EVIDENCE", {}).get("status") == "FAIL" and
+                                        Path("docs/assets/act0r/candidate_01_current_center.jpg").exists() and
+                                        Path("docs/assets/act0r/candidate_19_right_unresolved.jpg").exists(),
     }
-    result = {"schema": "boundary_sweep.static_validation.v5", "checks": checks, "missing": missing, "private_path_files": forbidden,
+    result = {"schema": "boundary_sweep.static_validation.v6", "checks": checks, "missing": missing, "private_path_files": forbidden,
               "geometry_reference_count": reference.get("geometry_reference_count"), "depth_metric": depth_result,
               "surface_stats_consistent": surface_checks, "gates": gates,
               "mask1r1_gates": mask1_r1.get("gates", {}), "obs0_gates": obs0.get("gates", {}),
               "obs0r1_gates": obs0r1_gates, "obs0r1_runtime_safety": runtime_safety,
-              "act0s_gates": act0s_gates}
+              "act0s_gates": act0s_gates, "act0r_gates": act0r_gates}
     print(json.dumps(result, indent=2))
     return 0 if all(checks.values()) else 1
 

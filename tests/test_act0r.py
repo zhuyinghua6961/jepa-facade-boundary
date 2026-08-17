@@ -1,0 +1,126 @@
+import json
+from pathlib import Path
+
+import numpy as np
+import yaml
+
+from boundary_sweep.act0r import (classify_boundary_pixels,
+                                  config_outcome_override_audit,
+                                  contour_span_metrics, official_tier_m,
+                                  pose_repeatability, sha256_file,
+                                  verify_manifest_hashes)
+
+
+def _classification_thresholds():
+    return {"side_probe_offset_px": 3, "building_semantic_tag": 3,
+            "min_bilateral_samples": 10, "min_depth_pairs": 10,
+            "depth_margin_m": 0.3, "same_depth_tolerance_m": 0.2,
+            "occlusion_closer_fraction": 0.6, "termination_max_closer_fraction": 0.2,
+            "semantic_majority_fraction": 0.7, "same_depth_majority_fraction": 0.7}
+
+
+def _synthetic_boundary(external_depth, external_semantic, external_instance):
+    target = np.zeros((80, 100), dtype=bool)
+    target[10:70, 20:60] = True
+    span = contour_span_metrics(target, "RIGHT")
+    depth = np.full(target.shape, 10.0, dtype=np.float32)
+    semantic = np.zeros(target.shape, dtype=np.uint8)
+    semantic[target] = 3
+    instance = np.zeros(target.shape, dtype=np.uint32)
+    instance[target] = 100
+    depth[:, 60:] = external_depth
+    semantic[:, 60:] = external_semantic
+    instance[:, 60:] = external_instance
+    result = classify_boundary_pixels(target, span["contour"], depth, semantic, instance,
+                                      100, "RIGHT", _classification_thresholds())
+    return span, result
+
+
+def test_config_cannot_override_computed_outcomes():
+    assert config_outcome_override_audit({"search": {"coarse_step_m": 1.0},
+                                          "boundary_classification": {"depth_margin_m": 0.3}})["status"] == "PASS"
+    failed = config_outcome_override_audit({"screening": {"tier_v_status": "PASS"}})
+    assert failed["status"] == "FAIL"
+    assert failed["forbidden_paths"] == ["screening.tier_v_status"]
+
+
+def test_checked_in_act0r_config_has_no_outcome_override():
+    path = Path("configs/experiments/act0r.yaml")
+    if not path.exists():
+        return
+    assert config_outcome_override_audit(yaml.safe_load(path.read_text()))["status"] == "PASS"
+
+
+def test_contour_span_is_normalized_by_target_bbox_height():
+    span, _result = _synthetic_boundary(20.0, 0, 0)
+    assert span["target_bbox_height_px"] == 60
+    assert span["span_over_target_bbox_height"] > 0.90
+    assert span["span_over_target_bbox_height"] > span["span_over_image_height"]
+
+
+def test_sparse_contour_endpoints_do_not_count_as_full_height():
+    target = np.zeros((80, 100), dtype=bool)
+    target[10:70, :] = True
+    span = contour_span_metrics(target, "LEFT")
+    assert span["target_bbox_height_px"] == 60
+    assert span["contour_pixel_count"] == 2
+    assert span["contour_span_px"] == 2
+    assert span["span_over_target_bbox_height"] < 0.05
+
+
+def test_pixel_boundary_types_cover_termination_occlusion_and_internal_seam():
+    _span, termination = _synthetic_boundary(20.0, 0, 0)
+    _span, occlusion = _synthetic_boundary(5.0, 0, 0)
+    _span, seam = _synthetic_boundary(10.05, 3, 200)
+    assert termination["boundary_type"] == "PHYSICAL_TERMINATION"
+    assert occlusion["boundary_type"] == "FOREGROUND_OCCLUSION"
+    assert seam["boundary_type"] == "INTERNAL_INSTANCE_SEAM"
+
+
+def test_official_tier_m_is_plane_and_bbox_free():
+    frames = [{"valid_contour_point_count": 50, "action_axis_median_m": value,
+               "action_axis_mad_m": 0.01} for value in (1.00, 1.04, 0.98, 1.02)]
+    result = official_tier_m(frames, [0.05, 0.10, 0.25, 1.0], 0.25)
+    assert result["status"] == "PASS"
+    assert abs(result["spread_m"] - 0.06) < 1e-12
+    assert result["uses_plane"] is False
+    assert result["uses_bbox"] is False
+    assert result["uses_legacy_boundary"] is False
+
+
+def test_three_frozen_repeats_have_identical_pose():
+    transform = np.eye(4)
+    result = pose_repeatability([transform.copy() for _ in range(4)], 0.01, 0.05)
+    assert result["status"] == "PASS"
+    moved = transform.copy()
+    moved[0, 3] = 0.02
+    assert pose_repeatability([transform, transform, transform, moved], 0.01, 0.05)["status"] == "FAIL"
+
+
+def test_raw_manifest_hashes_are_verified(tmp_path):
+    path = tmp_path / "frame_rgb.png"
+    path.write_bytes(b"pixel evidence")
+    entry = {"frame_id": 7, "files": {"rgb": {"path": path.name, "sha256": sha256_file(path)}}}
+    assert verify_manifest_hashes([entry], tmp_path)["status"] == "PASS"
+    path.write_bytes(b"changed")
+    assert verify_manifest_hashes([entry], tmp_path)["status"] == "FAIL"
+
+
+def test_published_incomplete_capture_fails_closed_and_has_audit_assets():
+    validation_path = Path("results/act0r/validation.json")
+    search_path = Path("results/act0r/search_plan_checkpoint.json")
+    assert validation_path.exists()
+    assert search_path.exists()
+    validation = json.loads(validation_path.read_text())
+    search = json.loads(search_path.read_text())
+    gates = validation["gates"]
+    assert validation["run_status"] == "INCOMPLETE_CAPTURE"
+    assert validation["saved_frame_count"] == 1
+    assert gates["RAW_PIXEL_EVIDENCE_AVAILABLE"]["status"] == "FAIL"
+    assert gates["TIER_V_RECOMPUTED_FROM_PIXELS"]["recomputed_sides"] == 0
+    assert gates["OFFICIAL_TIER_M"]["evaluated_sides"] == 0
+    assert gates["READY_FOR_COUNTERFACTUAL_ROLLOUT"]["status"] == "FAIL"
+    assert gates["READY_FOR_JEPA"]["status"] == "NOT_EVALUATED"
+    assert search["complete"] is True
+    assert [row["candidate_index"] for row in search["plans"]] == [1, 7, 10, 19]
+    assert len(list(Path("docs/assets/act0r").glob("*.jpg"))) == 7

@@ -1,0 +1,403 @@
+{
+  "schema": "act0r.validation.v1",
+  "phase": "ACT-0R adaptive boundary rescout",
+  "run_status": "INCOMPLETE_CAPTURE",
+  "candidate_count": 4,
+  "saved_frame_count": 1,
+  "failure": {
+    "stage": "canonical_sensor_quartet_initialization_or_first_tick_and_render_integrity",
+    "client_timeout_seconds": 1200,
+    "search_plan_complete": true,
+    "search_plan_sha256": "a56310883bb15513ea25c97c919d7faf14edb217b1a05fb0c4e12b060c664f73",
+    "available_center_rgb_visual_integrity": "FAIL",
+    "available_center_rgb_observation": "severe repeated triangular geometry/tiling artifacts",
+    "claim_limit": "locator events are acquisition positions, not physical-boundary labels"
+  },
+  "raw": {
+    "path": "results/act0r/raw",
+    "size_bytes": 3116843,
+    "uploaded_to_github": false
+  },
+  "thresholds": {
+    "schema": "act0r.config.v1",
+    "map": "Town10HD_Opt",
+    "candidate_indices": [
+      1,
+      7,
+      10,
+      19
+    ],
+    "sensor": {
+      "width": 640,
+      "height": 480,
+      "horizontal_fov_deg": 90.0,
+      "fixed_delta_seconds": 0.05
+    },
+    "search": {
+      "center_distance_width_fraction": 0.38,
+      "min_center_distance_m": 7.0,
+      "max_center_distance_m": 18.0,
+      "coarse_step_m": 1.0,
+      "max_coarse_steps": 16,
+      "binary_tolerance_m": 0.1,
+      "max_binary_steps": 5,
+      "post_edge_step_m": 1.0,
+      "inside_margin_m": 1.0,
+      "search_min_span_over_target_bbox": 0.6,
+      "max_saved_frames": 60,
+      "frozen_repeat_count": 3
+    },
+    "contour": {
+      "tier_v_min_span_over_target_bbox": 0.8,
+      "span_sensitivity_thresholds": [
+        0.6,
+        0.7,
+        0.8,
+        0.9
+      ],
+      "min_target_side_fraction": 0.8,
+      "min_external_side_fraction": 0.8
+    },
+    "boundary_classification": {
+      "side_probe_offset_px": 3,
+      "building_semantic_tag": 3,
+      "min_bilateral_samples": 32,
+      "min_depth_pairs": 24,
+      "depth_margin_m": 0.3,
+      "same_depth_tolerance_m": 0.2,
+      "occlusion_closer_fraction": 0.6,
+      "termination_max_closer_fraction": 0.2,
+      "semantic_majority_fraction": 0.7,
+      "same_depth_majority_fraction": 0.7
+    },
+    "tier_m": {
+      "gate_spread_m": 0.25,
+      "sensitivity_thresholds_m": [
+        0.05,
+        0.1,
+        0.25,
+        1.0
+      ]
+    },
+    "repeatability": {
+      "max_position_error_m": 0.01,
+      "max_rotation_error_deg": 0.05
+    },
+    "runtime_safety": {
+      "configured_python_address_space_limit_bytes": 4294967296,
+      "actual_outer_python_address_space_limit_bytes": 2147483648,
+      "carla_address_space_limit_bytes": 17179869184,
+      "numeric_threads": 1,
+      "carla_cpu_set": "20-27",
+      "carla_nice": 15
+    }
+  },
+  "gates": {
+    "SENSOR_QUADRUPLET_PAIRING": {
+      "status": "FAIL",
+      "available_frames": 1,
+      "available_frames_paired": 1,
+      "expected_frames": 60,
+      "available_pairing_valid": true,
+      "available_rgb_visual_integrity": "FAIL",
+      "visual_integrity_reason": "candidate 1 CENTER RGB has severe repeated triangular geometry/tiling artifacts"
+    },
+    "RAW_PIXEL_EVIDENCE_AVAILABLE": {
+      "status": "FAIL",
+      "available_frames": 1,
+      "expected_frames": 60,
+      "available_hash_audit": {
+        "status": "PASS",
+        "checked_file_count": 5,
+        "missing": [],
+        "mismatches": []
+      },
+      "raw_path": "results/act0r/raw",
+      "raw_size_bytes": 3116843
+    },
+    "CONFIG_OUTCOME_OVERRIDE_ABSENT": {
+      "status": "PASS",
+      "forbidden_paths": [],
+      "forbidden_keys": [
+        "candidate_classification",
+        "classification",
+        "existing_evidence_interpretation",
+        "expected_boundary_type",
+        "force_pass",
+        "override",
+        "tier_v_status"
+      ]
+    },
+    "TARGET_INSTANCE_STABILITY": {
+      "status": "FAIL",
+      "stable_candidates": 0,
+      "required": 4,
+      "reason": "bilateral canonical frames missing"
+    },
+    "BILATERAL_BOUNDARY_OBSERVED": {
+      "status": "FAIL",
+      "candidate_count": 0,
+      "required": 4
+    },
+    "BOUNDARY_TYPE_RESOLVED": {
+      "status": "FAIL",
+      "resolved_sides": 0,
+      "required_sides": 8
+    },
+    "PHYSICAL_TERMINATION_COUNT": {
+      "status": "FAIL",
+      "termination_sides": 0,
+      "bilateral_eligible_surfaces": 0
+    },
+    "TIER_V_RECOMPUTED_FROM_PIXELS": {
+      "status": "FAIL",
+      "recomputed_sides": 0,
+      "required_sides": 8,
+      "uses_act0s_outcomes": false
+    },
+    "OFFICIAL_TIER_M": {
+      "status": "FAIL",
+      "evaluated_sides": 0,
+      "required_sides": 8,
+      "uses_plane": false,
+      "uses_bbox": false,
+      "absolute_accuracy": "NOT_EVALUATED"
+    },
+    "SAME_POSE_CONFIRMATION": {
+      "status": "FAIL",
+      "confirmed_sides": 0,
+      "required_sides": 8
+    },
+    "PUBLIC_VISUAL_EVIDENCE": {
+      "status": "FAIL",
+      "image_count": 7,
+      "reason": "current LEFT/RIGHT canonical images are missing"
+    },
+    "OPERATOR_VISUAL_REVIEW": {
+      "status": "PENDING"
+    },
+    "READY_FOR_COUNTERFACTUAL_ROLLOUT": {
+      "status": "FAIL",
+      "eligible_surfaces": 0,
+      "required": 4
+    },
+    "READY_FOR_DATASET_EXPANSION": {
+      "status": "NOT_EVALUATED"
+    },
+    "READY_FOR_JEPA": {
+      "status": "NOT_EVALUATED"
+    }
+  },
+  "candidates": [
+    {
+      "candidate_index": 1,
+      "bbox_id": 48389,
+      "target_instance_id_from_locator": 39220,
+      "target_instance_stable": false,
+      "directions": {
+        "LEFT": {
+          "boundary_type": "UNRESOLVED",
+          "status": "NOT_EVALUATED",
+          "locator_search_status": "PASS",
+          "locator_first_legal_event_m": 4.0625,
+          "tier_v": {
+            "status": "NOT_EVALUATED",
+            "recomputed_from_raw_pixels": false,
+            "reason": "canonical side pixel evidence missing"
+          },
+          "tier_m": {
+            "status": "NOT_EVALUATED",
+            "uses_plane": false,
+            "uses_bbox": false,
+            "reason": "target-side contour depth evidence missing"
+          },
+          "same_pose": {
+            "status": "NOT_EVALUATED",
+            "reason": "frozen quartet frames missing"
+          }
+        },
+        "RIGHT": {
+          "boundary_type": "UNRESOLVED",
+          "status": "NOT_EVALUATED",
+          "locator_search_status": "PASS",
+          "locator_first_legal_event_m": 4.0625,
+          "tier_v": {
+            "status": "NOT_EVALUATED",
+            "recomputed_from_raw_pixels": false,
+            "reason": "canonical side pixel evidence missing"
+          },
+          "tier_m": {
+            "status": "NOT_EVALUATED",
+            "uses_plane": false,
+            "uses_bbox": false,
+            "reason": "target-side contour depth evidence missing"
+          },
+          "same_pose": {
+            "status": "NOT_EVALUATED",
+            "reason": "frozen quartet frames missing"
+          }
+        }
+      },
+      "eligible_surface": false
+    },
+    {
+      "candidate_index": 7,
+      "bbox_id": 48399,
+      "target_instance_id_from_locator": 39225,
+      "target_instance_stable": false,
+      "directions": {
+        "LEFT": {
+          "boundary_type": "UNRESOLVED",
+          "status": "NOT_EVALUATED",
+          "locator_search_status": "PASS",
+          "locator_first_legal_event_m": 1.4375,
+          "tier_v": {
+            "status": "NOT_EVALUATED",
+            "recomputed_from_raw_pixels": false,
+            "reason": "canonical side pixel evidence missing"
+          },
+          "tier_m": {
+            "status": "NOT_EVALUATED",
+            "uses_plane": false,
+            "uses_bbox": false,
+            "reason": "target-side contour depth evidence missing"
+          },
+          "same_pose": {
+            "status": "NOT_EVALUATED",
+            "reason": "frozen quartet frames missing"
+          }
+        },
+        "RIGHT": {
+          "boundary_type": "UNRESOLVED",
+          "status": "NOT_EVALUATED",
+          "locator_search_status": "PASS",
+          "locator_first_legal_event_m": 1.4375,
+          "tier_v": {
+            "status": "NOT_EVALUATED",
+            "recomputed_from_raw_pixels": false,
+            "reason": "canonical side pixel evidence missing"
+          },
+          "tier_m": {
+            "status": "NOT_EVALUATED",
+            "uses_plane": false,
+            "uses_bbox": false,
+            "reason": "target-side contour depth evidence missing"
+          },
+          "same_pose": {
+            "status": "NOT_EVALUATED",
+            "reason": "frozen quartet frames missing"
+          }
+        }
+      },
+      "eligible_surface": false
+    },
+    {
+      "candidate_index": 10,
+      "bbox_id": 48418,
+      "target_instance_id_from_locator": 39249,
+      "target_instance_stable": false,
+      "directions": {
+        "LEFT": {
+          "boundary_type": "UNRESOLVED",
+          "status": "NOT_EVALUATED",
+          "locator_search_status": "PASS",
+          "locator_first_legal_event_m": 2.4375,
+          "tier_v": {
+            "status": "NOT_EVALUATED",
+            "recomputed_from_raw_pixels": false,
+            "reason": "canonical side pixel evidence missing"
+          },
+          "tier_m": {
+            "status": "NOT_EVALUATED",
+            "uses_plane": false,
+            "uses_bbox": false,
+            "reason": "target-side contour depth evidence missing"
+          },
+          "same_pose": {
+            "status": "NOT_EVALUATED",
+            "reason": "frozen quartet frames missing"
+          }
+        },
+        "RIGHT": {
+          "boundary_type": "UNRESOLVED",
+          "status": "NOT_EVALUATED",
+          "locator_search_status": "PASS",
+          "locator_first_legal_event_m": 2.4375,
+          "tier_v": {
+            "status": "NOT_EVALUATED",
+            "recomputed_from_raw_pixels": false,
+            "reason": "canonical side pixel evidence missing"
+          },
+          "tier_m": {
+            "status": "NOT_EVALUATED",
+            "uses_plane": false,
+            "uses_bbox": false,
+            "reason": "target-side contour depth evidence missing"
+          },
+          "same_pose": {
+            "status": "NOT_EVALUATED",
+            "reason": "frozen quartet frames missing"
+          }
+        }
+      },
+      "eligible_surface": false
+    },
+    {
+      "candidate_index": 19,
+      "bbox_id": 48395,
+      "target_instance_id_from_locator": 39223,
+      "target_instance_stable": false,
+      "directions": {
+        "LEFT": {
+          "boundary_type": "UNRESOLVED",
+          "status": "NOT_EVALUATED",
+          "locator_search_status": "PASS",
+          "locator_first_legal_event_m": 0.0625,
+          "tier_v": {
+            "status": "NOT_EVALUATED",
+            "recomputed_from_raw_pixels": false,
+            "reason": "canonical side pixel evidence missing"
+          },
+          "tier_m": {
+            "status": "NOT_EVALUATED",
+            "uses_plane": false,
+            "uses_bbox": false,
+            "reason": "target-side contour depth evidence missing"
+          },
+          "same_pose": {
+            "status": "NOT_EVALUATED",
+            "reason": "frozen quartet frames missing"
+          }
+        },
+        "RIGHT": {
+          "boundary_type": "UNRESOLVED",
+          "status": "NOT_EVALUATED",
+          "locator_search_status": "PASS",
+          "locator_first_legal_event_m": 0.0625,
+          "tier_v": {
+            "status": "NOT_EVALUATED",
+            "recomputed_from_raw_pixels": false,
+            "reason": "canonical side pixel evidence missing"
+          },
+          "tier_m": {
+            "status": "NOT_EVALUATED",
+            "uses_plane": false,
+            "uses_bbox": false,
+            "reason": "target-side contour depth evidence missing"
+          },
+          "same_pose": {
+            "status": "NOT_EVALUATED",
+            "reason": "frozen quartet frames missing"
+          }
+        }
+      },
+      "eligible_surface": false
+    }
+  ],
+  "constraints": {
+    "counterfactual_rollout_run": false,
+    "jepa_training_run": false,
+    "models_downloaded": false,
+    "dataset_expansion_run": false
+  }
+}
