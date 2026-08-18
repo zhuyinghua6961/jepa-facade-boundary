@@ -7,7 +7,7 @@ Reusable CARLA geometry and RGB-D tooling for active facade-boundary perception 
 The repository contains the GEO-0.5R2 implementation and its reproducible audit. CARLA 0.10.0 UE5 / Town10HD_Opt was used with 640x480 RGB-D sensors, horizontal FOV 90 degrees, synchronous mode, fixed delta 0.05 s, and NORMAL_LOCK camera motion.
 
 ```text
-pytest: 61 passed
+pytest: 105 passed
 RGB-D: 960 pairs
 surface_alpha: bbox 48391
 surface_beta: bbox 48393
@@ -428,3 +428,36 @@ The preregistered kill test therefore stops at one facade: current evidence
 does not justify multi-surface capture or a JEPA experiment. Raw CF-0 payloads
 remain as one server-local, Git-ignored canonical copy. See
 [`docs/CF0_OBSERVABILITY_AUDIT.md`](docs/CF0_OBSERVABILITY_AUDIT.md).
+
+## PROBE-0 active-disambiguation kill test
+
+PROBE-0 is a one-shot offline audit over the frozen CF-0 raw. It compares the
+frozen shared-start B2 action-selection accuracy (`0.5385`) with the unchanged
+CF-0 B3 feature/model pipeline after a fixed 1.0 m probe. The primary history
+contains exactly the 0.5 m and 1.0 m frames; 0.5 m is reported only as a
+diagnostic, and no 1.5 m boundary frame or later frame enters the model.
+
+The 26 primary samples come from LEFT and RIGHT probes at the 13 frozen
+non-tie starts. Both probes from a start remain in the same held-out fold.
+Pooled accuracy is `0.8846` (balanced accuracy `0.8869`, AUROC `0.9762`, mean
+regret `0.1731 m`), with a start-cluster bootstrap accuracy interval of
+`[0.7308, 1.0000]`. LEFT-probe and RIGHT-probe accuracy are `0.8462` and
+`0.9231`. The improvement over the frozen B2 reference is `0.3462`.
+
+```text
+SOURCE_RAW_HASH_AUDIT: PASS (390/390 payloads)
+GROUP_SPLIT_LEAKAGE_AUDIT: PASS
+PREBOUNDARY_INPUT_AUDIT: PASS
+ACTIVE_DISAMBIGUATION_SIGNAL: PASS
+ACTIVE_FACADE_JEPA_ROUTE: CONDITIONAL_GO
+READY_FOR_NEW_CAPTURE: CONDITIONAL_PASS
+READY_FOR_SECOND_SURFACE_REPLICATION: CONDITIONAL_PASS
+EXTERNAL_VISUAL_REVIEW: PENDING
+READY_FOR_JEPA: NOT_EVALUATED
+```
+
+This is evidence for replication on a second surface, not authorization to
+train JEPA. It uses one facade and only 13 independent start groups, so
+cross-surface generalization remains untested. CARLA was not started, no new
+capture or download occurred, and no model artifact was saved. See
+[`docs/PROBE0_ACTIVE_DISAMBIGUATION_AUDIT.md`](docs/PROBE0_ACTIVE_DISAMBIGUATION_AUDIT.md).

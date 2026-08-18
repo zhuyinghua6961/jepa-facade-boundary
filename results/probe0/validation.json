@@ -1,0 +1,490 @@
+{
+  "schema": "probe0.validation.v1",
+  "experiment": "PROBE-0",
+  "source": "frozen CF-0 raw and compact result only",
+  "primary_probe_distance_m": 1.0,
+  "diagnostic_probe_distance_m": 0.5,
+  "P0": {
+    "definition": "frozen CF-0 shared-start B2 action selection",
+    "accuracy": 0.5384615384615384,
+    "non_tie_start_count": 13
+  },
+  "source_audit": {
+    "evidence_frame_count": 65,
+    "checked_file_count": 390
+  },
+  "preregistered_thresholds": {
+    "pooled_accuracy_minimum": 0.65,
+    "p0_accuracy_improvement_minimum": 0.1,
+    "pooled_ci_lower_strictly_greater_than": 0.5,
+    "left_probe_accuracy_minimum": 0.65,
+    "right_probe_accuracy_minimum": 0.65
+  },
+  "primary_1m": {
+    "pooled": {
+      "sample_count": 26,
+      "positive_count": 12,
+      "negative_count": 14,
+      "balanced_accuracy": 0.8869047619047619,
+      "AUROC": 0.9761904761904762,
+      "Brier": 0.08306476022635507,
+      "threshold": 0.5,
+      "accuracy": 0.8846153846153846,
+      "mean_regret_m": 0.17307692307692307,
+      "median_regret_m": 0.0,
+      "bootstrap_95_ci": {
+        "accuracy": {
+          "lower": 0.7307692307692307,
+          "upper": 1.0,
+          "bootstrap_samples": 1000,
+          "cluster_unit": "start_id"
+        },
+        "balanced_accuracy": {
+          "lower": 0.7166666666666667,
+          "upper": 1.0,
+          "bootstrap_samples": 1000,
+          "cluster_unit": "start_id"
+        },
+        "AUROC": {
+          "lower": 0.9027083333333333,
+          "upper": 1.0,
+          "bootstrap_samples": 1000,
+          "cluster_unit": "start_id"
+        },
+        "mean_regret_m": {
+          "lower": 0.0,
+          "upper": 0.4807692307692308,
+          "bootstrap_samples": 1000,
+          "cluster_unit": "start_id"
+        }
+      }
+    },
+    "LEFT_probe": {
+      "sample_count": 13,
+      "positive_count": 6,
+      "negative_count": 7,
+      "balanced_accuracy": 0.8452380952380952,
+      "AUROC": 0.9761904761904762,
+      "Brier": 0.109751579172303,
+      "threshold": 0.5,
+      "accuracy": 0.8461538461538461,
+      "mean_regret_m": 0.19230769230769232,
+      "median_regret_m": 0.0,
+      "bootstrap_95_ci": {
+        "accuracy": {
+          "lower": 0.6153846153846154,
+          "upper": 1.0,
+          "bootstrap_samples": 1000,
+          "cluster_unit": "start_id"
+        },
+        "balanced_accuracy": {
+          "lower": 0.6068948412698414,
+          "upper": 1.0,
+          "bootstrap_samples": 1000,
+          "cluster_unit": "start_id"
+        },
+        "AUROC": {
+          "lower": 0.8571428571428571,
+          "upper": 1.0,
+          "bootstrap_samples": 1000,
+          "cluster_unit": "start_id"
+        },
+        "mean_regret_m": {
+          "lower": 0.0,
+          "upper": 0.5009615384615376,
+          "bootstrap_samples": 1000,
+          "cluster_unit": "start_id"
+        }
+      }
+    },
+    "RIGHT_probe": {
+      "sample_count": 13,
+      "positive_count": 6,
+      "negative_count": 7,
+      "balanced_accuracy": 0.9285714285714286,
+      "AUROC": 1.0,
+      "Brier": 0.05637794128040718,
+      "threshold": 0.5,
+      "accuracy": 0.9230769230769231,
+      "mean_regret_m": 0.15384615384615385,
+      "median_regret_m": 0.0,
+      "bootstrap_95_ci": {
+        "accuracy": {
+          "lower": 0.7692307692307693,
+          "upper": 1.0,
+          "bootstrap_samples": 1000,
+          "cluster_unit": "start_id"
+        },
+        "balanced_accuracy": {
+          "lower": 0.7857142857142857,
+          "upper": 1.0,
+          "bootstrap_samples": 1000,
+          "cluster_unit": "start_id"
+        },
+        "AUROC": {
+          "lower": 1.0,
+          "upper": 1.0,
+          "bootstrap_samples": 1000,
+          "cluster_unit": "start_id"
+        },
+        "mean_regret_m": {
+          "lower": 0.0,
+          "upper": 0.46153846153846156,
+          "bootstrap_samples": 1000,
+          "cluster_unit": "start_id"
+        }
+      }
+    }
+  },
+  "diagnostic_0_5m": {
+    "selection_role": "diagnostic_only_not_gated",
+    "pooled": {
+      "sample_count": 26,
+      "positive_count": 12,
+      "negative_count": 14,
+      "balanced_accuracy": 0.8154761904761905,
+      "AUROC": 0.9702380952380952,
+      "Brier": 0.10312236148109626,
+      "threshold": 0.5,
+      "accuracy": 0.8076923076923077,
+      "mean_regret_m": 0.3269230769230769,
+      "median_regret_m": 0.0,
+      "bootstrap_95_ci": {
+        "accuracy": {
+          "lower": 0.6153846153846154,
+          "upper": 1.0,
+          "bootstrap_samples": 1000,
+          "cluster_unit": "start_id"
+        },
+        "balanced_accuracy": {
+          "lower": 0.6166666666666667,
+          "upper": 1.0,
+          "bootstrap_samples": 1000,
+          "cluster_unit": "start_id"
+        },
+        "AUROC": {
+          "lower": 0.86875,
+          "upper": 1.0,
+          "bootstrap_samples": 1000,
+          "cluster_unit": "start_id"
+        },
+        "mean_regret_m": {
+          "lower": 0.0,
+          "upper": 0.7692307692307693,
+          "bootstrap_samples": 1000,
+          "cluster_unit": "start_id"
+        }
+      }
+    },
+    "LEFT_probe": {
+      "sample_count": 13,
+      "positive_count": 6,
+      "negative_count": 7,
+      "balanced_accuracy": 0.7738095238095238,
+      "AUROC": 0.9523809523809523,
+      "Brier": 0.11955858458383237,
+      "threshold": 0.5,
+      "accuracy": 0.7692307692307693,
+      "mean_regret_m": 0.34615384615384615,
+      "median_regret_m": 0.0,
+      "bootstrap_95_ci": {
+        "accuracy": {
+          "lower": 0.5384615384615384,
+          "upper": 1.0,
+          "bootstrap_samples": 1000,
+          "cluster_unit": "start_id"
+        },
+        "balanced_accuracy": {
+          "lower": 0.5236309523809524,
+          "upper": 1.0,
+          "bootstrap_samples": 1000,
+          "cluster_unit": "start_id"
+        },
+        "AUROC": {
+          "lower": 0.7857142857142857,
+          "upper": 1.0,
+          "bootstrap_samples": 1000,
+          "cluster_unit": "start_id"
+        },
+        "mean_regret_m": {
+          "lower": 0.0,
+          "upper": 0.8076923076923077,
+          "bootstrap_samples": 1000,
+          "cluster_unit": "start_id"
+        }
+      }
+    },
+    "RIGHT_probe": {
+      "sample_count": 13,
+      "positive_count": 6,
+      "negative_count": 7,
+      "balanced_accuracy": 0.8571428571428572,
+      "AUROC": 1.0,
+      "Brier": 0.08668613837836017,
+      "threshold": 0.5,
+      "accuracy": 0.8461538461538461,
+      "mean_regret_m": 0.3076923076923077,
+      "median_regret_m": 0.0,
+      "bootstrap_95_ci": {
+        "accuracy": {
+          "lower": 0.6153846153846154,
+          "upper": 1.0,
+          "bootstrap_samples": 1000,
+          "cluster_unit": "start_id"
+        },
+        "balanced_accuracy": {
+          "lower": 0.6666666666666666,
+          "upper": 1.0,
+          "bootstrap_samples": 1000,
+          "cluster_unit": "start_id"
+        },
+        "AUROC": {
+          "lower": 1.0,
+          "upper": 1.0,
+          "bootstrap_samples": 1000,
+          "cluster_unit": "start_id"
+        },
+        "mean_regret_m": {
+          "lower": 0.0,
+          "upper": 0.7692307692307693,
+          "bootstrap_samples": 1000,
+          "cluster_unit": "start_id"
+        }
+      }
+    }
+  },
+  "P1_minus_P0_accuracy": 0.34615384615384615,
+  "primary_error_samples": [
+    {
+      "start_id": "start_07",
+      "probe_direction": "LEFT"
+    },
+    {
+      "start_id": "start_07",
+      "probe_direction": "RIGHT"
+    },
+    {
+      "start_id": "start_18",
+      "probe_direction": "LEFT"
+    }
+  ],
+  "folds": [
+    {
+      "fold": 0,
+      "train_start_ids": [
+        "start_00",
+        "start_04",
+        "start_05",
+        "start_06",
+        "start_07",
+        "start_12",
+        "start_16",
+        "start_17",
+        "start_18",
+        "start_19"
+      ],
+      "test_start_ids": [
+        "start_01",
+        "start_02",
+        "start_15"
+      ],
+      "preprocessing": {
+        "preprocessing_fit_scope": "training_fold_only",
+        "input_dimension": 133,
+        "pca_components": 16,
+        "ridge_alpha": 1.0,
+        "linear_system_dimension": 16
+      }
+    },
+    {
+      "fold": 1,
+      "train_start_ids": [
+        "start_00",
+        "start_01",
+        "start_02",
+        "start_05",
+        "start_06",
+        "start_12",
+        "start_15",
+        "start_17",
+        "start_18",
+        "start_19"
+      ],
+      "test_start_ids": [
+        "start_04",
+        "start_07",
+        "start_16"
+      ],
+      "preprocessing": {
+        "preprocessing_fit_scope": "training_fold_only",
+        "input_dimension": 133,
+        "pca_components": 16,
+        "ridge_alpha": 1.0,
+        "linear_system_dimension": 16
+      }
+    },
+    {
+      "fold": 2,
+      "train_start_ids": [
+        "start_01",
+        "start_02",
+        "start_04",
+        "start_05",
+        "start_07",
+        "start_15",
+        "start_16",
+        "start_17",
+        "start_18",
+        "start_19"
+      ],
+      "test_start_ids": [
+        "start_00",
+        "start_06",
+        "start_12"
+      ],
+      "preprocessing": {
+        "preprocessing_fit_scope": "training_fold_only",
+        "input_dimension": 133,
+        "pca_components": 16,
+        "ridge_alpha": 1.0,
+        "linear_system_dimension": 16
+      }
+    },
+    {
+      "fold": 3,
+      "train_start_ids": [
+        "start_00",
+        "start_01",
+        "start_02",
+        "start_04",
+        "start_06",
+        "start_07",
+        "start_12",
+        "start_15",
+        "start_16",
+        "start_17",
+        "start_18"
+      ],
+      "test_start_ids": [
+        "start_05",
+        "start_19"
+      ],
+      "preprocessing": {
+        "preprocessing_fit_scope": "training_fold_only",
+        "input_dimension": 133,
+        "pca_components": 16,
+        "ridge_alpha": 1.0,
+        "linear_system_dimension": 16
+      }
+    },
+    {
+      "fold": 4,
+      "train_start_ids": [
+        "start_00",
+        "start_01",
+        "start_02",
+        "start_04",
+        "start_05",
+        "start_06",
+        "start_07",
+        "start_12",
+        "start_15",
+        "start_16",
+        "start_19"
+      ],
+      "test_start_ids": [
+        "start_17",
+        "start_18"
+      ],
+      "preprocessing": {
+        "preprocessing_fit_scope": "training_fold_only",
+        "input_dimension": 133,
+        "pca_components": 16,
+        "ridge_alpha": 1.0,
+        "linear_system_dimension": 16
+      }
+    }
+  ],
+  "gates": {
+    "SOURCE_RAW_HASH_AUDIT": {
+      "status": "PASS",
+      "checked_file_count": 390,
+      "missing": [],
+      "mismatches": []
+    },
+    "FROZEN_GT_REUSE": {
+      "status": "PASS",
+      "non_tie_start_count": 13,
+      "frozen_P0_accuracy": 0.5384615384615384
+    },
+    "FEATURE_PIPELINE_FROZEN": {
+      "status": "PASS",
+      "baseline": "B3",
+      "descriptor_dimension": 64,
+      "PCA_max": 16,
+      "ridge_alpha": 1.0,
+      "seed": 20260817
+    },
+    "GROUP_SPLIT_LEAKAGE_AUDIT": {
+      "status": "PASS",
+      "group": "start_id",
+      "folds": 5,
+      "same_start_cross_fold": false,
+      "train_only_preprocessing": true
+    },
+    "PREBOUNDARY_INPUT_AUDIT": {
+      "status": "PASS",
+      "maximum_input_distance_m": 1.0,
+      "boundary_or_postboundary_input_count": 0
+    },
+    "ACTIVE_DISAMBIGUATION_SIGNAL": {
+      "status": "PASS",
+      "conditions": {
+        "pooled_accuracy": true,
+        "p0_accuracy_improvement": true,
+        "pooled_ci_lower": true,
+        "left_probe_accuracy": true,
+        "right_probe_accuracy": true,
+        "preboundary_and_group_integrity": true
+      }
+    },
+    "ACTIVE_FACADE_JEPA_ROUTE": {
+      "status": "CONDITIONAL_GO"
+    },
+    "READY_FOR_NEW_CAPTURE": {
+      "status": "CONDITIONAL_PASS"
+    },
+    "READY_FOR_SECOND_SURFACE_REPLICATION": {
+      "status": "CONDITIONAL_PASS"
+    },
+    "EXTERNAL_VISUAL_REVIEW": {
+      "status": "PENDING"
+    },
+    "READY_FOR_JEPA": {
+      "status": "NOT_EVALUATED"
+    }
+  },
+  "resources": {
+    "address_space_limit_bytes": 4294967296,
+    "peak_rss_bytes": 192458752,
+    "numeric_threads": 1,
+    "unique_input_rgb_frame_count": 65,
+    "maximum_feature_matrix_shape": [
+      26,
+      133
+    ],
+    "model_artifacts_saved": false
+  },
+  "constraints": {
+    "carla_started": false,
+    "new_capture": false,
+    "model_downloads": false,
+    "jepa_training": false,
+    "offset_model_feature": false,
+    "absolute_coordinates_model_feature": false,
+    "world_boundary_model_feature": false,
+    "frame_id_model_feature": false,
+    "planned_role_model_feature": false,
+    "distance_selection_by_performance": false
+  }
+}

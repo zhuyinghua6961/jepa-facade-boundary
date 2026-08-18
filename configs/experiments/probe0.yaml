@@ -1,0 +1,44 @@
+schema: probe0.config.v1
+experiment: PROBE-0 active disambiguation solvability audit
+seed: 20260817
+source:
+  cf0_validation: results/cf0/validation.json
+  cf0_capture_manifest: results/cf0/capture_manifest.json
+  cf0_frame_manifest: results/cf0/frame_manifest.csv
+  raw_root: results/cf0/raw
+probe:
+  primary_distance_m: 1.0
+  primary_steps: 2
+  diagnostic_distance_m: 0.5
+  diagnostic_steps: 1
+  step_m: 0.5
+  forbidden_distance_m: 2.0
+model:
+  baseline: B3
+  descriptor_length: 64
+  pca_components: 16
+  ridge_alpha: 1.0
+  group_folds: 5
+evaluation:
+  bootstrap_samples: 1000
+  frozen_p0_accuracy: 0.5384615384615384
+gates:
+  pooled_accuracy_minimum: 0.65
+  p0_accuracy_improvement_minimum: 0.10
+  pooled_ci_lower_strictly_greater_than: 0.50
+  left_probe_accuracy_minimum: 0.65
+  right_probe_accuracy_minimum: 0.65
+resources:
+  address_space_limit_bytes: 4294967296
+  numeric_threads: 1
+constraints:
+  carla_started: false
+  new_capture: false
+  model_downloads: false
+  jepa_training: false
+  offset_model_feature: false
+  absolute_coordinates_model_feature: false
+  world_boundary_model_feature: false
+  frame_id_model_feature: false
+  planned_role_model_feature: false
+  distance_selection_by_performance: false

@@ -40,7 +40,8 @@ from boundary_sweep.cap0 import (HEALTH_GATES, classify_root_cause,
                                  should_run_act0r1, verify_search_plan)
 from boundary_sweep.carla_utils import (discover_carla_root, import_carla,
                                         transform_from_matrix)
-from boundary_sweep.observability import (binary_metrics, fixed_length_descriptor,
+from boundary_sweep.observability import (binary_metrics, cf0_feature_matrix,
+                                          fixed_length_descriptor,
                                           grouped_kfold, model_visible_termination,
                                           regression_metrics, rgb_descriptor,
                                           train_only_pca_ridge)
@@ -1334,22 +1335,7 @@ def capture_cf0(args, config, act0r_config, cf0_config, carla, client):
 
 
 def _cf0_features(records, baseline):
-    action = np.asarray([[-1.0, 1.0] if row["direction"] == "LEFT" else [1.0, 0.0]
-                         for row in records], dtype=float)
-    odometry = np.asarray([[row["relative_distance_m"], row["relative_delta_m"]]
-                           for row in records], dtype=float)
-    current = np.asarray([row["descriptor"] for row in records], dtype=float)
-    previous = np.asarray([row["previous_descriptor"] for row in records], dtype=float)
-    history = np.asarray([[float(row["history_valid"])] for row in records], dtype=float)
-    if baseline == "B1":
-        return np.column_stack([action, odometry])
-    if baseline == "B2":
-        return np.column_stack([action, current])
-    if baseline == "B3":
-        return np.column_stack([action, odometry, current, previous, history])
-    if baseline == "B0":
-        return np.zeros((len(records), 1), dtype=float)
-    raise ValueError(f"unknown CF-0 baseline {baseline}")
+    return cf0_feature_matrix(records, baseline)
 
 
 def _cf0_cluster_ci(records, values, metric, samples, seed):

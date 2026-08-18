@@ -1,0 +1,325 @@
+{
+  "schema": "probe0.source_manifest.v1",
+  "sources": {
+    "cf0_validation": "results/cf0/validation.json",
+    "cf0_validation_sha256": "887bd85b1031f75e9dd0aba001ca0404c73bfe4eab6f194a9c780b74ee0f75d1",
+    "cf0_capture_manifest": "results/cf0/capture_manifest.json",
+    "cf0_capture_manifest_sha256": "d2f8b3cc0b6d6e98f69087b3450aea41f97f4977a993f6fad557ece875563494",
+    "cf0_frame_manifest": "results/cf0/frame_manifest.csv",
+    "cf0_frame_manifest_sha256": "9411172b1e5e1d0b94f181f7f806e39daa51063de0f8982b0f25f05b8341a962"
+  },
+  "selected_start_ids": [
+    "start_00",
+    "start_01",
+    "start_02",
+    "start_04",
+    "start_05",
+    "start_06",
+    "start_07",
+    "start_12",
+    "start_15",
+    "start_16",
+    "start_17",
+    "start_18",
+    "start_19"
+  ],
+  "selected_start_count": 13,
+  "primary_sample_count": 26,
+  "evidence_frame_count": 65,
+  "evidence_payload_size_bytes": 271328107,
+  "hash_audit": {
+    "status": "PASS",
+    "checked_file_count": 390,
+    "missing": [],
+    "mismatches": []
+  },
+  "folds": [
+    {
+      "fold": 0,
+      "train_start_ids": [
+        "start_00",
+        "start_04",
+        "start_05",
+        "start_06",
+        "start_07",
+        "start_12",
+        "start_16",
+        "start_17",
+        "start_18",
+        "start_19"
+      ],
+      "test_start_ids": [
+        "start_01",
+        "start_02",
+        "start_15"
+      ],
+      "preprocessing": {
+        "preprocessing_fit_scope": "training_fold_only",
+        "input_dimension": 133,
+        "pca_components": 16,
+        "ridge_alpha": 1.0,
+        "linear_system_dimension": 16
+      }
+    },
+    {
+      "fold": 1,
+      "train_start_ids": [
+        "start_00",
+        "start_01",
+        "start_02",
+        "start_05",
+        "start_06",
+        "start_12",
+        "start_15",
+        "start_17",
+        "start_18",
+        "start_19"
+      ],
+      "test_start_ids": [
+        "start_04",
+        "start_07",
+        "start_16"
+      ],
+      "preprocessing": {
+        "preprocessing_fit_scope": "training_fold_only",
+        "input_dimension": 133,
+        "pca_components": 16,
+        "ridge_alpha": 1.0,
+        "linear_system_dimension": 16
+      }
+    },
+    {
+      "fold": 2,
+      "train_start_ids": [
+        "start_01",
+        "start_02",
+        "start_04",
+        "start_05",
+        "start_07",
+        "start_15",
+        "start_16",
+        "start_17",
+        "start_18",
+        "start_19"
+      ],
+      "test_start_ids": [
+        "start_00",
+        "start_06",
+        "start_12"
+      ],
+      "preprocessing": {
+        "preprocessing_fit_scope": "training_fold_only",
+        "input_dimension": 133,
+        "pca_components": 16,
+        "ridge_alpha": 1.0,
+        "linear_system_dimension": 16
+      }
+    },
+    {
+      "fold": 3,
+      "train_start_ids": [
+        "start_00",
+        "start_01",
+        "start_02",
+        "start_04",
+        "start_06",
+        "start_07",
+        "start_12",
+        "start_15",
+        "start_16",
+        "start_17",
+        "start_18"
+      ],
+      "test_start_ids": [
+        "start_05",
+        "start_19"
+      ],
+      "preprocessing": {
+        "preprocessing_fit_scope": "training_fold_only",
+        "input_dimension": 133,
+        "pca_components": 16,
+        "ridge_alpha": 1.0,
+        "linear_system_dimension": 16
+      }
+    },
+    {
+      "fold": 4,
+      "train_start_ids": [
+        "start_00",
+        "start_01",
+        "start_02",
+        "start_04",
+        "start_05",
+        "start_06",
+        "start_07",
+        "start_12",
+        "start_15",
+        "start_16",
+        "start_19"
+      ],
+      "test_start_ids": [
+        "start_17",
+        "start_18"
+      ],
+      "preprocessing": {
+        "preprocessing_fit_scope": "training_fold_only",
+        "input_dimension": 133,
+        "pca_components": 16,
+        "ridge_alpha": 1.0,
+        "linear_system_dimension": 16
+      }
+    }
+  ],
+  "diagnostic_folds": [
+    {
+      "fold": 0,
+      "train_start_ids": [
+        "start_00",
+        "start_04",
+        "start_05",
+        "start_06",
+        "start_07",
+        "start_12",
+        "start_16",
+        "start_17",
+        "start_18",
+        "start_19"
+      ],
+      "test_start_ids": [
+        "start_01",
+        "start_02",
+        "start_15"
+      ],
+      "preprocessing": {
+        "preprocessing_fit_scope": "training_fold_only",
+        "input_dimension": 133,
+        "pca_components": 16,
+        "ridge_alpha": 1.0,
+        "linear_system_dimension": 16
+      }
+    },
+    {
+      "fold": 1,
+      "train_start_ids": [
+        "start_00",
+        "start_01",
+        "start_02",
+        "start_05",
+        "start_06",
+        "start_12",
+        "start_15",
+        "start_17",
+        "start_18",
+        "start_19"
+      ],
+      "test_start_ids": [
+        "start_04",
+        "start_07",
+        "start_16"
+      ],
+      "preprocessing": {
+        "preprocessing_fit_scope": "training_fold_only",
+        "input_dimension": 133,
+        "pca_components": 16,
+        "ridge_alpha": 1.0,
+        "linear_system_dimension": 16
+      }
+    },
+    {
+      "fold": 2,
+      "train_start_ids": [
+        "start_01",
+        "start_02",
+        "start_04",
+        "start_05",
+        "start_07",
+        "start_15",
+        "start_16",
+        "start_17",
+        "start_18",
+        "start_19"
+      ],
+      "test_start_ids": [
+        "start_00",
+        "start_06",
+        "start_12"
+      ],
+      "preprocessing": {
+        "preprocessing_fit_scope": "training_fold_only",
+        "input_dimension": 133,
+        "pca_components": 16,
+        "ridge_alpha": 1.0,
+        "linear_system_dimension": 16
+      }
+    },
+    {
+      "fold": 3,
+      "train_start_ids": [
+        "start_00",
+        "start_01",
+        "start_02",
+        "start_04",
+        "start_06",
+        "start_07",
+        "start_12",
+        "start_15",
+        "start_16",
+        "start_17",
+        "start_18"
+      ],
+      "test_start_ids": [
+        "start_05",
+        "start_19"
+      ],
+      "preprocessing": {
+        "preprocessing_fit_scope": "training_fold_only",
+        "input_dimension": 133,
+        "pca_components": 16,
+        "ridge_alpha": 1.0,
+        "linear_system_dimension": 16
+      }
+    },
+    {
+      "fold": 4,
+      "train_start_ids": [
+        "start_00",
+        "start_01",
+        "start_02",
+        "start_04",
+        "start_05",
+        "start_06",
+        "start_07",
+        "start_12",
+        "start_15",
+        "start_16",
+        "start_19"
+      ],
+      "test_start_ids": [
+        "start_17",
+        "start_18"
+      ],
+      "preprocessing": {
+        "preprocessing_fit_scope": "training_fold_only",
+        "input_dimension": 133,
+        "pca_components": 16,
+        "ridge_alpha": 1.0,
+        "linear_system_dimension": 16
+      }
+    }
+  ],
+  "model_feature_keys": [
+    "direction",
+    "relative_distance_m",
+    "relative_delta_m",
+    "descriptor",
+    "previous_descriptor",
+    "history_valid"
+  ],
+  "forbidden_feature_keys": [
+    "offset",
+    "absolute_coordinates",
+    "world_boundary",
+    "frame_id",
+    "planned_role"
+  ]
+}

@@ -314,6 +314,34 @@ def grouped_history_descriptors(records: Sequence[dict], descriptor_key: str = "
     return np.asarray(previous), valid
 
 
+def cf0_feature_matrix(records: Sequence[Mapping], baseline: str) -> np.ndarray:
+    """Build the frozen CF-0 B0/B1/B2/B3 feature matrices.
+
+    Coordinates, frame identifiers, planned roles and world-boundary values
+    are intentionally not read here. PROBE-0 calls this exact function for B3.
+    """
+    action = np.asarray([
+        [-1.0, 1.0] if row["direction"] == "LEFT" else [1.0, 0.0]
+        for row in records
+    ], dtype=float)
+    odometry = np.asarray([
+        [row["relative_distance_m"], row["relative_delta_m"]]
+        for row in records
+    ], dtype=float)
+    current = np.asarray([row["descriptor"] for row in records], dtype=float)
+    previous = np.asarray([row["previous_descriptor"] for row in records], dtype=float)
+    history = np.asarray([[float(row["history_valid"])] for row in records], dtype=float)
+    if baseline == "B0":
+        return np.zeros((len(records), 1), dtype=float)
+    if baseline == "B1":
+        return np.column_stack([action, odometry])
+    if baseline == "B2":
+        return np.column_stack([action, current])
+    if baseline == "B3":
+        return np.column_stack([action, odometry, current, previous, history])
+    raise ValueError(f"unknown CF-0 baseline {baseline}")
+
+
 def _ssim_gray(left: np.ndarray, right: np.ndarray) -> float:
     a = np.asarray(left, dtype=np.float32)
     b = np.asarray(right, dtype=np.float32)

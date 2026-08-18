@@ -8,6 +8,8 @@ import hashlib
 import json
 from pathlib import Path
 
+import yaml
+
 from scripts.validate_geo05r2 import depth_gate, reprojection_stats
 
 
@@ -79,6 +81,10 @@ def main(argv=None):
     cf0_branch_path = Path("results/cf0/branch_summary.csv")
     cf0_fold_path = Path("results/cf0/fold_assignments.csv")
     cf0_action_path = Path("results/cf0/action_selection.csv")
+    probe0_path = Path("results/probe0/validation.json")
+    probe0_source_path = Path("results/probe0/source_manifest.json")
+    probe0_predictions_path = Path("results/probe0/predictions.csv")
+    probe0_config_path = Path("configs/experiments/probe0.yaml")
     r1 = json.loads(r1_path.read_text()) if r1_path.exists() else {}
     mask1 = json.loads(mask1_path.read_text()) if mask1_path.exists() else {}
     mask1_r1 = json.loads(mask1_r1_path.read_text()) if mask1_r1_path.exists() else {}
@@ -105,6 +111,9 @@ def main(argv=None):
     act0r2_manifest = json.loads(act0r2_manifest_path.read_text()) if act0r2_manifest_path.exists() else {}
     cf0 = json.loads(cf0_path.read_text()) if cf0_path.exists() else {}
     cf0_manifest = json.loads(cf0_manifest_path.read_text()) if cf0_manifest_path.exists() else {}
+    probe0 = json.loads(probe0_path.read_text()) if probe0_path.exists() else {}
+    probe0_source = json.loads(probe0_source_path.read_text()) if probe0_source_path.exists() else {}
+    probe0_config = yaml.safe_load(probe0_config_path.read_text()) if probe0_config_path.exists() else {}
     act0s_matrix_count = 0
     if act0s_matrix_path.exists():
         with act0s_matrix_path.open(newline="") as handle:
@@ -117,6 +126,7 @@ def main(argv=None):
     act0r1_offline_gates = act0r1_offline.get("gates", {})
     act0r2_gates = act0r2.get("gates", {})
     cf0_gates = cf0.get("gates", {})
+    probe0_gates = probe0.get("gates", {})
     act0r1_offline_frame_count = 0
     if act0r1_offline_frames_path.exists():
         with act0r1_offline_frames_path.open(newline="") as handle:
@@ -135,6 +145,66 @@ def main(argv=None):
         if path.exists():
             with path.open(newline="") as handle:
                 cf0_csv_counts[name] = sum(1 for _row in csv.DictReader(handle))
+    probe0_predictions = []
+    if probe0_predictions_path.exists():
+        with probe0_predictions_path.open(newline="") as handle:
+            probe0_predictions = list(csv.DictReader(handle))
+    cf0_frame_lookup = {}
+    if cf0_frame_path.exists():
+        with cf0_frame_path.open(newline="") as handle:
+            cf0_frame_lookup = {int(row["frame_id"]): row for row in csv.DictReader(handle)}
+    probe0_assets = sorted(Path("docs/assets/probe0").glob("*.jpg"))
+    probe0_folds = probe0_source.get("folds", [])
+    probe0_fold_groups = [set(row.get("test_start_ids", [])) for row in probe0_folds]
+    probe0_fold_integrity = bool(probe0_folds) and all(
+        set(row.get("train_start_ids", [])).isdisjoint(row.get("test_start_ids", []))
+        for row in probe0_folds)
+    probe0_fold_integrity = probe0_fold_integrity and len(
+        set().union(*probe0_fold_groups)) == 13 and sum(
+        len(group) for group in probe0_fold_groups) == 13
+    probe0_prediction_integrity = len(probe0_predictions) == 26
+    if probe0_prediction_integrity:
+        grouped_predictions = {}
+        for row in probe0_predictions:
+            grouped_predictions.setdefault(row["start_id"], []).append(row)
+        probe0_prediction_integrity = (
+            len(grouped_predictions) == 13 and
+            all({item["probe_direction"] for item in rows} == {"LEFT", "RIGHT"}
+                and len({item["fold"] for item in rows}) == 1
+                and all(float(item["probe_distance_m"]) == 1.0 for item in rows)
+                for rows in grouped_predictions.values()))
+    probe0_preboundary_inputs = bool(probe0_predictions)
+    for row in probe0_predictions:
+        previous = cf0_frame_lookup.get(int(row["previous_frame_id_gt_audit_only"]), {})
+        current = cf0_frame_lookup.get(int(row["current_frame_id_gt_audit_only"]), {})
+        probe0_preboundary_inputs = probe0_preboundary_inputs and (
+            int(previous.get("step_index", -1)) == 1 and
+            int(current.get("step_index", -1)) == 2 and
+            previous.get("first_physical_termination") == "False" and
+            current.get("first_physical_termination") == "False" and
+            previous.get("model_visible_termination") == "False" and
+            current.get("model_visible_termination") == "False")
+    probe0_primary = probe0.get("primary_1m", {})
+    probe0_pooled = probe0_primary.get("pooled", {})
+    probe0_left = probe0_primary.get("LEFT_probe", {})
+    probe0_right = probe0_primary.get("RIGHT_probe", {})
+    probe0_thresholds = probe0_config.get("gates", {})
+    probe0_p0 = probe0.get("P0", {}).get("accuracy")
+    probe0_expected_conditions = {
+        "pooled_accuracy": probe0_pooled.get("accuracy", -1) >= probe0_thresholds.get(
+            "pooled_accuracy_minimum", float("inf")),
+        "p0_accuracy_improvement": probe0.get("P1_minus_P0_accuracy", -1) >=
+            probe0_thresholds.get("p0_accuracy_improvement_minimum", float("inf")),
+        "pooled_ci_lower": probe0_pooled.get("bootstrap_95_ci", {}).get(
+            "accuracy", {}).get("lower", -1) > probe0_thresholds.get(
+                "pooled_ci_lower_strictly_greater_than", float("inf")),
+        "left_probe_accuracy": probe0_left.get("accuracy", -1) >= probe0_thresholds.get(
+            "left_probe_accuracy_minimum", float("inf")),
+        "right_probe_accuracy": probe0_right.get("accuracy", -1) >= probe0_thresholds.get(
+            "right_probe_accuracy_minimum", float("inf")),
+        "preboundary_and_group_integrity": probe0_preboundary_inputs and
+            probe0_fold_integrity and probe0_prediction_integrity,
+    }
     act0r2_frame_count = 0
     if act0r2_frames_path.exists():
         with act0r2_frames_path.open(newline="") as handle:
@@ -603,11 +673,63 @@ def main(argv=None):
                                     "configured_carla_address_space_limit_bytes") == 34359738368 and
                                cf0.get("resources", {}).get("numeric_threads") == 1 and
                                cf0.get("resources", {}).get("rss_watchdog_exceeded") is False,
+        "probe0_required_compact_files": all(path.exists() for path in (
+            probe0_path, probe0_source_path, probe0_predictions_path, probe0_config_path,
+            Path("docs/PROBE0_ACTIVE_DISAMBIGUATION_AUDIT.md"))),
+        "probe0_schema_and_frozen_protocol": probe0.get("schema") == "probe0.validation.v1" and
+            probe0_source.get("schema") == "probe0.source_manifest.v1" and
+            probe0.get("primary_probe_distance_m") == 1.0 and
+            probe0.get("diagnostic_probe_distance_m") == 0.5 and
+            probe0_config.get("probe", {}).get("forbidden_distance_m") == 2.0 and
+            probe0.get("diagnostic_0_5m", {}).get("selection_role") ==
+                "diagnostic_only_not_gated" and
+            probe0.get("preregistered_thresholds") == probe0_thresholds,
+        "probe0_frozen_p0_and_sample_counts": abs(float(probe0_p0 or -1) -
+            0.5384615384615384) < 1e-12 and
+            probe0_source.get("selected_start_count") == 13 and
+            probe0_source.get("primary_sample_count") == 26 and
+            probe0_pooled.get("sample_count") == 26 and
+            probe0_left.get("sample_count") == 13 and probe0_right.get("sample_count") == 13,
+        "probe0_group_split_and_prediction_integrity": probe0_fold_integrity and
+            probe0_prediction_integrity,
+        "probe0_preboundary_inputs_from_cf0_manifest": probe0_preboundary_inputs and
+            probe0_gates.get("PREBOUNDARY_INPUT_AUDIT", {}).get(
+                "boundary_or_postboundary_input_count") == 0,
+        "probe0_raw_hash_and_evidence_audit": probe0_source.get("evidence_frame_count") == 65 and
+            probe0_source.get("evidence_payload_size_bytes", 0) > 0 and
+            probe0_source.get("hash_audit", {}).get("status") == "PASS" and
+            probe0_source.get("hash_audit", {}).get("checked_file_count") == 390 and
+            not probe0_source.get("hash_audit", {}).get("missing") and
+            not probe0_source.get("hash_audit", {}).get("mismatches"),
+        "probe0_forbidden_features_absent": probe0_source.get("model_feature_keys") == [
+            "direction", "relative_distance_m", "relative_delta_m", "descriptor",
+            "previous_descriptor", "history_valid"] and
+            set(probe0_source.get("forbidden_feature_keys", [])) == {
+                "offset", "absolute_coordinates", "world_boundary", "frame_id",
+                "planned_role"},
+        "probe0_preregistered_gates_recomputed": probe0_gates.get(
+            "ACTIVE_DISAMBIGUATION_SIGNAL", {}).get("conditions") ==
+                probe0_expected_conditions and all(probe0_expected_conditions.values()) and
+            probe0_gates.get("ACTIVE_DISAMBIGUATION_SIGNAL", {}).get("status") == "PASS" and
+            probe0_gates.get("READY_FOR_SECOND_SURFACE_REPLICATION", {}).get(
+                "status") == "CONDITIONAL_PASS" and
+            probe0_gates.get("READY_FOR_JEPA", {}).get("status") == "NOT_EVALUATED",
+        "probe0_public_assets": len(probe0_assets) == 4 and
+            {path.name for path in probe0_assets} == {
+                "probe_1m_left_right.jpg", "near_away_rgb_change.jpg",
+                "fold_predictions.jpg", "accuracy_ci.jpg"} and
+            all(0 < path.stat().st_size < 2_000_000 for path in probe0_assets),
+        "probe0_resource_limits": probe0.get("resources", {}).get(
+            "address_space_limit_bytes") == 4294967296 and
+            probe0.get("resources", {}).get("numeric_threads") == 1 and
+            probe0.get("resources", {}).get("unique_input_rgb_frame_count") == 65 and
+            probe0.get("resources", {}).get("maximum_feature_matrix_shape") == [26, 133] and
+            probe0.get("resources", {}).get("model_artifacts_saved") is False,
         "cap0_checkpoint_unchanged": hashlib.sha256(
                                       act0r_search_path.read_bytes()).hexdigest() ==
                                       "a56310883bb15513ea25c97c919d7faf14edb217b1a05fb0c4e12b060c664f73",
     }
-    result = {"schema": "boundary_sweep.static_validation.v10", "checks": checks, "missing": missing, "private_path_files": forbidden,
+    result = {"schema": "boundary_sweep.static_validation.v11", "checks": checks, "missing": missing, "private_path_files": forbidden,
               "geometry_reference_count": reference.get("geometry_reference_count"), "depth_metric": depth_result,
               "surface_stats_consistent": surface_checks, "gates": gates,
               "mask1r1_gates": mask1_r1.get("gates", {}), "obs0_gates": obs0.get("gates", {}),
@@ -615,7 +737,8 @@ def main(argv=None):
               "act0s_gates": act0s_gates, "act0r_gates": act0r_gates,
               "cap0_gates": cap0_gates, "act0r1_gates": act0r1_gates,
               "act0r1_offline_gates": act0r1_offline_gates,
-              "act0r2_gates": act0r2_gates, "cf0_gates": cf0_gates}
+              "act0r2_gates": act0r2_gates, "cf0_gates": cf0_gates,
+              "probe0_gates": probe0_gates}
     print(json.dumps(result, indent=2))
     return 0 if all(checks.values()) else 1
 
