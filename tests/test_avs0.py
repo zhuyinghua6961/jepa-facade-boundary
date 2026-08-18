@@ -136,6 +136,8 @@ def test_published_avs0_result_is_fail_closed_and_assets_exist():
     assert result["valid_starts_per_surface"] == {
         "candidate_1": 8, "candidate_7": 8, "candidate_8": 8}
     assert gates["PHYSICAL_BOUNDARY_AND_SAFETY"]["status"] == "PASS"
+    assert gates["SENSOR_QUADRUPLET_PAIRING"]["status"] == "PASS"
+    assert gates["SENSOR_QUADRUPLET_PAIRING"]["new_quartet_count"] == 70
     assert gates["SURFACE_LEAVE_ONE_OUT"]["status"] == "PASS"
     assert gates["ACTIVE_VIEW_SELECTION_HEADROOM"]["status"] == "FAIL"
     assert gates["READY_FOR_POLICY_PILOT"]["status"] == "FAIL"

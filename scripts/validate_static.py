@@ -910,6 +910,11 @@ def main(argv=None):
         "avs0_source_hash_and_resources": avs0_source.get("hash_audit", {}).get(
             "status") == "PASS" and not avs0_source.get("hash_audit", {}).get(
                 "missing") and not avs0_source.get("hash_audit", {}).get("mismatches") and
+            avs0_source.get("new_sensor_quartet_pairing", {}).get("status") == "PASS" and
+            avs0_source.get("new_sensor_quartet_pairing", {}).get(
+                "new_quartet_count") == 70 and
+            avs0.get("gates", {}).get("SENSOR_QUADRUPLET_PAIRING", {}).get(
+                "status") == "PASS" and
             avs0_source.get("raw_uploaded") is False and
             avs0.get("resources", {}).get(
                 "configured_python_address_space_limit_bytes") == 4294967296 and

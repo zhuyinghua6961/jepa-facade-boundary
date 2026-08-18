@@ -399,6 +399,12 @@
       "status": "PASS",
       "qualified_new_surfaces": 2
     },
+    "SENSOR_QUADRUPLET_PAIRING": {
+      "status": "PASS",
+      "new_quartet_count": 70,
+      "all_sensor_frame_ids_equal": true,
+      "maximum_timestamp_delta_s": 1e-06
+    },
     "RAW_HASH_AUDIT": {
       "status": "PASS",
       "checked_file_count": 564,

@@ -13,6 +13,12 @@
     "missing": [],
     "mismatches": []
   },
+  "new_sensor_quartet_pairing": {
+    "status": "PASS",
+    "new_quartet_count": 70,
+    "all_sensor_frame_ids_equal": true,
+    "maximum_timestamp_delta_s": 1e-06
+  },
   "server_raw_path": "results/avs0/raw",
   "server_raw_size_bytes": 294525482,
   "raw_uploaded": false

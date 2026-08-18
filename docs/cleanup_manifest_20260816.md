@@ -51,7 +51,7 @@ AVS-0 retained one canonical server-local raw directory at `results/avs0/raw`
 candidates 7 and 8 and 48 formal START/LEFT-1.0m/RIGHT-1.0m quartets. The raw
 directory is Git-ignored and was not copied into a public result directory.
 
-The public subset contains `30,059 bytes` of compact JSON/CSV and `452,315
+The public subset contains `30,408 bytes` of compact JSON/CSV and `452,315
 bytes` across five compressed JPG files. Three superseded qualification/start-
 range attempts were moved to trash with `gio trash`; their exact combined size
 was not recorded and remains `DISPOSITION_UNVERIFIED`. Python and pytest caches,

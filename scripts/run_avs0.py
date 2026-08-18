@@ -128,6 +128,14 @@ def no_external_boundary(metrics: dict[str, dict], act0r_config: dict) -> bool:
                for direction in ("LEFT", "RIGHT"))
 
 
+def sensor_quartet_paired(entry: dict) -> bool:
+    frames = entry.get("sensor_frames", {})
+    timestamps = entry.get("sensor_timestamps", {})
+    return (set(frames) == {"rgb", "depth", "semantic", "instance"} and
+            len(set(frames.values())) == 1 and set(timestamps) == set(frames) and
+            max(timestamps.values()) - min(timestamps.values()) <= 1e-6)
+
+
 def qualify_candidate(rig, carla, candidate_id: int, candidate: dict, config: dict,
                       act0r_config: dict, raw_root: Path, trace: TraceWriter,
                       saved_counter: list[int]) -> dict:
@@ -571,12 +579,20 @@ def postprocess(args, config: dict, act0r_config: dict) -> int:
         summary, starts_per_surface, bootstrap, config["gates"])
     qualification_evidence = [entry for row in manifest["qualifications"]
                               for entry in row.get("evidence_frames", [])]
-    raw_hash = verify_manifest_hashes(old_evidence + new_evidence + qualification_evidence,
-                                      PROJECT_ROOT)
+    all_evidence = old_evidence + new_evidence + qualification_evidence
+    raw_hash = verify_manifest_hashes(all_evidence, PROJECT_ROOT)
+    new_pairing = all(sensor_quartet_paired(entry)
+                      for entry in new_evidence + qualification_evidence)
     gates = {
         "CANDIDATE_ORDER_PRESERVED": {"status": "PASS", "selected": selected,
                                       "preregistered_order": config["candidate_order"]},
         "PHYSICAL_BOUNDARY_AND_SAFETY": {"status": "PASS", "qualified_new_surfaces": 2},
+        "SENSOR_QUADRUPLET_PAIRING": {
+            "status": "PASS" if new_pairing else "FAIL",
+            "new_quartet_count": len(new_evidence + qualification_evidence),
+            "all_sensor_frame_ids_equal": new_pairing,
+            "maximum_timestamp_delta_s": 1e-6,
+        },
         "RAW_HASH_AUDIT": raw_hash,
         "SURFACE_LEAVE_ONE_OUT": {"status": "PASS", "folds": folds},
         "ACTIVE_VIEW_SELECTION_HEADROOM": preregistered,
@@ -609,8 +625,9 @@ def postprocess(args, config: dict, act0r_config: dict) -> int:
         "candidate_1_source": "frozen CF-0 raw",
         "new_surface_source": "bounded AVS-0 synchronous sensor quartets",
         "selected_new_candidates": selected,
-        "evidence_frame_count": len(old_evidence + new_evidence + qualification_evidence),
+        "evidence_frame_count": len(all_evidence),
         "hash_audit": raw_hash,
+        "new_sensor_quartet_pairing": gates["SENSOR_QUADRUPLET_PAIRING"],
         "server_raw_path": "results/avs0/raw",
         "server_raw_size_bytes": sum(path.stat().st_size for path in resolve(
             "results/avs0/raw").rglob("*") if path.is_file()),
@@ -674,6 +691,7 @@ def write_docs(validation: dict, output: Path) -> None:
                   f"- Oracle minus best fixed: {summary['oracle_minus_best_fixed_accuracy']:.6f}",
                   f"- Bootstrap 95% CI: [{validation['bootstrap_95_ci']['lower']:.6f}, {validation['bootstrap_95_ci']['upper']:.6f}]",
                   f"- ACTIVE_VIEW_SELECTION_HEADROOM: {validation['gates']['ACTIVE_VIEW_SELECTION_HEADROOM']['status']}",
+                  f"- SENSOR_QUADRUPLET_PAIRING: {validation['gates']['SENSOR_QUADRUPLET_PAIRING']['status']}",
                   f"- READY_FOR_POLICY_PILOT: {validation['gates']['READY_FOR_POLICY_PILOT']['status']}",
                   "- READY_FOR_JEPA: NOT_EVALUATED", ""])
     lines.extend(["## Per-Surface Policy Accuracy", "",

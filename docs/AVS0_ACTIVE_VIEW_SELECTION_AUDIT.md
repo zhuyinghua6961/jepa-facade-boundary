@@ -18,6 +18,7 @@ probe action. PCA and ridge are fitted on training surfaces only.
 - Oracle minus best fixed: 0.000000
 - Bootstrap 95% CI: [0.000000, 0.000000]
 - ACTIVE_VIEW_SELECTION_HEADROOM: FAIL
+- SENSOR_QUADRUPLET_PAIRING: PASS
 - READY_FOR_POLICY_PILOT: FAIL
 - READY_FOR_JEPA: NOT_EVALUATED
 

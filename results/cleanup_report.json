@@ -650,7 +650,7 @@
     },
     {
       "path": "results/avs0/compact_results",
-      "pre_cleanup_size_bytes": 30059,
+      "pre_cleanup_size_bytes": 30408,
       "classification": "compact AVS-0 qualification, source, prediction, policy and bootstrap results",
       "final_disposition": "MOVED_TO_GIT_TRACKED_COMPACT_RESULT",
       "reason": "Publishes preregistered cross-surface E1 metrics and fail-closed gates without raw arrays or model artifacts.",
