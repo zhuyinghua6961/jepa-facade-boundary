@@ -34,6 +34,11 @@ def main(argv=None):
         surface_checks.append(actual["sample_count"] > 0 and abs(actual["median_px"] - match.get("median_px", -1)) < 1e-12 and abs(actual["max_px"] - match.get("max_px", -1)) < 1e-12)
     forbidden = []
     for path in Path(".").rglob("*"):
+        non_public_raw = (len(path.parts) >= 3 and path.parts[0] == "results" and
+                          path.parts[2] == "raw")
+        non_public_capture_manifest = path == Path("results/avs0/capture_manifest.json")
+        if non_public_raw or non_public_capture_manifest:
+            continue
         if path.is_file() and ".git" not in path.parts and "__pycache__" not in path.parts and path.suffix != ".pyc" and path.stat().st_size < 2_000_000:
             try:
                 text = path.read_text(errors="ignore")
@@ -89,6 +94,13 @@ def main(argv=None):
     probe0r1_bootstrap_path = Path("results/probe0/bootstrap_r1.json")
     probe0r1_ablation_path = Path("results/probe0/causal_ablation_r1.csv")
     probe0r1_config_path = Path("configs/experiments/probe0r1.yaml")
+    avs0_path = Path("results/avs0/validation.json")
+    avs0_source_path = Path("results/avs0/source_manifest.json")
+    avs0_qualification_path = Path("results/avs0/surface_qualification.json")
+    avs0_policy_path = Path("results/avs0/policy_comparison.csv")
+    avs0_predictions_path = Path("results/avs0/predictions.csv")
+    avs0_bootstrap_path = Path("results/avs0/bootstrap.json")
+    avs0_config_path = Path("configs/experiments/avs0.yaml")
     r1 = json.loads(r1_path.read_text()) if r1_path.exists() else {}
     mask1 = json.loads(mask1_path.read_text()) if mask1_path.exists() else {}
     mask1_r1 = json.loads(mask1_r1_path.read_text()) if mask1_r1_path.exists() else {}
@@ -121,6 +133,11 @@ def main(argv=None):
     probe0r1 = json.loads(probe0r1_path.read_text()) if probe0r1_path.exists() else {}
     probe0r1_bootstrap = json.loads(probe0r1_bootstrap_path.read_text()) if probe0r1_bootstrap_path.exists() else {}
     probe0r1_config = yaml.safe_load(probe0r1_config_path.read_text()) if probe0r1_config_path.exists() else {}
+    avs0 = json.loads(avs0_path.read_text()) if avs0_path.exists() else {}
+    avs0_source = json.loads(avs0_source_path.read_text()) if avs0_source_path.exists() else {}
+    avs0_qualification = json.loads(avs0_qualification_path.read_text()) if avs0_qualification_path.exists() else {}
+    avs0_bootstrap = json.loads(avs0_bootstrap_path.read_text()) if avs0_bootstrap_path.exists() else {}
+    avs0_config = yaml.safe_load(avs0_config_path.read_text()) if avs0_config_path.exists() else {}
     act0s_matrix_count = 0
     if act0s_matrix_path.exists():
         with act0s_matrix_path.open(newline="") as handle:
@@ -163,6 +180,15 @@ def main(argv=None):
             cf0_frame_lookup = {int(row["frame_id"]): row for row in csv.DictReader(handle)}
     probe0_assets = sorted(Path("docs/assets/probe0").glob("*.jpg"))
     probe0r1_assets = sorted(Path("docs/assets/probe0r1").glob("*.jpg"))
+    avs0_assets = sorted(Path("docs/assets/avs0").glob("*.jpg"))
+    avs0_policy_rows = []
+    if avs0_policy_path.exists():
+        with avs0_policy_path.open(newline="") as handle:
+            avs0_policy_rows = list(csv.DictReader(handle))
+    avs0_prediction_rows = []
+    if avs0_predictions_path.exists():
+        with avs0_predictions_path.open(newline="") as handle:
+            avs0_prediction_rows = list(csv.DictReader(handle))
     probe0r1_ablation_rows = []
     if probe0r1_ablation_path.exists():
         with probe0r1_ablation_path.open(newline="") as handle:
@@ -234,6 +260,27 @@ def main(argv=None):
             "bootstrap_95_ci", {}).get("accuracy", {}).get("lower", -999.0) >
             probe0r1_thresholds.get(
                 "E2_minus_E1_accuracy_ci_lower_strictly_greater_than", float("inf")),
+    }
+    avs0_summary = avs0.get("policy_summary", {})
+    avs0_accuracy = avs0_summary.get("accuracy", {})
+    avs0_thresholds = avs0_config.get("gates", {})
+    avs0_starts = avs0.get("valid_starts_per_surface", {})
+    avs0_expected_conditions = {
+        "valid_surface_count": len(avs0_starts) >= avs0_thresholds.get(
+            "minimum_surface_count", float("inf")),
+        "valid_starts_per_surface": bool(avs0_starts) and all(
+            count >= avs0_thresholds.get("minimum_starts_per_surface", float("inf"))
+            for count in avs0_starts.values()),
+        "oracle_accuracy": avs0_accuracy.get("ORACLE_PER_START", -1) >=
+            avs0_thresholds.get("oracle_accuracy_minimum", float("inf")),
+        "oracle_headroom": avs0_summary.get("oracle_minus_best_fixed_accuracy", -1) >=
+            avs0_thresholds.get("oracle_minus_best_fixed_minimum", float("inf")),
+        "headroom_ci_lower": avs0_bootstrap.get("lower", -1) >
+            avs0_thresholds.get("headroom_ci_lower_strictly_greater_than", float("inf")),
+        "left_unique_fraction": avs0_summary.get("unique_best_action_fractions", {}).get(
+            "LEFT", -1) >= avs0_thresholds.get("unique_action_fraction_minimum", float("inf")),
+        "right_unique_fraction": avs0_summary.get("unique_best_action_fractions", {}).get(
+            "RIGHT", -1) >= avs0_thresholds.get("unique_action_fraction_minimum", float("inf")),
     }
     probe0r1_historical_hashes_match = bool(probe0r1.get("historical_probe0_sha256"))
     for name, expected_hash in probe0r1.get("historical_probe0_sha256", {}).items():
@@ -835,6 +882,45 @@ def main(argv=None):
             probe0r1.get("resources", {}).get("numeric_threads") == 1 and
             probe0r1.get("resources", {}).get("largest_feature_matrix_shape") == [26, 133] and
             probe0r1.get("resources", {}).get("model_artifacts_saved") is False,
+        "avs0_required_compact_files": all(path.exists() for path in (
+            avs0_path, avs0_source_path, avs0_qualification_path, avs0_policy_path,
+            avs0_predictions_path, avs0_bootstrap_path, avs0_config_path,
+            Path("docs/AVS0_ACTIVE_VIEW_SELECTION_AUDIT.md"))),
+        "avs0_candidate_order_and_qualification": avs0_config.get("candidate_order") ==
+            [7, 8, 10, 19] and avs0.get("selected_new_candidates") == [7, 8] and
+            avs0_qualification.get("selected_new_candidates") == [7, 8] and
+            [row.get("candidate_index") for row in avs0_qualification.get(
+                "qualifications", [])] == [7, 8] and
+            all(row.get("status") == "PASS" for row in avs0_qualification.get(
+                "qualifications", [])),
+        "avs0_surface_leave_one_out_and_pairs": avs0_starts == {
+            "candidate_1": 8, "candidate_7": 8, "candidate_8": 8} and
+            len(avs0_policy_rows) == 24 and len(avs0_prediction_rows) == 48 and
+            all(sum(row["surface_id"] == surface for row in avs0_policy_rows) == 8
+                for surface in avs0_starts),
+        "avs0_preregistered_gate_recomputed": avs0.get("gates", {}).get(
+            "ACTIVE_VIEW_SELECTION_HEADROOM", {}).get("conditions") ==
+            avs0_expected_conditions and not all(avs0_expected_conditions.values()) and
+            avs0.get("gates", {}).get("ACTIVE_VIEW_SELECTION_HEADROOM", {}).get(
+                "status") == "FAIL" and
+            avs0.get("gates", {}).get("READY_FOR_POLICY_PILOT", {}).get(
+                "status") == "FAIL" and
+            avs0.get("gates", {}).get("READY_FOR_JEPA", {}).get(
+                "status") == "NOT_EVALUATED",
+        "avs0_source_hash_and_resources": avs0_source.get("hash_audit", {}).get(
+            "status") == "PASS" and not avs0_source.get("hash_audit", {}).get(
+                "missing") and not avs0_source.get("hash_audit", {}).get("mismatches") and
+            avs0_source.get("raw_uploaded") is False and
+            avs0.get("resources", {}).get(
+                "configured_python_address_space_limit_bytes") == 4294967296 and
+            avs0.get("resources", {}).get("numeric_threads") == 1 and
+            avs0.get("resources", {}).get("model_artifacts_saved") is False,
+        "avs0_public_assets": len(avs0_assets) == 5 and
+            {path.name for path in avs0_assets} == {
+                "candidate_1_probe_contact_sheet.jpg", "candidate_7_probe_contact_sheet.jpg",
+                "candidate_8_probe_contact_sheet.jpg", "fixed_vs_oracle.jpg",
+                "action_preference_distribution.jpg"} and
+            all(0 < path.stat().st_size < 2_000_000 for path in avs0_assets),
         "cap0_checkpoint_unchanged": hashlib.sha256(
                                       act0r_search_path.read_bytes()).hexdigest() ==
                                       "a56310883bb15513ea25c97c919d7faf14edb217b1a05fb0c4e12b060c664f73",
@@ -848,7 +934,8 @@ def main(argv=None):
               "cap0_gates": cap0_gates, "act0r1_gates": act0r1_gates,
               "act0r1_offline_gates": act0r1_offline_gates,
               "act0r2_gates": act0r2_gates, "cf0_gates": cf0_gates,
-              "probe0_gates": probe0_gates, "probe0r1_gates": probe0r1_gates}
+              "probe0_gates": probe0_gates, "probe0r1_gates": probe0r1_gates,
+              "avs0_gates": avs0.get("gates", {})}
     print(json.dumps(result, indent=2))
     return 0 if all(checks.values()) else 1
 

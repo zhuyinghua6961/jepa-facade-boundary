@@ -1,0 +1,275 @@
+{
+  "schema": "avs0.surface_qualification.v1",
+  "candidate_order": [
+    7,
+    8,
+    10,
+    19
+  ],
+  "selected_new_candidates": [
+    7,
+    8
+  ],
+  "qualifications": [
+    {
+      "candidate_index": 7,
+      "bbox_id": 48399,
+      "configured_target_instance_id_provenance_only": 39225,
+      "resolved_target_instance_id": 39241,
+      "status": "PASS",
+      "reason": "bilateral physical termination and safety gates pass",
+      "target_resolution": {
+        "status": "PASS",
+        "target_instance_id": 39241,
+        "method": "optical_center_building_pixel",
+        "center_view_coverage": 0.68958984375
+      },
+      "center_target_coverage": 0.68958984375,
+      "center_boundary_absent": true,
+      "bilateral_probe_endpoints_preboundary": true,
+      "reference_frame_ids": {
+        "CENTER": 29790,
+        "LEFT_1M": 29794,
+        "RIGHT_1M": 29798
+      },
+      "live_frame_count": 15,
+      "formal_valid_start_count": 8,
+      "directions": {
+        "LEFT": {
+          "status": "PASS",
+          "event_signed_offset_m": -2.0,
+          "boundary_type": {
+            "status": "PASS",
+            "boundary_type": "PHYSICAL_TERMINATION",
+            "consensus_count": 4,
+            "frame_count": 4,
+            "minimum_agreement": 3,
+            "counts": {
+              "FOREGROUND_OCCLUSION": 0,
+              "INTERNAL_INSTANCE_SEAM": 0,
+              "PHYSICAL_TERMINATION": 4,
+              "UNRESOLVED": 0
+            }
+          },
+          "tier_v": {
+            "status": "PASS",
+            "frame_count": 4,
+            "pass_count": 4,
+            "minimum_pass_frames": 3,
+            "thresholds": {
+              "span_over_target_bbox_height": 0.8,
+              "target_side_fraction": 0.8,
+              "external_side_fraction": 0.8
+            }
+          },
+          "official_tier_m": {
+            "status": "PASS",
+            "frame_count": 4,
+            "spread_m": 0.0,
+            "standard_deviation_m": 0.0,
+            "gate_threshold_m": 0.25,
+            "sensitivity": {
+              "0.05m": true,
+              "0.10m": true,
+              "0.25m": true,
+              "1.00m": true
+            },
+            "absolute_accuracy": "NOT_EVALUATED",
+            "uses_plane": false,
+            "uses_bbox": false,
+            "uses_legacy_boundary": false
+          },
+          "boundary_action_axis_coordinate_m_gt_audit_only": 235.1352233082056,
+          "frame_ids_gt_audit_only": [
+            29810,
+            29814,
+            29818,
+            29822
+          ]
+        },
+        "RIGHT": {
+          "status": "PASS",
+          "event_signed_offset_m": 2.0,
+          "boundary_type": {
+            "status": "PASS",
+            "boundary_type": "PHYSICAL_TERMINATION",
+            "consensus_count": 4,
+            "frame_count": 4,
+            "minimum_agreement": 3,
+            "counts": {
+              "FOREGROUND_OCCLUSION": 0,
+              "INTERNAL_INSTANCE_SEAM": 0,
+              "PHYSICAL_TERMINATION": 4,
+              "UNRESOLVED": 0
+            }
+          },
+          "tier_v": {
+            "status": "PASS",
+            "frame_count": 4,
+            "pass_count": 4,
+            "minimum_pass_frames": 3,
+            "thresholds": {
+              "span_over_target_bbox_height": 0.8,
+              "target_side_fraction": 0.8,
+              "external_side_fraction": 0.8
+            }
+          },
+          "official_tier_m": {
+            "status": "PASS",
+            "frame_count": 4,
+            "spread_m": 0.0,
+            "standard_deviation_m": 0.0,
+            "gate_threshold_m": 0.25,
+            "sensitivity": {
+              "0.05m": true,
+              "0.10m": true,
+              "0.25m": true,
+              "1.00m": true
+            },
+            "absolute_accuracy": "NOT_EVALUATED",
+            "uses_plane": false,
+            "uses_bbox": false,
+            "uses_legacy_boundary": false
+          },
+          "boundary_action_axis_coordinate_m_gt_audit_only": 277.70930773317815,
+          "frame_ids_gt_audit_only": [
+            29834,
+            29838,
+            29842,
+            29846
+          ]
+        }
+      }
+    },
+    {
+      "candidate_index": 8,
+      "bbox_id": 48401,
+      "configured_target_instance_id_provenance_only": 39226,
+      "resolved_target_instance_id": 39242,
+      "status": "PASS",
+      "reason": "bilateral physical termination and safety gates pass",
+      "target_resolution": {
+        "status": "PASS",
+        "target_instance_id": 39242,
+        "method": "optical_center_building_pixel",
+        "center_view_coverage": 0.68958984375
+      },
+      "center_target_coverage": 0.68958984375,
+      "center_boundary_absent": true,
+      "bilateral_probe_endpoints_preboundary": true,
+      "reference_frame_ids": {
+        "CENTER": 30078,
+        "LEFT_1M": 30082,
+        "RIGHT_1M": 30086
+      },
+      "live_frame_count": 15,
+      "formal_valid_start_count": 8,
+      "directions": {
+        "LEFT": {
+          "status": "PASS",
+          "event_signed_offset_m": -2.0,
+          "boundary_type": {
+            "status": "PASS",
+            "boundary_type": "PHYSICAL_TERMINATION",
+            "consensus_count": 4,
+            "frame_count": 4,
+            "minimum_agreement": 3,
+            "counts": {
+              "FOREGROUND_OCCLUSION": 0,
+              "INTERNAL_INSTANCE_SEAM": 0,
+              "PHYSICAL_TERMINATION": 4,
+              "UNRESOLVED": 0
+            }
+          },
+          "tier_v": {
+            "status": "PASS",
+            "frame_count": 4,
+            "pass_count": 4,
+            "minimum_pass_frames": 3,
+            "thresholds": {
+              "span_over_target_bbox_height": 0.8,
+              "target_side_fraction": 0.8,
+              "external_side_fraction": 0.8
+            }
+          },
+          "official_tier_m": {
+            "status": "PASS",
+            "frame_count": 4,
+            "spread_m": 0.0,
+            "standard_deviation_m": 0.0,
+            "gate_threshold_m": 0.25,
+            "sensitivity": {
+              "0.05m": true,
+              "0.10m": true,
+              "0.25m": true,
+              "1.00m": true
+            },
+            "absolute_accuracy": "NOT_EVALUATED",
+            "uses_plane": false,
+            "uses_bbox": false,
+            "uses_legacy_boundary": false
+          },
+          "boundary_action_axis_coordinate_m_gt_audit_only": 214.73362723886967,
+          "frame_ids_gt_audit_only": [
+            30098,
+            30102,
+            30106,
+            30110
+          ]
+        },
+        "RIGHT": {
+          "status": "PASS",
+          "event_signed_offset_m": 2.0,
+          "boundary_type": {
+            "status": "PASS",
+            "boundary_type": "PHYSICAL_TERMINATION",
+            "consensus_count": 4,
+            "frame_count": 4,
+            "minimum_agreement": 3,
+            "counts": {
+              "FOREGROUND_OCCLUSION": 0,
+              "INTERNAL_INSTANCE_SEAM": 0,
+              "PHYSICAL_TERMINATION": 4,
+              "UNRESOLVED": 0
+            }
+          },
+          "tier_v": {
+            "status": "PASS",
+            "frame_count": 4,
+            "pass_count": 4,
+            "minimum_pass_frames": 3,
+            "thresholds": {
+              "span_over_target_bbox_height": 0.8,
+              "target_side_fraction": 0.8,
+              "external_side_fraction": 0.8
+            }
+          },
+          "official_tier_m": {
+            "status": "PASS",
+            "frame_count": 4,
+            "spread_m": 0.0,
+            "standard_deviation_m": 0.0,
+            "gate_threshold_m": 0.25,
+            "sensitivity": {
+              "0.05m": true,
+              "0.10m": true,
+              "0.25m": true,
+              "1.00m": true
+            },
+            "absolute_accuracy": "NOT_EVALUATED",
+            "uses_plane": false,
+            "uses_bbox": false,
+            "uses_legacy_boundary": false
+          },
+          "boundary_action_axis_coordinate_m_gt_audit_only": 257.30769640505315,
+          "frame_ids_gt_audit_only": [
+            30122,
+            30126,
+            30130,
+            30134
+          ]
+        }
+      }
+    }
+  ]
+}

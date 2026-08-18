@@ -43,3 +43,18 @@ unreferenced candidate-15 images were moved to the desktop trash with
 `gio trash` (total measured pre-trash size `488,506 bytes`). No raw data,
 historical result, or Git-tracked file was removed. The measured project size
 after this cleanup is `209,918,831 bytes`, excluding `.git` metadata.
+
+## AVS-0 follow-up disposition
+
+AVS-0 retained one canonical server-local raw directory at `results/avs0/raw`
+(`294,562,346 bytes`). It contains the synchronized qualification evidence for
+candidates 7 and 8 and 48 formal START/LEFT-1.0m/RIGHT-1.0m quartets. The raw
+directory is Git-ignored and was not copied into a public result directory.
+
+The public subset contains `30,059 bytes` of compact JSON/CSV and `452,315
+bytes` across five compressed JPG files. Three superseded qualification/start-
+range attempts were moved to trash with `gio trash`; their exact combined size
+was not recorded and remains `DISPOSITION_UNVERIFIED`. Python and pytest caches,
+CARLA launch logs and the temporary local-wheel runtime extraction are
+regenerable and are not part of the tracked AVS-0 result. No historical result
+or unique canonical raw frame was removed.

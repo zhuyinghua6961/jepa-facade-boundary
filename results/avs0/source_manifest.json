@@ -1,0 +1,19 @@
+{
+  "schema": "avs0.source_manifest.v1",
+  "candidate_1_source": "frozen CF-0 raw",
+  "new_surface_source": "bounded AVS-0 synchronous sensor quartets",
+  "selected_new_candidates": [
+    7,
+    8
+  ],
+  "evidence_frame_count": 94,
+  "hash_audit": {
+    "status": "PASS",
+    "checked_file_count": 564,
+    "missing": [],
+    "mismatches": []
+  },
+  "server_raw_path": "results/avs0/raw",
+  "server_raw_size_bytes": 294525482,
+  "raw_uploaded": false
+}

@@ -639,6 +639,40 @@
       "recoverability": "recoverable from trash until emptied; size DISPOSITION_UNVERIFIED"
     }
   ],
+  "avs0_cleanup": [
+    {
+      "path": "results/avs0/raw",
+      "pre_cleanup_size_bytes": 294562346,
+      "classification": "single canonical AVS-0 raw capture for candidates 7 and 8 qualification plus 48 formal endpoint quartets",
+      "final_disposition": "KEPT",
+      "reason": "Unique synchronized RGB/depth/semantic/instance evidence and hashes are retained server-side for audit; the directory is excluded from Git.",
+      "recoverability": "server-local canonical copy; excluded from Git"
+    },
+    {
+      "path": "results/avs0/compact_results",
+      "pre_cleanup_size_bytes": 30059,
+      "classification": "compact AVS-0 qualification, source, prediction, policy and bootstrap results",
+      "final_disposition": "MOVED_TO_GIT_TRACKED_COMPACT_RESULT",
+      "reason": "Publishes preregistered cross-surface E1 metrics and fail-closed gates without raw arrays or model artifacts.",
+      "recoverability": "tracked compact result after publication"
+    },
+    {
+      "path": "docs/assets/avs0",
+      "pre_cleanup_size_bytes": 452315,
+      "classification": "five compressed AVS-0 probe and policy audit JPG files",
+      "final_disposition": "MOVED_TO_GIT_TRACKED_COMPACT_RESULT",
+      "reason": "Shows all three surface probe contact sheets, fixed-versus-oracle results and unique-action distribution.",
+      "recoverability": "tracked compact result after publication"
+    },
+    {
+      "path": "results/avs0/failed_intermediate_raw_attempts",
+      "pre_cleanup_size_bytes": null,
+      "classification": "superseded AVS-0 qualification attempts with stale session IDs or invalid start-range logic",
+      "final_disposition": "MOVED_TO_TRASH",
+      "reason": "Three failed intermediate outputs were moved with gio trash before the final bounded canonical run; exact combined size was not recorded and is not fabricated.",
+      "recoverability": "recoverable from trash until emptied; size DISPOSITION_UNVERIFIED"
+    }
+  ],
   "unverified_items": [
     ".carla_pkg",
     ".venv",

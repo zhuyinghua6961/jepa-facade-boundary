@@ -22,6 +22,8 @@ __pycache__/
 data/
 results/*/raw/
 results/*/full_overlays/
+results/avs0/capture_manifest.json
+results/avs0/*.log
 _cleanup_quarantine/
 GEO-0.5*_audit_*.tar.gz
 GEO-0.5R2_*

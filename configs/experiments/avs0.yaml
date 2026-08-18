@@ -1,0 +1,85 @@
+schema: avs0.config.v1
+experiment: AVS-0 active viewpoint selection feasibility audit
+seed: 20260817
+map: Town10HD_Opt
+server: {host: localhost, port: 2100, timeout_s: 10.0}
+sensor:
+  width: 640
+  height: 480
+  horizontal_fov_deg: 90.0
+  fixed_delta_seconds: 0.05
+candidate_order: [7, 8, 10, 19]
+candidates:
+  7:
+    bbox_id: 48399
+    target_instance_id: 39225
+    center: [6.548404693603516, 256.4228210449219, 10.276723861694336]
+    normal: [-1.0, -1.2246467991473532e-16, 0.0]
+    distance_m: 17.81907096862793
+    action_axis: [-1.2246467991473532e-16, 1.0, 0.0]
+  8:
+    bbox_id: 48401
+    target_instance_id: 39226
+    center: [103.44488048553467, 236.02120971679688, 10.276723861694336]
+    normal: [-1.0, -1.2246467991473532e-16, 0.0]
+    distance_m: 17.81907096862793
+    action_axis: [-1.2246467991473532e-16, 1.0, 0.0]
+  10:
+    bbox_id: 48418
+    target_instance_id: 39249
+    center: [226.08840084075928, 152.677490234375, 14.006122589111328]
+    normal: [1.0, 0.0, 0.0]
+    distance_m: 11.955664329528808
+    action_axis: [0.0, -1.0, 0.0]
+  19:
+    bbox_id: 48395
+    target_instance_id: 39223
+    center: [-14.278355598449707, 225.7529468536377, 10.268207550048828]
+    normal: [6.123233995736766e-17, -1.0, 0.0]
+    distance_m: 7.13862247467041
+    action_axis: [-1.0, -6.123233995736766e-17, 0.0]
+qualification:
+  probe_distance_m: 1.0
+  coarse_step_m: 0.5
+  maximum_search_distance_m: 12.0
+  maximum_live_frames_per_candidate: 60
+  repeated_event_frames: 4
+  minimum_consensus_frames: 3
+  minimum_center_target_coverage: 0.20
+  maximum_saved_quartets: 44
+capture:
+  starts_per_new_surface: 8
+  probe_distance_m: 1.0
+  boundary_safety_margin_m: 0.20
+  minimum_non_tie_distance_m: 0.25
+  maximum_start_attempts_per_surface: 24
+  maximum_saved_quartets: 48
+evaluation:
+  descriptor_length: 64
+  pca_components: 16
+  ridge_alpha: 1.0
+  bootstrap_samples: 1000
+gates:
+  minimum_surface_count: 3
+  minimum_starts_per_surface: 8
+  oracle_accuracy_minimum: 0.70
+  oracle_minus_best_fixed_minimum: 0.15
+  headroom_ci_lower_strictly_greater_than: 0.0
+  unique_action_fraction_minimum: 0.20
+resources:
+  python_address_space_limit_bytes: 4294967296
+  python_rss_watchdog_bytes: 1610612736
+  carla_address_space_limit_bytes: 34359738368
+  numeric_threads: 1
+  python_cpu_set: "15"
+  carla_cpu_set: "16-23"
+constraints:
+  candidate_selection_uses_model_results: false
+  absolute_coordinates_are_model_features: false
+  frame_ids_are_model_features: false
+  planned_roles_are_model_features: false
+  world_boundary_coordinates_are_model_features: false
+  raw_uploaded: false
+  model_downloads: false
+  policy_training: false
+  jepa_training: false

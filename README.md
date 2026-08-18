@@ -500,3 +500,46 @@ Under the preregistered kill-test rule, the second-surface capture is stopped.
 The evidence is more consistent with static endpoint appearance than with an
 incremental ordered-history signal. See
 [`docs/PROBE0R1_CAUSAL_ATTRIBUTION_AUDIT.md`](docs/PROBE0R1_CAUSAL_ATTRIBUTION_AUDIT.md).
+
+## AVS-0 active viewpoint-selection headroom audit
+
+AVS-0 asks a narrower cross-surface question: can choosing a LEFT or RIGHT
+1.0 m endpoint per start outperform the best fixed endpoint? It does not train
+an active policy or JEPA. Candidates were qualified in the preregistered order
+`7, 8, 10, 19`; candidates 7 and 8 were the first two to pass bilateral
+physical-termination, Tier V, plane-free Tier M, and endpoint-safety gates.
+Together with frozen candidate 1, the surface leave-one-out evaluation contains
+three surfaces with eight shared non-tie starts each.
+
+```text
+FIXED_LEFT accuracy:                    0.666667
+FIXED_RIGHT accuracy:                   0.541667
+RANDOM expected accuracy:               0.604167
+ORACLE_PER_START accuracy:              0.666667
+ORACLE - best FIXED:                    0.000000
+start-cluster bootstrap 95% CI:         [0.000000, 0.000000]
+unique LEFT / RIGHT optimum fractions:  0.125000 / 0.000000
+```
+
+The preregistered oracle accuracy (`>=0.70`), oracle headroom (`>=0.15`),
+strictly positive CI lower bound, and bilateral unique-action support (`>=20%`
+each) all fail. The data therefore provide no performance space for an adaptive
+probe policy under this frozen E1 endpoint-RGB setup.
+
+Candidate 1's earlier fixed-RIGHT value of `1.0` was a 13-start within-surface
+grouped estimate. AVS-0 instead holds candidate 1 out, trains only on candidates
+7 and 8, and evaluates eight frozen candidate-1 starts; its fixed-RIGHT accuracy
+is `0.125`. The two numbers answer different questions, so the historical value
+is retained as motivation and is not reused as a cross-surface score.
+
+```text
+PHYSICAL_BOUNDARY_AND_SAFETY: PASS
+SURFACE_LEAVE_ONE_OUT: PASS
+ACTIVE_VIEW_SELECTION_HEADROOM: FAIL
+READY_FOR_POLICY_PILOT: FAIL
+READY_FOR_JEPA: NOT_EVALUATED
+```
+
+Raw sensor quartets remain as one Git-ignored server copy. Git contains only
+compact manifests, CSV results, documentation and compressed JPG evidence. See
+[`docs/AVS0_ACTIVE_VIEW_SELECTION_AUDIT.md`](docs/AVS0_ACTIVE_VIEW_SELECTION_AUDIT.md).
