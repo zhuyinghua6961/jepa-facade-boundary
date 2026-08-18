@@ -1,0 +1,43 @@
+schema: probe0r1.config.v1
+experiment: PROBE-0R1 causal attribution audit
+seed: 20260817
+source:
+  probe0_config: configs/experiments/probe0.yaml
+  probe0_validation: results/probe0/validation.json
+  probe0_source_manifest: results/probe0/source_manifest.json
+  probe0_predictions: results/probe0/predictions.csv
+  cf0_validation: results/cf0/validation.json
+  cf0_capture_manifest: results/cf0/capture_manifest.json
+  cf0_frame_manifest: results/cf0/frame_manifest.csv
+experiment_design:
+  endpoint_distance_m: 1.0
+  previous_distance_m: 0.5
+  start_count: 13
+  sample_count: 26
+  ablations: [E0, E1, E2, E3_SWAP, E4_ZERO]
+  intervention_protocol:
+    E3_SWAP: fit ordered E2 on training fold; swap previous/current only in held-out fold
+    E4_ZERO: fit ordered E2 on training fold; zero previous/history-valid only in held-out fold
+model:
+  descriptor_length: 64
+  pca_components: 16
+  ridge_alpha: 1.0
+  group_folds: 5
+evaluation:
+  bootstrap_samples: 1000
+gates:
+  E2_minus_E1_accuracy_minimum: 0.10
+  E2_minus_E3_SWAP_accuracy_minimum: 0.10
+  E2_minus_E4_ZERO_accuracy_minimum: 0.10
+  E2_minus_E1_accuracy_ci_lower_strictly_greater_than: 0.0
+resources:
+  address_space_limit_bytes: 4294967296
+  numeric_threads: 1
+constraints:
+  carla_started: false
+  new_capture: false
+  model_downloads: false
+  jepa_training: false
+  model_or_threshold_selection: false
+  endpoint_selection: false
+  historical_results_modified: false

@@ -342,6 +342,42 @@ def cf0_feature_matrix(records: Sequence[Mapping], baseline: str) -> np.ndarray:
     raise ValueError(f"unknown CF-0 baseline {baseline}")
 
 
+def probe0r1_feature_matrix(records: Sequence[Mapping], ablation: str) -> np.ndarray:
+    """Build preregistered PROBE-0R1 feature ablations at a shared endpoint.
+
+    E3 swaps only the temporal descriptor order. E4 removes previous-frame
+    information while retaining the E2 matrix shape, odometry and action.
+    No GT/audit-only field is accessed.
+    """
+    if ablation == "E0":
+        return cf0_feature_matrix(records, "B1")
+    if ablation == "E1":
+        return cf0_feature_matrix(records, "B2")
+    if ablation == "E2":
+        return cf0_feature_matrix(records, "B3")
+    transformed = []
+    for source in records:
+        row = {
+            "direction": source["direction"],
+            "relative_distance_m": source["relative_distance_m"],
+            "relative_delta_m": source["relative_delta_m"],
+            "descriptor": source["descriptor"],
+            "previous_descriptor": source["previous_descriptor"],
+            "history_valid": source["history_valid"],
+        }
+        if ablation == "E3_SWAP":
+            row["descriptor"], row["previous_descriptor"] = (
+                row["previous_descriptor"], row["descriptor"])
+        elif ablation == "E4_ZERO":
+            row["previous_descriptor"] = np.zeros_like(
+                np.asarray(row["previous_descriptor"], dtype=float))
+            row["history_valid"] = False
+        else:
+            raise ValueError(f"unknown PROBE-0R1 ablation {ablation}")
+        transformed.append(row)
+    return cf0_feature_matrix(transformed, "B3")
+
+
 def _ssim_gray(left: np.ndarray, right: np.ndarray) -> float:
     a = np.asarray(left, dtype=np.float32)
     b = np.asarray(right, dtype=np.float32)

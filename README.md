@@ -7,7 +7,7 @@ Reusable CARLA geometry and RGB-D tooling for active facade-boundary perception 
 The repository contains the GEO-0.5R2 implementation and its reproducible audit. CARLA 0.10.0 UE5 / Town10HD_Opt was used with 640x480 RGB-D sensors, horizontal FOV 90 degrees, synchronous mode, fixed delta 0.05 s, and NORMAL_LOCK camera motion.
 
 ```text
-pytest: 105 passed
+pytest: 112 passed
 RGB-D: 960 pairs
 surface_alpha: bbox 48391
 surface_beta: bbox 48393
@@ -461,3 +461,42 @@ train JEPA. It uses one facade and only 13 independent start groups, so
 cross-surface generalization remains untested. CARLA was not started, no new
 capture or download occurred, and no model artifact was saved. See
 [`docs/PROBE0_ACTIVE_DISAMBIGUATION_AUDIT.md`](docs/PROBE0_ACTIVE_DISAMBIGUATION_AUDIT.md).
+
+## PROBE-0R1 causal attribution audit
+
+PROBE-0R1 reuses the same 13 starts, 26 samples, 1.0 m endpoints, folds,
+descriptor, seed, PCA limit and ridge setting. It asks whether PROBE-0 gains
+come from ordered RGB history or from the more informative static endpoint.
+E3/E4 are held-out interventions: every fold is fit on normal ordered E2
+features, then only held-out previous/current inputs are swapped or removed.
+
+```text
+               E0       E1       E2       E3_SWAP  E4_ZERO
+accuracy       0.3077   0.8846   0.8846   0.9231   0.4615
+balanced acc   0.3214   0.8869   0.8869   0.9226   0.5000
+AUROC          0.2976   0.9464   0.9762   0.9821   0.5000
+regret m       1.0000   0.1731   0.1731   0.1346   0.8077
+```
+
+E2 has zero accuracy improvement over current endpoint RGB alone (E1), and
+E3_SWAP is 0.0385 better rather than at least 0.10 worse. E4_ZERO degradation
+shows that the fitted E2 classifier uses the previous-RGB block, but it does
+not establish useful temporal order. The paired E2-E1 accuracy difference is
+`0.0000`, with start-cluster bootstrap 95% CI `[-0.1154, 0.1154]`.
+
+```text
+SOURCE_FILE_HASH_AUDIT: PASS
+RAW_PAYLOAD_HASH_AUDIT: PASS (390/390)
+STRICT_SAME_ENDPOINT: PASS
+FOLD_REUSE: PASS
+E2_REPRODUCES_PROBE0: PASS
+TEMPORAL_HISTORY_INCREMENTAL_VALUE: FAIL
+ACTIVE_JEPA_ROUTE: NO_GO
+READY_FOR_SECOND_SURFACE_REPLICATION: FAIL
+READY_FOR_JEPA: NOT_EVALUATED
+```
+
+Under the preregistered kill-test rule, the second-surface capture is stopped.
+The evidence is more consistent with static endpoint appearance than with an
+incremental ordered-history signal. See
+[`docs/PROBE0R1_CAUSAL_ATTRIBUTION_AUDIT.md`](docs/PROBE0R1_CAUSAL_ATTRIBUTION_AUDIT.md).

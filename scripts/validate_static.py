@@ -85,6 +85,10 @@ def main(argv=None):
     probe0_source_path = Path("results/probe0/source_manifest.json")
     probe0_predictions_path = Path("results/probe0/predictions.csv")
     probe0_config_path = Path("configs/experiments/probe0.yaml")
+    probe0r1_path = Path("results/probe0/validation_r1.json")
+    probe0r1_bootstrap_path = Path("results/probe0/bootstrap_r1.json")
+    probe0r1_ablation_path = Path("results/probe0/causal_ablation_r1.csv")
+    probe0r1_config_path = Path("configs/experiments/probe0r1.yaml")
     r1 = json.loads(r1_path.read_text()) if r1_path.exists() else {}
     mask1 = json.loads(mask1_path.read_text()) if mask1_path.exists() else {}
     mask1_r1 = json.loads(mask1_r1_path.read_text()) if mask1_r1_path.exists() else {}
@@ -114,6 +118,9 @@ def main(argv=None):
     probe0 = json.loads(probe0_path.read_text()) if probe0_path.exists() else {}
     probe0_source = json.loads(probe0_source_path.read_text()) if probe0_source_path.exists() else {}
     probe0_config = yaml.safe_load(probe0_config_path.read_text()) if probe0_config_path.exists() else {}
+    probe0r1 = json.loads(probe0r1_path.read_text()) if probe0r1_path.exists() else {}
+    probe0r1_bootstrap = json.loads(probe0r1_bootstrap_path.read_text()) if probe0r1_bootstrap_path.exists() else {}
+    probe0r1_config = yaml.safe_load(probe0r1_config_path.read_text()) if probe0r1_config_path.exists() else {}
     act0s_matrix_count = 0
     if act0s_matrix_path.exists():
         with act0s_matrix_path.open(newline="") as handle:
@@ -127,6 +134,7 @@ def main(argv=None):
     act0r2_gates = act0r2.get("gates", {})
     cf0_gates = cf0.get("gates", {})
     probe0_gates = probe0.get("gates", {})
+    probe0r1_gates = probe0r1.get("gates", {})
     act0r1_offline_frame_count = 0
     if act0r1_offline_frames_path.exists():
         with act0r1_offline_frames_path.open(newline="") as handle:
@@ -154,6 +162,11 @@ def main(argv=None):
         with cf0_frame_path.open(newline="") as handle:
             cf0_frame_lookup = {int(row["frame_id"]): row for row in csv.DictReader(handle)}
     probe0_assets = sorted(Path("docs/assets/probe0").glob("*.jpg"))
+    probe0r1_assets = sorted(Path("docs/assets/probe0r1").glob("*.jpg"))
+    probe0r1_ablation_rows = []
+    if probe0r1_ablation_path.exists():
+        with probe0r1_ablation_path.open(newline="") as handle:
+            probe0r1_ablation_rows = list(csv.DictReader(handle))
     probe0_folds = probe0_source.get("folds", [])
     probe0_fold_groups = [set(row.get("test_start_ids", [])) for row in probe0_folds]
     probe0_fold_integrity = bool(probe0_folds) and all(
@@ -205,6 +218,29 @@ def main(argv=None):
         "preboundary_and_group_integrity": probe0_preboundary_inputs and
             probe0_fold_integrity and probe0_prediction_integrity,
     }
+    probe0r1_metrics = probe0r1.get("ablations", {})
+    probe0r1_differences = probe0r1.get("paired_differences", {})
+    probe0r1_thresholds = probe0r1_config.get("gates", {})
+    def r1_difference(name):
+        return probe0r1_differences.get(name, {}).get("observed", {}).get("accuracy", -999.0)
+    probe0r1_expected_conditions = {
+        "E2_minus_E1_accuracy": r1_difference("E2_minus_E1") >=
+            probe0r1_thresholds.get("E2_minus_E1_accuracy_minimum", float("inf")),
+        "E2_minus_E3_SWAP_accuracy": r1_difference("E2_minus_E3_SWAP") >=
+            probe0r1_thresholds.get("E2_minus_E3_SWAP_accuracy_minimum", float("inf")),
+        "E2_minus_E4_ZERO_accuracy": r1_difference("E2_minus_E4_ZERO") >=
+            probe0r1_thresholds.get("E2_minus_E4_ZERO_accuracy_minimum", float("inf")),
+        "E2_minus_E1_ci_lower": probe0r1_differences.get("E2_minus_E1", {}).get(
+            "bootstrap_95_ci", {}).get("accuracy", {}).get("lower", -999.0) >
+            probe0r1_thresholds.get(
+                "E2_minus_E1_accuracy_ci_lower_strictly_greater_than", float("inf")),
+    }
+    probe0r1_historical_hashes_match = bool(probe0r1.get("historical_probe0_sha256"))
+    for name, expected_hash in probe0r1.get("historical_probe0_sha256", {}).items():
+        path = Path(name)
+        actual_hash = hashlib.sha256(path.read_bytes()).hexdigest() if path.exists() else None
+        probe0r1_historical_hashes_match = (
+            probe0r1_historical_hashes_match and actual_hash == expected_hash)
     act0r2_frame_count = 0
     if act0r2_frames_path.exists():
         with act0r2_frames_path.open(newline="") as handle:
@@ -725,11 +761,85 @@ def main(argv=None):
             probe0.get("resources", {}).get("unique_input_rgb_frame_count") == 65 and
             probe0.get("resources", {}).get("maximum_feature_matrix_shape") == [26, 133] and
             probe0.get("resources", {}).get("model_artifacts_saved") is False,
+        "probe0r1_required_compact_files": all(path.exists() for path in (
+            probe0r1_path, probe0r1_bootstrap_path, probe0r1_ablation_path,
+            probe0r1_config_path, Path("docs/PROBE0R1_CAUSAL_ATTRIBUTION_AUDIT.md"))),
+        "probe0r1_schema_and_same_endpoint": probe0r1.get("schema") ==
+            "probe0.validation_r1.v1" and
+            probe0r1_bootstrap.get("schema") == "probe0r1.bootstrap.v1" and
+            probe0r1.get("strict_same_endpoint") == {
+                "status": "PASS", "distance_m": 1.0, "previous_distance_m": 0.5,
+                "sample_count": 26, "start_count": 13},
+        "probe0r1_historical_results_unchanged": probe0r1.get(
+            "historical_probe0_files_modified") is False and
+            probe0r1_historical_hashes_match,
+        "probe0r1_source_and_raw_hashes": all(
+            row.get("match") is True for row in probe0r1.get(
+                "source_hash_checks", {}).values()) and
+            probe0r1.get("raw_hash_audit", {}).get("status") == "PASS" and
+            probe0r1.get("raw_hash_audit", {}).get("checked_file_count") == 390 and
+            not probe0r1.get("raw_hash_audit", {}).get("missing") and
+            not probe0r1.get("raw_hash_audit", {}).get("mismatches"),
+        "probe0r1_ablation_matrix_and_csv": set(probe0r1_metrics) == {
+            "E0", "E1", "E2", "E3_SWAP", "E4_ZERO"} and
+            probe0r1.get("feature_matrix_shapes") == {
+                "E0": [26, 4], "E1": [26, 66], "E2": [26, 133],
+                "E3_SWAP": [26, 133], "E4_ZERO": [26, 133]} and
+            len(probe0r1_ablation_rows) == 15 and
+            {(row["ablation"], row["scope"]) for row in probe0r1_ablation_rows} == {
+                (ablation, scope) for ablation in
+                ("E0", "E1", "E2", "E3_SWAP", "E4_ZERO") for scope in
+                ("pooled", "LEFT_probe", "RIGHT_probe")},
+        "probe0r1_frozen_pipeline_and_fold_reuse": probe0r1_gates.get(
+            "FROZEN_MODEL_PIPELINE", {}).get("status") == "PASS" and
+            probe0r1_gates.get("FOLD_REUSE", {}).get("status") == "PASS" and
+            probe0r1_gates.get("FOLD_REUSE", {}).get(
+                "historical_probe0_fold_match") is True and
+            probe0r1.get("fold_audit", {}).get("all_ablation_folds_match") is True and
+            probe0r1.get("fold_audit", {}).get("historical_probe0_folds_match") is True,
+        "probe0r1_heldout_intervention_protocol": probe0r1.get(
+            "probability_diagnostics", {}).get(
+                "E3_E4_fit_on_ordered_E2_train_features") is True and
+            probe0r1.get("probability_diagnostics", {}).get(
+                "intervention_scope") == "held-out test samples only" and
+            set(probe0r1_config.get("experiment_design", {}).get(
+                "intervention_protocol", {})) == {"E3_SWAP", "E4_ZERO"},
+        "probe0r1_e2_exact_reproduction": probe0r1_gates.get(
+            "E2_REPRODUCES_PROBE0", {}).get("status") == "PASS" and
+            probe0r1_gates.get("E2_REPRODUCES_PROBE0", {}).get(
+                "maximum_probability_error", 1.0) <= 1e-12 and
+            probe0r1_metrics.get("E2", {}).get("pooled", {}).get("accuracy") ==
+                probe0.get("primary_1m", {}).get("pooled", {}).get("accuracy"),
+        "probe0r1_preregistered_gate_recomputed": probe0r1_gates.get(
+            "TEMPORAL_HISTORY_INCREMENTAL_VALUE", {}).get("conditions") ==
+                probe0r1_expected_conditions and
+            not all(probe0r1_expected_conditions.values()) and
+            probe0r1_gates.get("TEMPORAL_HISTORY_INCREMENTAL_VALUE", {}).get(
+                "status") == "FAIL",
+        "probe0r1_terminal_no_go": probe0r1_gates.get("ACTIVE_JEPA_ROUTE", {}).get(
+            "status") == "NO_GO" and
+            probe0r1_gates.get("READY_FOR_SECOND_SURFACE_REPLICATION", {}).get(
+                "status") == "FAIL" and
+            probe0r1_gates.get("READY_FOR_JEPA", {}).get("status") == "NOT_EVALUATED",
+        "probe0r1_paired_bootstrap": probe0r1_bootstrap.get("samples") == 1000 and
+            probe0r1_bootstrap.get("cluster_unit") == "start_id" and
+            all(row.get("bootstrap_95_ci", {}).get("accuracy", {}).get(
+                "bootstrap_samples") == 1000 for row in probe0r1_differences.values()),
+        "probe0r1_public_assets": len(probe0r1_assets) == 4 and
+            {path.name for path in probe0r1_assets} == {
+                "e0_e4_overview.jpg", "e2_e1_paired_starts.jpg",
+                "temporal_destruction.jpg", "bootstrap_accuracy_differences.jpg"} and
+            all(0 < path.stat().st_size < 2_000_000 for path in probe0r1_assets),
+        "probe0r1_resource_limits": probe0r1.get("resources", {}).get(
+            "address_space_limit_bytes") == 4294967296 and
+            probe0r1.get("resources", {}).get("numeric_threads") == 1 and
+            probe0r1.get("resources", {}).get("largest_feature_matrix_shape") == [26, 133] and
+            probe0r1.get("resources", {}).get("model_artifacts_saved") is False,
         "cap0_checkpoint_unchanged": hashlib.sha256(
                                       act0r_search_path.read_bytes()).hexdigest() ==
                                       "a56310883bb15513ea25c97c919d7faf14edb217b1a05fb0c4e12b060c664f73",
     }
-    result = {"schema": "boundary_sweep.static_validation.v11", "checks": checks, "missing": missing, "private_path_files": forbidden,
+    result = {"schema": "boundary_sweep.static_validation.v12", "checks": checks, "missing": missing, "private_path_files": forbidden,
               "geometry_reference_count": reference.get("geometry_reference_count"), "depth_metric": depth_result,
               "surface_stats_consistent": surface_checks, "gates": gates,
               "mask1r1_gates": mask1_r1.get("gates", {}), "obs0_gates": obs0.get("gates", {}),
@@ -738,7 +848,7 @@ def main(argv=None):
               "cap0_gates": cap0_gates, "act0r1_gates": act0r1_gates,
               "act0r1_offline_gates": act0r1_offline_gates,
               "act0r2_gates": act0r2_gates, "cf0_gates": cf0_gates,
-              "probe0_gates": probe0_gates}
+              "probe0_gates": probe0_gates, "probe0r1_gates": probe0r1_gates}
     print(json.dumps(result, indent=2))
     return 0 if all(checks.values()) else 1
 
