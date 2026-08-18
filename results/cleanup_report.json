@@ -20,6 +20,9 @@
   "act0s_public_asset_bytes": 2360066,
   "act0s_raw_sensor_data_path": null,
   "act0s_raw_sensor_data_bytes": 0,
+  "pre_occlusion_task_cleanup_project_du_bytes": 2130796544,
+  "post_occlusion_task_cleanup_project_du_bytes_before_report_update": 480571392,
+  "occlusion_task_cleanup_reclaimed_du_bytes": 1650225152,
   "disposition_mechanism": "gio trash moved quarantined content to the desktop trash; no permanent direct deletion was used",
   "items": [
     {
@@ -673,6 +676,158 @@
       "recoverability": "recoverable from trash until emptied; size DISPOSITION_UNVERIFIED"
     }
   ],
+  "occlusion_task_cleanup_20260818": {
+    "purpose": "Remove explicitly approved raw artifacts from terminated experiments before the active building-boundary discovery task under occlusion.",
+    "operation_time_server_local": "2026-08-18T14:39:22/2026-08-18T14:39:25",
+    "method": "gio trash",
+    "permanent_delete_used": false,
+    "trash_emptied": false,
+    "recoverability": "All six entries remain recoverable from the filesystem-local XDG trash until that trash is emptied.",
+    "trash_location_note": "Public report records trash entry names and project-relative original paths; the host-specific absolute trash root is intentionally omitted.",
+    "pre_cleanup_project_du_bytes": 2130796544,
+    "post_move_project_du_bytes_before_report_update": 480571392,
+    "reclaimed_project_du_bytes": 1650225152,
+    "moved_file_count": 2821,
+    "moved_file_content_bytes": 1645657000,
+    "items": [
+      {
+        "path": "results/act0r/raw",
+        "file_count": 6,
+        "pre_cleanup_file_content_bytes": 3116843,
+        "pre_cleanup_du_bytes": 3141632,
+        "classification": "incomplete ACT-0R raw with historical triangle artifact",
+        "final_disposition": "MOVED_TO_TRASH",
+        "trash_entry_name": "raw.7",
+        "trash_info_entry": "raw.7.trashinfo",
+        "reason": "The incomplete single-CENTER capture is superseded by the canonical bilateral ACT-0R2 capture.",
+        "raw_level_recomputation_unavailable": "ACT-0R pixel-level inspection of the incomplete triangle-artifact frame can no longer be rerun from the project path.",
+        "recoverability": "recoverable from trash until emptied"
+      },
+      {
+        "path": "results/cf0/raw",
+        "file_count": 2381,
+        "pre_cleanup_file_content_bytes": 1423644806,
+        "pre_cleanup_du_bytes": 1427316736,
+        "classification": "terminated CF-0 counterfactual raw",
+        "final_disposition": "MOVED_TO_TRASH",
+        "trash_entry_name": "raw.8",
+        "trash_info_entry": "raw.8.trashinfo",
+        "reason": "The temporal JEPA route is NO_GO and its compact CF-0, PROBE-0 and PROBE-0R1 audit results remain tracked in Git.",
+        "raw_level_recomputation_unavailable": "CF-0 and PROBE-0/R1 feature extraction, payload rehashing, and the candidate-1 raw portion of AVS-0 cannot be rerun from the project path.",
+        "recoverability": "recoverable from trash until emptied"
+      },
+      {
+        "path": "results/act0r1/raw",
+        "file_count": 56,
+        "pre_cleanup_file_content_bytes": 34190124,
+        "pre_cleanup_du_bytes": 34254848,
+        "classification": "superseded single-sided ACT-0R1 raw",
+        "final_disposition": "MOVED_TO_TRASH",
+        "trash_entry_name": "raw.9",
+        "trash_info_entry": "raw.9.trashinfo",
+        "reason": "The LEFT-only recovery pilot is superseded by the bilateral canonical ACT-0R2 capture.",
+        "raw_level_recomputation_unavailable": "The ACT-0R1 offline eight-frame boundary audit cannot be recomputed from raw files in the project path.",
+        "recoverability": "recoverable from trash until emptied"
+      },
+      {
+        "path": "results/mask0/raw",
+        "file_count": 180,
+        "pre_cleanup_file_content_bytes": 87727522,
+        "pre_cleanup_du_bytes": 88084480,
+        "classification": "superseded MASK-0 instance-boundary raw",
+        "final_disposition": "MOVED_TO_TRASH",
+        "trash_entry_name": "raw.10",
+        "trash_info_entry": "raw.10.trashinfo",
+        "reason": "Compact decoder, grouping, alignment and visual audit results remain tracked, while the new task uses canonical ACT-0R2 and AVS-0 controls.",
+        "raw_level_recomputation_unavailable": "MASK-0 decoder, instance grouping and boundary-alignment outputs cannot be recomputed from raw files in the project path.",
+        "recoverability": "recoverable from trash until emptied"
+      },
+      {
+        "path": "results/mask1/raw",
+        "file_count": 158,
+        "pre_cleanup_file_content_bytes": 76137126,
+        "pre_cleanup_du_bytes": 76447744,
+        "classification": "superseded MASK-1 boundary-sequence raw",
+        "final_disposition": "MOVED_TO_TRASH",
+        "trash_entry_name": "raw.11",
+        "trash_info_entry": "raw.11.trashinfo",
+        "reason": "Compact event reanalysis and world-boundary results remain tracked, while the new task uses canonical ACT-0R2 and AVS-0 controls.",
+        "raw_level_recomputation_unavailable": "MASK-1 event reanalysis and world-boundary repeatability cannot be recomputed from raw files in the project path.",
+        "recoverability": "recoverable from trash until emptied"
+      },
+      {
+        "path": "data",
+        "file_count": 40,
+        "pre_cleanup_file_content_bytes": 20840579,
+        "pre_cleanup_du_bytes": 20979712,
+        "classification": "legacy GEO-0.5R2 calibration material",
+        "final_disposition": "MOVED_TO_TRASH",
+        "trash_entry_name": "data",
+        "trash_info_entry": "data.trashinfo",
+        "reason": "The new candidate 1/7/8 task does not depend on the legacy alpha/beta annotations; compact surfaces and audit evidence remain tracked.",
+        "raw_level_recomputation_unavailable": "The legacy surface-alpha/surface-beta annotation fit cannot be rebuilt from the project path.",
+        "recoverability": "recoverable from trash until emptied"
+      }
+    ],
+    "retained_raw_validation": {
+      "ACT-0R2": {
+        "raw_path": "results/act0r2/raw",
+        "manifest": "results/act0r2/capture_manifest.json",
+        "frame_count": 15,
+        "raw_file_count": 106,
+        "hashed_sensor_file_count": 90,
+        "manifest_covered_file_count": 105,
+        "auxiliary_files": ["results/act0r2/raw/timing_trace.jsonl"],
+        "missing_files": 0,
+        "size_mismatches": 0,
+        "sha256_mismatches": 0,
+        "frame_id_pairing_failures": 0,
+        "timestamp_pairing_failures": 0,
+        "maximum_sensor_timestamp_delta_s": 0.0,
+        "status": "PASS"
+      },
+      "AVS-0": {
+        "raw_path": "results/avs0/raw",
+        "manifest": "results/avs0/capture_manifest.json",
+        "frame_count": 70,
+        "raw_file_count": 491,
+        "hashed_sensor_file_count": 420,
+        "manifest_covered_file_count": 490,
+        "auxiliary_files": ["results/avs0/raw/timing_trace.jsonl"],
+        "missing_files": 0,
+        "size_mismatches": 0,
+        "sha256_mismatches": 0,
+        "frame_id_pairing_failures": 0,
+        "timestamp_pairing_failures": 0,
+        "maximum_sensor_timestamp_delta_s": 0.0,
+        "status": "PASS",
+        "scope_note": "This verifies all 70 retained candidate-7/8 AVS-0 frames. The historical 564-payload aggregate also included 24 candidate-1 CF-0 frames whose raw files were moved to trash in this cleanup."
+      },
+      "CAP-0": {
+        "raw_path": "results/cap0/raw",
+        "manifest": "results/cap0/diagnostic_manifest.json",
+        "frame_count": 15,
+        "raw_file_count": 81,
+        "hashed_sensor_file_count": 66,
+        "manifest_covered_file_count": 81,
+        "auxiliary_files": [],
+        "missing_files": 0,
+        "size_mismatches": 0,
+        "sha256_mismatches": 0,
+        "frame_id_pairing_failures": 0,
+        "timestamp_pairing_failures": 0,
+        "maximum_sensor_timestamp_delta_s": 0.0,
+        "status": "PASS"
+      }
+    },
+    "retained_project_data": [
+      "results/act0r2/raw",
+      "results/avs0/raw",
+      "results/avs0/capture_manifest.json",
+      "results/cap0/raw"
+    ],
+    "historical_data_note": "The original 12,863,775,129-byte data disposition remains historically unverified. This cleanup records only the verified 20,840,579 content bytes present at data immediately before the 2026-08-18 operation."
+  },
   "unverified_items": [
     ".carla_pkg",
     ".venv",
